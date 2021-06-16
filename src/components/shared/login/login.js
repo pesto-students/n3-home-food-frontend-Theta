@@ -1,22 +1,20 @@
 import { Form, Input, Button, Typography, Card } from "antd";
 import "antd/dist/antd.css";
-import "./login.css"
+import "./login.css";
 import { submitLogin } from "./utility";
 import { useState } from "react";
 
 const Login = () => {
   const { Title } = Typography;
-  const [loading,setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   const endLoading = () => {
-    setLoading(false)
-  }
+    setLoading(false);
+  };
   const sendDetails = (value) => {
-    setLoading(true)
-    submitLogin(value,endLoading)
-  }
-
-
+    setLoading(true);
+    submitLogin(value, endLoading);
+  };
 
   return (
     <div className="login-page">
@@ -30,7 +28,7 @@ const Login = () => {
           }}
           onFinish={sendDetails}
         >
-            <Title level={4}>Sign in</Title>
+          <Title level={4}>Sign in</Title>
           <Form.Item
             name="phone"
             rules={[
@@ -40,10 +38,7 @@ const Login = () => {
               },
             ]}
           >
-            <Input
-              
-              placeholder="Phone"
-            />
+            <Input placeholder="Phone" />
           </Form.Item>
 
           <Form.Item
@@ -55,12 +50,8 @@ const Login = () => {
               },
             ]}
           >
-            <Input   
-              placeholder="OTP"
-            />
+            <Input placeholder="OTP" />
           </Form.Item>
-
- 
 
           <Form.Item>
             <Button
@@ -69,8 +60,7 @@ const Login = () => {
               htmlType="submit"
               className="login-form-button"
             >
-              {loading ? ' wait...' : ' SEND OTP' }
-             
+              {loading ? " wait..." : " SEND OTP"}
             </Button>
           </Form.Item>
         </Form>

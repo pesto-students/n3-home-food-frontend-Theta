@@ -8,6 +8,8 @@ import {
   FileOutlined,
 } from "@ant-design/icons";
 import DashboardRoutes from "../dashboard-routes/dashboardRoutes";
+import {Link} from "react-router-dom"
+
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -29,16 +31,26 @@ export default class AdminDashBoard extends React.Component {
           <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
             <div className="logo" />
             <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
+           
               <Menu.Item key="1" icon={<PieChartOutlined />}>
+                   <Link to='/admin/dashboard'>
                 Dashboard
+                </Link>
               </Menu.Item>
+             
+            
               <Menu.Item key="2" icon={<DesktopOutlined />}>
+               <Link to='/admin/dashboard/product'>
                 Product
+                </Link>
               </Menu.Item>
-
+                       
               <Menu.Item key="3" icon={<FileOutlined />}>
+              <Link to='/admin/dashboard'>
                 Seller
+                </Link>
               </Menu.Item>
+            
             </Menu>
           </Sider>
           <Layout className="site-layout">
@@ -51,7 +63,6 @@ export default class AdminDashBoard extends React.Component {
                 className="site-layout-background"
                 style={{ padding: 24, minHeight: 360 }}
               >
-                {/* routes of sidenav */}
                 <DashboardRoutes />
               </div>
             </Content>

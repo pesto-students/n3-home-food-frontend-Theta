@@ -1,13 +1,13 @@
 import React from "react";
 import "antd/dist/antd.css";
-import { Card } from "antd";
+import { Card,Rate } from "antd";
 import Image from "../image/image";
+import './seller.css'
 
 const { Meta } = Card;
 
 
 const SellerCard= ({detail}) =>{
-  console.log(detail)
     return <Card
     hoverable
     style={{ width: '100%',margin:'0px' }}
@@ -20,8 +20,9 @@ const SellerCard= ({detail}) =>{
     }
   >
    
-    <Meta title= {detail.name} description= {detail.name} />
-  </Card>
+    <Meta title= "THE FLAVOR OF HOME--34 mins₹ 200 for two" description= "Punjabi, Snacks, Beverages" />
+    <Rate className="move-from-top" disabled defaultValue={2} ></Rate>
+  </Card> 
 }
 
 export default SellerCard

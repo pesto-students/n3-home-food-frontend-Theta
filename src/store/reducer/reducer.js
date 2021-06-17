@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import initialState from '../data/initialState';
-
+import landing from '../data/landing';
 
 const isAdminLoggedIn = (state = initialState.isUserLoggedIn, action) => {
     if (action.type === 'ADMIN_LOGGED') {
@@ -9,6 +9,8 @@ const isAdminLoggedIn = (state = initialState.isUserLoggedIn, action) => {
     return state;
 }
 
+
 export default combineReducers({
-    isAdminLoggedIn
+    isAdminLoggedIn,
+    landing
 });

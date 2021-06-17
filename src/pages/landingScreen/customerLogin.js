@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Drawer, Button } from 'antd';
+import Login from '../../components/shared/login/login';
 
 const CustomerLogin = () => {
 
@@ -9,20 +10,19 @@ const CustomerLogin = () => {
       setVisible(true);
     };
     const onClose = () => {
-      setVisible(false);
+      setVisible(true);
     };
 
 
     return    <Drawer
-    title="Basic Drawer"
+    title="Sign in"
     placement="right"
-    closable={false}
+    width={400}
+    closable={true}
     onClose={onClose}
     visible={visible}
   >
-    <p>Some contents...</p>
-    <p>Some contents...</p>
-    <p>Some contents...</p>
+    <Login/>
   </Drawer>
   };
 

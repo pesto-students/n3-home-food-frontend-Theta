@@ -41,7 +41,7 @@ const getCurrentTab = (tab) =>{
         <Navbar/>
       <Content>
         <Row>
-          <Col span={24}>
+          <Col md={24}>
             <Carousel autoplay>
               {imagesUrls.map((image,index)=>{
                 return  <Image
@@ -58,10 +58,10 @@ const getCurrentTab = (tab) =>{
 
         <div className="category-and-seller-container">
         <Row className="category-conatiner">
-              <Col span={15}>
+              <Col md={15} sm={24} xs={24}>
                  <Title level={4}>Category</Title>
               </Col>
-              <Col span={9} className="keep-items-left">
+              <Col md={9} sm={24} xs={24} className="keep-items-left">
                     <CustomTabs
                      currentTab={getCurrentTab}
                      list={['Breakfast','Lunch','Snack','Dinner']}
@@ -72,7 +72,7 @@ const getCurrentTab = (tab) =>{
         <Row gutter={[20,20]}>
           {seller.map((detail,index) => {
             return (
-              <Col span={6} key={index}>
+              <Col md={6} sm={24} xs={24} key={index}>
                 <SellerCard detail={detail} />
               </Col>
             );

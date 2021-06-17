@@ -7,7 +7,6 @@ const { Meta } = Card;
 
 
 const SellerCard= ({detail}) =>{
-  console.log(detail)
     return <Card
     hoverable
     style={{ width: '100%',margin:'0px' }}

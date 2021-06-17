@@ -17,14 +17,14 @@ const Navbar = () => {
   return (
     <Header className="navbar">
     <Row className="full-width">
-      <Col span={10}>
+      <Col md={10} sm={24} xs={24}>
         <Image
           height="70px"
           width="70px"
           url={logo}
         />
       </Col>
-      <Col span={14} className='keep-items-left'>
+      <Col md={14} sm={24} xs={24} className='keep-items-left'>
       <SelectBox />
         <Button type="link">Become Seller</Button>
         <Button type="link">Sign In</Button>

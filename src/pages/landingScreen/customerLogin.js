@@ -1,29 +1,29 @@
-import React, { useState } from 'react';
-import { Drawer, Button } from 'antd';
+import { Drawer } from "antd";
+import React, { useState } from "react";
+import Login from "../../components/shared/login/login";
 
 const CustomerLogin = () => {
+  const [visible, setVisible] = useState(false);
 
-    const [visible, setVisible] = useState(true);
-
-    const showDrawer = () => {
-      setVisible(true);
-    };
-    const onClose = () => {
-      setVisible(false);
-    };
-
-
-    return    <Drawer
-    title="Basic Drawer"
-    placement="right"
-    closable={false}
-    onClose={onClose}
-    visible={visible}
-  >
-    <p>Some contents...</p>
-    <p>Some contents...</p>
-    <p>Some contents...</p>
-  </Drawer>
+  const showDrawer = () => {
+    setVisible(true);
+  };
+  const onClose = () => {
+    setVisible(true);
   };
 
-  export default CustomerLogin
+  return (
+    <Drawer
+      title="Sign in"
+      placement="right"
+      width={400}
+      closable={true}
+      onClose={onClose}
+      visible={visible}
+    >
+      <Login />
+    </Drawer>
+  );
+};
+
+export default CustomerLogin;

@@ -10,4 +10,10 @@ export const setLogInAdminInfo = (value) => ({
     type: 'ADMIN_LOGIN',
     value
 });
+export const setIsCustomerLoginDrawerOpen = (value) => ({
+    type: 'DRAWER_STATUS',
+    value : value 
+});
+
+
 

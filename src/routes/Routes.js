@@ -1,4 +1,4 @@
-import { React } from "react";
+import { React} from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -7,14 +7,16 @@ import {
 import LandingPage from "../pages/landingScreen/Landing";
 import SellerLanding from "../pages/seller/sellerLanding/sellerLanding"
 import AdminLanding from "../pages/admin/adminLanding/adminLanding"
-
 import BrokenLink from "../pages/BrokenLink";
+import { withRouter } from "react-router-dom";
 
-function MainRoutes() {
+
+function MainRoutes(props) {
+
   return (
     <Router>
       <Switch>
-        <Route path="/" exact>
+        <Route path="/" exact> 
           <LandingPage />
         </Route>
         <Route path="/admin">
@@ -29,4 +31,4 @@ function MainRoutes() {
   );
 }
 
-export default MainRoutes;
+export default withRouter(MainRoutes)

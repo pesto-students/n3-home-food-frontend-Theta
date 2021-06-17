@@ -6,10 +6,11 @@ import Image from "../../components/shared/image/image";
 import Navbar from "../../components/shared/navbar/navbar";
 import CustomTabs from "../../components/shared/Tabs/Tabs";
 import CustomerLogin from "./customerLogin";
+
 import "./landing.css";
 import SellerItems from "./sellerItems";
-const { Header, Content } = Layout;
 
+const { Content } = Layout;
 const { Title } = Typography;
 const imagesUrls = [
   "https://image.shutterstock.com/image-photo/fresh-green-food-cooking-concept-600w-1615988773.jpg",
@@ -35,6 +36,7 @@ const LandingPage = () => {
     console.log(tab);
   };
 
+  
 
   
 

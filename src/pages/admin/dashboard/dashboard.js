@@ -6,14 +6,10 @@ import {
   DesktopOutlined,
   PieChartOutlined,
   FileOutlined,
-  TeamOutlined,
-  UserOutlined,
 } from "@ant-design/icons";
 import DashboardRoutes from "../dashboard-routes/dashboardRoutes";
-import { BrowserRouter as Router, Route } from "react-router-dom";
 
 const { Header, Content, Footer, Sider } = Layout;
-const { SubMenu } = Menu;
 
 export default class AdminDashBoard extends React.Component {
   state = {
@@ -34,14 +30,14 @@ export default class AdminDashBoard extends React.Component {
             <div className="logo" />
             <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
               <Menu.Item key="1" icon={<PieChartOutlined />}>
-                Option 1
+                Dashboard
               </Menu.Item>
               <Menu.Item key="2" icon={<DesktopOutlined />}>
-                Option 2
+                Product
               </Menu.Item>
 
               <Menu.Item key="3" icon={<FileOutlined />}>
-                Files
+                Seller
               </Menu.Item>
             </Menu>
           </Sider>

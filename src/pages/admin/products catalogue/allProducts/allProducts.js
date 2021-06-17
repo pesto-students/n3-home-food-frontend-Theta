@@ -8,7 +8,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { Skeleton } from "antd";
 import { Pagination } from "antd";
 import { Button } from "antd";
-import { AddProductModal } from '../../../../components/shared/modal/addProduct';
+import { AddProductModal } from '../../../../components/shared/addProductmodal/addProduct';
 const { Meta } = Card;
 
 const AllProducts = () => {

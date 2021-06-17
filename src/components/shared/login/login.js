@@ -1,9 +1,11 @@
-import { Form, Input, Button, Typography, Card, notification } from "antd";
+import { Form, Input, Button, notification } from "antd";
 import "antd/dist/antd.css";
 import "./login.css";
 import { useState } from "react";
 import firebase from "../../../utils/firebase";
 import React from "react";
+import { adminLogin } from "./utility";
+
 
 const Login = () => {
   const [hasMoile, sethasMobile] = useState(false);
@@ -23,7 +25,12 @@ const Login = () => {
       }
     );
   };
+
+
+
   const onSignInSubmit = ({ phone }) => {
+    adminLogin({phone:phone,customerType:'Admin'})
+
     setButtonLoding(true)
     configureCaptcha();
     const phoneNumber = "+91" + phone;
@@ -67,7 +74,6 @@ const Login = () => {
       .then((result) => {
         // User signed in successfully.
         setButtonLoding(false)
-
         const user = result.user;
         console.log(JSON.stringify(user));
         notification.success({

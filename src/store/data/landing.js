@@ -1,4 +1,4 @@
-const initialState = {
+const LandingScreenState = {
     isCustomerLoginDrawerOpen: false,
 }
-export default initialState;
+export default LandingScreenState;

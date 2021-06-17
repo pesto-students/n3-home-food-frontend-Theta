@@ -8,17 +8,19 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import reducers from "./store/reducer/reducer";
+import { saveToLocalStorage, loadToLocalStorage} from './store/encryptStore'
 
-
-const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
+let createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 export let store = createStoreWithMiddleware(reducers);
+const persistedState = loadToLocalStorage()
 
-if (process.env.NODE_ENV !== "production") {
-  store = createStoreWithMiddleware(
-    reducers,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  );
-}
+ store = createStoreWithMiddleware(
+  reducers,persistedState,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
+store.subscribe(()=> saveToLocalStorage(store.getState()))
+
 
 ReactDOM.render(
   <React.StrictMode>

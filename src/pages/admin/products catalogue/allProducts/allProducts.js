@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from "react";
-import "./allProducts.css";
+import { Card, Row, Skeleton } from "antd";
 import "antd/dist/antd.css";
-import { Card } from "antd";
-import item from "../../../../images/south-indian.jpg";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Skeleton } from "antd";
-import { Pagination } from "antd";
-import { Button } from "antd";
 import { AddProductModal } from '../../../../components/shared/addProductmodal/addProduct';
-const { Meta } = Card;
+import SpinnerLoader from "../../../../components/shared/spinnerLoader/spinnerLoader";
+import item from "../../../../images/south-indian.jpg";
+import "./allProducts.css";
+
 
 const AllProducts = () => {
   const [products, setproducts] = useState([]);
@@ -49,14 +47,14 @@ const AllProducts = () => {
             dataLength={products.length}
             next={fetchMoreData}
             hasMore={true}
-            loader={<div className="loader">loading..</div>}
+            loader={<Row className='m-2 mt-4' justify="center"> <SpinnerLoader /></Row > }
           >
             {products.map((product, i) => (
-              <Card hoverable>
+              <Card key={i} hoverable>
                 <div className="container">
                   <div className="row">
                     <div className="product-cointaner">
-                      <img src={item} className="product-image" />
+                      <img src={item} className="product-image" alt =''/>
                     </div>
                     <div className="product-details ">
                       <span className="seller-name">{product.name}</span>

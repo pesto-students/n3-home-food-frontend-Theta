@@ -46,7 +46,7 @@ export default class AdminDashBoard extends React.Component {
               </Menu.Item>
                        
               <Menu.Item key="3" icon={<FileOutlined />}>
-              <Link to='/admin/dashboard'>
+              <Link to='/admin/dashboard/seller'>
                 Seller
                 </Link>
               </Menu.Item>

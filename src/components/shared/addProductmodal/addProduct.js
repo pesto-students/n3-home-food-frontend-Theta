@@ -1,18 +1,15 @@
-import React, { useState } from "react";
-import ReactDOM from "react-dom";
-import "antd/dist/antd.css";
-import { Button, Modal, Form, Input, Radio,InputNumber,Select } from "antd";
-import { Upload, message } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
+import { Button, Form, Input, InputNumber, message, Modal, notification, Select, Upload } from "antd";
+import "antd/dist/antd.css";
 import axios from 'axios';
-import { notification, Space } from 'antd';
+import React, { useState } from "react";
 const { Option } = Select;
 
 
 
-const openNotificationWithIcon = type => {
+const openNotificationWithIcon = (type,message) => {
   notification[type]({
-    message: 'Product Added'
+    message: message
   });
 };
 
@@ -168,12 +165,19 @@ export const AddProductModal = (props) => {
 
     data)
     .then((result) => {
-      if(result.status == 200){
-        openNotificationWithIcon('success')
+      if(result.status === 200){
+        openNotificationWithIcon('success','Product Added')
+      }
+      else{
+        openNotificationWithIcon('error','Could Not Add Product')
+
       }
       
     })
-    .catch((err) => console.error(err))
+    .catch((err) => {
+      console.error(err)
+      openNotificationWithIcon('error','Could Not Add Product')
+    })
     .finally(() => {
 
     });

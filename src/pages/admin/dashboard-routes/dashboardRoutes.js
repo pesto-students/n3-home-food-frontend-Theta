@@ -13,6 +13,7 @@ function DashboardRoutes() {
       <Switch>
      <Route path='/admin/dashboard' exact><ProductCatalogue /></Route> 
      <Route path='/admin/dashboard/product'><ProductCatalogue /></Route> 
+     <Route path='/admin/dashboard/seller'><ProductCatalogue /></Route> 
 
     </Switch>
    </Router>

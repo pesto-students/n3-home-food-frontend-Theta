@@ -3,19 +3,21 @@ import "antd/dist/antd.css";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { AddProductModal } from '../../../../components/shared/manageProductmodal/addProduct';
+import { AppoveProductModal } from '../../../../components/shared/manageProductmodal/approveProduct';
 import SpinnerLoader from "../../../../components/shared/spinnerLoader/spinnerLoader";
 import item from "../../../../images/south-indian.jpg";
-import "./allProducts.css";
+import "./productApproval.css";
+import {getPendingProducts} from '../../../../utils/products'
+import { RejectProductModal } from "../../../../components/shared/manageProductmodal/rejectProduct";
 
 
-const AllProducts = () => {
+const ProductApproval = () => {
   const [products, setproducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/v1/products/get/approved")
+      .get("http://localhost:8080/api/v1/products/get/pending")
       .then((result) => {
         setproducts(result.data);
       })
@@ -39,7 +41,7 @@ const AllProducts = () => {
     <>
       <div>
         {/* add product modal */}
-        <AddProductModal />
+        
 
 
         <Skeleton loading={isLoading} active>
@@ -58,10 +60,8 @@ const AllProducts = () => {
                     </div>
                     <div className="product-details ">
                       <span className="seller-name">{product.name}</span>
-                      <span className="cost">
-                        <p className="max-amount">Max Amount</p> &nbsp; ₹{" "}
-                        {product.max_price}
-                      </span>
+                      <AppoveProductModal productId={product.id} />
+                      <RejectProductModal productId={product.id}/>
                     </div>
                   </div>
                 </div>
@@ -78,4 +78,4 @@ const AllProducts = () => {
   );
 };
 
-export default AllProducts;
+export default ProductApproval;

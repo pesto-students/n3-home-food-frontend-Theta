@@ -2,6 +2,7 @@ import React from 'react';
 import 'antd/dist/antd.css';
 import { Tabs } from 'antd';
 import AllProducts from './allProducts/allProducts';
+import ProductApproval from './product Approval/productApproval';
 
 const { TabPane } = Tabs;
 
@@ -15,7 +16,7 @@ const ProductCatalogue = () => (
     <AllProducts />
     </TabPane>
     <TabPane tab="Product Approval" key="2">
-      Content of Tab Pane 2
+    <ProductApproval />
     </TabPane>
 
   </Tabs>

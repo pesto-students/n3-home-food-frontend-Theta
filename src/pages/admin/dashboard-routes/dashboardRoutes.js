@@ -5,6 +5,7 @@ import {
   Route,
 } from "react-router-dom";
 import ProductCatalogue from '../products catalogue';
+import SellerManagment from "../sellerManagment";
 
 
 function DashboardRoutes() {
@@ -12,8 +13,8 @@ function DashboardRoutes() {
     <Router>
       <Switch>
      <Route path='/admin/dashboard' exact><ProductCatalogue /></Route> 
-     <Route path='/admin/dashboard/product'><ProductCatalogue /></Route> 
-     <Route path='/admin/dashboard/seller'><ProductCatalogue /></Route> 
+     <Route path='/admin/dashboard/product' ><ProductCatalogue /></Route> 
+     <Route path='/admin/dashboard/seller' ><SellerManagment /></Route> 
 
     </Switch>
    </Router>

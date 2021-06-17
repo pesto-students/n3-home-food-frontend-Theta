@@ -5,16 +5,16 @@ import AdminDashBoard from "../dashboard/dashboard"
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 
-const Admin = () => {
+const AdminLanding = () => {
   return (
     <Router>
        <Route path='/admin' exact>  <Login/></Route> 
-       <Route path='/admin/dashboard' exact>  <AdminDashBoard/></Route> 
+       <Route path='/admin/dashboard'>  <AdminDashBoard/></Route> 
     </Router>
   );
 }
 
-export default Admin;
+export default AdminLanding;
  
 
 

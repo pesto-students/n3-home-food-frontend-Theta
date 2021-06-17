@@ -1,12 +1,13 @@
 import { React } from "react";
 import {
   BrowserRouter as Router,
-  Redirect,
   Switch,
   Route,
 } from "react-router-dom";
-import Admin from "../pages/admin/login/admin";
 import LandingPage from "../pages/landingScreen/Landing";
+import SellerLanding from "../pages/seller/sellerLanding/sellerLanding"
+import AdminLanding from "../pages/admin/adminLanding/adminLanding"
+
 import BrokenLink from "../pages/BrokenLink";
 
 function MainRoutes() {
@@ -17,7 +18,10 @@ function MainRoutes() {
           <LandingPage />
         </Route>
         <Route path="/admin">
-          <Admin />
+          <AdminLanding />
+        </Route>
+        <Route path="/seller">
+          <SellerLanding />
         </Route>
         <Route exact default component={BrokenLink}></Route>
       </Switch>

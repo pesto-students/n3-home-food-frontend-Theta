@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Login from "../../components/shared/login/login";
 
 const CustomerLogin = () => {
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
 
   // const showDrawer = () => {
   //   setVisible(true);

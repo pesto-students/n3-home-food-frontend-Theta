@@ -4,7 +4,9 @@ import SellerDashBoard from "../sellerDashboard/sellerDashboard";
 import SellerRegistration from "../sellerRegistration/sellerRegistration";
 
 
-const sellerLanding = () => {
+const SellerLanding = () => {
+
+  
   return (
     <Router>
       <Switch>
@@ -15,7 +17,7 @@ const sellerLanding = () => {
   );
 }
 
-export default sellerLanding;
+export default SellerLanding;
  
 
 

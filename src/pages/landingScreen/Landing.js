@@ -6,6 +6,7 @@ import Image from "../../components/shared/image/image";
 import Navbar from "../../components/shared/navbar/navbar";
 import CustomTabs from "../../components/shared/Tabs/Tabs";
 import { baseUrlAdmin } from "../../utils/constant";
+import {  redirectToOriginalPageFromLanding } from "../../utils/helpers";
 import CustomerLogin from "./customerLogin";
 
 import "./landing.css";
@@ -24,6 +25,7 @@ const LandingPage = () => {
   const [loadSeller, setLoadSeller] = useState(false);
 
   useEffect(() => {
+    redirectToOriginalPageFromLanding()
     axios
       .get(`${baseUrlAdmin}/sellers`)
       .then((result) => {

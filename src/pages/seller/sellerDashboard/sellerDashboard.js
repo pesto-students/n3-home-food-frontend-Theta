@@ -3,29 +3,25 @@ import {
 } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 import "antd/dist/antd.css";
-import React from "react";
+import React, { useState } from "react";
 import { Link, Route } from "react-router-dom";
 import SellerGraphs from "../sellerGraphs/sellerGraphs";
 import SellerProducts from "../sellerProducts/sellerProducts";
 import SellerProfile from "../sellerProfile/sellerProfile";
 const { Header, Content, Footer, Sider } = Layout;
 
-export default class SellerDashBoard extends React.Component {
-  state = {
-    collapsed: false,
+ const SellerDashBoard  = () => {
+
+  const [collapsed,setCollapsed] = useState(false)
+  const onCollapse = (collapsed) => {
+    setCollapsed({ collapsed });
   };
 
-  onCollapse = (collapsed) => {
-    console.log(collapsed);
-    this.setState({ collapsed });
-  };
 
-  render() {
-    const { collapsed } = this.state;
-    return (
-      <>
+
+    return <>
         <Layout style={{ minHeight: "100vh" }}>
-          <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
+          <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
             <div className="logo" />
             <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
               <Menu.Item key="1" icon={<PieChartOutlined />}>
@@ -68,6 +64,6 @@ export default class SellerDashBoard extends React.Component {
           </Layout>
         </Layout>
       </>
-    );
-  }
 }
+
+export default SellerDashBoard

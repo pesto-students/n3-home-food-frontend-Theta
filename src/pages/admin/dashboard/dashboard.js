@@ -1,34 +1,29 @@
-import React from "react";
-import "antd/dist/antd.css";
-import "./dashboard.css";
-import { Layout, Menu, Breadcrumb } from "antd";
 import {
-  DesktopOutlined,
-  PieChartOutlined,
-  FileOutlined,
+  DesktopOutlined, FileOutlined, PieChartOutlined
 } from "@ant-design/icons";
+import { Breadcrumb, Layout, Menu } from "antd";
+import "antd/dist/antd.css";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import DashboardRoutes from "../dashboard-routes/dashboardRoutes";
-import {Link} from "react-router-dom"
+import "./dashboard.css";
 
 
 const { Header, Content, Footer, Sider } = Layout;
 
-export default class AdminDashBoard extends React.Component {
-  state = {
-    collapsed: false,
+const AdminDashBoard = ()                                                                            => {
+
+  const [collapsed,setCollapsed] = useState(false)
+  const onCollapse = (collapsed) => {
+    setCollapsed({ collapsed });
   };
 
-  onCollapse = (collapsed) => {
-    console.log(collapsed);
-    this.setState({ collapsed });
-  };
 
-  render() {
-    const { collapsed } = this.state;
-    return (
-      <>
+
+
+    return  <>
         <Layout style={{ minHeight: "100vh" }}>
-          <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
+          <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
             <div className="logo" />
             <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
            
@@ -72,6 +67,6 @@ export default class AdminDashBoard extends React.Component {
           </Layout>
         </Layout>
       </>
-    );
-  }
 }
+
+export default AdminDashBoard

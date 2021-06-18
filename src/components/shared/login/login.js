@@ -29,7 +29,6 @@ const Login = () => {
 
 
   const onSignInSubmit = ({ phone }) => {
-    adminLogin({phone:phone,customerType:'Admin'})
 
     setButtonLoding(true)
     configureCaptcha();
@@ -75,7 +74,7 @@ const Login = () => {
         // User signed in successfully.
         setButtonLoding(false)
         const user = result.user;
-        console.log(JSON.stringify(user));
+        adminLogin({phone:user.phoneNumber,customerType:'Admin'})
         notification.success({
           message: "Verified",
           description: "Successfully Login",

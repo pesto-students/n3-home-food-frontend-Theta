@@ -5,7 +5,6 @@ import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { AddProductModal } from '../../../../components/shared/manageProductmodal/addProduct';
 import SpinnerLoader from "../../../../components/shared/spinnerLoader/spinnerLoader";
-import foodalt from "../../../../images/food_alt.jpeg";
 import { baseUrlAdmin } from "../../../../utils/constant";
 import "./allProducts.css";
 
@@ -48,9 +47,9 @@ const AllProducts = () => {
     .finally(() => setIsLoading(false));
 
   }
-  const addDefaultSrc = (ev) =>{
-    ev.target.src = 'some default image url'
-  }
+  // const addDefaultSrc = (ev) =>{
+  //   ev.target.src = 'some default image url'
+  // }
 
   return (
     <>
@@ -71,7 +70,7 @@ const AllProducts = () => {
                 <div className="container">
                   <div className="row">
                     <div className="product-cointaner">
-                      <img src={product.image} className="product-image" alt ="No image"/>
+                      <img src={product.image} className="product-image" alt="not found"/>
 
 
                     </div>

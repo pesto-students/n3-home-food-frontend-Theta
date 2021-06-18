@@ -1,15 +1,13 @@
-import React from "react";
-import "antd/dist/antd.css";
-import { Layout, Menu, Breadcrumb } from "antd";
 import {
-  DesktopOutlined,
-  PieChartOutlined,
-  FileOutlined,
+  DesktopOutlined, FileOutlined, PieChartOutlined
 } from "@ant-design/icons";
-import { BrowserRouter as Router, Switch, Link, Route } from "react-router-dom";
-import SellerProfile from "../sellerProfile/sellerProfile";
+import { Layout, Menu } from "antd";
+import "antd/dist/antd.css";
+import React from "react";
+import { Link, Route } from "react-router-dom";
 import SellerGraphs from "../sellerGraphs/sellerGraphs";
 import SellerProducts from "../sellerProducts/sellerProducts";
+import SellerProfile from "../sellerProfile/sellerProfile";
 const { Header, Content, Footer, Sider } = Layout;
 
 export default class SellerDashBoard extends React.Component {

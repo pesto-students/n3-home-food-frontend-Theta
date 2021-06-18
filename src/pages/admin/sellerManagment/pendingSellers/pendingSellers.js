@@ -1,14 +1,13 @@
-import { Card, Row, Skeleton, Button,notification } from "antd";
+import { Button, Card, notification, Row, Skeleton } from "antd";
 import "antd/dist/antd.css";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { AppoveProductModal } from "../../../../components/shared/manageProductmodal/approveProduct";
+import { RejectSellerModal } from "../../../../components/manageSellerModal/rejectSeller";
 import SpinnerLoader from "../../../../components/shared/spinnerLoader/spinnerLoader";
 import item from "../../../../images/south-indian.jpg";
-import "./pendingSeller.css";
-import { RejectSellerModal } from "../../../../components/manageSellerModal/rejectSeller";
 import { baseUrlAdmin } from "../../../../utils/constant";
+import "./pendingSeller.css";
 
 const openNotificationWithIcon = (type, message) => {
     notification[type]({

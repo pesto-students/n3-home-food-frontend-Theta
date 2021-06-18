@@ -1,4 +1,4 @@
-import { Card, Row,Button, Skeleton } from "antd";
+import { Button, Card, Row, Skeleton } from "antd";
 import "antd/dist/antd.css";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -6,6 +6,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { AddProductSellerModal } from '../../../../components/shared/manageProductmodal/addProduct';
 import SpinnerLoader from "../../../../components/shared/spinnerLoader/spinnerLoader";
 import item from "../../../../images/south-indian.jpg";
+import { baseUrlAdmin } from "../../../../utils/constant";
 
 
 const AllProducts = () => {
@@ -14,7 +15,7 @@ const AllProducts = () => {
 
   useEffect(() => {
     axios
-      .get("`${baseUrlAdmin}/products/get/approved")
+      .get(`${baseUrlAdmin}/products/get/approved`)
       .then((result) => {
         setproducts(result.data);
       })

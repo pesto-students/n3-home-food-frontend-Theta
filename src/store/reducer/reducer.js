@@ -13,7 +13,7 @@ const isCustomerLoginDrawerOpen = (
   state = LandingScreenState.isCustomerLoginDrawerOpen,
   action
 ) => {
-    if(action.type == 'DRAWER_STATUS'){
+    if(action.type === 'DRAWER_STATUS'){
         console.log(state)
         // return state.isCustomerLoginDrawerOpen
     }

@@ -1,19 +1,11 @@
-import { React } from "react";
-import "antd/dist/antd.css";
 import {
-  Drawer,
-  Form,
   Button,
   Card,
-  Col,
-  Row,
-  Input,
-  Select,
-  DatePicker,
+  Col, Form, Input, Row
 } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import "antd/dist/antd.css";
+import { React } from "react";
 
-const { Option } = Select;
 
 function SellerRegistration() {
   return (

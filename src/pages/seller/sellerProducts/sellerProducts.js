@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { Col, Row } from "antd";
 import "antd/dist/antd.css";
-import { Tabs, Row, Col } from "antd";
+import React, { useState } from "react";
 import CustomTabs from "../../../components/shared/Tabs/Tabs";
 import AllProducts from "./allProduct/allProducts";
 

@@ -5,8 +5,8 @@ import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import SpinnerLoader from "../../../../components/shared/spinnerLoader/spinnerLoader";
 import item from "../../../../images/seller.png";
+import { baseUrlAdmin } from '../../../../utils/constant';
 import "../Seller Approval/sellerApproval.css";
-import {baseUrlAdmin} from '../../../../utils/constant'
 const RejectedSellers = () => {
   const [sellers, setSellers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -31,11 +31,11 @@ const RejectedSellers = () => {
     // .finally(() => setIsLoading(false));
   };
 
-  const onChange = (checked) => {
-    if (false) {
-    }
-    console.log(`switch to ${checked}`);
-  };
+  // const onChange = (checked) => {
+  //   if (false) {
+  //   }
+  //   console.log(`switch to ${checked}`);
+  // };
 
   return (
     <>

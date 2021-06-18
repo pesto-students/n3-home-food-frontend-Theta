@@ -3,12 +3,11 @@ import "antd/dist/antd.css";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { RejectSellerModal } from "../../../../components/manageSellerModal/rejectSeller";
 import SpinnerLoader from "../../../../components/shared/spinnerLoader/spinnerLoader";
 import item from "../../../../images/seller.png";
+import { baseUrlAdmin } from "../../../../utils/constant";
 import "./sellerApproval.css";
-import { Switch } from "antd";
-import { RejectSellerModal } from "../../../../components/manageSellerModal/rejectSeller";
-import {baseUrlAdmin} from "../../../../utils/constant"
 const SellerApproval = () => {
   const [sellers, setSellers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -33,11 +32,11 @@ const SellerApproval = () => {
     // .finally(() => setIsLoading(false));
   };
 
-  const onChange = (checked) => {
-    if (false) {
-    }
-    console.log(`switch to ${checked}`);
-  };
+  // const onChange = (checked) => {
+  //   if (false) {
+  //   }
+  //   console.log(`switch to ${checked}`);
+  // };
 
   const updateSellerList = () =>{
     setIsLoading(true)

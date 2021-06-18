@@ -5,9 +5,9 @@ import Login from "../../components/shared/login/login";
 const CustomerLogin = () => {
   const [visible, setVisible] = useState(false);
 
-  const showDrawer = () => {
-    setVisible(true);
-  };
+  // const showDrawer = () => {
+  //   setVisible(true);
+  // };
   const onClose = () => {
     setVisible(true);
   };

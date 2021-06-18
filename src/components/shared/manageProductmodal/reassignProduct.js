@@ -46,6 +46,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
           });
       }}
     >
+      {isLoading}
       <Form
         form={form}
         layout="vertical"

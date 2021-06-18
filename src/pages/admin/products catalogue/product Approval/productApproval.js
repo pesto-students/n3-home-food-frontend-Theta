@@ -4,13 +4,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { AppoveProductModal } from '../../../../components/shared/manageProductmodal/approveProduct';
+import { ReassignProduct } from "../../../../components/shared/manageProductmodal/reassignProduct";
+import { RejectProductModal } from "../../../../components/shared/manageProductmodal/rejectProduct";
 import SpinnerLoader from "../../../../components/shared/spinnerLoader/spinnerLoader";
 import item from "../../../../images/south-indian.jpg";
-import "./productApproval.css";
-import {getPendingProducts} from '../../../../utils/products'
-import { RejectProductModal } from "../../../../components/shared/manageProductmodal/rejectProduct";
-import { ReassignProduct } from "../../../../components/shared/manageProductmodal/reassignProduct"
 import { baseUrlAdmin } from "../../../../utils/constant";
+import "./productApproval.css";
 
 const ProductApproval = () => {
   const [products, setproducts] = useState([]);

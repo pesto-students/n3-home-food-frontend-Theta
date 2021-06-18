@@ -1,7 +1,5 @@
-import {React} from "react";
-import Login from "../../../components/shared/login/login"
-import { BrowserRouter as Router, Route ,Switch} from "react-router-dom";
-import SellerProfile from "../sellerProfile/sellerProfile";
+import { React } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import SellerDashBoard from "../sellerDashboard/sellerDashboard";
 import SellerRegistration from "../sellerRegistration/sellerRegistration";
 

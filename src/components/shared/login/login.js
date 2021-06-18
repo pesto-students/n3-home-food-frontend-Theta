@@ -3,7 +3,7 @@ import "antd/dist/antd.css";
 import React, { useState } from "react";
 import firebase from "../../../utils/firebase";
 import "./login.css";
-import { adminLogin } from "./utility";
+import { loginUser } from "./utility";
 
 
 
@@ -74,7 +74,7 @@ const Login = () => {
         // User signed in successfully.
         setButtonLoding(false)
         const user = result.user;
-        adminLogin({phone:user.phoneNumber,customerType:'Admin'})
+        loginUser({phone:user.phoneNumber,customerType:'Admin'})
         notification.success({
           message: "Verified",
           description: "Successfully Login",

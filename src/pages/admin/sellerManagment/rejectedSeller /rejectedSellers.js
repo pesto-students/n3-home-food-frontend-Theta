@@ -47,11 +47,8 @@ const RejectedSellers = () => {
             dataLength={sellers.length}
             next={fetchMoreData}
             hasMore={true}
-            loader={
-              <Row className="m-2 mt-4" justify="center">
-                <SpinnerLoader />
-              </Row>
-            }
+            loader={<Row className='m-2 mt-4' justify="center"><p>Loading ...</p></Row > }
+
           >
             {sellers.map((seller, i) => (
               <Card key={i} hoverable>

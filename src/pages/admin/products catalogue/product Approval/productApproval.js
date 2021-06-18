@@ -6,7 +6,6 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { AppoveProductModal } from '../../../../components/shared/manageProductmodal/approveProduct';
 import { ReassignProduct } from "../../../../components/shared/manageProductmodal/reassignProduct";
 import { RejectProductModal } from "../../../../components/shared/manageProductmodal/rejectProduct";
-import SpinnerLoader from "../../../../components/shared/spinnerLoader/spinnerLoader";
 import item from "../../../../images/south-indian.jpg";
 import { baseUrlAdmin } from "../../../../utils/constant";
 import "./productApproval.css";
@@ -59,7 +58,7 @@ const ProductApproval = () => {
             dataLength={products.length}
             next={fetchMoreData}
             hasMore={true}
-            loader={<Row className='m-2 mt-4' justify="center"> <SpinnerLoader /></Row > }
+            loader={<Row className='m-2 mt-4' justify="center"><p>Loading ...</p></Row > }
           >
             {products.map((product, i) => (
               <Card key={i} hoverable>

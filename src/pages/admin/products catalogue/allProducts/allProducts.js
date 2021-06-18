@@ -4,7 +4,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { AddProductModal } from '../../../../components/shared/manageProductmodal/addProduct';
-import SpinnerLoader from "../../../../components/shared/spinnerLoader/spinnerLoader";
 import { baseUrlAdmin } from "../../../../utils/constant";
 import "./allProducts.css";
 
@@ -63,7 +62,7 @@ const AllProducts = () => {
             dataLength={products.length}
             next={fetchMoreData}
             hasMore={true}
-            loader={<Row className='m-2 mt-4' justify="center"> <SpinnerLoader /></Row > }
+            loader={<Row className='m-2 mt-4' justify="center"><p>Loading ...</p></Row > }
           >
             {products.map((product, i) => (
               <Card key={i} hoverable>

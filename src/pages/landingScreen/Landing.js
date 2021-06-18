@@ -5,6 +5,7 @@ import { React, useEffect, useState } from "react";
 import Image from "../../components/shared/image/image";
 import Navbar from "../../components/shared/navbar/navbar";
 import CustomTabs from "../../components/shared/Tabs/Tabs";
+import { baseUrlAdmin } from "../../utils/constant";
 import CustomerLogin from "./customerLogin";
 
 import "./landing.css";
@@ -24,7 +25,7 @@ const LandingPage = () => {
 
   useEffect(() => {
     axios
-      .get("`${baseUrlAdmin}/sellers")
+      .get(`${baseUrlAdmin }/sellers`)
       .then((result) => {
         setSeller(result.data);
         setLoadSeller(true);

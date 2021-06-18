@@ -8,7 +8,8 @@ import {
   FileOutlined,
 } from "@ant-design/icons";
 import DashboardRoutes from "../dashboard-routes/dashboardRoutes";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
+import { AvatarMenu } from "../header/header";
 
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -31,30 +32,25 @@ export default class AdminDashBoard extends React.Component {
           <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
             <div className="logo" />
             <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
-           
               <Menu.Item key="1" icon={<PieChartOutlined />}>
-                   <Link to='/admin/dashboard'>
-                Dashboard
-                </Link>
+                <Link to="/admin/dashboard">Dashboard</Link>
               </Menu.Item>
-             
-            
+
               <Menu.Item key="2" icon={<DesktopOutlined />}>
-               <Link to='/admin/dashboard/product'>
-                Product
-                </Link>
+                <Link to="/admin/dashboard/product">Product</Link>
               </Menu.Item>
-                       
+
               <Menu.Item key="3" icon={<FileOutlined />}>
-              <Link to='/admin/dashboard/seller'>
-                Seller
-                </Link>
+                <Link to="/admin/dashboard/seller">Seller</Link>
               </Menu.Item>
-            
             </Menu>
           </Sider>
           <Layout className="site-layout">
-            <Header className="site-layout-background" style={{ padding: 0 }} />
+            <Header className="site-layout-background" style={{ padding: 0 }}>
+              <div className="header">
+                <AvatarMenu />
+              </div>
+            </Header>
             <Content style={{ margin: "0 16px" }}>
               <Breadcrumb style={{ margin: "16px 0" }}>
                 <Breadcrumb.Item></Breadcrumb.Item>

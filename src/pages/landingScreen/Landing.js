@@ -36,10 +36,6 @@ const LandingPage = () => {
     console.log(tab);
   };
 
-  
-
-  
-
   return (
     <Layout className="layout">
       <Navbar />

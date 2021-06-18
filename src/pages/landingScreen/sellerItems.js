@@ -21,7 +21,7 @@ const SellerItems = ({loading,seller}) => {
               </Col>
             );
           })}
-          ;
+          
         </Row>
       );
     }

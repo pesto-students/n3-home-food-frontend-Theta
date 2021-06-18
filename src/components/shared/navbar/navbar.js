@@ -1,7 +1,7 @@
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { Button, Col, Layout, Row } from "antd";
 import "antd/dist/antd.css";
-import { React } from "react";
+import { React, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import logo from "../../../images/logo.png";
@@ -9,16 +9,18 @@ import { setIsCustomerLoginDrawerOpen } from "../../../store/actions";
 import Image from "../image/image";
 import SelectBox from "../selectBox/selectBox";
 import "./navbar.css";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 
 const { Header } = Layout;
 
 
-const Navbar = () => {
-  
+const Navbar = (props) => {
+
   const Dispatch = useDispatch();
   const toggleDrawer = () => {
-    Dispatch(setIsCustomerLoginDrawerOpen())
+    Dispatch(setIsCustomerLoginDrawerOpen(true))
   };
 
   return (
@@ -47,4 +49,10 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+
+const mapStateToProps = state => {
+  return {
+    title: state
+  };
+};
+export default connect(mapStateToProps)(Navbar);

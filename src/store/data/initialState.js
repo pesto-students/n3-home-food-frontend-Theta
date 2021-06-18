@@ -1,4 +1,4 @@
 const initialState = {
-    isAdminLoggedIn: false,
+    isAdminLoggedIn: true,
 }
 export default initialState;

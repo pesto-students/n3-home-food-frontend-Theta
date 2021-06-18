@@ -65,7 +65,7 @@ const ProductApproval = () => {
                 <div className="container">
                   <div className="row">
                     <div className="product-cointaner">
-                      <img src={item} className="product-image" alt =''/>
+                      <img src={product.image} className="product-image" alt =''/>
                     </div>
                     <div className="product-details ">
                       <span className="seller-name">{product.name}</span>

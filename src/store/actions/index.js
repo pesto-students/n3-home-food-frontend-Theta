@@ -2,7 +2,7 @@ export const setAsAdminLoggedIn = () => ({
     type: 'ADMIN_LOGGED',
     value: true
 });
-export const setAsAdminLoggedOut = () => ({
+export const setAsAdminLoggedOut = (value) => ({
     type: 'ADMIN_LOGGED',
     value: false
 });

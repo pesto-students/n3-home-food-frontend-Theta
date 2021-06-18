@@ -6,7 +6,7 @@ import "antd/dist/antd.css";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import DashboardRoutes from "../dashboard-routes/dashboardRoutes";
-import "./dashboard.css";
+import { AvatarMenu } from "../header/header";
 
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -26,30 +26,25 @@ const AdminDashBoard = ()                                                       
           <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
             <div className="logo" />
             <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
-           
               <Menu.Item key="1" icon={<PieChartOutlined />}>
-                   <Link to='/admin/dashboard'>
-                Dashboard
-                </Link>
+                <Link to="/admin/dashboard">Dashboard</Link>
               </Menu.Item>
-             
-            
+
               <Menu.Item key="2" icon={<DesktopOutlined />}>
-               <Link to='/admin/dashboard/product'>
-                Product
-                </Link>
+                <Link to="/admin/dashboard/product">Product</Link>
               </Menu.Item>
-                       
+
               <Menu.Item key="3" icon={<FileOutlined />}>
-              <Link to='/admin/dashboard/seller'>
-                Seller
-                </Link>
+                <Link to="/admin/dashboard/seller">Seller</Link>
               </Menu.Item>
-            
             </Menu>
           </Sider>
           <Layout className="site-layout">
-            <Header className="site-layout-background" style={{ padding: 0 }} />
+            <Header className="site-layout-background" style={{ padding: 0 }}>
+              <div className="header">
+                <AvatarMenu />
+              </div>
+            </Header>
             <Content style={{ margin: "0 16px" }}>
               <Breadcrumb style={{ margin: "16px 0" }}>
                 <Breadcrumb.Item></Breadcrumb.Item>

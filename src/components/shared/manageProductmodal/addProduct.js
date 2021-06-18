@@ -44,7 +44,7 @@ const normFile = (e) => {
   return e && e.fileList;
 };
 
-const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
+const CollectionCreateForm = ({ visible, onCreate, onCancel,fromFor }) => {
   const [form] = Form.useForm();
   return (
     <Modal
@@ -126,7 +126,8 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
             <Button  icon={<UploadOutlined />}>Click to Upload</Button>
           </Upload>
         </Form.Item>
-
+       
+       {fromFor === 'admin' ?
         <Form.Item
           name="maxPrice"
           label="Max Price"
@@ -139,6 +140,21 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
         >
           <InputNumber min={1}  />
         </Form.Item>
+        :
+        <Form.Item
+        name="Price"
+        label="Price"
+        rules={[
+          {
+            required: true,
+            message: "Please Enter Price!",
+          },
+        ]}
+      >
+        <InputNumber min={1}  />
+      </Form.Item>
+
+}
 
       
       </Form>
@@ -149,8 +165,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
 export const AddProductModal = (props) => {
   const [visible, setVisible] = useState(false);
 
-  const onCreate = (values) => {
-    console.log("Received values of form: ", values);
+    const onCreate = (values) => {
     
     const data = new FormData()
     data.append('image',values.productImage[0].originFileObj)
@@ -198,6 +213,70 @@ export const AddProductModal = (props) => {
       </div>
 
       <CollectionCreateForm
+        fromFor='admin'
+        visible={visible}
+        onCreate={onCreate}
+        onCancel={() => {
+          setVisible(false);
+        }}
+      />
+    </div>
+  );
+};
+
+
+
+export const AddProductSellerModal = (props) => {
+  const [visible, setVisible] = useState(false);
+
+  const onCreate = (values) => {
+    
+    const data = new FormData()
+    data.append('image',values.productImage[0].originFileObj)
+    data.append('name',values.productName)
+    data.append('description',values.description)
+    data.append('price',values.maxPrice)
+    data.append('category',values.productCategory)
+
+    axios
+    .post("http://localhost:8080/api/v1/products",
+
+    data)
+    .then((result) => {
+      if(result.status === 200){
+        openNotificationWithIcon('success','Product Reuested')
+      }
+      else{
+        openNotificationWithIcon('error','Could Not Add Product')
+
+      }
+      
+    })
+    .catch((err) => {
+      console.error(err)
+      openNotificationWithIcon('error','Could Not Add Product')
+    })
+    .finally(() => {
+
+    });
+    setVisible(false);
+  };
+
+  return (
+    <div>
+      <div style={{ display: "flex", flexFlow: "row-reverse", margin: "10px" }}>
+        <Button
+          type="primary"
+          onClick={() => {
+            setVisible(true);
+          }}
+        >
+          Reuest Product
+        </Button>
+      </div>
+
+      <CollectionCreateForm
+        fromFor='seller'
         visible={visible}
         onCreate={onCreate}
         onCancel={() => {

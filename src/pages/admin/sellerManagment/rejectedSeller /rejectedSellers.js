@@ -3,28 +3,23 @@ import "antd/dist/antd.css";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { AddProductModal } from '../../../../components/shared/manageProductmodal/addProduct';
 import SpinnerLoader from "../../../../components/shared/spinnerLoader/spinnerLoader";
-import foodalt from "../../../../images/food_alt.jpeg";
+import item from "../../../../images/seller.png";
+import "../Seller Approval/sellerApproval.css";
 
-import "./allProducts.css";
-
-
-const AllProducts = () => {
-  const [products, setproducts] = useState([]);
+const RejectedSellers = () => {
+  const [sellers, setSellers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/v1/products/get/approved")
+      .get("http://localhost:8080/api/v1/sellers/get/rejected")
       .then((result) => {
-        setproducts(result.data);
+        setSellers(result.data);
       })
       .catch((err) => console.error(err))
       .finally(() => setIsLoading(false));
   }, []);
-
-
 
   const fetchMoreData = () => {
     // axios
@@ -36,38 +31,43 @@ const AllProducts = () => {
     // .finally(() => setIsLoading(false));
   };
 
-  const addDefaultSrc = (ev) =>{
-    ev.target.src = 'some default image url'
-  }
+  const onChange = (checked) => {
+    if (false) {
+    }
+    console.log(`switch to ${checked}`);
+  };
 
   return (
     <>
       <div>
         {/* add product modal */}
-        <AddProductModal />
-
 
         <Skeleton loading={isLoading} active>
           <InfiniteScroll
-            dataLength={products.length}
+            dataLength={sellers.length}
             next={fetchMoreData}
             hasMore={true}
-            loader={<Row className='m-2 mt-4' justify="center"> <SpinnerLoader /></Row > }
+            loader={
+              <Row className="m-2 mt-4" justify="center">
+                <SpinnerLoader />
+              </Row>
+            }
           >
-            {products.map((product, i) => (
+            {sellers.map((seller, i) => (
               <Card key={i} hoverable>
-                <div className="container">
-                  <div className="row">
+                <div>
+                  <div className="row seller-row">
                     <div className="product-cointaner">
-                      <img src={product.image} className="product-image" alt ="No image"/>
-
-
+                      <img src={item} className="product-image" alt="" />
+                      <div className="seller-details">
+                      <span className="seller-name">{seller.name}</span>
+                      <span className="rejection-reason"><span style={{color:'red'}} >Reason </span> - {seller.rejection_reason}</span>
+                      </div>
+                      
                     </div>
-                    <div className="product-details ">
-                      <span className="seller-name">{product.name}</span>
-                      <span className="cost">
-                        <p className="max-amount">Max Amount</p> &nbsp; ₹{" "}
-                        {product.max_price}
+
+                    <div className="mr-3">
+                      <span className={seller.status === 'Approved' ? 'status-text-green':'status-text-red'} > {seller.status}
                       </span>
                     </div>
                   </div>
@@ -75,14 +75,10 @@ const AllProducts = () => {
               </Card>
             ))}
           </InfiniteScroll>
-
-          {/* <div className="pagination-container">
-            <Pagination defaultCurrent={6} total={100} />
-          </div> */}
         </Skeleton>
       </div>
     </>
   );
 };
 
-export default AllProducts;
+export default RejectedSellers;

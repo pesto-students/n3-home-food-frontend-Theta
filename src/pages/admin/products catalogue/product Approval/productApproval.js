@@ -9,7 +9,7 @@ import item from "../../../../images/south-indian.jpg";
 import "./productApproval.css";
 import {getPendingProducts} from '../../../../utils/products'
 import { RejectProductModal } from "../../../../components/shared/manageProductmodal/rejectProduct";
-
+import { ReassignProduct } from "../../../../components/shared/manageProductmodal/reassignProduct"
 
 const ProductApproval = () => {
   const [products, setproducts] = useState([]);
@@ -60,8 +60,11 @@ const ProductApproval = () => {
                     </div>
                     <div className="product-details ">
                       <span className="seller-name">{product.name}</span>
+                    </div>
+                    <div className="acess-buttons">
                       <AppoveProductModal productId={product.id} />
                       <RejectProductModal productId={product.id}/>
+                      <ReassignProduct productId = {product.id} />
                     </div>
                   </div>
                 </div>

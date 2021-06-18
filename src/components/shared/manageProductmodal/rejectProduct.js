@@ -17,7 +17,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
     <Modal
       visible={visible}
       title="Reject Product"
-      okText="Add"
+      okText="Reject"
       cancelText="Cancel"
       onCancel={onCancel}
       onOk={() => {

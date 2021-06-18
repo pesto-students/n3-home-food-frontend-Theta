@@ -1,6 +1,9 @@
 import React from 'react';
 import 'antd/dist/antd.css';
 import { Tabs } from 'antd';
+import SellerApproval from './Seller Approval/sellerApproval';
+import RejectedSellers from './rejectedSeller /rejectedSellers';
+import PendingSellers from './pendingSellers/pendingSellers';
 // import AllProducts from './allProducts/allProducts';
 // import ProductApproval from './product Approval/productApproval';
 
@@ -13,13 +16,13 @@ function callback(key) {
 const sellerManagment = () => (
   <Tabs defaultActiveKey="1" onChange={callback}>
     <TabPane tab="Approved" key="1">
-    {/* <AllProducts /> */}
+    <SellerApproval />
     </TabPane>
     <TabPane tab="Rejected" key="2">
-    {/* <ProductApproval /> */}
+   <RejectedSellers />
     </TabPane>
     <TabPane tab="Pending" key="3">
-    {/* <ProductApproval /> */}
+    <PendingSellers />
     </TabPane>
 
   </Tabs>

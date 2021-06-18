@@ -1,8 +1,9 @@
-import { Button, Form, Input, Modal, notification, Select, Card } from "antd";
+import { Button, Form, Modal, notification, Select } from "antd";
 import "antd/dist/antd.css";
 import axios from "axios";
-import reassignProduct from "./reassignProduct.css";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { baseUrlAdmin } from "../../../utils/constant";
+
 let { Option } = Select;
 const openNotificationWithIcon = (type, message) => {
   notification[type]({
@@ -18,7 +19,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/v1/products/get/approved")
+      .get(`${baseUrlAdmin}/products/get/approved`)
       .then((result) => {
         setproducts(result.data);
       })
@@ -88,12 +89,13 @@ export const ReassignProduct = (props) => {
 
     axios
       .put(
-        `http://localhost:8080/api/v1/products/product-reassign/${props.productId}`,
+        `${baseUrlAdmin}/products/product-reassign/${props.productId}`,
         { existingProductId: values.existingProductId }
       )
       .then((result) => {
         if (result.status === 200) {
           openNotificationWithIcon("success", "Product Reassigned");
+          props.callback()
         } else {
           openNotificationWithIcon("error", "Could Not Reassign Product ");
         }

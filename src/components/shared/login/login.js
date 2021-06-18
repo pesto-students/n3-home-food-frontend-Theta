@@ -1,11 +1,8 @@
-import { Form, Input, Button, notification } from "antd";
+import { Button, Form, Input, notification } from "antd";
 import "antd/dist/antd.css";
-import { useDispatch } from "react-redux";
-import { setAsAdminLoggedIn } from "../../../store/actions";
-import "./login.css";
-import { useState } from "react";
+import React, { useState } from "react";
 import firebase from "../../../utils/firebase";
-import React from "react";
+import "./login.css";
 import { adminLogin } from "./utility";
 
 

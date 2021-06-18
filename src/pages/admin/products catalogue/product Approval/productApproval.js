@@ -10,6 +10,7 @@ import "./productApproval.css";
 import {getPendingProducts} from '../../../../utils/products'
 import { RejectProductModal } from "../../../../components/shared/manageProductmodal/rejectProduct";
 import { ReassignProduct } from "../../../../components/shared/manageProductmodal/reassignProduct"
+import { baseUrlAdmin } from "../../../../utils/constant";
 
 const ProductApproval = () => {
   const [products, setproducts] = useState([]);
@@ -17,7 +18,7 @@ const ProductApproval = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/v1/products/get/pending")
+      .get(`${baseUrlAdmin}/products/get/pending`)
       .then((result) => {
         setproducts(result.data);
       })
@@ -27,7 +28,7 @@ const ProductApproval = () => {
 
   const fetchMoreData = () => {
     // axios
-    // .get("http://localhost:8080/api/v1/products/get/approved")
+    // .get("`${baseUrlAdmin}/products/get/approved")
     // .then((result) => {
     //   setproducts(products.concat(result.data));
     // })
@@ -35,6 +36,16 @@ const ProductApproval = () => {
     // .finally(() => setIsLoading(false));
   };
 
+  const updateProductList = () =>{
+    axios
+    .get(`${baseUrlAdmin}/products/get/pending`)
+    .then((result) => {
+      setproducts(result.data);
+    })
+    .catch((err) => console.error(err))
+    .finally(() => setIsLoading(false));
+
+  }
 
 
   return (
@@ -62,9 +73,9 @@ const ProductApproval = () => {
                       <span className="seller-name">{product.name}</span>
                     </div>
                     <div className="acess-buttons">
-                      <AppoveProductModal productId={product.id} />
-                      <RejectProductModal productId={product.id}/>
-                      <ReassignProduct productId = {product.id} />
+                      <AppoveProductModal callback ={updateProductList} productId={product.id} />
+                      <RejectProductModal callback ={updateProductList} productId={product.id}/>
+                      <ReassignProduct callback ={updateProductList} productId = {product.id} />
                     </div>
                   </div>
                 </div>

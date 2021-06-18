@@ -8,14 +8,14 @@ import item from "../../../../images/seller.png";
 import "./sellerApproval.css";
 import { Switch } from "antd";
 import { RejectSellerModal } from "../../../../components/manageSellerModal/rejectSeller";
-
+import {baseUrlAdmin} from "../../../../utils/constant"
 const SellerApproval = () => {
   const [sellers, setSellers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/v1/sellers")
+      .get(`${baseUrlAdmin}/sellers`)
       .then((result) => {
         setSellers(result.data);
       })
@@ -25,7 +25,7 @@ const SellerApproval = () => {
 
   const fetchMoreData = () => {
     // axios
-    // .get("http://localhost:8080/api/v1/products/get/approved")
+    // .get("`${baseUrlAdmin}/products/get/approved")
     // .then((result) => {
     //   setproducts(products.concat(result.data));
     // })
@@ -39,6 +39,17 @@ const SellerApproval = () => {
     console.log(`switch to ${checked}`);
   };
 
+  const updateSellerList = () =>{
+    setIsLoading(true)
+    axios
+      .get(`${baseUrlAdmin}/sellers`)
+      .then((result) => {
+        setSellers(result.data);
+      })
+      .catch((err) => console.error(err))
+      .finally(() => setIsLoading(false));
+
+  }
   return (
     <>
       <div>
@@ -67,7 +78,7 @@ const SellerApproval = () => {
 
                     <div className="mr-3">
                       <div className='switch-cointaner'>
-                        <RejectSellerModal buttonType='switch' switchChecked={seller.status === 'Approved' ? true:false} sellerId = {seller.id}/>
+                        <RejectSellerModal callback = {updateSellerList} buttonType='switch' switchChecked={seller.status === 'Approved' ? true:false} sellerId = {seller.id}/>
                       </div>
 
                       <span className={seller.status === 'Approved' ? 'status-text-green':'status-text-red'} > {seller.status}

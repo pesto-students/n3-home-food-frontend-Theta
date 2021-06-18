@@ -3,6 +3,7 @@ import "antd/dist/antd.css";
 import axios from 'axios';
 import React, { useState } from "react";
 
+import { baseUrlAdmin } from "../../../utils/constant";
 
 
 const openNotificationWithIcon = (type,message) => {
@@ -67,10 +68,11 @@ export const RejectProductModal = (props) => {
     console.log("Received values of form: ", values);
 
     axios
-    .put(`http://localhost:8080/api/v1/products/product-rejection/${props.productId}`,{'rejection_reason':values.rejectReason})
+    .put(`${baseUrlAdmin}/products/product-rejection/${props.productId}`,{'rejection_reason':values.rejectReason})
     .then((result) => {
       if(result.status === 200){
         openNotificationWithIcon('success','Product Rejected')
+        props.callback()
       }
       else{
         openNotificationWithIcon('error','Could Not Reject Product ')

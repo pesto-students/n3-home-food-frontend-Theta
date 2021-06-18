@@ -6,14 +6,14 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import SpinnerLoader from "../../../../components/shared/spinnerLoader/spinnerLoader";
 import item from "../../../../images/seller.png";
 import "../Seller Approval/sellerApproval.css";
-
+import {baseUrlAdmin} from '../../../../utils/constant'
 const RejectedSellers = () => {
   const [sellers, setSellers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/v1/sellers/get/rejected")
+      .get(`${baseUrlAdmin}/sellers/get/rejected`)
       .then((result) => {
         setSellers(result.data);
       })
@@ -23,7 +23,7 @@ const RejectedSellers = () => {
 
   const fetchMoreData = () => {
     // axios
-    // .get("http://localhost:8080/api/v1/products/get/approved")
+    // .get("`${baseUrlAdmin}/products/get/approved")
     // .then((result) => {
     //   setproducts(products.concat(result.data));
     // })

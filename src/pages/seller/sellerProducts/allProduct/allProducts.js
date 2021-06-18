@@ -14,7 +14,7 @@ const AllProducts = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/v1/products/get/approved")
+      .get("`${baseUrlAdmin}/products/get/approved")
       .then((result) => {
         setproducts(result.data);
       })
@@ -24,7 +24,7 @@ const AllProducts = () => {
 
   const fetchMoreData = () => {
     // axios
-    // .get("http://localhost:8080/api/v1/products/get/approved")
+    // .get("`${baseUrlAdmin}/products/get/approved")
     // .then((result) => {
     //   setproducts(products.concat(result.data));
     // })

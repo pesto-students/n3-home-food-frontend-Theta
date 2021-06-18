@@ -3,8 +3,9 @@ import { Button, Form, Input, InputNumber, message, Modal, notification, Select,
 import "antd/dist/antd.css";
 import axios from 'axios';
 import React, { useState } from "react";
-const { Option } = Select;
+import { baseUrlAdmin} from '../../../utils/constant'
 
+const { Option } = Select;
 
 
 const openNotificationWithIcon = (type,message) => {
@@ -176,12 +177,13 @@ export const AddProductModal = (props) => {
 
     console.log('file,',data)
     axios
-    .post("http://localhost:8080/api/v1/products",
+    .post(`${baseUrlAdmin}/products`,
 
     data)
     .then((result) => {
       if(result.status === 200){
         openNotificationWithIcon('success','Product Added')
+        props.callback()
       }
       else{
         openNotificationWithIcon('error','Could Not Add Product')
@@ -239,12 +241,13 @@ export const AddProductSellerModal = (props) => {
     data.append('category',values.productCategory)
 
     axios
-    .post("http://localhost:8080/api/v1/products",
+    .post(`${baseUrlAdmin}/products`,
 
     data)
     .then((result) => {
       if(result.status === 200){
         openNotificationWithIcon('success','Product Reuested')
+        props.callback()
       }
       else{
         openNotificationWithIcon('error','Could Not Add Product')

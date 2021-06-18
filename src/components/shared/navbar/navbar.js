@@ -1,15 +1,15 @@
+import { ShoppingCartOutlined } from "@ant-design/icons";
 import { Button, Col, Layout, Row } from "antd";
 import "antd/dist/antd.css";
 import { React } from "react";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import logo from "../../../images/logo.png";
+import { setIsCustomerLoginDrawerOpen } from "../../../store/actions";
 import Image from "../image/image";
 import SelectBox from "../selectBox/selectBox";
-import logo from "../../../images/logo.png";
-import { Link } from "react-router-dom";
 import "./navbar.css";
 
-import { ShoppingCartOutlined } from "@ant-design/icons";
-import { useDispatch } from "react-redux";
-import { setIsCustomerLoginDrawerOpen, setIsCustomerLoginDrawerClosed } from "../../../store/actions"
 
 const { Header } = Layout;
 

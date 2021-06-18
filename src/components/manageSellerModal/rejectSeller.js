@@ -3,6 +3,7 @@ import "antd/dist/antd.css";
 import axios from "axios";
 import React, { useState } from "react";
 import { Switch } from "antd";
+import { baseUrlAdmin } from "../../utils/constant";
 
 const openNotificationWithIcon = (type, message) => {
   notification[type]({
@@ -63,12 +64,13 @@ export const RejectSellerModal = (props) => {
     console.log("Received values of form: ", values);
 
     axios
-      .put(`http://localhost:8080/api/v1/sellers/reject/${props.sellerId}`, {
+      .put(`${baseUrlAdmin}/sellers/reject/${props.sellerId}`, {
         rejection_reason: values.rejectReason,
       })
       .then((result) => {
         if (result.status === 200) {
           openNotificationWithIcon("success", "Seller Rejected");
+          props.callback()
         } else {
           openNotificationWithIcon("error", "Could Not Reject Seller ");
         }
@@ -88,11 +90,12 @@ export const RejectSellerModal = (props) => {
       setVisible(true);
     } else {
       axios
-        .put(`http://localhost:8080/api/v1/sellers/approve/${props.sellerId}`)
+        .put(`${baseUrlAdmin}/sellers/approve/${props.sellerId}`)
         .then((result) => {
           if (result.status === 200) {
             setSwitchChecked(true);
             openNotificationWithIcon("success", "Seller Approved");
+            props.callback()
           } else {
             openNotificationWithIcon("error", "Could Not Approve Seller");
           }

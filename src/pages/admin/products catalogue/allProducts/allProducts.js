@@ -6,7 +6,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { AddProductModal } from '../../../../components/shared/manageProductmodal/addProduct';
 import SpinnerLoader from "../../../../components/shared/spinnerLoader/spinnerLoader";
 import foodalt from "../../../../images/food_alt.jpeg";
-
+import { baseUrlAdmin } from "../../../../utils/constant";
 import "./allProducts.css";
 
 
@@ -16,7 +16,7 @@ const AllProducts = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/v1/products/get/approved")
+      .get(`${baseUrlAdmin}/products/get/approved`)
       .then((result) => {
         setproducts(result.data);
       })
@@ -26,16 +26,28 @@ const AllProducts = () => {
 
 
 
-  const fetchMoreData = () => {
-    // axios
-    // .get("http://localhost:8080/api/v1/products/get/approved")
-    // .then((result) => {
-    //   setproducts(products.concat(result.data));
-    // })
-    // .catch((err) => console.error(err))
-    // .finally(() => setIsLoading(false));
-  };
+   const fetchMoreData = () => {
+  //   setIsLoading(false)
+  //   axios
+  //   .get("`${baseUrlAdmin}/products/get/approved")
+  //   .then((result) => {
+  //     setproducts(result.data);
+  //   })
+  //   .catch((err) => console.error(err))
+  //   .finally(() => setIsLoading(false));
+   };
 
+  const updateProductList = () =>{
+    setIsLoading(false)
+    axios
+    .get(`${baseUrlAdmin}/products/get/approved`)
+    .then((result) => {
+      setproducts(result.data);
+    })
+    .catch((err) => console.error(err))
+    .finally(() => setIsLoading(false));
+
+  }
   const addDefaultSrc = (ev) =>{
     ev.target.src = 'some default image url'
   }
@@ -44,7 +56,7 @@ const AllProducts = () => {
     <>
       <div>
         {/* add product modal */}
-        <AddProductModal />
+        <AddProductModal callback ={updateProductList} />
 
 
         <Skeleton loading={isLoading} active>

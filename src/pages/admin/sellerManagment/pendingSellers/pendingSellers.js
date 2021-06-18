@@ -8,6 +8,7 @@ import SpinnerLoader from "../../../../components/shared/spinnerLoader/spinnerLo
 import item from "../../../../images/south-indian.jpg";
 import "./pendingSeller.css";
 import { RejectSellerModal } from "../../../../components/manageSellerModal/rejectSeller";
+import { baseUrlAdmin } from "../../../../utils/constant";
 
 const openNotificationWithIcon = (type, message) => {
     notification[type]({
@@ -21,7 +22,7 @@ const PendingSellers = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/v1/sellers/get/pending")
+      .get(`${baseUrlAdmin}/sellers/get/pending`)
       .then((result) => {
         setSellers(result.data);
       })
@@ -31,7 +32,7 @@ const PendingSellers = () => {
 
   const fetchMoreData = () => {
     // axios
-    // .get("http://localhost:8080/api/v1/products/get/approved")
+    // .get("`${baseUrlAdmin}/products/get/approved")
     // .then((result) => {
     //   setproducts(products.concat(result.data));
     // })
@@ -41,7 +42,7 @@ const PendingSellers = () => {
 
   const approveSellerbyId = (id) => {
     axios
-    .put(`http://localhost:8080/api/v1/sellers/approve/${id}`)
+    .put(`${baseUrlAdmin}/sellers/approve/${id}`)
     .then((result) => {
       if (result.status === 200) {
         openNotificationWithIcon("success", "Seller Approved");
@@ -55,6 +56,18 @@ const PendingSellers = () => {
     })
     .finally(() => {});
   };
+
+  const updateSellerList = () =>{
+    setIsLoading(true)
+    axios
+    .get(`${baseUrlAdmin}/sellers/get/pending`)
+    .then((result) => {
+      setSellers(result.data);
+    })
+    .catch((err) => console.error(err))
+    .finally(() => setIsLoading(false));
+
+  }
 
   return (
     <>
@@ -86,10 +99,11 @@ const PendingSellers = () => {
                     <div className="acess-buttons">
                       <Button style={{margin:'10px'}} type="primary" onClick={()=>{
                         approveSellerbyId(seller.id)
+                        updateSellerList()
                       }}>
                         Approve
                       </Button>
-                      <RejectSellerModal sellerId={seller.id} />
+                      <RejectSellerModal callback = {updateSellerList} sellerId={seller.id} />
                     </div>
                   </div>
                 </div>

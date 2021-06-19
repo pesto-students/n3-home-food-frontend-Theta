@@ -3,7 +3,6 @@ import "antd/dist/antd.css";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import SpinnerLoader from "../../../../components/shared/spinnerLoader/spinnerLoader";
 import item from "../../../../images/seller.png";
 import { baseUrlAdmin } from '../../../../utils/constant';
 import "../Seller Approval/sellerApproval.css";

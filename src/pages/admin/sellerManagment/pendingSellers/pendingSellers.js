@@ -4,7 +4,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { RejectSellerModal } from "../../../../components/manageSellerModal/rejectSeller";
-import SpinnerLoader from "../../../../components/shared/spinnerLoader/spinnerLoader";
 import item from "../../../../images/south-indian.jpg";
 import { baseUrlAdmin } from "../../../../utils/constant";
 import "./pendingSeller.css";

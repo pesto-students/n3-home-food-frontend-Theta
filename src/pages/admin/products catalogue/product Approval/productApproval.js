@@ -6,9 +6,9 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { AppoveProductModal } from '../../../../components/shared/manageProductmodal/approveProduct';
 import { ReassignProduct } from "../../../../components/shared/manageProductmodal/reassignProduct";
 import { RejectProductModal } from "../../../../components/shared/manageProductmodal/rejectProduct";
-import item from "../../../../images/south-indian.jpg";
 import { baseUrlAdmin } from "../../../../utils/constant";
 import "./productApproval.css";
+import Image from "../../../../components/shared/image/image";
 
 const ProductApproval = () => {
   const [products, setproducts] = useState([]);
@@ -65,7 +65,7 @@ const ProductApproval = () => {
                 <div className="container">
                   <div className="row">
                     <div className="product-cointaner">
-                      <img src={product.image} className="product-image" alt =''/>
+                      <Image url={product.image} height="100" width='150'></Image>
                     </div>
                     <div className="product-details ">
                       <span className="seller-name">{product.name}</span>

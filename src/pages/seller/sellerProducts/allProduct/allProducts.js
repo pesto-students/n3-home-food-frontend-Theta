@@ -6,6 +6,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { AddProductSellerModal } from '../../../../components/shared/manageProductmodal/addProduct';
 import item from "../../../../images/south-indian.jpg";
 import { baseUrlAdmin } from "../../../../utils/constant";
+import Image from "../../../../components/shared/image/image";
 
 
 const AllProducts = () => {
@@ -57,7 +58,7 @@ const AllProducts = () => {
                 <div className="container">
                   <div className="row">
                     <div className="product-cointaner">
-                      <img src={item} className="product-image" alt =''/>
+                      <Image url={item} height="60" width='60'></Image>
                     </div>
                     <div className="product-details ">
                       <span className="seller-name">{product.name}</span>

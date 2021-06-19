@@ -3,8 +3,9 @@ import {
 } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu } from "antd";
 import "antd/dist/antd.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { getUser } from "../../../utils/helpers";
 import DashboardRoutes from "../dashboard-routes/dashboardRoutes";
 import { AvatarMenu } from "../header/header";
 
@@ -18,6 +19,11 @@ const AdminDashBoard = ()                                                       
     setCollapsed({ collapsed });
   };
 
+  const user =  getUser() ? getUser().user_type : null
+  useEffect(()=>{
+    if(user === 'Seller') window.location.href = '/seller/dashboard'
+    if(user === null) window.location.href = '/'
+  },[user])
 
 
 
@@ -53,7 +59,10 @@ const AdminDashBoard = ()                                                       
                 className="site-layout-background"
                 style={{ padding: 24, minHeight: 360 }}
               >
+                {user === 'Admin' &&
                 <DashboardRoutes />
+                }
+            
               </div>
             </Content>
             <Footer style={{ textAlign: "center" }}>

@@ -3,8 +3,9 @@ import {
 } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 import "antd/dist/antd.css";
-import React, { useState } from "react";
-import { Link, Route } from "react-router-dom";
+import React, { useState,useEffect } from "react";
+import { Link, Route} from "react-router-dom";
+import { getUser } from "../../../utils/helpers";
 import SellerGraphs from "../sellerGraphs/sellerGraphs";
 import SellerProducts from "../sellerProducts/sellerProducts";
 import SellerProfile from "../sellerProfile/sellerProfile";
@@ -16,6 +17,14 @@ const { Header, Content, Footer, Sider } = Layout;
   const onCollapse = (collapsed) => {
     setCollapsed({ collapsed });
   };
+
+  const user =  getUser() ? getUser().user_type : null
+
+  useEffect(()=>{
+    if(user === 'Admin') window.location.href = '/admin/dashboard'
+    if(user === null) window.location.href = '/'
+  },[user])
+
 
 
 
@@ -40,10 +49,13 @@ const { Header, Content, Footer, Sider } = Layout;
           <Layout className="site-layout">
             <Header className="site-layout-background" style={{ padding: 0 }} />
             <Content style={{ margin: "0 16px" }}>
+            {user === 'Seller' ?
               <div
                 className="site-layout-background"
                 style={{ padding: 24, minHeight: 360 }}
               >
+
+              
                 <Route exact path="/seller/dashboard/">
                   <SellerGraphs />
                 </Route>
@@ -56,7 +68,11 @@ const { Header, Content, Footer, Sider } = Layout;
                 <Route path="/seller/dashboard/product">
                   <SellerProducts />
                 </Route>
+
               </div>
+              :
+              window.location.href = '/'
+}
             </Content>
             <Footer style={{ textAlign: "center" }}>
               Home Food ©2021 Created by Pesto Theta

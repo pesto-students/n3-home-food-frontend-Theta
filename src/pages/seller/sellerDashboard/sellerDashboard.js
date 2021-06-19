@@ -9,11 +9,14 @@ import { getUser } from "../../../utils/helpers";
 import SellerGraphs from "../sellerGraphs/sellerGraphs";
 import SellerProducts from "../sellerProducts/sellerProducts";
 import SellerProfile from "../sellerProfile/sellerProfile";
+import logo from "../../../images/logo.png"
+import Image from "../../../components/shared/image/image";
 const { Header, Content, Footer, Sider } = Layout;
 
  const SellerDashBoard  = () => {
 
   const [collapsed,setCollapsed] = useState(false)
+
   const onCollapse = (collapsed) => {
     setCollapsed({ collapsed });
   };
@@ -25,13 +28,16 @@ const { Header, Content, Footer, Sider } = Layout;
     if(user === null) window.location.href = '/'
   },[user])
 
+   
 
-
+  const logoSize = collapsed ? 50 : 100
 
     return <>
         <Layout style={{ minHeight: "100vh" }}>
           <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
-            <div className="logo" />
+            <div className="home-food-logos">
+                 <Image url={logo} height={logoSize} width={logoSize} radius="100%"/>
+              </div>
             <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
               <Menu.Item key="1" icon={<PieChartOutlined />}>
                 <Link to="/seller/dashboard">Dashboard</Link>

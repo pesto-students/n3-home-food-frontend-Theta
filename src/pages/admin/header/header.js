@@ -18,10 +18,15 @@ export const AvatarMenu = () => {
     }
   };
 
+  const logout  = () =>{
+     localStorage.clear()
+     window.location.href = '/'
+  }
+
   const menu = (
     <Menu onClick={onClick}>
       <Menu.Item key="1">My Profile</Menu.Item>
-      <Menu.Item key="logout">Logout</Menu.Item>
+      <Menu.Item key="logout" onClick={logout}>Logout</Menu.Item>
     </Menu>
   );
 

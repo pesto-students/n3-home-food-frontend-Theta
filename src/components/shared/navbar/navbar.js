@@ -35,7 +35,7 @@ const Navbar = (props) => {
           <Button type="link" onClick={toggleDrawer}>
             Sign In
           </Button>
-          <Link to="/admin/dashboard">
+          <Link to="/admin">
             <Button type="link">Admin</Button>
           </Link>
           <Button type="link">

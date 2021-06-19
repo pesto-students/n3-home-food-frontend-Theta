@@ -26,14 +26,14 @@ const CustomerLogin = (props) => {
 
   return (
     <Drawer
-      title="Sign in"
+      title={`${props.type} Login`}
       placement="right"
       width={400}
       closable={true}
       onClose={onClose}
       visible={visible}
     >
-      <Login />
+      <Login userType={props.type}/>
     </Drawer>
   );
 };

@@ -67,7 +67,7 @@ const LandingPage = () => {
               />
             </Col>
           </Row>
-          <CustomerLogin/>
+          <CustomerLogin type="Customer"/>
           <SellerItems loading={loadSeller} seller={seller}/>
         </div>
       </Content>

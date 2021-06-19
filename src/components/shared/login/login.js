@@ -7,7 +7,7 @@ import { loginUser } from "./utility";
 
 
 
-const Login = () => {
+const Login = ({userType}) => {
   const [hasMoile, sethasMobile] = useState(false);
   const [buttonLoding, setButtonLoding] = useState(false);
   
@@ -74,7 +74,7 @@ const Login = () => {
         // User signed in successfully.
         setButtonLoding(false)
         const user = result.user;
-        loginUser({phone:user.phoneNumber,customerType:'Admin'})
+        loginUser({phone:user.phoneNumber,customerType:userType})
         notification.success({
           message: "Verified",
           description: "Successfully Login",
@@ -98,7 +98,7 @@ const Login = () => {
   
 
   return (
-    <div>
+    <div style={{width:'100%'}}>
       <div id="sign-in-button"></div>
       <Form
         name="normal_login"

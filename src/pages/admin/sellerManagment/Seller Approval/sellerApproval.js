@@ -1,53 +1,20 @@
 import { Card, Row, Skeleton } from "antd";
 import "antd/dist/antd.css";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { RejectSellerModal } from "../../../../components/manageSellerModal/rejectSeller";
 import item from "../../../../images/seller.png";
-import { baseUrlAdmin } from "../../../../utils/constant";
 import "./sellerApproval.css";
-const SellerApproval = () => {
-  const [sellers, setSellers] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+const SellerApproval = ({isLoading,sellers,callback}) => {
 
-  useEffect(() => {
-    axios
-      .get(`${baseUrlAdmin}/sellers`)
-      .then((result) => {
-        setSellers(result.data);
-      })
-      .catch((err) => console.error(err))
-      .finally(() => setIsLoading(false));
-  }, []);
 
   const fetchMoreData = () => {
-    // axios
-    // .get("`${baseUrlAdmin}/products/get/approved")
-    // .then((result) => {
-    //   setproducts(products.concat(result.data));
-    // })
-    // .catch((err) => console.error(err))
-    // .finally(() => setIsLoading(false));
   };
 
-  // const onChange = (checked) => {
-  //   if (false) {
-  //   }
-  //   console.log(`switch to ${checked}`);
-  // };
+  const updateSellerList = () => {
+   callback()
+  };
 
-  const updateSellerList = () =>{
-    setIsLoading(true)
-    axios
-      .get(`${baseUrlAdmin}/sellers`)
-      .then((result) => {
-        setSellers(result.data);
-      })
-      .catch((err) => console.error(err))
-      .finally(() => setIsLoading(false));
-
-  }
   return (
     <>
       <div>

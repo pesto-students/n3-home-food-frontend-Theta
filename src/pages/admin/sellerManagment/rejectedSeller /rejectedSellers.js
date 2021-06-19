@@ -1,25 +1,12 @@
 import { Card, Row, Skeleton } from "antd";
 import "antd/dist/antd.css";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import item from "../../../../images/seller.png";
-import { baseUrlAdmin } from '../../../../utils/constant';
 import "../Seller Approval/sellerApproval.css";
-const RejectedSellers = () => {
-  const [sellers, setSellers] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+const RejectedSellers = ({isLoading,sellers}) => {
 
-  useEffect(() => {
-    axios
-      .get(`${baseUrlAdmin}/sellers/get/rejected`)
-      .then((result) => {
-        setSellers(result.data);
-      })
-      .catch((err) => console.error(err))
-      .finally(() => setIsLoading(false));
-  }, []);
-
+  
   const fetchMoreData = () => {
     // axios
     // .get("`${baseUrlAdmin}/products/get/approved")

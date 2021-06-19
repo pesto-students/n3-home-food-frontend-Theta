@@ -1,7 +1,7 @@
 import { Button, Card, notification, Row, Skeleton } from "antd";
 import "antd/dist/antd.css";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { RejectSellerModal } from "../../../../components/manageSellerModal/rejectSeller";
 import item from "../../../../images/south-indian.jpg";
@@ -14,19 +14,8 @@ const openNotificationWithIcon = (type, message) => {
     });
   };
 
-const PendingSellers = () => {
-  const [sellers, setSellers] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+const PendingSellers = ({callback,sellers,isLoading}) => {
 
-  useEffect(() => {
-    axios
-      .get(`${baseUrlAdmin}/sellers/get/pending`)
-      .then((result) => {
-        setSellers(result.data);
-      })
-      .catch((err) => console.error(err))
-      .finally(() => setIsLoading(false));
-  }, []);
 
   const fetchMoreData = () => {
     // axios
@@ -56,15 +45,7 @@ const PendingSellers = () => {
   };
 
   const updateSellerList = () =>{
-    setIsLoading(true)
-    axios
-    .get(`${baseUrlAdmin}/sellers/get/pending`)
-    .then((result) => {
-      setSellers(result.data);
-    })
-    .catch((err) => console.error(err))
-    .finally(() => setIsLoading(false));
-
+    callback()
   }
 
   return (

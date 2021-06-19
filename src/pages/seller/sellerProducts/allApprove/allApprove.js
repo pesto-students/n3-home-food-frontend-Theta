@@ -1,15 +1,14 @@
-import { Button, Card, Row, Skeleton } from "antd";
+import { Card, Row, Skeleton } from "antd";
 import "antd/dist/antd.css";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { AddProductSellerModal } from '../../../../components/shared/manageProductmodal/addProduct';
+import Image from "../../../../components/shared/image/image";
 import item from "../../../../images/south-indian.jpg";
 import { baseUrlAdmin, baseUrlSeller } from "../../../../utils/constant";
-import Image from "../../../../components/shared/image/image";
 
 
-const AllProducts = () => {
+const AllApprove = () => {
   const [products, setproducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -48,10 +47,6 @@ const AllProducts = () => {
   return (
     <>
       <div>
-        {/* add product modal */}
-        <AddProductSellerModal />
-
-
         <Skeleton loading={isLoading} active>
           <InfiniteScroll
             dataLength={products.length}
@@ -77,9 +72,7 @@ const AllProducts = () => {
                    
                   </div>
                 </div>
-                <Row justify="end">
-                     <Button type="primary" onClick={()=>addToMyProduct(product)}>Add</Button>
-                </Row>
+       
               </Card>
             ))}
           </InfiniteScroll>
@@ -93,4 +86,4 @@ const AllProducts = () => {
   );
 };
 
-export default AllProducts;
+export default AllApprove;

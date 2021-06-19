@@ -233,12 +233,16 @@ export const AddProductSellerModal = (props) => {
 
   const onCreate = (values) => {
     
+    console.log(values)
+  try
+  {
     const data = new FormData()
     data.append('image',values.productImage[0].originFileObj)
     data.append('name',values.productName)
     data.append('description',values.description)
-    data.append('price',values.maxPrice)
+    data.append('max_price',values.maxPrice)
     data.append('category',values.productCategory)
+    data.append('status','Pending')
 
     axios
     .post(`${baseUrlAdmin}/products`,
@@ -263,7 +267,13 @@ export const AddProductSellerModal = (props) => {
 
     });
     setVisible(false);
-  };
+  }
+  catch(e)
+  {
+    openNotificationWithIcon('error',"Something went wrong")
+
+  }
+};
 
   return (
     <div>

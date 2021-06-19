@@ -35,7 +35,7 @@ const { Header, Content, Footer, Sider } = Layout;
     return <>
         <Layout style={{ minHeight: "100vh" }}>
           <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
-            <div className="home-food-logos">
+            <div className="home-food-logo">
                  <Image url={logo} height={logoSize} width={logoSize} radius="100%"/>
               </div>
             <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">

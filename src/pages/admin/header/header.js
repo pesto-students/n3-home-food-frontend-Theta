@@ -25,7 +25,7 @@ export const AvatarMenu = () => {
 
   const menu = (
     <Menu onClick={onClick}>
-      <Menu.Item key="1">My Profile</Menu.Item>
+      {/* <Menu.Item key="1">My Profile</Menu.Item> */}
       <Menu.Item key="logout" onClick={logout}>Logout</Menu.Item>
     </Menu>
   );

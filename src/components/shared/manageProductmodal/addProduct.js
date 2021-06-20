@@ -99,9 +99,9 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel,fromFor }) => {
         >
              <Select placeholder="Please select a Category">
           <Option value="60c906ce35453e14cd3f4ee3">Breakfast</Option>
-          <Option value="Lunch">Lunch</Option>
-          <Option value="Snacks">Snacks</Option>
-          <Option value="Dinner">Dinner</Option>
+          <Option value="60ccfb4516659e249450ed49">Lunch</Option>
+          <Option value="60ccfea78d901732e097e2ee">Snacks</Option>
+          <Option value="60cf33b093112a14d5da3897">Dinner</Option>
         </Select>
         </Form.Item>
 
@@ -131,7 +131,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel,fromFor }) => {
        {fromFor === 'admin' ?
         <Form.Item
           name="maxPrice"
-          label="Max Price"
+          label="Max Price (₹)"
           rules={[
             {
               required: true,
@@ -139,12 +139,12 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel,fromFor }) => {
             },
           ]}
         >
-          <InputNumber min={1}  />
+          <InputNumber min={1}  placeholder="₹" />
         </Form.Item>
         :
         <Form.Item
-        name="Price"
-        label="Price"
+        name="maxPrice"
+        label="Price (₹)"
         rules={[
           {
             required: true,
@@ -152,7 +152,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel,fromFor }) => {
           },
         ]}
       >
-        <InputNumber min={1}  />
+        <InputNumber min={1} placeholder="₹"  />
       </Form.Item>
 
 }
@@ -284,7 +284,7 @@ export const AddProductSellerModal = (props) => {
             setVisible(true);
           }}
         >
-          Reuest Product
+          Reqest Product
         </Button>
       </div>
 

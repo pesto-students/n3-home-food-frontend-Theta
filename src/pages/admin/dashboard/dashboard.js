@@ -1,16 +1,16 @@
 import {
   DesktopOutlined, FileOutlined, PieChartOutlined
 } from "@ant-design/icons";
-import { Breadcrumb, Layout, Menu } from "antd";
+import { Layout, Menu } from "antd";
 import "antd/dist/antd.css";
-import "./dashboard.css"
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Image from "../../../components/shared/image/image";
+import logo from "../../../images/logo.png";
 import { getUser } from "../../../utils/helpers";
 import DashboardRoutes from "../dashboard-routes/dashboardRoutes";
 import { AvatarMenu } from "../header/header";
-import Image from "../../../components/shared/image/image";
-import logo from "../../../images/logo.png"
+import "./dashboard.css";
 const { Header, Content, Footer, Sider } = Layout;
 
 const AdminDashBoard = ()                                                                            => {
@@ -20,7 +20,7 @@ const AdminDashBoard = ()                                                       
     setCollapsed({ collapsed });
   };
 
-  const user =  getUser() ? getUser().user_type : null
+  const user =  getUser() ? getUser().userType : null
   useEffect(()=>{
     if(user === 'Seller') window.location.href = '/seller/dashboard'
     if(user === null) window.location.href = '/'
@@ -51,15 +51,11 @@ const AdminDashBoard = ()                                                       
             </Menu>
           </Sider>
           <Layout className="site-layout">
-            <Header className="site-layout-background" style={{ padding: 0 }}>
-              <div className="header">
+          <Header className="header-navbar">
+                 <h1>Admin</h1>
                 <AvatarMenu />
-              </div>
             </Header>
-            <Content style={{ margin: "0 16px" }}>
-              <Breadcrumb style={{ margin: "16px 0" }}>
-                <Breadcrumb.Item></Breadcrumb.Item>
-              </Breadcrumb>
+            <Content style={{ margin: "20px 16px" }}>
               <div
                 className="site-layout-background"
                 style={{ padding: 24, minHeight: 360 }}

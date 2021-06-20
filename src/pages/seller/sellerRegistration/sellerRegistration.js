@@ -1,5 +1,6 @@
 import {
   Button,
+  notification,
   Col, Form, Input, Row
 } from "antd";
 import "antd/dist/antd.css";
@@ -9,6 +10,7 @@ import { connect, useDispatch } from "react-redux";
 import "./sellerRegistration.css"
 import CustomerLogin from "../../landingScreen/customerLogin";
 import { setIsCustomerLoginDrawerOpen } from "../../../store/actions";
+import axios from "../../../utils/axios";
 
 function SellerRegistration() {
   const Dispatch = useDispatch();
@@ -16,6 +18,27 @@ function SellerRegistration() {
   const toggleDrawer = () => {
     Dispatch(setIsCustomerLoginDrawerOpen(true))
   };
+
+  const registerSeller = async (form) =>{
+        
+    let response = await axios
+      .post('/sellers/register',form)
+      .then((response) => {
+         notification.success({
+          message: "Great",
+          description: "Successfully Register login with your mobile number",
+          placement: "topLeft",
+        });
+        setTimeout(()=>{
+          toggleDrawer()
+            
+        },[2000])
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return response;
+  }
 
   return (
     <>
@@ -30,7 +53,8 @@ function SellerRegistration() {
 
       <div className="right-container">
         <h4 align="center">Register</h4>
-        <Form layout="vertical" hideRequiredMark>
+        <Form layout="vertical" hideRequiredMark onFinish={registerSeller}
+>
           <Row gutter={16}>
             <Col span={24}>
               <Form.Item
@@ -55,11 +79,25 @@ function SellerRegistration() {
                 />
               </Form.Item>
             </Col>
+            <Col span={24}>
+              <Form.Item
+                name="email"
+                label="Email"
+                rules={[
+                  { required: true, message: "Please enter email" },
+                ]}
+              >
+                <Input
+                  style={{ width: "100%" }}
+                  placeholder="Please enter email"
+                />
+              </Form.Item>
+            </Col>
           </Row>
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
-                name="adhar_card"
+                name="idProof"
                 label="Adhar Card"
                 rules={[{ required: true, message: "Please enter adhar card" }]}
               >
@@ -72,7 +110,7 @@ function SellerRegistration() {
 
             <Col span={12}>
               <Form.Item
-                name="mobile"
+                name="phone"
                 label="Mobile Number"
                 rules={[
                   { required: true, message: "Please enter mobile number" },
@@ -89,18 +127,18 @@ function SellerRegistration() {
           <Row gutter={16}>
             <Col span={24}>
               <Form.Item
-                name="description"
-                label="Description"
+                name="adress"
+                label="Adress"
                 rules={[
                   {
                     required: true,
-                    message: "please enter url description",
+                    message: "please enter adress",
                   },
                 ]}
               >
                 <Input.TextArea
                   rows={4}
-                  placeholder="please enter url description"
+                  placeholder="please enter adress"
                 />
               </Form.Item>
             </Col>

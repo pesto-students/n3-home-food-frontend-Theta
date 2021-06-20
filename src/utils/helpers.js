@@ -10,10 +10,10 @@ export const getUser = () => {
 export const redirectToOriginalPageFromLanding = () => {
   const user = getUser();
   if (user) {
-    if (user.user_type === "Admin") {
+    if (user.userType === "Admin") {
       window.location.href = "/admin/dashboard";
     }
-    if (user.user_type === "Seller") {
+    if (user.userType === "Seller") {
        window.location.href = "/seller/dashboard";
     }
   } 

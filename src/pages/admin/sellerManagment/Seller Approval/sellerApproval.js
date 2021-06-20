@@ -39,9 +39,17 @@ const SellerApproval = ({isLoading,sellers,callback}) => {
                     </div>
 
                     <div className="mr-3">
+                    {seller.status === 'Approved' ? 
+                      <span>Deactivate</span>
+                      :
+                      <span>Activate</span> 
+                   }
+
                       <div className='switch-cointaner'>
                         <RejectSellerModal callback = {updateSellerList} buttonType='switch' switchChecked={seller.status === 'Approved' ? true:false} sellerId = {seller.id}/>
                       </div>
+             
+
 
                       <span className={seller.status === 'Approved' ? 'status-text-green':'status-text-red'} > {seller.status}
                       </span>

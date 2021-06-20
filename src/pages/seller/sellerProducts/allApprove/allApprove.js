@@ -1,26 +1,12 @@
 import { Card, Row, Skeleton } from "antd";
 import "antd/dist/antd.css";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Image from "../../../../components/shared/image/image";
 import item from "../../../../images/south-indian.jpg";
-import { baseUrlAdmin, baseUrlSeller } from "../../../../utils/constant";
 
 
-const AllApprove = () => {
-  const [products, setproducts] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    axios
-      .get(`${baseUrlAdmin}/products/get/approved`)
-      .then((result) => {
-        setproducts(result.data);
-      })
-      .catch((err) => console.error(err))
-      .finally(() => setIsLoading(false));
-  }, []);
+const AllApprove = ({products,isLoading}) => {
 
   const fetchMoreData = () => {
     // axios
@@ -30,16 +16,6 @@ const AllApprove = () => {
     // })
     // .catch((err) => console.error(err))
     // .finally(() => setIsLoading(false));
-  };
-
-  const addToMyProduct = (product) => {
-      axios
-    .put(`${baseUrlSeller}/${product._id}`,{ "products":[product._id]})
-    .then((result) => {
-      setproducts(products.concat(result.data));
-    })
-    .catch((err) => console.error(err))
-    .finally(() => setIsLoading(false));
   };
 
 
@@ -76,10 +52,6 @@ const AllApprove = () => {
               </Card>
             ))}
           </InfiniteScroll>
-
-          {/* <div className="pagination-container">
-            <Pagination defaultCurrent={6} total={100} />
-          </div> */}
         </Skeleton>
       </div>
     </>

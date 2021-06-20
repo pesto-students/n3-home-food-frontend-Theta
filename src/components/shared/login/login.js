@@ -74,7 +74,7 @@ const Login = ({userType}) => {
         // User signed in successfully.
         setButtonLoding(false)
         const user = result.user;
-        loginUser({phone:user.phoneNumber,customerType:userType})
+        loginUser({phone:user.phoneNumber.slice(3),customerType:userType})
         notification.success({
           message: "Verified",
           description: "Successfully Login",

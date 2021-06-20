@@ -1,6 +1,7 @@
 import {
   DesktopOutlined, FileOutlined, PieChartOutlined
 } from "@ant-design/icons";
+import './sellerDashboard.css'
 import { Layout, Menu } from "antd";
 import "antd/dist/antd.css";
 import React, { useState,useEffect } from "react";
@@ -11,6 +12,7 @@ import SellerProducts from "../sellerProducts/sellerProducts";
 import SellerProfile from "../sellerProfile/sellerProfile";
 import logo from "../../../images/logo.png"
 import Image from "../../../components/shared/image/image";
+import { AvatarMenu } from "../../admin/header/header";
 const { Header, Content, Footer, Sider } = Layout;
 
  const SellerDashBoard  = () => {
@@ -21,7 +23,7 @@ const { Header, Content, Footer, Sider } = Layout;
     setCollapsed({ collapsed });
   };
 
-  const user =  getUser() ? getUser().user_type : null
+  const user =  getUser() ? getUser().userType : null
 
   useEffect(()=>{
     if(user === 'Admin') window.location.href = '/admin/dasmyhboard'
@@ -34,6 +36,7 @@ const { Header, Content, Footer, Sider } = Layout;
 
     return <>
         <Layout style={{ minHeight: "100vh" }}>
+       
           <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
             <div className="home-food-logo">
                  <Image url={logo} height={logoSize} width={logoSize} radius="100%"/>
@@ -53,8 +56,11 @@ const { Header, Content, Footer, Sider } = Layout;
             </Menu>
           </Sider>
           <Layout className="site-layout">
-            <Header className="site-layout-background" style={{ padding: 0 }} />
-            <Content style={{ margin: "0 16px" }}>
+          <Header className="header-navbar">
+                 <h1>Seller</h1>
+                <AvatarMenu />
+            </Header>
+            <Content style={{ margin: "20px 16px" }}>
             {user === 'Seller' ?
               <div
                 className="site-layout-background"

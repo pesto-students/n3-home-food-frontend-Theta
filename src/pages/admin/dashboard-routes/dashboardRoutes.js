@@ -12,8 +12,8 @@ function DashboardRoutes() {
     <>
       <Switch>
      <Route path='/admin/dashboard' exact><ProductCatalogue /></Route> 
-     <Route path='/admin/dashboard/product' ><ProductCatalogue /></Route> 
-     <Route path='/admin/dashboard/seller' ><SellerManagment /></Route> 
+     <Route path='/admin/product' ><ProductCatalogue /></Route> 
+     <Route path='/admin/seller' ><SellerManagment /></Route> 
 
     </Switch>
    </>

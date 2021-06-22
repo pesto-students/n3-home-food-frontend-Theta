@@ -42,11 +42,11 @@ const AdminDashBoard = ()                                                       
               </Menu.Item>
 
               <Menu.Item key="2" icon={<DesktopOutlined />}>
-                <Link to="/admin/dashboard/product">Product</Link>
+                <Link to="/admin/product">Product</Link>
               </Menu.Item>
 
               <Menu.Item key="3" icon={<FileOutlined />}>
-                <Link to="/admin/dashboard/seller">Seller</Link>
+                <Link to="/admin/seller">Seller</Link>
               </Menu.Item>
             </Menu>
           </Sider>

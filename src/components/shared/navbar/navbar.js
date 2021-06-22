@@ -29,13 +29,13 @@ const Navbar = (props) => {
         </Col>
         <Col md={14} sm={24} xs={24} className="keep-items-left">
           <SelectBox />
-          <Link to="/seller">
+          <Link to="/seller/login">
             <Button type="link">Become Seller</Button>
           </Link>
           <Button type="link" onClick={toggleDrawer}>
             Sign In
           </Button>
-          <Link to="/admin">
+          <Link to="/admin/login">
             <Button type="link">Admin</Button>
           </Link>
           <Button type="link">

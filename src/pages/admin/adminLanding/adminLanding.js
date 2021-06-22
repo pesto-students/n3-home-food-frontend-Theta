@@ -11,8 +11,8 @@ const AdminLanding = () => {
   return (
     <Router>
       <Switch>
-       <Route path='/admin' exact>  <AdminLogin/></Route> 
-       <Route path='/admin/dashboard'>  <AdminDashBoard/></Route>
+       <Route path='/admin/login' exact>  <AdminLogin/></Route> 
+       <Route path='/admin'>  <AdminDashBoard/></Route>
        </Switch> 
     </Router>
   );

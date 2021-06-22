@@ -5,13 +5,11 @@ import SellerRegistration from "../sellerRegistration/sellerRegistration";
 
 
 const SellerLanding = () => {
-
-
   return (
     <Router>
       <Switch>
-       <Route path='/seller' exact>  <SellerRegistration/></Route> 
-       <Route path='/seller/dashboard'>  <SellerDashBoard/></Route> 
+       <Route path='/seller/login' exact>  <SellerRegistration/></Route> 
+       <Route path='/seller'>  <SellerDashBoard/></Route> 
        </Switch>
     </Router>
   );

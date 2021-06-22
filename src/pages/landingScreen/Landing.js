@@ -5,8 +5,8 @@ import { React, useEffect, useState } from "react";
 import Image from "../../components/shared/image/image";
 import Navbar from "../../components/shared/navbar/navbar";
 import CustomTabs from "../../components/shared/Tabs/Tabs";
-import { baseUrlAdmin } from "../../utils/constant";
-import {  redirectToOriginalPageFromLanding } from "../../utils/helpers";
+import { baseUrl } from "../../utils/constant";
+import {  getCategoryId, redirectToOriginalPageFromLanding } from "../../utils/helpers";
 import CustomerLogin from "./customerLogin";
 
 import "./landing.css";
@@ -23,20 +23,47 @@ const imagesUrls = [
 const LandingPage = () => {
   const [seller, setSeller] = useState([]);
   const [loadSeller, setLoadSeller] = useState(false);
+  //const [currentTabValue,setCurrentTabValue] = useState("");
+
+
+  const getSellers = () =>{
+    setLoadSeller(false)
+    axios
+    .get(`${baseUrl}/sellers`)
+    .then((result) => {
+      setSeller(result.data);
+      setLoadSeller(true);
+    })
+    .catch((err) => console.error(err));
+  }
+
+
+  const getCategorySeller = (category) =>{
+    if(category !== 'All')
+    {
+    setLoadSeller(false)
+    axios
+    .get(`${baseUrl}/sellers/get/SellersByCategory?categoryId=${getCategoryId(category)}`)
+    .then((result) => {
+      setSeller(result.data);
+      setLoadSeller(true);
+    })
+    .catch((err) => console.error(err));
+  }
+  else
+  {
+    getSellers()
+  }
+  }
 
   useEffect(() => {
     redirectToOriginalPageFromLanding()
-    axios
-      .get(`${baseUrlAdmin}/sellers`)
-      .then((result) => {
-        setSeller(result.data);
-        setLoadSeller(true);
-      })
-      .catch((err) => console.error(err));
+    getSellers()
   }, []);
 
   const getCurrentTab = (tab) => {
-    console.log(tab);
+    getCategorySeller(tab)
+     //setCurrentTabValue(tab)
   };
 
   return (
@@ -63,7 +90,7 @@ const LandingPage = () => {
             <Col md={9} sm={24} xs={24} className="keep-items-left">
               <CustomTabs
                 currentTab={getCurrentTab}
-                list={["Breakfast", "Lunch", "Snack", "Dinner"]}
+                list={["All","Breakfast", "Lunch", "Snack", "Dinner"]}
               />
             </Col>
           </Row>

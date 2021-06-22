@@ -1,4 +1,4 @@
-import { Button, Card, notification, Row, Skeleton } from "antd";
+import { Button, Card, notification, Row, Skeleton, Typography } from "antd";
 import "antd/dist/antd.css";
 import axios from "axios";
 import React from "react";
@@ -6,15 +6,15 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Image from "../../../../components/shared/image/image";
 import { AddProductSellerModal } from '../../../../components/shared/manageProductmodal/addProduct';
 import item from "../../../../images/south-indian.jpg";
-import { baseUrlSeller } from "../../../../utils/constant";
+import { baseUrl } from "../../../../utils/constant";
 
 
 const AllProducts = ({products,isLoading,callback}) => {
 
-
+const {Title} = Typography
   const fetchMoreData = () => {
     // axios
-    // .get("`${baseUrlAdmin}/products/get/approved")
+    // .get("`${baseUrl}/products/get/approved")
     // .then((result) => {
     //   setproducts(products.concat(result.data));
     // })
@@ -24,7 +24,7 @@ const AllProducts = ({products,isLoading,callback}) => {
 
   const addToMyProduct = (product) => {
       axios
-    .put(`${baseUrlSeller}/60c9f9b635f0f7183a9a7497`,{ "products":[product._id]})
+    .put(`${baseUrl}/sellers/60c9f9b635f0f7183a9a7497`,{ "products":[product._id]})
     .then((result) => {
       notification.success({
         message: `Notification`,
@@ -48,7 +48,7 @@ const AllProducts = ({products,isLoading,callback}) => {
   return (
     <>
       <div>
-        <AddProductSellerModal />
+        <AddProductSellerModal callback={callback}/>
 
 
         <Skeleton loading={isLoading} active>
@@ -66,11 +66,9 @@ const AllProducts = ({products,isLoading,callback}) => {
                       <Image url={item} height="100" width='150'></Image>
                     </div>
                     <div className="product-details ">
-                      <span className="seller-name">{product.name}</span>
-                      <span className="cost">
-                        <p className="max-amount">Max Amount</p> &nbsp; ₹{" "}
-                        {product.max_price}
-                      </span>
+                      <Title level={4}>{product.name}</Title>
+                      <span>Max Amount ₹{product.max_price}</span>
+                    
                      
                     </div>
                    

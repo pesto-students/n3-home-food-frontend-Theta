@@ -3,7 +3,7 @@ import 'antd/dist/antd.css';
 import { Tabs } from 'antd';
 import AllProducts from './allProducts/allProducts';
 import ProductApproval from './product Approval/productApproval';
-import { baseUrlAdmin } from '../../../utils/constant';
+import { baseUrl } from '../../../utils/constant';
 import axios from '../../../utils/axios';
 
 const { TabPane } = Tabs;
@@ -22,7 +22,7 @@ const ProductCatalogue = () => {
 
   const allPending = () =>{
     axios
-    .get(`${baseUrlAdmin}/products/get/pending`)
+    .get(`${baseUrl}/products/get/pending`)
     .then((result) => {
       setPenidngproducts(result.data);
     })
@@ -32,7 +32,7 @@ const ProductCatalogue = () => {
 
   const allApproved  = () =>{
     axios
-    .get(`${baseUrlAdmin}/products/get/approved`)
+    .get(`${baseUrl}/products/get/approved`)
     .then((result) => {
       setApproveProducts(result.data);
     })

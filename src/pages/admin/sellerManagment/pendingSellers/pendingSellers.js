@@ -5,7 +5,7 @@ import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { RejectSellerModal } from "../../../../components/manageSellerModal/rejectSeller";
 import item from "../../../../images/south-indian.jpg";
-import { baseUrlAdmin } from "../../../../utils/constant";
+import { baseUrl } from "../../../../utils/constant";
 import "./pendingSeller.css";
 
 const openNotificationWithIcon = (type, message) => {
@@ -19,7 +19,7 @@ const PendingSellers = ({callback,sellers,isLoading}) => {
 
   const fetchMoreData = () => {
     // axios
-    // .get("`${baseUrlAdmin}/products/get/approved")
+    // .get("`${baseUrl}/products/get/approved")
     // .then((result) => {
     //   setproducts(products.concat(result.data));
     // })
@@ -29,7 +29,7 @@ const PendingSellers = ({callback,sellers,isLoading}) => {
 
   const approveSellerbyId = (id) => {
     axios
-    .put(`${baseUrlAdmin}/sellers/approve/${id}`)
+    .put(`${baseUrl}/sellers/approve/${id}`)
     .then((result) => {
       if (result.status === 200) {
         openNotificationWithIcon("success", "Seller Approved");

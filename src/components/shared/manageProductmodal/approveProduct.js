@@ -3,7 +3,7 @@ import "antd/dist/antd.css";
 import axios from 'axios';
 import React, { useState } from "react";
 
-import { baseUrlAdmin } from "../../../utils/constant";
+import { baseUrl } from "../../../utils/constant";
 
 
 const openNotificationWithIcon = (type,message) => {
@@ -68,7 +68,7 @@ export const AppoveProductModal = (props) => {
     console.log("Received values of form: ", values);
 
     axios
-    .put(`${baseUrlAdmin}/products/product-approval/${props.productId}`,{'max_price':values.maxPrice})
+    .put(`${baseUrl}/products/product-approval/${props.productId}`,{'max_price':values.maxPrice})
     .then((result) => {
       if(result.status === 200){
         openNotificationWithIcon('success','Product Approved')

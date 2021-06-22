@@ -1,4 +1,4 @@
-import { Card, Row, Skeleton } from "antd";
+import { Card, Row, Skeleton,Typography } from "antd";
 import "antd/dist/antd.css";
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -8,6 +8,8 @@ import "./allProducts.css";
 
 
 const AllProducts = ({isLoading,products,loadApproveItem}) => {
+
+  const {Title} = Typography
 
    const fetchMoreData = () => {
    };
@@ -38,10 +40,9 @@ const AllProducts = ({isLoading,products,loadApproveItem}) => {
                       <Image url={product.image} height="100" width='150'></Image>
                     </div>
                     <div className="product-details ">
-                      <span className="seller-name">{product.name}</span>
-                      <span className="cost">
-                        <p className="max-amount">Max Amount</p> &nbsp; ₹{" "}
-                        {product.max_price}
+                     <Title level={4}>{product.name}</Title>
+                      <span>
+                       Max Amount : ₹ {product.max_price}
                       </span>
                     </div>
                   </div>

@@ -2,7 +2,7 @@ import { Button, Form, Modal, notification, Select } from "antd";
 import "antd/dist/antd.css";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { baseUrlAdmin } from "../../../utils/constant";
+import { baseUrl } from "../../../utils/constant";
 
 let { Option } = Select;
 const openNotificationWithIcon = (type, message) => {
@@ -19,7 +19,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
 
   useEffect(() => {
     axios
-      .get(`${baseUrlAdmin}/products/get/approved`)
+      .get(`${baseUrl}/products/get/approved`)
       .then((result) => {
         setproducts(result.data);
       })
@@ -90,7 +90,7 @@ export const ReassignProduct = (props) => {
 
     axios
       .put(
-        `${baseUrlAdmin}/products/product-reassign/${props.productId}`,
+        `${baseUrl}/products/product-reassign/${props.productId}`,
         { existingProductId: values.existingProductId }
       )
       .then((result) => {

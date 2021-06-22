@@ -1,4 +1,4 @@
-import { Card, Row, Skeleton } from "antd";
+import { Card, Row, Skeleton,Typography } from "antd";
 import "antd/dist/antd.css";
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -10,6 +10,7 @@ import "./productApproval.css";
 
 const ProductApproval = ({isLoading,products,loadPenindgProducts}) => {
 
+  const {Title} = Typography
   const fetchMoreData = () => {
   };
 
@@ -41,7 +42,10 @@ const ProductApproval = ({isLoading,products,loadPenindgProducts}) => {
                       <Image url={product.image} height="100" width='150'></Image>
                     </div>
                     <div className="product-details ">
-                      <span className="seller-name">{product.name}</span>
+                      <Title level={4}>{product.name}</Title>
+                      <span>Price : ₹{product.max_price ? product.max_price : 0}</span>
+
+
                     </div>
                     <div className="acess-buttons">
                       <AppoveProductModal callback ={updateProductList} productId={product.id} />

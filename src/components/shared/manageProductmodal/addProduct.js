@@ -3,7 +3,7 @@ import { Button, Form, Input, InputNumber, message, Modal, notification, Select,
 import "antd/dist/antd.css";
 import axios from 'axios';
 import React, { useState } from "react";
-import { baseUrlAdmin} from '../../../utils/constant'
+import { baseUrl} from '../../../utils/constant'
 
 const { Option } = Select;
 
@@ -177,7 +177,7 @@ export const AddProductModal = (props) => {
 
     console.log('file,',data)
     axios
-    .post(`${baseUrlAdmin}/products`,
+    .post(`${baseUrl}/products`,
 
     data)
     .then((result) => {
@@ -245,9 +245,7 @@ export const AddProductSellerModal = (props) => {
     data.append('status','Pending')
 
     axios
-    .post(`${baseUrlAdmin}/products`,
-
-    data)
+    .post(`${baseUrl}/products`,data)
     .then((result) => {
       if(result.status === 200){
         openNotificationWithIcon('success','Product Reuested')

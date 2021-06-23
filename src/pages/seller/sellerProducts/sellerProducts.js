@@ -46,7 +46,7 @@ const SellerProducts = () => {
       .get(`/sellers/get/getproducts?sellerid=${sellerId}`)
       .then((result) => {
         
-        setMyProducts(result.data[0].myProducts);
+        setMyProducts(result.data[0].productdetails);
         setIsLoading(false)
 
       })

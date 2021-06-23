@@ -21,7 +21,7 @@ const { Header, Content, Footer, Sider } = Layout;
   const [collapsed,setCollapsed] = useState(false)
 
   const onCollapse = (collapsed) => {
-    setCollapsed({ collapsed });
+    setCollapsed(collapsed );
   };
 
   const user =  getUser() ? getUser().userType : null

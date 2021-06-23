@@ -38,7 +38,6 @@ const MyProducts = ({ products, isLoading, callback }) => {
   };
 
   const editProduct = () => {
-    console.log(item);
     let sellerId = "60c9f9b635f0f7183a9a7497"
     
     let product ={
@@ -55,6 +54,8 @@ const MyProducts = ({ products, isLoading, callback }) => {
   };
 
   const editableProduct = (key) => {
+    console.log(products[key]);
+
     products[key].edit = true;
    setQuantity(products[key].quantity)
    setPrice(products[key].price)

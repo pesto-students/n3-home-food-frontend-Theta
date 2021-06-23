@@ -11,13 +11,17 @@ import { getUser } from "../../../utils/helpers";
 import DashboardRoutes from "../dashboard-routes/dashboardRoutes";
 import { AvatarMenu } from "../header/header";
 import "./dashboard.css";
+
 const { Header, Content, Footer, Sider } = Layout;
 
-const AdminDashBoard = ()                                                                            => {
+const AdminDashBoard = () => {
 
   const [collapsed,setCollapsed] = useState(false)
   const onCollapse = (collapsed) => {
-    setCollapsed({ collapsed });
+    console.log('onCollapse',onCollapse)
+    
+    setCollapsed(collapsed);
+
   };
 
   const user =  getUser() ? getUser().userType : null

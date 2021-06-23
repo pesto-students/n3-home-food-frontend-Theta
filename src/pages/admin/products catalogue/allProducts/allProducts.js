@@ -4,6 +4,7 @@ import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Image from "../../../../components/shared/image/image";
 import { AddProductModal } from '../../../../components/shared/manageProductmodal/addProduct';
+import { ProductCrudMenu } from "../productCrudMenu";
 import "./allProducts.css";
 
 
@@ -15,6 +16,8 @@ const AllProducts = ({isLoading,products,loadApproveItem}) => {
   const updateProductList = () =>{
      loadApproveItem()
   }
+
+
 
   return (
     <>
@@ -43,6 +46,12 @@ const AllProducts = ({isLoading,products,loadApproveItem}) => {
                         <p className="max-amount">Max Amount</p> &nbsp; ₹{" "}
                         {product.max_price}
                       </span>
+                    </div>
+                    <div className="product-delete">
+                      <span className="seller-name">
+                        <ProductCrudMenu product={product} callback ={updateProductList} />
+                        </span>
+                      
                     </div>
                   </div>
                 </div>

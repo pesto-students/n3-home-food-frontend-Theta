@@ -173,8 +173,8 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, fromFor }) => {
   );
 };
 
-export const AddProductModal = (props) => {
-  const [visible, setVisible] = useState(false);
+export const EditProductModal = (props) => {
+  const [visible, setVisible] = useState(props.modalStatus);
 
   const onCreate = (values) => {
     const data = new FormData();
@@ -210,14 +210,6 @@ export const AddProductModal = (props) => {
   return (
     <div>
       <div style={{ display: "flex", flexFlow: "row-reverse", margin: "10px" }}>
-        <Button
-          type="primary"
-          onClick={() => {
-            setVisible(true);
-          }}
-        >
-          Add Product
-        </Button>
       </div>
 
       <CollectionCreateForm
@@ -232,66 +224,3 @@ export const AddProductModal = (props) => {
   );
 };
 
-export const AddProductSellerModal = (props) => {
-  const [visible, setVisible] = useState(false);
-
-  const onCreate = (values) => {
-    console.log(values);
-    try {
-      const data = new FormData();
-      data.append("image", values.productImage[0].originFileObj);
-      data.append("name", values.productName);
-      data.append("description", values.description);
-      data.append("max_price", values.maxPrice);
-      data.append("category", values.productCategory);
-      data.append("status", "Pending");
-
-      axios
-        .post(
-          `${baseUrlAdmin}/products`,
-
-          data
-        )
-        .then((result) => {
-          if (result.status === 200) {
-            openNotificationWithIcon("success", "Product Reuested");
-            props.callback();
-          } else {
-            openNotificationWithIcon("error", "Could Not Add Product");
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-          openNotificationWithIcon("error", "Could Not Add Product");
-        })
-        .finally(() => {});
-      setVisible(false);
-    } catch (e) {
-      openNotificationWithIcon("error", "Something went wrong");
-    }
-  };
-
-  return (
-    <div>
-      <div style={{ display: "flex", flexFlow: "row-reverse", margin: "10px" }}>
-        <Button
-          type="primary"
-          onClick={() => {
-            setVisible(true);
-          }}
-        >
-          Reqest Product
-        </Button>
-      </div>
-
-      <CollectionCreateForm
-        fromFor="seller"
-        visible={visible}
-        onCreate={onCreate}
-        onCancel={() => {
-          setVisible(false);
-        }}
-      />
-    </div>
-  );
-};

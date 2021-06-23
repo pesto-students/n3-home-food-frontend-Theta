@@ -69,10 +69,10 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
             {products.map((product, i) => (
               <Option value={product.id}>
                 <span >{product.name}</span>
-                <span className="cost">
+                {/* <span className="cost">
                   <p className="max-amount">Max Amount</p> &nbsp; ₹
                   {product.max_price}
-                </span>
+                </span> */}
               </Option>
             ))}
           </Select>

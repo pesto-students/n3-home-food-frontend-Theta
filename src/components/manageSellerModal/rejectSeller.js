@@ -48,6 +48,8 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
               required: true,
               message: "Please input the Rejection Reason!",
             },
+            { min: 5, message: "Rejection Reason must be minimum 5 characters." },
+
           ]}
         >
           <Input />

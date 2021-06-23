@@ -16,15 +16,11 @@ const { Header, Content, Footer, Sider } = Layout;
 
 const AdminDashBoard = () => {
 
+  const [activeTab,setActiveTab] = useState("1")
+
   const [collapsed,setCollapsed] = useState(false)
-
-
-  
   const onCollapse = (collapsed) => {
-    console.log('onCollapse',onCollapse)
-    
     setCollapsed(collapsed);
-
   };
 
 
@@ -42,6 +38,17 @@ const AdminDashBoard = () => {
 
   const logoSize = collapsed ? 50 : 100
 
+  const handdleActiveTabs = () =>{
+    if(window.location.pathname === '/admin/dashboard')setActiveTab("1")
+    if(window.location.pathname === '/admin/product') setActiveTab("2")
+    if(window.location.pathname === '/admin/seller') setActiveTab("3")
+
+  }
+  
+  useEffect(()=>{
+    handdleActiveTabs()
+  },[])
+
  
     return  <>
         <Layout style={{ minHeight: "100vh" }}>
@@ -50,7 +57,7 @@ const AdminDashBoard = () => {
             <Image url={logo} height={logoSize} width={logoSize} radius="100%"/>
 
               </div>
-            <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
+            <Menu theme="dark" onClick={handdleActiveTabs} defaultSelectedKeys={[activeTab]} selectedKeys={[activeTab]} mode="inline">
               <Menu.Item key="1" icon={<PieChartOutlined />}>
                 <Link to="/admin/dashboard">Dashboard</Link>
               </Menu.Item>

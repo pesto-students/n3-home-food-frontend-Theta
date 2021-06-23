@@ -14,18 +14,21 @@ import logo from "../../../images/logo.png"
 import Image from "../../../components/shared/image/image";
 import { AvatarMenu } from "../../admin/header/header";
 import { Switch } from "react-router-dom";
+import Orders from "../order/order";
 const { Header, Content, Footer, Sider } = Layout;
+
+
+
 
  const SellerDashBoard  = () => {
 
   const [collapsed,setCollapsed] = useState(false)
-
+  const [activeTab,setActiveTab] = useState("1")
   const onCollapse = (collapsed) => {
     setCollapsed(collapsed );
   };
 
   const user =  getUser() ? getUser().userType : null
-
   useEffect(()=>{
     if(user === 'Admin') window.location.href = '/admin/dashboard'
     if(user === 'Customer') window.location.href = '/customer'
@@ -33,6 +36,21 @@ const { Header, Content, Footer, Sider } = Layout;
   },[user])
 
    
+
+
+
+  const handdleActiveTabs = () =>{
+    if(window.location.pathname === '/seller/dashboard')setActiveTab("1")
+    if(window.location.pathname === '/seller/product') setActiveTab("2")
+    if(window.location.pathname === '/seller/profile') setActiveTab("3")
+    if(window.location.pathname === '/seller/orders') setActiveTab("4")
+
+  }
+  
+  useEffect(()=>{
+    handdleActiveTabs()
+  },[])
+
 
   const logoSize = collapsed ? 50 : 100
 
@@ -43,7 +61,7 @@ const { Header, Content, Footer, Sider } = Layout;
             <div className="home-food-logo">
                  <Image url={logo} height={logoSize} width={logoSize} radius="100%"/>
               </div>
-            <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
+            <Menu theme="dark"  onClick={handdleActiveTabs}  defaultSelectedKeys={[activeTab]} selectedKeys={[activeTab]} mode="inline">
               <Menu.Item key="1" icon={<PieChartOutlined />}>
                 <Link to="/seller/dashboard">Dashboard</Link>
               </Menu.Item>
@@ -54,6 +72,10 @@ const { Header, Content, Footer, Sider } = Layout;
 
               <Menu.Item key="3" icon={<FileOutlined />}>
                 <Link to="/seller/profile">Profile</Link>
+              </Menu.Item>
+
+              <Menu.Item key="4" icon={<FileOutlined />}>
+                <Link to="/seller/orders">Order</Link>
               </Menu.Item>
             </Menu>
           </Sider>
@@ -81,6 +103,10 @@ const { Header, Content, Footer, Sider } = Layout;
 
                 <Route path="/seller/product">
                   <SellerProducts />
+                </Route>
+
+                <Route path="/seller/orders">
+                  <Orders />
                 </Route>
                 </Switch>
 

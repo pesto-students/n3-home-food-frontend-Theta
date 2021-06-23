@@ -1,9 +1,7 @@
 import { React } from "react";
 import {
-  Switch,
-  Route,
+  Route, Switch
 } from "react-router-dom";
-import AdminDashboard from "../adminDashboard/adminDashboard";
 import ProductCatalogue from '../products catalogue';
 import SellerManagment from "../sellerManagment";
 

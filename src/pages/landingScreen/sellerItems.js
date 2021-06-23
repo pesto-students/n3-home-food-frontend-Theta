@@ -2,6 +2,7 @@ import { Row,Col } from "antd";
 import SellerCard from "../../components/shared/sellerCard/sellerCard";
 import ServiceNotFound from "../../components/shared/serviceNotFound/serviceNotFound";
 import SpinnerLoader from "../../components/shared/spinnerLoader/spinnerLoader";
+import {Link} from "react-router-dom"
 
 const SellerItems = ({loading,seller}) => {
     if (loading) {
@@ -17,7 +18,9 @@ const SellerItems = ({loading,seller}) => {
           {seller.map((detail, index) => {
             return (
               <Col md={6} sm={24} xs={24} key={index}>
+                 <Link to={`/seller-detail/12444`}>
                 <SellerCard detail={detail} />
+                </Link>
               </Col>
             );
           })}

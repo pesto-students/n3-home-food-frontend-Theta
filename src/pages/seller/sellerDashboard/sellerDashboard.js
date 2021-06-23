@@ -28,6 +28,7 @@ const { Header, Content, Footer, Sider } = Layout;
 
   useEffect(()=>{
     if(user === 'Admin') window.location.href = '/admin/dashboard'
+    if(user === 'Customer') window.location.href = '/customer'
     if(user === null) window.location.href = '/'
   },[user])
 

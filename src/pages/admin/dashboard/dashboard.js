@@ -34,6 +34,8 @@ const AdminDashBoard = () => {
   const user =  getUser() ? getUser().userType : null
   useEffect(()=>{
     if(user === 'Seller') window.location.href = '/seller/dashboard'
+    if(user === 'Customer') window.location.href = '/customer'
+
     if(user === null) window.location.href = '/'
   },[user])
 

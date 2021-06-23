@@ -18,3 +18,23 @@ export const redirectToOriginalPageFromLanding = () => {
     }
   } 
 };
+
+export const getCategoryId = (category) =>{
+  if(category === "Breakfast")
+  {
+    return "60c906ce35453e14cd3f4ee3"
+  }
+  else if(category === "Lunch")
+  {
+    return "60ccfb4516659e249450ed49"
+  }
+  else if(category === "Snack")
+  {
+    return "60ccfea78d901732e097e2ee"
+  }
+  else if(category === "Dinner")
+  {
+    return "60cf33b093112a14d5da3897"
+  }
+}
+

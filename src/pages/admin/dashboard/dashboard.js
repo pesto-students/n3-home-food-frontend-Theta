@@ -17,12 +17,19 @@ const { Header, Content, Footer, Sider } = Layout;
 const AdminDashBoard = () => {
 
   const [collapsed,setCollapsed] = useState(false)
+
+
+  
   const onCollapse = (collapsed) => {
     console.log('onCollapse',onCollapse)
     
     setCollapsed(collapsed);
 
   };
+
+
+
+
 
   const user =  getUser() ? getUser().userType : null
   useEffect(()=>{
@@ -33,6 +40,7 @@ const AdminDashBoard = () => {
 
   const logoSize = collapsed ? 50 : 100
 
+ 
     return  <>
         <Layout style={{ minHeight: "100vh" }}>
           <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
@@ -40,17 +48,17 @@ const AdminDashBoard = () => {
             <Image url={logo} height={logoSize} width={logoSize} radius="100%"/>
 
               </div>
-            <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
+            <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
               <Menu.Item key="1" icon={<PieChartOutlined />}>
                 <Link to="/admin/dashboard">Dashboard</Link>
               </Menu.Item>
 
               <Menu.Item key="2" icon={<DesktopOutlined />}>
-                <Link to="/admin/dashboard/product">Product</Link>
+                <Link to="/admin/product">Product</Link>
               </Menu.Item>
 
               <Menu.Item key="3" icon={<FileOutlined />}>
-                <Link to="/admin/dashboard/seller">Seller</Link>
+                <Link to="/admin/seller">Seller</Link>
               </Menu.Item>
             </Menu>
           </Sider>

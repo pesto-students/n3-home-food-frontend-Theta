@@ -9,7 +9,7 @@ const RejectedSellers = ({isLoading,sellers}) => {
   
   const fetchMoreData = () => {
     // axios
-    // .get("`${baseUrlAdmin}/products/get/approved")
+    // .get("`${baseUrl}/products/get/approved")
     // .then((result) => {
     //   setproducts(products.concat(result.data));
     // })

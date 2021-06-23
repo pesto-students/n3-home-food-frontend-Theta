@@ -13,6 +13,7 @@ import SellerProfile from "../sellerProfile/sellerProfile";
 import logo from "../../../images/logo.png"
 import Image from "../../../components/shared/image/image";
 import { AvatarMenu } from "../../admin/header/header";
+import { Switch } from "react-router-dom";
 const { Header, Content, Footer, Sider } = Layout;
 
  const SellerDashBoard  = () => {
@@ -26,7 +27,7 @@ const { Header, Content, Footer, Sider } = Layout;
   const user =  getUser() ? getUser().userType : null
 
   useEffect(()=>{
-    if(user === 'Admin') window.location.href = '/admin/dasmyhboard'
+    if(user === 'Admin') window.location.href = '/admin/dashboard'
     if(user === null) window.location.href = '/'
   },[user])
 
@@ -47,11 +48,11 @@ const { Header, Content, Footer, Sider } = Layout;
               </Menu.Item>
 
               <Menu.Item key="2" icon={<DesktopOutlined />}>
-                <Link to="/seller/dashboard/product">Product</Link>
+                <Link to="/seller/product">Product</Link>
               </Menu.Item>
 
               <Menu.Item key="3" icon={<FileOutlined />}>
-                <Link to="/seller/dashboard/profile">Profile</Link>
+                <Link to="/seller/profile">Profile</Link>
               </Menu.Item>
             </Menu>
           </Sider>
@@ -66,20 +67,21 @@ const { Header, Content, Footer, Sider } = Layout;
                 className="site-layout-background"
                 style={{ padding: 24, minHeight: 360 }}
               >
-
+               <Switch>
               
-                <Route exact path="/seller/dashboard/">
+                <Route exact path="/seller/dashboard">
                   <SellerGraphs />
                 </Route>
 
-                <Route path="/seller/dashboard/profile">
+                <Route path="/seller/profile">
                   <SellerProfile />
                 </Route>
 
 
-                <Route path="/seller/dashboard/product">
+                <Route path="/seller/product">
                   <SellerProducts />
                 </Route>
+                </Switch>
 
               </div>
               :

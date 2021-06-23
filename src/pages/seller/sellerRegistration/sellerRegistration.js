@@ -60,9 +60,9 @@ function SellerRegistration() {
               <Form.Item
                 name="name"
                 label="Name"
-                rules={[{ required: true, message: "Please enter user name" }]}
+                rules={[{ required: true, message: "Please Enter User Name" }]}
               >
-                <Input placeholder="Please enter user name" />
+                <Input placeholder="Please Enter User Name" />
               </Form.Item>
             </Col>
             <Col span={24}>
@@ -70,75 +70,82 @@ function SellerRegistration() {
                 name="display_name"
                 label="Display Name"
                 rules={[
-                  { required: true, message: "Please enter display name" },
+                  { required: true, message: "Please Enter Display Name" },
                 ]}
               >
                 <Input
                   style={{ width: "100%" }}
-                  placeholder="Please enter display name"
-                />
-              </Form.Item>
-            </Col>
-            <Col span={24}>
-              <Form.Item
-                name="email"
-                label="Email"
-                rules={[
-                  { required: true, message: "Please enter email" },
-                ]}
-              >
-                <Input
-                  style={{ width: "100%" }}
-                  placeholder="Please enter email"
-                />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item
-                name="idProof"
-                label="Adhar Card"
-                rules={[{ required: true, message: "Please enter adhar card" }]}
-              >
-                <Input
-                  style={{ width: "100%" }}
-                  placeholder="Please enter adhar card"
+                  placeholder="Please Enter Display Name"
                 />
               </Form.Item>
             </Col>
 
-            <Col span={12}>
+            <Col span={24}>
               <Form.Item
                 name="phone"
                 label="Mobile Number"
                 rules={[
-                  { required: true, message: "Please enter mobile number" },
+                  { required: true, message: "Please Enter Mobile Number" },
                 ]}
               >
                 <Input
                   style={{ width: "100%" }}
-                  placeholder="Please enter mobile number"
+                  placeholder="Please enter Mobile Number"
                 />
               </Form.Item>
             </Col>
+
+    
+          </Row>
+          <Row gutter={16}>
+
+          <Col span={12}>
+              <Form.Item
+                name="idProof"
+                label="Aadhaar Card"
+                rules={[{ required: true, message: "Please Enter Aadhaar Card" }]}
+              >
+                <Input
+                  style={{ width: "100%" }}
+                  placeholder="Please Enter Aadhaar Card"
+                />
+              </Form.Item>
+            </Col>
+
+          <Col span={12}>
+              <Form.Item
+                name="email"
+                label="Email (optional)"
+                rules={[
+                  { required: false, message: "Please Enter Email" },
+                ]}
+              >
+                <Input
+                  style={{ width: "100%" }}
+                  placeholder="Please Enter Email"
+                />
+              </Form.Item>
+            </Col>
+
+ 
+           
           </Row>
 
           <Row gutter={16}>
             <Col span={24}>
               <Form.Item
                 name="adress"
-                label="Adress"
+                label="Address"
                 rules={[
                   {
                     required: true,
-                    message: "please enter adress",
+                    message: "Please Enter Address",
                   },
                 ]}
               >
                 <Input.TextArea
                   rows={4}
-                  placeholder="please enter adress"
+                  placeholder="Please Enter Address"
                 />
               </Form.Item>
             </Col>

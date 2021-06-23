@@ -11,20 +11,25 @@ import {
   Typography,
 } from "antd";
 import "antd/dist/antd.css";
-import axios from "axios";
+import axios from "../../../../utils/axios";
 import React, { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Image from "../../../../components/shared/image/image";
 import item from "../../../../images/south-indian.jpg";
-import { baseUrlSeller } from "../../../../utils/constant";
+import { baseUrl } from "../../../../utils/constant";
 
 const MyProducts = ({ products, isLoading, callback }) => {
   const { Title } = Typography;
   const [myProducts, setMyProducts] = useState([...products]);
+  const [price, setPrice] = useState(0);
+  const [quantity, setQuantity] = useState(0);
+  const [currentProductId, setCurrentProductId] = useState("");
+
+
 
   const fetchMoreData = () => {
     // axios
-    // .get("`${baseUrlAdmin}/products/get/approved")
+    // .get("`${baseUrl}/products/get/approved")
     // .then((result) => {
     //   setproducts(products.concat(result.data));
     // })
@@ -32,10 +37,17 @@ const MyProducts = ({ products, isLoading, callback }) => {
     // .finally(() => setIsLoading(false));
   };
 
-  const editProduct = (item) => {
+  const editProduct = () => {
     console.log(item);
+    let sellerId = "60c9f9b635f0f7183a9a7497"
+    
+    let product ={
+      "productid" : currentProductId,
+      "product_price" : price,
+      "product_quantity": quantity
+   }
     axios
-      .put(`/sellers/update-product-quantitiy/60c9f9b635f0f7183a9a7497`, item)
+      .put(`/sellers/update-product-quantitiy/${sellerId}`, {product})
       .then((result) => {
         //setMyProducts(products.concat(result.data));
       })
@@ -44,13 +56,16 @@ const MyProducts = ({ products, isLoading, callback }) => {
 
   const editableProduct = (key) => {
     products[key].edit = true;
-    setMyProducts([...products]);
+   setQuantity(products[key].quantity)
+   setPrice(products[key].price)
+   setCurrentProductId(products[key].productId)
+   setMyProducts([...products]);
   };
 
   const deleteProduct = (key) => {
     const item = products[key];
     axios
-      .put(`${baseUrlSeller}/${item._id}`, { product: item._id })
+      .put(`${baseUrl}/${item._id}`, { product: item._id })
       .then((result) => {
         products.splice(key, 1);
         setMyProducts([...products]);
@@ -100,60 +115,60 @@ const MyProducts = ({ products, isLoading, callback }) => {
                       <Image url={item} height="100" width="150"></Image>
                     </div>
                     <div className="product-details ">
-                      <span className="seller-name">
+                      <Title level={4}>
                         {product.name ? product.name : "Static for now"}
-                      </span>
-                      <span className="cost">
+                      </Title>
+                      
                         <Row gutter={[16, 14]}>
                           <Col md={24}>
-                            <Form.Item style={{display:'none'}} name="productid">
-                              <Input defaultValue={product.productId} />
-                            </Form.Item>
+                      
 
                             {product.edit ? (
                               <Form.Item
-                                name="product_quantity"
+                                label="Quantity"
+                                
                                 rules={[
                                   {
-                                    required: false,
+                                    required: true,
                                     message: "Enter quantity",
                                   },
                                 ]}
                               >
                                 <Input
                                   placeholder="Quantity"
-                                  value={product.quantity}
-                                  defaultValue={product.quantity}
+                                  value={quantity}
+                                  onChange={(e) => setQuantity(e.target.value)} 
+                                  
                                 />
                               </Form.Item>
                             ) : (
-                              <Title level={5}>
+                              <span>
                                 Plates: {product.quantity}{" "}
-                              </Title>
+                              </span>
                             )}
                           </Col>
                           <Col md={24}>
                             {product.edit ? (
                               <Form.Item
-                                name="product_price"
+                                label='Price'
                                 rules={[
                                   {
-                                    required: false,
+                                    required: true,
                                     message: "Enter Price ₹",
                                   },
                                 ]}
                               >
                                 <Input
                                   placeholder="Price ₹"
-                                  defaultValue={product.price}
+                                  value={price}
+                                  onChange={(e) => setPrice(e.target.value)} 
                                 />
                               </Form.Item>
                             ) : (
-                              <Title level={5}>Price: ₹ {product.price} </Title>
+                              <span>Price: ₹ {product.price} </span>
                             )}
                           </Col>
                         </Row>
-                      </span>
                     </div>
                   </div>
                 </div>

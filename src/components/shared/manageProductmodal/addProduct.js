@@ -13,7 +13,7 @@ import {
 import "antd/dist/antd.css";
 import axios from "axios";
 import React, { useState } from "react";
-import { baseUrlAdmin } from "../../../utils/constant";
+import { baseUrl} from '../../../utils/constant'
 
 const { Option } = Select;
 
@@ -186,24 +186,27 @@ export const AddProductModal = (props) => {
 
     console.log("file,", data);
     axios
-      .post(
-        `${baseUrlAdmin}/products`,
+    .post(`${baseUrl}/products`,
 
-        data
-      )
-      .then((result) => {
-        if (result.status === 200) {
-          openNotificationWithIcon("success", "Product Added");
-          props.callback();
-        } else {
-          openNotificationWithIcon("error", "Could Not Add Product");
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        openNotificationWithIcon("error", "Could Not Add Product");
-      })
-      .finally(() => {});
+    data)
+    .then((result) => {
+      if(result.status === 200){
+        openNotificationWithIcon('success','Product Added')
+        props.callback()
+      }
+      else{
+        openNotificationWithIcon('error','Could Not Add Product')
+
+      }
+      
+    })
+    .catch((err) => {
+      console.error(err)
+      openNotificationWithIcon('error','Could Not Add Product')
+    })
+    .finally(() => {
+
+    });
     setVisible(false);
   };
 
@@ -236,40 +239,46 @@ export const AddProductSellerModal = (props) => {
   const [visible, setVisible] = useState(false);
 
   const onCreate = (values) => {
-    console.log(values);
-    try {
-      const data = new FormData();
-      data.append("image", values.productImage[0].originFileObj);
-      data.append("name", values.productName);
-      data.append("description", values.description);
-      data.append("max_price", values.maxPrice);
-      data.append("category", values.productCategory);
-      data.append("status", "Pending");
+    
+    console.log(values)
+  try
+  {
+    const data = new FormData()
+    data.append('image',values.productImage[0].originFileObj)
+    data.append('name',values.productName)
+    data.append('description',values.description)
+    data.append('max_price',values.maxPrice)
+    data.append('category',values.productCategory)
+    data.append('status','Pending')
 
-      axios
-        .post(
-          `${baseUrlAdmin}/products`,
+    axios
+    .post(`${baseUrl}/products`,data)
+    .then((result) => {
+      if(result.status === 200){
+        openNotificationWithIcon('success','Product Reuested')
+        props.callback()
+      }
+      else{
+        openNotificationWithIcon('error','Could Not Add Product')
 
-          data
-        )
-        .then((result) => {
-          if (result.status === 200) {
-            openNotificationWithIcon("success", "Product Reuested");
-            props.callback();
-          } else {
-            openNotificationWithIcon("error", "Could Not Add Product");
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-          openNotificationWithIcon("error", "Could Not Add Product");
-        })
-        .finally(() => {});
-      setVisible(false);
-    } catch (e) {
-      openNotificationWithIcon("error", "Something went wrong");
-    }
-  };
+      }
+      
+    })
+    .catch((err) => {
+      console.error(err)
+      openNotificationWithIcon('error','Could Not Add Product')
+    })
+    .finally(() => {
+
+    });
+    setVisible(false);
+  }
+  catch(e)
+  {
+    openNotificationWithIcon('error',"Something went wrong")
+
+  }
+};
 
   return (
     <div>

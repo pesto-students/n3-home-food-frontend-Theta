@@ -5,7 +5,7 @@ import SellerApproval from './Seller Approval/sellerApproval';
 import RejectedSellers from './rejectedSeller /rejectedSellers';
 import PendingSellers from './pendingSellers/pendingSellers';
 import axios from '../../../utils/axios';
-import { baseUrlAdmin } from '../../../utils/constant';
+import { baseUrl } from '../../../utils/constant';
 // import AllProducts from './allProducts/allProducts';
 // import ProductApproval from './product Approval/productApproval';
 
@@ -28,7 +28,7 @@ const SellerManagment = () => {
 
   const rejectedSeller = () =>{
     axios
-    .get(`${baseUrlAdmin}/sellers/get/rejected`)
+    .get(`${baseUrl}/sellers/get/rejected`)
     .then((result) => {
       setRejectedSellersItems(result.data);
     })
@@ -38,7 +38,7 @@ const SellerManagment = () => {
 
   const approveSeller = () =>{
     axios
-    .get(`${baseUrlAdmin}/sellers`)
+    .get(`${baseUrl}/sellers`)
     .then((result) => {
       setApproveSellersItems(result.data);
     })
@@ -48,7 +48,7 @@ const SellerManagment = () => {
 
   const pendingSeller = () =>{
     axios
-    .get(`${baseUrlAdmin}/sellers/get/pending`)
+    .get(`${baseUrl}/sellers/get/pending`)
     .then((result) => {
       setPendingSellersItems(result.data);
     })

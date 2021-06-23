@@ -3,7 +3,7 @@ import "antd/dist/antd.css";
 import axios from "axios";
 import React, { useState } from "react";
 import { Switch } from "antd";
-import { baseUrlAdmin } from "../../utils/constant";
+import { baseUrl } from "../../utils/constant";
 
 const openNotificationWithIcon = (type, message) => {
   notification[type]({
@@ -66,7 +66,7 @@ export const RejectSellerModal = (props) => {
     console.log("Received values of form: ", values);
 
     axios
-      .put(`${baseUrlAdmin}/sellers/reject/${props.sellerId}`, {
+      .put(`${baseUrl}/sellers/reject/${props.sellerId}`, {
         rejection_reason: values.rejectReason,
       })
       .then((result) => {
@@ -92,7 +92,7 @@ export const RejectSellerModal = (props) => {
       setVisible(true);
     } else {
       axios
-        .put(`${baseUrlAdmin}/sellers/approve/${props.sellerId}`)
+        .put(`${baseUrl}/sellers/approve/${props.sellerId}`)
         .then((result) => {
           if (result.status === 200) {
             setSwitchChecked(true);

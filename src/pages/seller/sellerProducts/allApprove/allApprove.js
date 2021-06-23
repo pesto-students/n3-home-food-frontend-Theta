@@ -1,4 +1,4 @@
-import { Card, Row, Skeleton } from "antd";
+import { Card, Row, Skeleton, Typography } from "antd";
 import "antd/dist/antd.css";
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -7,10 +7,10 @@ import item from "../../../../images/south-indian.jpg";
 
 
 const AllApprove = ({products,isLoading}) => {
-
+  const {Title} = Typography
   const fetchMoreData = () => {
     // axios
-    // .get("`${baseUrlAdmin}/products/get/approved")
+    // .get("`${baseUrl}/products/get/approved")
     // .then((result) => {
     //   setproducts(products.concat(result.data));
     // })
@@ -38,14 +38,9 @@ const AllApprove = ({products,isLoading}) => {
                       <Image url={item} height="100" width='150'></Image>
                     </div>
                     <div className="product-details ">
-                      <span className="seller-name">{product.name}</span>
-                      <span className="cost">
-                        <p className="max-amount">Max Amount</p> &nbsp; ₹{" "}
-                        {product.max_price}
-                      </span>
-                     
+                      <Title level={4}>{product.name}</Title>
+                      <span>Max Amount: ₹ {product.max_price}</span>
                     </div>
-                   
                   </div>
                 </div>
        

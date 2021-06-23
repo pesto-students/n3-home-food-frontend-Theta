@@ -8,6 +8,7 @@ const { Meta } = Card;
 
 
 const SellerCard= ({detail}) =>{
+  console.log(detail)
     return <Card
     hoverable
     style={{ width: '100%',margin:'0px' }}
@@ -15,12 +16,12 @@ const SellerCard= ({detail}) =>{
       <Image
         height="150px"
         width="100%"
-        url={"https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/ndbykjavkxko09lutd18"}
+        url={detail.image}
       />
     }
   >
    
-    <Meta title= "THE FLAVOR OF HOME--34 mins₹ 200 for two" description= "Punjabi, Snacks, Beverages" />
+    <Meta title= {detail.name} description={detail.phone} />
     <Rate className="move-from-top" disabled defaultValue={2} ></Rate>
   </Card> 
 }

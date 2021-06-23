@@ -12,6 +12,7 @@ export const loginUser = async (info) => {
       {
         url = '/sellers/login'
       }
+
       let response = await axios
         .post(url,info)
         .then((response) => {
@@ -23,7 +24,7 @@ export const loginUser = async (info) => {
           if(response.data.userType === 'Seller')
           {
             window.location.href = '/seller/dashboard'
-          }         
+          }          
           return response;
         })
         .catch((error) => {

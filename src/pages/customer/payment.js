@@ -59,12 +59,6 @@ const Payment = () => {
           paymentObject.open()
     })
     .catch((err) => console.error(err));
-
-    // const data = await fetch(`${baseUrl}/razorpay`,{method:'POST'}).then( (t) => {
-    //     t.json()
-    // })
-
-  
     
 };
   return (

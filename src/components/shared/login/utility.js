@@ -24,6 +24,10 @@ export const loginUser = async (info) => {
           if(response.data.userType === 'Seller')
           {
             window.location.href = '/seller/dashboard'
+          }   
+          if(response.data.userType === 'Seller')
+          {
+            window.location.href = '/customer'
           }          
           return response;
         })

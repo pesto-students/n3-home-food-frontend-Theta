@@ -1,7 +1,7 @@
 import { Menu, Dropdown, notification } from "antd";
 import { MoreOutlined } from "@ant-design/icons";
 import axios from "../../../utils/axios";
-import { baseUrlAdmin } from "../../../utils/constant";
+import { baseUrl } from "../../../utils/constant";
 
 
 const openNotificationWithIcon = (type, message) => {
@@ -15,7 +15,7 @@ export const ProductCrudMenu = (props) => {
 
   const deleteProduct = () => {
     axios
-      .delete(`${baseUrlAdmin}/products/${props.product.id}`)
+      .delete(`${baseUrl}/products/${props.product.id}`)
       .then((result) => {
         console.log(result);
         if (result.status === 200) {

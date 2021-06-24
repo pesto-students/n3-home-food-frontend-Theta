@@ -13,7 +13,7 @@ import {
 import "antd/dist/antd.css";
 import axios from "axios";
 import React, { useState } from "react";
-import { baseUrlAdmin } from "../../../utils/constant";
+import { baseUrl } from "../../../utils/constant";
 
 const { Option } = Select;
 
@@ -187,7 +187,7 @@ export const EditProductModal = (props) => {
     console.log("file,", data);
     axios
       .post(
-        `${baseUrlAdmin}/products`,
+        `${baseUrl}/products`,
 
         data
       )

@@ -16,6 +16,9 @@ export const redirectToOriginalPageFromLanding = () => {
     if (user.userType === "Seller") {
        window.location.href = "/seller/dashboard";
     }
+    if (user.userType === "Customer") {
+      window.location.href = "/customer";
+   }
   } 
 };
 

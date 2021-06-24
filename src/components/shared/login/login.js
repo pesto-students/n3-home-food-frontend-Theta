@@ -5,12 +5,9 @@ import firebase from "../../../utils/firebase";
 import "./login.css";
 import { loginUser } from "./utility";
 
-
-
-const Login = ({userType}) => {
+const Login = ({ userType }) => {
   const [hasMoile, sethasMobile] = useState(false);
   const [buttonLoding, setButtonLoding] = useState(false);
-  
 
   const configureCaptcha = () => {
     window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
@@ -26,11 +23,8 @@ const Login = ({userType}) => {
     );
   };
 
-
-
   const onSignInSubmit = ({ phone }) => {
-
-    setButtonLoding(true)
+    setButtonLoding(true);
     configureCaptcha();
     const phoneNumber = "+91" + phone;
     console.log(phoneNumber);
@@ -42,7 +36,7 @@ const Login = ({userType}) => {
         // SMS sent. Prompt user to type the code from the message, then sign the
         // user in with confirmationResult.confirm(code).
         sethasMobile(true);
-        setButtonLoding(false)
+        setButtonLoding(false);
 
         window.confirmationResult = confirmationResult;
         notification.success({
@@ -53,10 +47,10 @@ const Login = ({userType}) => {
         // ...
       })
       .catch((error) => {
-        console.log(error)
+        console.log(error);
         // Error; SMS not sent
         // ...
-        setButtonLoding(false)
+        setButtonLoding(false);
 
         notification.error({
           message: "Error",
@@ -66,24 +60,24 @@ const Login = ({userType}) => {
       });
   };
   const onSubmitOTP = ({ otp }) => {
-    setButtonLoding(true)
+    setButtonLoding(true);
     const code = otp;
     window.confirmationResult
       .confirm(code)
       .then((result) => {
         // User signed in successfully.
-        setButtonLoding(false)
+        setButtonLoding(false);
         const user = result.user;
-        loginUser({phone:user.phoneNumber.slice(3),customerType:userType})
+        loginUser({ phone: user.phoneNumber.slice(3), customerType: userType });
         notification.success({
           message: "Verified",
-          description: "Successfully Login",
+          description: "OTP Verified",
           placement: "topLeft",
         });
         // ...
       })
       .catch((error) => {
-        setButtonLoding(false)
+        setButtonLoding(false);
 
         notification.error({
           message: "Error",
@@ -93,12 +87,8 @@ const Login = ({userType}) => {
       });
   };
 
- 
-
-  
-
   return (
-    <div style={{width:'100%'}}>
+    <div style={{ width: "100%" }}>
       <div id="sign-in-button"></div>
       <Form
         name="normal_login"
@@ -119,41 +109,7 @@ const Login = ({userType}) => {
         >
           <Input placeholder="Phone" />
         </Form.Item>
-       {!hasMoile &&
-        <Button
-          type="primary"
-          loading={buttonLoding}
-          block
-          htmlType="submit"
-          className="login-form-button"
-        >
-           SEND OTP
-        </Button>
-      }
-      </Form>
-
-      {hasMoile &&
-      <Form
-        name="normal_login"
-        className="login-form"
-        initialValues={{
-          remember: true,
-        }}
-        onFinish={onSubmitOTP}
-      >
-        <Form.Item
-          name="otp"
-          rules={[
-            {
-              required: false,
-              message: "Enter OTP",
-            },
-          ]}
-        >
-          <Input placeholder="OTP" />
-        </Form.Item>
-     
-        <Form.Item>
+        {!hasMoile && (
           <Button
             type="primary"
             loading={buttonLoding}
@@ -161,12 +117,45 @@ const Login = ({userType}) => {
             htmlType="submit"
             className="login-form-button"
           >
-            Verify OTP
+            SEND OTP
           </Button>
-        </Form.Item>
-
+        )}
       </Form>
-}
+
+      {hasMoile && (
+        <Form
+          name="normal_login"
+          className="login-form"
+          initialValues={{
+            remember: true,
+          }}
+          onFinish={onSubmitOTP}
+        >
+          <Form.Item
+            name="otp"
+            rules={[
+              {
+                required: false,
+                message: "Enter OTP",
+              },
+            ]}
+          >
+            <Input placeholder="OTP" />
+          </Form.Item>
+
+          <Form.Item>
+            <Button
+              type="primary"
+              loading={buttonLoding}
+              block
+              htmlType="submit"
+              className="login-form-button"
+            >
+              Verify OTP
+            </Button>
+          </Form.Item>
+        </Form>
+      )}
     </div>
   );
 };

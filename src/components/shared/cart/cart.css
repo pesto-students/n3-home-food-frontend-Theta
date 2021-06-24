@@ -1,0 +1,13 @@
+.sub-total{
+    width: 100%;
+}
+.checkout{
+  margin-top:20px;   
+  width: 100%;
+}
+.bold{
+    font-weight: 800;
+}
+.empty-cart-icon{
+    font-size: 140px;
+}

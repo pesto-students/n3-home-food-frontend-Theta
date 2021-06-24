@@ -6,13 +6,13 @@ import { Link } from "react-router-dom";
 import logo from "../../../images/logo.png";
 import Image from "../image/image";
 
-
 const { Header } = Layout;
 
-
 const CustomerNavbar = () => {
-
-
+  const logout = () => {
+    localStorage.clear();
+    window.location.reload();
+  };
 
   return (
     <Header className="navbar">
@@ -21,12 +21,12 @@ const CustomerNavbar = () => {
           <Image height="70px" width="70px" url={logo} />
         </Col>
         <Col md={14} sm={24} xs={24} className="keep-items-left">
-        <Link to="/my/orders">
+          <Link to="/my/orders">
             <Button type="link">Orders</Button>
           </Link>
-          <Link to="/admin/login">
-            <Button type="link">Login </Button>
-          </Link>
+          <Button type="link" onClick={logout}>
+            Logout{" "}
+          </Button>
           <Button type="link">
             <ShoppingCartOutlined className="cart-icon" />
           </Button>
@@ -36,4 +36,4 @@ const CustomerNavbar = () => {
   );
 };
 
-export default CustomerNavbar
+export default CustomerNavbar;

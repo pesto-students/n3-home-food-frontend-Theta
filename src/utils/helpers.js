@@ -35,5 +35,13 @@ export const getCategoryId = (category) => {
 
 export const sessionId = () => {
   let user = getUser();
-  return user.id;
+  return user ? user.id : "";
+};
+
+export const setPincode = (code) => {
+  localStorage.setItem("pincode", code);
+};
+
+export const getPincode = () => {
+  return localStorage.getItem("pincode");
 };

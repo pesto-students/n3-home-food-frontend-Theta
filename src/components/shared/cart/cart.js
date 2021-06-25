@@ -1,14 +1,16 @@
-import { ShoppingCartOutlined } from "@ant-design/icons";
-import { Button, Col, Row, Typography } from "antd";
+import { Button, Col, Row } from "antd";
 import "antd/dist/antd.css";
 import { React, useState } from "react";
 import axios from "../../../utils/axios";
 import { baseUrl, rupeeSign } from "../../../utils/constant";
 import "./cart.css";
-let userId = "60d47bea991e8422112938f7";
+import emptyCardImage from "../../../images/empty_cart.jpg";
+import Image from "../../shared/image/image";
 
 const Cart = ({ alreadyInCart, reloadCart }) => {
   const [isLoading, setIsLoding] = useState(false);
+
+  const userId = "60d47bea991e8422112938f7";
 
   const addItems = (dish, method) => {
     setIsLoding(true);
@@ -68,7 +70,7 @@ const Cart = ({ alreadyInCart, reloadCart }) => {
   if (alreadyInCart.items.length === 0) {
     return (
       <Row justify="center">
-        <ShoppingCartOutlined className="empty-cart-icon" />;
+        <Image height="150" width="150" url={emptyCardImage}></Image>
       </Row>
     );
   }

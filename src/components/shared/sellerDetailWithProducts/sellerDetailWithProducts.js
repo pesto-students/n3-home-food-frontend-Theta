@@ -1,5 +1,5 @@
 import "antd/dist/antd.css";
-import { React, useEffect, useState } from "react";
+import { React, useEffect, useState, useCallback } from "react";
 import { Row, Col, Typography, Rate, Card } from "antd";
 import "./sellerDetailWithProducts.css";
 import CustomerNavbar from "../customerNavbar/customerNavbar";
@@ -10,8 +10,9 @@ import { baseUrl, rupeeSign } from "../../../utils/constant";
 import axios from "../../../utils/axios";
 import SpinnerLoader from "../spinnerLoader/spinnerLoader";
 import Cart from "../cart/cart";
-import { sessionId } from "../../../utils/helpers";
+import { getUser, sessionId } from "../../../utils/helpers";
 import { withRouter } from "react-router-dom";
+import Navbar from "../navbar/navbar";
 
 const SellerDetailWithProducts = (props) => {
   const sellerId = props.match.params.id;
@@ -28,7 +29,7 @@ const SellerDetailWithProducts = (props) => {
     //setCurrentTabValue(tab)
   };
 
-  const getSellerProfile = () => {
+  const getSellerProfile = useCallback(() => {
     axios
       .get(`${baseUrl}/sellers/get/getproducts?sellerid=${sellerId}`)
       .then((result) => {
@@ -36,7 +37,7 @@ const SellerDetailWithProducts = (props) => {
         setIsLoading(false);
       })
       .catch((err) => console.error(err));
-  };
+  }, [sellerId]);
 
   const getCart = () => {
     axios
@@ -47,11 +48,11 @@ const SellerDetailWithProducts = (props) => {
       })
       .catch((err) => {
         setIsCartLoad(true);
-        let m = {
+        let cart = {
           items: [],
           subTotal: 0,
         };
-        setAlreadyInCart(m);
+        setAlreadyInCart(cart);
 
         console.error(err);
       });
@@ -60,11 +61,11 @@ const SellerDetailWithProducts = (props) => {
   useEffect(() => {
     getSellerProfile();
     getCart();
-  }, []);
+  }, [getSellerProfile]);
 
   return (
     <>
-      <CustomerNavbar></CustomerNavbar>
+      {getUser() ? <CustomerNavbar></CustomerNavbar> : <Navbar />}
       {isLoading === true ? (
         <Row justify="center">
           <SpinnerLoader />

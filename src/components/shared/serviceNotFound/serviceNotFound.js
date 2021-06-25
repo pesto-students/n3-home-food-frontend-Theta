@@ -1,14 +1,9 @@
-import { Typography } from "antd";
-import {React} from "react";
+import { React } from "react";
+import "./serviceNotFound.css";
+import noServiceImage from "../../../images/no_service.jpg";
 
-
-const {Title} = Typography
-const serviceNotFound = ({url,height,width}) => {
-  return (        
-     <Title level={3}>Service not found!</Title>
-
-  );
-}
+const serviceNotFound = () => {
+  return <img src={noServiceImage} alt="not found" />;
+};
 
 export default serviceNotFound;
- 

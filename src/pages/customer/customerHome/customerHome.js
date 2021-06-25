@@ -6,11 +6,7 @@ import Image from "../../../components/shared/image/image";
 import CustomerNavbar from "../../../components/shared/customerNavbar/customerNavbar";
 import CustomTabs from "../../../components/shared/Tabs/Tabs";
 import { baseUrl } from "../../../utils/constant";
-import {
-  getCategoryId,
-  getUser,
-  redirectToOriginalPageFromLanding,
-} from "../../../utils/helpers";
+import { getCategoryId, getPincode, getUser } from "../../../utils/helpers";
 import SellerItems from "../../landingScreen/sellerItems";
 
 const { Content } = Layout;
@@ -24,6 +20,8 @@ const imagesUrls = [
 const CustomerHome = () => {
   const [seller, setSeller] = useState([]);
   const [loadSeller, setLoadSeller] = useState(false);
+  const [pincode, setPincode] = useState(false);
+
   //const [currentTabValue,setCurrentTabValue] = useState("");
 
   const user = getUser() ? getUser().userType : null;
@@ -63,9 +61,14 @@ const CustomerHome = () => {
     }
   };
 
+  const updatePincode = (pincode) => {
+    setPincode(pincode);
+  };
+
   useEffect(() => {
+    setPincode(getPincode());
     getSellers();
-  }, []);
+  }, [pincode]);
 
   const getCurrentTab = (tab) => {
     getCategorySeller(tab);
@@ -73,7 +76,7 @@ const CustomerHome = () => {
 
   return (
     <Layout className="layout">
-      <CustomerNavbar />
+      <CustomerNavbar updatePincode={updatePincode} />
       <Content>
         <Row>
           <Col md={24}>

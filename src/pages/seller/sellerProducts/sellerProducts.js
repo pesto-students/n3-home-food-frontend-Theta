@@ -6,6 +6,7 @@ import AllApprove from "./allApprove/allApprove";
 import AllProducts from "./allProduct/allProducts";
 import MyProducts from "./myProducts/myProducts";
 import { sessionId } from "../../../utils/helpers";
+import TabTag from "../../../components/shared/tag/tag";
 
 const SellerProducts = () => {
   const { TabPane } = Tabs;
@@ -54,21 +55,30 @@ const SellerProducts = () => {
 
   return (
     <Tabs defaultActiveKey="1">
-      <TabPane tab={`All Products (${allProducts.length})`} key="1">
+      <TabPane
+        tab={<TabTag count={allProducts.length} text="All Products " />}
+        key="1"
+      >
         <AllProducts
           products={allProducts}
           isLoading={isLoading}
           callback={getApproved}
         />{" "}
       </TabPane>
-      <TabPane tab={`My Products (${myProducts.length})`} key="2">
+      <TabPane
+        tab={<TabTag count={myProducts.length} text="My Products" />}
+        key="2"
+      >
         <MyProducts
           products={myProducts}
           isLoading={isLoading}
           callback={getMyProducts}
         />
       </TabPane>
-      <TabPane tab={`All Approve (${allApprove.length})`} key="3">
+      <TabPane
+        tab={<TabTag count={allApprove.length} text="All Approve" />}
+        key="3"
+      >
         <AllApprove products={allApprove} isLoading={isLoading} />
       </TabPane>
     </Tabs>

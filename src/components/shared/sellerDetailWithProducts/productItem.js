@@ -3,9 +3,10 @@ import "antd/dist/antd.css";
 import { React, useState } from "react";
 import axios from "../../../utils/axios";
 import { baseUrl, rupeeSign } from "../../../utils/constant";
+import { sessionId } from "../../../utils/helpers";
 import Image from "../image/image";
 import "./sellerDetailWithProducts.css";
-let userId = "60d47bea991e8422112938f7";
+let userId = sessionId();
 
 const ProductItems = ({ products, savedCartItem, reloadCart }) => {
   console.log(products, "akao");

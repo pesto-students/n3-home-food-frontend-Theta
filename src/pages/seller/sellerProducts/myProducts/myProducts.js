@@ -1,32 +1,46 @@
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined, MoreOutlined } from "@ant-design/icons";
 import {
   Button,
   Card,
   Col,
   Input,
+  notification,
+  Select,
+  Dropdown,
   Menu,
   Row,
+  Tag,
   Form,
   Skeleton,
   Typography,
 } from "antd";
 import "antd/dist/antd.css";
 import axios from "../../../../utils/axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Image from "../../../../components/shared/image/image";
 import item from "../../../../images/south-indian.jpg";
 import { baseUrl } from "../../../../utils/constant";
 import { sessionId } from "../../../../utils/helpers";
-
+import SpinnerLoader from "../../../../components/shared/spinnerLoader/spinnerLoader";
+import DataNotFound from "../../../../components/shared/dataNotFound/dataNotFound";
 const MyProducts = ({ products, isLoading, callback }) => {
+  const { Option } = Select;
   const { Title } = Typography;
   const [myProducts, setMyProducts] = useState([...products]);
   const [price, setPrice] = useState(0);
   const [quantity, setQuantity] = useState(0);
   const [currentProductId, setCurrentProductId] = useState("");
+  const [ishasMore, setIshasMore] = useState(false);
+
+  const [SelectedCategory, setSelectedCategory] = useState([]);
+
+  useEffect(() => {
+    setMyProducts([...products]);
+  }, [products]);
 
   const fetchMoreData = () => {
+    setIshasMore(true);
     // axios
     // .get("`${baseUrl}/products/get/approved")
     // .then((result) => {
@@ -37,14 +51,30 @@ const MyProducts = ({ products, isLoading, callback }) => {
   };
 
   const editProduct = () => {
+    if (SelectedCategory.length === 0) {
+      notification.error({
+        message: `Notification`,
+        description: "Please select category",
+        placement: "topRight",
+      });
+      return;
+    }
+
     let product = {
       productid: currentProductId,
       product_price: price,
+      category: SelectedCategory,
       product_quantity: quantity,
     };
     axios
       .put(`/sellers/update-product-quantitiy/${sessionId()}`, { ...product })
       .then((result) => {
+        notification.success({
+          message: `Notification`,
+          description: "Product updated successfully",
+          placement: "topRight",
+        });
+        callback();
         //setMyProducts(products.concat(result.data));
       })
       .catch((err) => console.error(err));
@@ -55,123 +85,193 @@ const MyProducts = ({ products, isLoading, callback }) => {
     setQuantity(products[key].quantity);
     setPrice(products[key].price);
     setCurrentProductId(products[key].productId);
+    setSelectedCategory(
+      products[key].productCategory.map((category) => category.id)
+    );
     setMyProducts([...products]);
   };
 
   const deleteProduct = (key) => {
     const item = products[key];
     axios
-      .put(`${baseUrl}/${item._id}`, { product: item._id })
+      .put(`${baseUrl}/sellers/delete-product/${sessionId()}`, {
+        productId: item._id,
+      })
       .then((result) => {
+        notification.success({
+          message: `Notification`,
+          description: "Product successfully deleted",
+          placement: "topRight",
+        });
         products.splice(key, 1);
         setMyProducts([...products]);
+        callback();
       })
       .catch((err) => console.error(err));
+  };
+
+  const changeCategory = (categoryies) => {
+    setSelectedCategory(categoryies);
   };
 
   return (
     <>
       <Skeleton loading={isLoading} active>
-        <InfiniteScroll
-          dataLength={products.length}
-          next={fetchMoreData}
-          hasMore={true}
-          loader={
-            <Row className="m-2 mt-4" justify="center">
-              <p>Loading ...</p>
-            </Row>
-          }
-        >
-          {myProducts.map((product, i) => (
-            <Card key={i} hoverable>
-              <Row justify="end">
-                <Menu style={{ width: "20px" }} mode="horizontal">
-                  <Menu.Item
-                    key="edit"
-                    onClick={() => editableProduct(i)}
-                    icon={<EditOutlined />}
-                  >
-                    Edit
-                  </Menu.Item>
-                  <Menu.Item
-                    key="delete"
-                    onClick={() => deleteProduct(i)}
-                    s
-                    icon={<DeleteOutlined />}
-                  >
-                    Delete
-                  </Menu.Item>
-                </Menu>
+        {myProducts.length > 0 ? (
+          <InfiniteScroll
+            dataLength={myProducts.length}
+            next={fetchMoreData}
+            hasMore={ishasMore}
+            loader={
+              <Row className="m-2 mt-4" justify="center">
+                <SpinnerLoader />
               </Row>
+            }
+          >
+            {myProducts.map((product, i) => (
+              <Card key={i} hoverable>
+                <Row justify="end">
+                  <Dropdown
+                    overlay={
+                      <Menu>
+                        <Menu.Item
+                          key="edit"
+                          onClick={() => editableProduct(i)}
+                          icon={<EditOutlined />}
+                        >
+                          Edit
+                        </Menu.Item>
+                        <Menu.Item
+                          key="delete"
+                          onClick={() => deleteProduct(i)}
+                          s
+                          icon={<DeleteOutlined />}
+                        >
+                          Delete
+                        </Menu.Item>
+                      </Menu>
+                    }
+                  >
+                    <MoreOutlined />
+                  </Dropdown>
+                </Row>
 
-              <Form onFinish={editProduct}>
-                <div className="container">
-                  <div className="row">
-                    <div className="product-cointaner">
-                      <Image url={item} height="100" width="150"></Image>
-                    </div>
-                    <div className="product-details ">
-                      <Title level={4}>
-                        {product.name ? product.name : "Static for now"}
-                      </Title>
-
-                      <Row gutter={[16, 14]}>
-                        <Col md={24}>
+                <Form layout="vertical" onFinish={editProduct}>
+                  <div className="container">
+                    <div className="row">
+                      <div className="product-cointaner">
+                        <Image url={item} height="100" width="150"></Image>
+                      </div>
+                      <div className="product-details ">
+                        <Title level={4}>
+                          {product.name ? product.name : "Static for now"}
+                        </Title>
+                        <Row style={{ marginBottom: 20 }}>
                           {product.edit ? (
                             <Form.Item
-                              label="Quantity"
+                              name="productCategory"
+                              label="Product Category"
                               rules={[
                                 {
-                                  required: true,
-                                  message: "Enter quantity",
+                                  required: false,
+                                  message: "Please Select Product Category!",
                                 },
                               ]}
                             >
-                              <Input
-                                placeholder="Quantity"
-                                value={quantity}
-                                onChange={(e) => setQuantity(e.target.value)}
-                              />
+                              <Select
+                                mode="multiple"
+                                style={{ width: 200 }}
+                                defaultValue={SelectedCategory}
+                                onChange={changeCategory}
+                                placeholder="Please select a Category"
+                              >
+                                <Option value="60c906ce35453e14cd3f4ee3">
+                                  Breakfast
+                                </Option>
+                                <Option value="60ccfb4516659e249450ed49">
+                                  Lunch
+                                </Option>
+                                <Option value="60ccfea78d901732e097e2ee">
+                                  Snacks
+                                </Option>
+                                <Option value="60cf33b093112a14d5da3897">
+                                  Dinner
+                                </Option>
+                              </Select>
                             </Form.Item>
                           ) : (
-                            <span>Plates: {product.quantity} </span>
+                            product.productCategory.map((category) => {
+                              return (
+                                <Tag color="processing">{category.name}</Tag>
+                              );
+                            })
                           )}
-                        </Col>
-                        <Col md={24}>
-                          {product.edit ? (
-                            <Form.Item
-                              label="Price"
-                              rules={[
-                                {
-                                  required: true,
-                                  message: "Enter Price ₹",
-                                },
-                              ]}
-                            >
-                              <Input
-                                placeholder="Price ₹"
-                                value={price}
-                                onChange={(e) => setPrice(e.target.value)}
-                              />
-                            </Form.Item>
-                          ) : (
-                            <span>Price: ₹ {product.price} </span>
-                          )}
-                        </Col>
-                      </Row>
+                        </Row>
+
+                        <Row>
+                          <Col md={24}>
+                            {product.edit ? (
+                              <Form.Item
+                                label="Quantity"
+                                rules={[
+                                  {
+                                    required: true,
+                                    message: "Enter quantity",
+                                  },
+                                ]}
+                              >
+                                <Input
+                                  placeholder="Quantity"
+                                  value={quantity}
+                                  onChange={(e) => setQuantity(e.target.value)}
+                                />
+                              </Form.Item>
+                            ) : (
+                              <span>Plates: {product.quantity} </span>
+                            )}
+                          </Col>
+                          <Col md={24}>
+                            {product.edit ? (
+                              <Form.Item
+                                label="Price"
+                                rules={[
+                                  {
+                                    required: true,
+                                    message: "Enter Price ₹",
+                                  },
+                                ]}
+                              >
+                                <Input
+                                  placeholder="Price ₹"
+                                  value={price}
+                                  onChange={(e) => setPrice(e.target.value)}
+                                />
+                              </Form.Item>
+                            ) : (
+                              <span>Price: ₹ {product.price} </span>
+                            )}
+                          </Col>
+                        </Row>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <Row justify="end">
-                  <Button type="primary" htmlType="submit">
-                    Save
-                  </Button>
-                </Row>
-              </Form>
-            </Card>
-          ))}
-        </InfiniteScroll>
+                  <Row justify="end">
+                    {product.edit && (
+                      <Button type="primary" htmlType="submit">
+                        Save
+                      </Button>
+                    )}
+                  </Row>
+                </Form>
+              </Card>
+            ))}
+          </InfiniteScroll>
+        ) : (
+          <Row className="m-2 mt-4" justify="center">
+            <DataNotFound text="No Data Found!" />
+          </Row>
+        )}
 
         {/* <div className="pagination-container">
             <Pagination defaultCurrent={6} total={100} />

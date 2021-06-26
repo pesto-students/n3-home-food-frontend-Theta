@@ -1,16 +1,32 @@
-import { Button, Card, notification, Row, Skeleton, Typography } from "antd";
+import {
+  Button,
+  Card,
+  notification,
+  Modal,
+  Select,
+  Row,
+  Skeleton,
+  Typography,
+} from "antd";
 import "antd/dist/antd.css";
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Image from "../../../../components/shared/image/image";
 import { AddProductSellerModal } from "../../../../components/shared/manageProductmodal/addProduct";
 import item from "../../../../images/south-indian.jpg";
 import { baseUrl } from "../../../../utils/constant";
-import { sessionId } from "../../../../utils/helpers";
+import { getCategoryId, sessionId } from "../../../../utils/helpers";
+import SpinnerLoader from "../../../../components/shared/spinnerLoader/spinnerLoader";
 
 const AllProducts = ({ products, isLoading, callback }) => {
   const { Title } = Typography;
+  const { Option } = Select;
+
+  const [isCategoryModal, setIsCategoryModal] = useState(false);
+  const [currentProduct, setCurrentProduct] = useState({});
+  const [selectedCategory, setSelectedCategory] = useState([]);
+
   const fetchMoreData = () => {
     // axios
     // .get("`${baseUrl}/products/get/approved")
@@ -21,15 +37,28 @@ const AllProducts = ({ products, isLoading, callback }) => {
     // .finally(() => setIsLoading(false));
   };
 
-  const addToMyProduct = (product) => {
+  const addToMyProduct = () => {
+    if (selectedCategory.length === 0) {
+      notification.error({
+        message: `Notification`,
+        description: "Please Select Category",
+        placement: "topRight",
+      });
+      return;
+    }
     axios
-      .put(`${baseUrl}/sellers/${sessionId()}`, { products: [product._id] })
+      .put(`${baseUrl}/sellers/${sessionId()}`, {
+        products: [currentProduct._id],
+        category: selectedCategory,
+      })
       .then((result) => {
+        setIsCategoryModal(false);
         notification.success({
           message: `Notification`,
           description: "This product is added to your my product",
           placement: "topRight",
         });
+        callback();
       })
       .catch((err) => {
         notification.error({
@@ -41,10 +70,45 @@ const AllProducts = ({ products, isLoading, callback }) => {
     // .finally(() => setIsLoading(false));
   };
 
+  const handdleCloseCategoryModal = () => {
+    setIsCategoryModal(false);
+  };
+
+  const handdleOpenCategoryModal = (product) => {
+    setIsCategoryModal(true);
+    setCurrentProduct(product);
+  };
+
+  const handleChange = (value) => {
+    setSelectedCategory(value);
+  };
+
   return (
     <>
       <div>
         <AddProductSellerModal callback={callback} />
+
+        <Modal
+          title={currentProduct.name}
+          visible={isCategoryModal}
+          onOk={addToMyProduct}
+          onCancel={handdleCloseCategoryModal}
+        >
+          <p>Add Category</p>
+          <Select
+            mode="multiple"
+            allowClear
+            style={{ width: "100%" }}
+            placeholder="Please select Category"
+            defaultValue={[]}
+            onChange={handleChange}
+          >
+            <Option key={getCategoryId("Breakfast")}>Breakfast</Option>
+            <Option key={getCategoryId("Lunch")}>Lunch</Option>
+            <Option key={getCategoryId("Snacks")}>Snacks</Option>
+            <Option key={getCategoryId("Dinner")}>Dinner</Option>
+          </Select>
+        </Modal>
 
         <Skeleton loading={isLoading} active>
           <InfiniteScroll
@@ -53,7 +117,7 @@ const AllProducts = ({ products, isLoading, callback }) => {
             hasMore={true}
             loader={
               <Row className="m-2 mt-4" justify="center">
-                <p>Loading ...</p>
+                <SpinnerLoader />
               </Row>
             }
           >
@@ -73,7 +137,7 @@ const AllProducts = ({ products, isLoading, callback }) => {
                 <Row justify="end">
                   <Button
                     type="primary"
-                    onClick={() => addToMyProduct(product)}
+                    onClick={() => handdleOpenCategoryModal(product)}
                   >
                     Add
                   </Button>

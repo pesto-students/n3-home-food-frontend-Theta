@@ -4,9 +4,8 @@ import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import item from "../../../../images/seller.png";
 import "../Seller Approval/sellerApproval.css";
-const RejectedSellers = ({isLoading,sellers}) => {
-
-  
+import DataNotFound from "../../../../components/shared/dataNotFound/dataNotFound";
+const RejectedSellers = ({ isLoading, sellers }) => {
   const fetchMoreData = () => {
     // axios
     // .get("`${baseUrl}/products/get/approved")
@@ -29,35 +28,54 @@ const RejectedSellers = ({isLoading,sellers}) => {
         {/* add product modal */}
 
         <Skeleton loading={isLoading} active>
-          <InfiniteScroll
-            dataLength={sellers.length}
-            next={fetchMoreData}
-            hasMore={true}
-            loader={<Row className='m-2 mt-4' justify="center"><p>Loading ...</p></Row > }
-
-          >
-            {sellers.map((seller, i) => (
-              <Card key={i} hoverable>
-                <div>
-                  <div className="row seller-row">
-                    <div className="product-cointaner">
-                      <img src={item} className="product-image" alt="" />
-                      <div className="seller-details">
-                      <span className="seller-name">{seller.name}</span>
-                      <span className="rejection-reason"><span style={{color:'red'}} >Reason </span> - {seller.rejection_reason}</span>
+          {sellers.length > 0 ? (
+            <InfiniteScroll
+              dataLength={sellers.length}
+              next={fetchMoreData}
+              hasMore={true}
+              loader={
+                <Row className="m-2 mt-4" justify="center">
+                  <p>Loading ...</p>
+                </Row>
+              }
+            >
+              {sellers.map((seller, i) => (
+                <Card key={i} hoverable>
+                  <div>
+                    <div className="row seller-row">
+                      <div className="product-cointaner">
+                        <img src={item} className="product-image" alt="" />
+                        <div className="seller-details">
+                          <span className="seller-name">{seller.name}</span>
+                          <span className="rejection-reason">
+                            <span style={{ color: "red" }}>Reason </span> -{" "}
+                            {seller.rejection_reason}
+                          </span>
+                        </div>
                       </div>
-                      
-                    </div>
 
-                    <div className="mr-3">
-                      <span className={seller.status === 'Approved' ? 'status-text-green':'status-text-red'} > {seller.status}
-                      </span>
+                      <div className="mr-3">
+                        <span
+                          className={
+                            seller.status === "Approved"
+                              ? "status-text-green"
+                              : "status-text-red"
+                          }
+                        >
+                          {" "}
+                          {seller.status}
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Card>
-            ))}
-          </InfiniteScroll>
+                </Card>
+              ))}
+            </InfiniteScroll>
+          ) : (
+            <Row className="m-2 mt-4" justify="center">
+              <DataNotFound text="No Data Found!" />
+            </Row>
+          )}
         </Skeleton>
       </div>
     </>

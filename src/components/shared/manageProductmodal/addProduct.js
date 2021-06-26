@@ -13,7 +13,7 @@ import {
 import "antd/dist/antd.css";
 import axios from "axios";
 import React, { useState } from "react";
-import { baseUrl} from '../../../utils/constant'
+import { baseUrl } from "../../../utils/constant";
 
 const { Option } = Select;
 
@@ -94,25 +94,25 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, fromFor }) => {
         >
           <Input />
         </Form.Item>
-
-        <Form.Item
-          name="productCategory"
-          label="Product Category"
-          rules={[
-            {
-              required: true,
-              message: "Please input the Product Category!",
-            },
-          ]}
-        >
-          <Select placeholder="Please select a Category">
-            <Option value="60c906ce35453e14cd3f4ee3">Breakfast</Option>
-            <Option value="60ccfb4516659e249450ed49">Lunch</Option>
-            <Option value="60ccfea78d901732e097e2ee">Snacks</Option>
-            <Option value="60cf33b093112a14d5da3897">Dinner</Option>
-          </Select>
-        </Form.Item>
-
+        {fromFor !== "admin" && (
+          <Form.Item
+            name="productCategory"
+            label="Product Category"
+            rules={[
+              {
+                required: true,
+                message: "Please input the Product Category!",
+              },
+            ]}
+          >
+            <Select mode="multiple" placeholder="Please select a Category">
+              <Option value="60c906ce35453e14cd3f4ee3">Breakfast</Option>
+              <Option value="60ccfb4516659e249450ed49">Lunch</Option>
+              <Option value="60ccfea78d901732e097e2ee">Snacks</Option>
+              <Option value="60cf33b093112a14d5da3897">Dinner</Option>
+            </Select>
+          </Form.Item>
+        )}
         <Form.Item
           name="description"
           label="Description"
@@ -121,9 +121,14 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, fromFor }) => {
               required: true,
               message: "Please input the Product Description!",
             },
-            { min: 5, message: "Product Description must be minimum 5 characters." },
-            { max: 20, message: "Product Description must be Maximun 20 characters." },
-
+            {
+              min: 5,
+              message: "Product Description must be minimum 5 characters.",
+            },
+            {
+              max: 20,
+              message: "Product Description must be Maximun 20 characters.",
+            },
           ]}
         >
           <Input type="textarea" />
@@ -186,27 +191,24 @@ export const AddProductModal = (props) => {
 
     console.log("file,", data);
     axios
-    .post(`${baseUrl}/products`,
+      .post(
+        `${baseUrl}/products`,
 
-    data)
-    .then((result) => {
-      if(result.status === 200){
-        openNotificationWithIcon('success','Product Added')
-        props.callback()
-      }
-      else{
-        openNotificationWithIcon('error','Could Not Add Product')
-
-      }
-      
-    })
-    .catch((err) => {
-      console.error(err)
-      openNotificationWithIcon('error','Could Not Add Product')
-    })
-    .finally(() => {
-
-    });
+        data
+      )
+      .then((result) => {
+        if (result.status === 200) {
+          openNotificationWithIcon("success", "Product Added");
+          props.callback();
+        } else {
+          openNotificationWithIcon("error", "Could Not Add Product");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        openNotificationWithIcon("error", "Could Not Add Product");
+      })
+      .finally(() => {});
     setVisible(false);
   };
 
@@ -239,46 +241,36 @@ export const AddProductSellerModal = (props) => {
   const [visible, setVisible] = useState(false);
 
   const onCreate = (values) => {
-    
-    console.log(values)
-  try
-  {
-    const data = new FormData()
-    data.append('image',values.productImage[0].originFileObj)
-    data.append('name',values.productName)
-    data.append('description',values.description)
-    data.append('max_price',values.maxPrice)
-    data.append('category',values.productCategory)
-    data.append('status','Pending')
+    console.log(values);
+    try {
+      const data = new FormData();
+      data.append("image", values.productImage[0].originFileObj);
+      data.append("name", values.productName);
+      data.append("description", values.description);
+      data.append("max_price", values.maxPrice);
+      data.append("category", values.productCategory);
+      data.append("status", "Pending");
 
-    axios
-    .post(`${baseUrl}/products`,data)
-    .then((result) => {
-      if(result.status === 200){
-        openNotificationWithIcon('success','Product Reuested')
-        props.callback()
-      }
-      else{
-        openNotificationWithIcon('error','Could Not Add Product')
-
-      }
-      
-    })
-    .catch((err) => {
-      console.error(err)
-      openNotificationWithIcon('error','Could Not Add Product')
-    })
-    .finally(() => {
-
-    });
-    setVisible(false);
-  }
-  catch(e)
-  {
-    openNotificationWithIcon('error',"Something went wrong")
-
-  }
-};
+      axios
+        .post(`${baseUrl}/products`, data)
+        .then((result) => {
+          if (result.status === 200) {
+            openNotificationWithIcon("success", "Product Reuested");
+            props.callback();
+          } else {
+            openNotificationWithIcon("error", "Could Not Add Product");
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+          openNotificationWithIcon("error", "Could Not Add Product");
+        })
+        .finally(() => {});
+      setVisible(false);
+    } catch (e) {
+      openNotificationWithIcon("error", "Something went wrong");
+    }
+  };
 
   return (
     <div>
@@ -289,7 +281,7 @@ export const AddProductSellerModal = (props) => {
             setVisible(true);
           }}
         >
-          Reqest Product
+          Request Product
         </Button>
       </div>
 

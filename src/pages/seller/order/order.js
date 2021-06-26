@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 // import axios from "../../../utils/axios";
 import CurrentOrders from "./currentOrder";
 import PastOrders from "./pastOrder";
+import TabTag from "../../../components/shared/tag/tag";
 
 const SellerProducts = () => {
   const { TabPane } = Tabs;
@@ -18,10 +19,16 @@ const SellerProducts = () => {
 
   return (
     <Tabs defaultActiveKey="1">
-      <TabPane tab={`Current Orders (${currentOrdersItem.length})`} key="1">
+      <TabPane
+        tab={<TabTag count={currentOrdersItem.length} text="Current Orders " />}
+        key="1"
+      >
         <CurrentOrders />
       </TabPane>
-      <TabPane tab={`Past Orders (${pastOrdersItem.length})`} key="2">
+      <TabPane
+        tab={<TabTag count={pastOrdersItem.length} text="Past Orders" />}
+        key="2"
+      >
         <PastOrders />
       </TabPane>
     </Tabs>

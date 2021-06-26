@@ -6,11 +6,12 @@ import { baseUrl, rupeeSign } from "../../../utils/constant";
 import "./cart.css";
 import emptyCardImage from "../../../images/empty_cart.jpg";
 import Image from "../../shared/image/image";
+import { sessionId } from "../../../utils/helpers";
 
 const Cart = ({ alreadyInCart, reloadCart }) => {
   const [isLoading, setIsLoding] = useState(false);
 
-  const userId = "60d47bea991e8422112938f7";
+  let userId = sessionId();
 
   const addItems = (dish, method) => {
     setIsLoding(true);
@@ -27,14 +28,14 @@ const Cart = ({ alreadyInCart, reloadCart }) => {
         currentProduct[0].quantity = currentProduct[0].quantity - 1;
       }
       cartItem = {
-        productId: dish.productId,
+        productId: dish.productId.id,
         quantity: currentProduct[0].quantity,
         userId: userId,
       };
       console.log(cartItem, currentProduct[0]);
     } else {
       cartItem = {
-        productId: dish.productId,
+        productId: dish.productId.id,
         quantity: 1,
         userId: userId,
       };
@@ -44,6 +45,7 @@ const Cart = ({ alreadyInCart, reloadCart }) => {
   };
 
   const updateCart = (cartItem) => {
+    console.log('cartitem-update',cartItem)
     axios
       .post(`${baseUrl}/cart`, cartItem)
       .then((result) => {

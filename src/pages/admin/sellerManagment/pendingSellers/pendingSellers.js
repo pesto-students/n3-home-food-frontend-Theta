@@ -7,16 +7,15 @@ import { RejectSellerModal } from "../../../../components/manageSellerModal/reje
 import item from "../../../../images/south-indian.jpg";
 import { baseUrl } from "../../../../utils/constant";
 import "./pendingSeller.css";
+import DataNotFound from "../../../../components/shared/dataNotFound/dataNotFound";
 
 const openNotificationWithIcon = (type, message) => {
-    notification[type]({
-      message: message,
-    });
-  };
+  notification[type]({
+    message: message,
+  });
+};
 
-const PendingSellers = ({callback,sellers,isLoading}) => {
-
-
+const PendingSellers = ({ callback, sellers, isLoading }) => {
   const fetchMoreData = () => {
     // axios
     // .get("`${baseUrl}/products/get/approved")
@@ -29,24 +28,24 @@ const PendingSellers = ({callback,sellers,isLoading}) => {
 
   const approveSellerbyId = (id) => {
     axios
-    .put(`${baseUrl}/sellers/approve/${id}`)
-    .then((result) => {
-      if (result.status === 200) {
-        openNotificationWithIcon("success", "Seller Approved");
-      } else {
+      .put(`${baseUrl}/sellers/approve/${id}`)
+      .then((result) => {
+        if (result.status === 200) {
+          openNotificationWithIcon("success", "Seller Approved");
+        } else {
+          openNotificationWithIcon("error", "Could Not Approve Seller");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
         openNotificationWithIcon("error", "Could Not Approve Seller");
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      openNotificationWithIcon("error", "Could Not Approve Seller");
-    })
-    .finally(() => {});
+      })
+      .finally(() => {});
   };
 
-  const updateSellerList = () =>{
-    callback()
-  }
+  const updateSellerList = () => {
+    callback();
+  };
 
   return (
     <>
@@ -54,37 +53,53 @@ const PendingSellers = ({callback,sellers,isLoading}) => {
         {/* add product modal */}
 
         <Skeleton loading={isLoading} active>
-          <InfiniteScroll
-            dataLength={sellers.length}
-            next={fetchMoreData}
-            hasMore={true}
-            loader={<Row className='m-2 mt-4' justify="center"><p>Loading ...</p></Row > }
-
-          >
-            {sellers.map((seller, i) => (
-              <Card key={i} hoverable>
-                <div className="container">
-                  <div className="row">
-                    <div className="product-cointaner">
-                      <img src={item} className="product-image" alt="" />
-                    </div>
-                    <div className="product-details ">
-                      <span className="seller-name">{seller.name}</span>
-                    </div>
-                    <div className="acess-buttons">
-                      <Button style={{margin:'10px'}} type="primary" onClick={()=>{
-                        approveSellerbyId(seller.id)
-                        updateSellerList()
-                      }}>
-                        Approve
-                      </Button>
-                      <RejectSellerModal callback = {updateSellerList} sellerId={seller.id} />
+          {sellers.length > 0 ? (
+            <InfiniteScroll
+              dataLength={sellers.length}
+              next={fetchMoreData}
+              hasMore={true}
+              loader={
+                <Row className="m-2 mt-4" justify="center">
+                  <p>Loading ...</p>
+                </Row>
+              }
+            >
+              {sellers.map((seller, i) => (
+                <Card key={i} hoverable>
+                  <div className="container">
+                    <div className="row">
+                      <div className="product-cointaner">
+                        <img src={item} className="product-image" alt="" />
+                      </div>
+                      <div className="product-details ">
+                        <span className="seller-name">{seller.name}</span>
+                      </div>
+                      <div className="acess-buttons">
+                        <Button
+                          style={{ margin: "10px" }}
+                          type="primary"
+                          onClick={() => {
+                            approveSellerbyId(seller.id);
+                            updateSellerList();
+                          }}
+                        >
+                          Approve
+                        </Button>
+                        <RejectSellerModal
+                          callback={updateSellerList}
+                          sellerId={seller.id}
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Card>
-            ))}
-          </InfiniteScroll>
+                </Card>
+              ))}
+            </InfiniteScroll>
+          ) : (
+            <Row className="m-2 mt-4" justify="center">
+              <DataNotFound text="No Data Found!" />
+            </Row>
+          )}
         </Skeleton>
       </div>
     </>

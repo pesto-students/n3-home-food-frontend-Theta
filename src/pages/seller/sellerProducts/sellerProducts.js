@@ -51,6 +51,11 @@ const SellerProducts = () => {
     getMyProducts();
   }, []);
 
+  const allProductCallback = () => {
+    getApproved();
+    getMyProducts();
+  };
+
   useEffect(() => {}, [allProducts, myProducts, allApprove]);
 
   return (
@@ -62,7 +67,7 @@ const SellerProducts = () => {
         <AllProducts
           products={allProducts}
           isLoading={isLoading}
-          callback={getApproved}
+          callback={allProductCallback}
         />{" "}
       </TabPane>
       <TabPane

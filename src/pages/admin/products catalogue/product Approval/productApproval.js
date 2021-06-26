@@ -1,62 +1,85 @@
-import { Card, Row, Skeleton,Typography } from "antd";
+import { Card, Row, Skeleton, Typography } from "antd";
 import "antd/dist/antd.css";
-import React from "react";
+import React, { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Image from "../../../../components/shared/image/image";
-import { AppoveProductModal } from '../../../../components/shared/manageProductmodal/approveProduct';
+import { AppoveProductModal } from "../../../../components/shared/manageProductmodal/approveProduct";
 import { ReassignProduct } from "../../../../components/shared/manageProductmodal/reassignProduct";
 import { RejectProductModal } from "../../../../components/shared/manageProductmodal/rejectProduct";
 import "./productApproval.css";
+import SpinnerLoader from "../../../../components/shared/spinnerLoader/spinnerLoader";
+import DataNotFound from "../../../../components/shared/dataNotFound/dataNotFound";
 
-const ProductApproval = ({isLoading,products,loadPenindgProducts}) => {
+const ProductApproval = ({ isLoading, products, loadPenindgProducts }) => {
+  const { Title } = Typography;
+  const [hasMore, setHasMore] = useState(false);
 
-  const {Title} = Typography
   const fetchMoreData = () => {
+    setHasMore(false);
   };
 
-  const updateProductList = () =>{
-    loadPenindgProducts()
-
-  }
-
+  const updateProductList = () => {
+    loadPenindgProducts();
+  };
 
   return (
     <>
       <div>
         {/* add product modal */}
-        
-
 
         <Skeleton loading={isLoading} active>
-          <InfiniteScroll
-            dataLength={products.length}
-            next={fetchMoreData}
-            hasMore={true}
-            loader={<Row className='m-2 mt-4' justify="center"><p>Loading ...</p></Row > }
-          >
-            {products.map((product, i) => (
-              <Card key={i} hoverable>
-                <div className="container">
-                  <div className="row">
-                    <div className="product-cointaner">
-                      <Image url={product.image} height="100" width='150'></Image>
-                    </div>
-                    <div className="product-details ">
-                      <Title level={4}>{product.name}</Title>
-                      <span>Price : ₹{product.max_price ? product.max_price : 0}</span>
-
-
-                    </div>
-                    <div className="acess-buttons">
-                      <AppoveProductModal callback ={updateProductList} productId={product.id} />
-                      <RejectProductModal callback ={updateProductList} productId={product.id}/>
-                      <ReassignProduct callback ={updateProductList} productId = {product.id} />
+          {products.length > 0 ? (
+            <InfiniteScroll
+              dataLength={products.length}
+              next={fetchMoreData}
+              hasMore={hasMore}
+              loader={
+                <Row className="m-2 mt-4" justify="center">
+                  <SpinnerLoader />
+                </Row>
+              }
+            >
+              {products.map((product, i) => (
+                <Card key={i} hoverable>
+                  <div className="container">
+                    <div className="row">
+                      <div className="product-cointaner">
+                        <Image
+                          url={product.image}
+                          height="100"
+                          width="150"
+                        ></Image>
+                      </div>
+                      <div className="product-details ">
+                        <Title level={4}>{product.name}</Title>
+                        <span>
+                          Price : ₹{product.max_price ? product.max_price : 0}
+                        </span>
+                      </div>
+                      <div className="acess-buttons">
+                        <AppoveProductModal
+                          callback={updateProductList}
+                          productId={product.id}
+                        />
+                        <RejectProductModal
+                          callback={updateProductList}
+                          productId={product.id}
+                        />
+                        <ReassignProduct
+                          callback={updateProductList}
+                          productId={product.id}
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Card>
-            ))}
-          </InfiniteScroll>
+                </Card>
+              ))}
+            </InfiniteScroll>
+          ) : (
+            <Row className="m-2 mt-4" justify="center">
+              <DataNotFound text="No Data Found! " />
+            </Row>
+          )}
 
           {/* <div className="pagination-container">
             <Pagination defaultCurrent={6} total={100} />

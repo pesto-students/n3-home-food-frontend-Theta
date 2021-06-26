@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "antd/dist/antd.css";
-import { Tabs, Tag } from "antd";
+import { Tabs } from "antd";
 import AllProducts from "./allProducts/allProducts";
 import ProductApproval from "./product Approval/productApproval";
 import { baseUrl } from "../../../utils/constant";

@@ -8,6 +8,8 @@ import CustomTabs from "../../components/shared/Tabs/Tabs";
 import { baseUrl } from "../../utils/constant";
 import {  getCategoryId, redirectToOriginalPageFromLanding } from "../../utils/helpers";
 import CustomerLogin from "./customerLogin";
+import corousel1 from "../../images/courosel.jpg"
+import corousel2 from "../../images/courosel-3.jpg"
 
 import "./landing.css";
 import SellerItems from "./sellerItems";
@@ -15,8 +17,8 @@ import SellerItems from "./sellerItems";
 const { Content } = Layout;
 const { Title } = Typography;
 const imagesUrls = [
-  "https://image.shutterstock.com/image-photo/fresh-green-food-cooking-concept-600w-1615988773.jpg",
-  "https://image.shutterstock.com/image-photo/organic-clean-vegetables-assorted-cooking-600w-334204937.jpg",
+  corousel1,
+  corousel2,
   "https://image.shutterstock.com/z/stock-vector-delicious-fluffy-pancake-in-frying-pan-fresh-fruit-and-honey-toppings-in-d-illustration-food-ad-1120833698.jpg",
 ];
 

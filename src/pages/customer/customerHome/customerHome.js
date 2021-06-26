@@ -6,7 +6,7 @@ import Image from "../../../components/shared/image/image";
 import CustomerNavbar from "../../../components/shared/customerNavbar/customerNavbar";
 import CustomTabs from "../../../components/shared/Tabs/Tabs";
 import { baseUrl } from "../../../utils/constant";
-import { getCategoryId,getUser,redirectToOriginalPageFromLanding } from "../../../utils/helpers";
+import { getCategoryId, getPincode, getUser } from "../../../utils/helpers";
 import SellerItems from "../../landingScreen/sellerItems";
 
 const { Content } = Layout;
@@ -20,59 +20,63 @@ const imagesUrls = [
 const CustomerHome = () => {
   const [seller, setSeller] = useState([]);
   const [loadSeller, setLoadSeller] = useState(false);
+  const [pincode, setPincode] = useState(false);
+
   //const [currentTabValue,setCurrentTabValue] = useState("");
 
+  const user = getUser() ? getUser().userType : null;
+  useEffect(() => {
+    if (user === "Seller") window.location.href = "/seller/dashboard";
+    if (user === "Admin") window.location.href = "/admin/dashboard";
+    if (user === null) window.location.href = "/";
+  }, [user]);
 
-  // const user =  getUser() ? getUser().userType : null
-  // useEffect(()=>{
-  //   if(user === 'Seller') window.location.href = '/seller/dashboard'
-  //   if(user === 'Admin') window.location.href = '/admin/dashboard'
-  //   if(user === null) window.location.href = '/'
-  // },[user])
-
-
-  const getSellers = () =>{
-    setLoadSeller(false)
+  const getSellers = () => {
+    setLoadSeller(false);
     axios
-    .get(`${baseUrl}/sellers`)
-    .then((result) => {
-      setSeller(result.data);
-      setLoadSeller(true);
-    })
-    .catch((err) => console.error(err));
-  }
+      .get(`${baseUrl}/sellers`)
+      .then((result) => {
+        setSeller(result.data);
+        setLoadSeller(true);
+      })
+      .catch((err) => console.error(err));
+  };
 
+  const getCategorySeller = (category) => {
+    if (category !== "All") {
+      setLoadSeller(false);
+      axios
+        .get(
+          `${baseUrl}/sellers/get/SellersByCategory?categoryId=${getCategoryId(
+            category
+          )}`
+        )
+        .then((result) => {
+          setSeller(result.data);
+          setLoadSeller(true);
+        })
+        .catch((err) => console.error(err));
+    } else {
+      getSellers();
+    }
+  };
 
-  const getCategorySeller = (category) =>{
-    if(category !== 'All')
-    {
-    setLoadSeller(false)
-    axios
-    .get(`${baseUrl}/sellers/get/SellersByCategory?categoryId=${getCategoryId(category)}`)
-    .then((result) => {
-      setSeller(result.data);
-      setLoadSeller(true);
-    })
-    .catch((err) => console.error(err));
-  }
-  else
-  {
-    getSellers()
-  }
-  }
+  const updatePincode = (pincode) => {
+    setPincode(pincode);
+  };
 
   useEffect(() => {
-    redirectToOriginalPageFromLanding()
-    getSellers()
-  }, []);
+    setPincode(getPincode());
+    getSellers();
+  }, [pincode]);
 
   const getCurrentTab = (tab) => {
-    getCategorySeller(tab)
+    getCategorySeller(tab);
   };
 
   return (
     <Layout className="layout">
-      <CustomerNavbar />
+      <CustomerNavbar updatePincode={updatePincode} />
       <Content>
         <Row>
           <Col md={24}>
@@ -94,11 +98,11 @@ const CustomerHome = () => {
             <Col md={9} sm={24} xs={24} className="keep-items-left">
               <CustomTabs
                 currentTab={getCurrentTab}
-                list={["All","Breakfast", "Lunch", "Snack", "Dinner"]}
+                list={["All", "Breakfast", "Lunch", "Snack", "Dinner"]}
               />
             </Col>
           </Row>
-          <SellerItems loading={loadSeller} seller={seller}/>
+          <SellerItems loading={loadSeller} seller={seller} />
         </div>
       </Content>
     </Layout>

@@ -17,6 +17,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Image from "../../../../components/shared/image/image";
 import item from "../../../../images/south-indian.jpg";
 import { baseUrl } from "../../../../utils/constant";
+import { sessionId } from "../../../../utils/helpers";
 
 const MyProducts = ({ products, isLoading, callback }) => {
   const { Title } = Typography;
@@ -24,8 +25,6 @@ const MyProducts = ({ products, isLoading, callback }) => {
   const [price, setPrice] = useState(0);
   const [quantity, setQuantity] = useState(0);
   const [currentProductId, setCurrentProductId] = useState("");
-
-
 
   const fetchMoreData = () => {
     // axios
@@ -38,15 +37,13 @@ const MyProducts = ({ products, isLoading, callback }) => {
   };
 
   const editProduct = () => {
-    let sellerId = "60c9f9b635f0f7183a9a7497"
-    
-    let product ={
-      "productid" : currentProductId,
-      "product_price" : price,
-      "product_quantity": quantity
-   }
+    let product = {
+      productid: currentProductId,
+      product_price: price,
+      product_quantity: quantity,
+    };
     axios
-      .put(`/sellers/update-product-quantitiy/${sellerId}`, {product})
+      .put(`/sellers/update-product-quantitiy/${sessionId()}`, { ...product })
       .then((result) => {
         //setMyProducts(products.concat(result.data));
       })
@@ -54,13 +51,11 @@ const MyProducts = ({ products, isLoading, callback }) => {
   };
 
   const editableProduct = (key) => {
-    console.log(products[key]);
-
     products[key].edit = true;
-   setQuantity(products[key].quantity)
-   setPrice(products[key].price)
-   setCurrentProductId(products[key].productId)
-   setMyProducts([...products]);
+    setQuantity(products[key].quantity);
+    setPrice(products[key].price);
+    setCurrentProductId(products[key].productId);
+    setMyProducts([...products]);
   };
 
   const deleteProduct = (key) => {
@@ -119,57 +114,51 @@ const MyProducts = ({ products, isLoading, callback }) => {
                       <Title level={4}>
                         {product.name ? product.name : "Static for now"}
                       </Title>
-                      
-                        <Row gutter={[16, 14]}>
-                          <Col md={24}>
-                      
 
-                            {product.edit ? (
-                              <Form.Item
-                                label="Quantity"
-                                
-                                rules={[
-                                  {
-                                    required: true,
-                                    message: "Enter quantity",
-                                  },
-                                ]}
-                              >
-                                <Input
-                                  placeholder="Quantity"
-                                  value={quantity}
-                                  onChange={(e) => setQuantity(e.target.value)} 
-                                  
-                                />
-                              </Form.Item>
-                            ) : (
-                              <span>
-                                Plates: {product.quantity}{" "}
-                              </span>
-                            )}
-                          </Col>
-                          <Col md={24}>
-                            {product.edit ? (
-                              <Form.Item
-                                label='Price'
-                                rules={[
-                                  {
-                                    required: true,
-                                    message: "Enter Price ₹",
-                                  },
-                                ]}
-                              >
-                                <Input
-                                  placeholder="Price ₹"
-                                  value={price}
-                                  onChange={(e) => setPrice(e.target.value)} 
-                                />
-                              </Form.Item>
-                            ) : (
-                              <span>Price: ₹ {product.price} </span>
-                            )}
-                          </Col>
-                        </Row>
+                      <Row gutter={[16, 14]}>
+                        <Col md={24}>
+                          {product.edit ? (
+                            <Form.Item
+                              label="Quantity"
+                              rules={[
+                                {
+                                  required: true,
+                                  message: "Enter quantity",
+                                },
+                              ]}
+                            >
+                              <Input
+                                placeholder="Quantity"
+                                value={quantity}
+                                onChange={(e) => setQuantity(e.target.value)}
+                              />
+                            </Form.Item>
+                          ) : (
+                            <span>Plates: {product.quantity} </span>
+                          )}
+                        </Col>
+                        <Col md={24}>
+                          {product.edit ? (
+                            <Form.Item
+                              label="Price"
+                              rules={[
+                                {
+                                  required: true,
+                                  message: "Enter Price ₹",
+                                },
+                              ]}
+                            >
+                              <Input
+                                placeholder="Price ₹"
+                                value={price}
+                                onChange={(e) => setPrice(e.target.value)}
+                              />
+                            </Form.Item>
+                          ) : (
+                            <span>Price: ₹ {product.price} </span>
+                          )}
+                        </Col>
+                      </Row>
                     </div>
                   </div>
                 </div>

@@ -2,7 +2,7 @@ import { Menu, Dropdown, notification } from "antd";
 import { MoreOutlined } from "@ant-design/icons";
 import axios from "../../../utils/axios";
 import { baseUrl } from "../../../utils/constant";
-
+import { EditProductModal } from "../../../components/shared/manageProductmodal/editProduct";
 
 const openNotificationWithIcon = (type, message) => {
   notification[type]({
@@ -10,9 +10,7 @@ const openNotificationWithIcon = (type, message) => {
   });
 };
 
-
 export const ProductCrudMenu = (props) => {
-
   const deleteProduct = () => {
     axios
       .delete(`${baseUrl}/products/${props.product.id}`)
@@ -20,7 +18,7 @@ export const ProductCrudMenu = (props) => {
         console.log(result);
         if (result.status === 200) {
           openNotificationWithIcon("success", "Product Deleted");
-          props.callback()
+          props.callback();
         } else {
           openNotificationWithIcon("warning", "could not Product Deleted");
         }
@@ -29,24 +27,22 @@ export const ProductCrudMenu = (props) => {
       .finally(() => {});
   };
 
-
-
   const menu = (
     <Menu>
       <Menu.Item key="deleteProduct" onClick={deleteProduct}>
         Delete
       </Menu.Item>
-      {/* <Menu.Item key="updateProduct" onClick={updateProduct}>
-        Update   
-      </Menu.Item> */}
+      <Menu.Item key="updateProduct">
+        <EditProductModal product={props.product} />
+      </Menu.Item>
     </Menu>
   );
 
   return (
     <>
-    <Dropdown overlay={menu} trigger={["click"]}>
-      <MoreOutlined />
-    </Dropdown>
+      <Dropdown overlay={menu} trigger={["click"]}>
+        <MoreOutlined />
+      </Dropdown>
     </>
   );
 };

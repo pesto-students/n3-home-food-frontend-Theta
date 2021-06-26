@@ -52,13 +52,27 @@ const normFile = (e) => {
   return e && e.fileList;
 };
 
-const CollectionCreateForm = ({ visible, onCreate, onCancel, fromFor }) => {
+const CollectionCreateForm = ({
+  product,
+  visible,
+  onCreate,
+  onCancel,
+  fromFor,
+}) => {
   const [form] = Form.useForm();
+  const fileList = [
+    {
+      uid: "-1",
+      status: "done",
+      url: product.image,
+      thumbUrl: product.image,
+    },
+  ];
   return (
     <Modal
       visible={visible}
-      title="Add Product"
-      okText="Add"
+      title="Edit Product"
+      okText="Edit"
       cancelText="Cancel"
       onCancel={onCancel}
       onOk={() => {
@@ -78,17 +92,15 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, fromFor }) => {
         layout="vertical"
         name="form_in_modal"
         initialValues={{
-          modifier: "public",
+          productName: product.name,
+          description: product.description,
+          maxPrice: product.max_price,
         }}
       >
         <Form.Item
           name="productName"
           label="Product Name"
           rules={[
-            {
-              required: true,
-              message: "Please input the Product Name!",
-            },
             { min: 5, message: "Product Name must be minimum 5 characters." },
           ]}
         >
@@ -96,34 +108,18 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, fromFor }) => {
         </Form.Item>
 
         <Form.Item
-          name="productCategory"
-          label="Product Category"
-          rules={[
-            {
-              required: true,
-              message: "Please input the Product Category!",
-            },
-          ]}
-        >
-          <Select placeholder="Please select a Category">
-            <Option value="60c906ce35453e14cd3f4ee3">Breakfast</Option>
-            <Option value="60ccfb4516659e249450ed49">Lunch</Option>
-            <Option value="60ccfea78d901732e097e2ee">Snacks</Option>
-            <Option value="60cf33b093112a14d5da3897">Dinner</Option>
-          </Select>
-        </Form.Item>
-
-        <Form.Item
           name="description"
           label="Description"
           rules={[
+ 
             {
-              required: true,
-              message: "Please input the Product Description!",
+              min: 5,
+              message: "Product Description must be minimum 5 characters.",
             },
-            { min: 5, message: "Product Description must be minimum 5 characters." },
-            { max: 20, message: "Product Description must be Maximun 20 characters." },
-
+            {
+              max: 20,
+              message: "Product Description must be Maximun 20 characters.",
+            },
           ]}
         >
           <Input type="textarea" />
@@ -136,7 +132,13 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, fromFor }) => {
           getValueFromEvent={normFile}
           extra=""
         >
-          <Upload {...props} name="logo" maxCount={1}>
+          <Upload
+            {...props}
+            name="logo"
+            maxCount={1}
+            listType="picture"
+            defaultFileList={[...fileList]}
+          >
             <Button icon={<UploadOutlined />}>Click to Upload</Button>
           </Upload>
         </Form.Item>
@@ -145,12 +147,6 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, fromFor }) => {
           <Form.Item
             name="maxPrice"
             label="Max Price (₹)"
-            rules={[
-              {
-                required: true,
-                message: "Please input the Max Price!",
-              },
-            ]}
           >
             <InputNumber min={1} placeholder="₹" />
           </Form.Item>
@@ -174,11 +170,19 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, fromFor }) => {
 };
 
 export const EditProductModal = (props) => {
-  const [visible, setVisible] = useState(props.modalStatus);
+  const [visible, setVisible] = useState(false);
 
   const onCreate = (values) => {
     const data = new FormData();
-    data.append("image", values.productImage[0].originFileObj);
+
+    if(typeof(values.productImage) === 'undefined'){
+      data.append("image", props.product.image);
+    }
+    else{
+      data.append('image',values.productImage[0].originFileObj)
+
+    }
+    
     data.append("name", values.productName);
     data.append("description", values.description);
     data.append("max_price", values.maxPrice);
@@ -186,22 +190,20 @@ export const EditProductModal = (props) => {
 
     console.log("file,", data);
     axios
-      .post(
-        `${baseUrl}/products`,
-
+      .put(
+        `${baseUrl}/products/${props.product.id}`,
         data
       )
       .then((result) => {
         if (result.status === 200) {
-          openNotificationWithIcon("success", "Product Added");
+          openNotificationWithIcon("success", "Product Edited");
           props.callback();
         } else {
-          openNotificationWithIcon("error", "Could Not Add Product");
+          openNotificationWithIcon("error", "Could Not Edited Product");
         }
       })
       .catch((err) => {
         console.error(err);
-        openNotificationWithIcon("error", "Could Not Add Product");
       })
       .finally(() => {});
     setVisible(false);
@@ -209,10 +211,15 @@ export const EditProductModal = (props) => {
 
   return (
     <div>
-      <div style={{ display: "flex", flexFlow: "row-reverse", margin: "10px" }}>
+      <div
+        onClick={() => {
+          setVisible(true);
+        }}
+      >
+        Edit
       </div>
-
       <CollectionCreateForm
+        product={props.product}
         fromFor="admin"
         visible={visible}
         onCreate={onCreate}
@@ -223,4 +230,3 @@ export const EditProductModal = (props) => {
     </div>
   );
 };
-

@@ -1,10 +1,14 @@
 import { React } from "react";
 import "antd/dist/antd.css";
-
+import LineChart from "../../../components/shared/lineChart/lineChart";
 
 function SellerGraphs() {
   return (
-      <h1>seller graps</h1>
+    <div>
+      <div id="chart">
+        <LineChart />
+      </div>
+    </div>
   );
 }
 

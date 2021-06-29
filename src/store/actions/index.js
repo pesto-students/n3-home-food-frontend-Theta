@@ -15,6 +15,11 @@ export const setIsCustomerLoginDrawerOpen = (value) => ({
   value: value,
 });
 
+export const setSellerIdInCart = (value) => ({
+  type: "SELLER_IN_CART",
+  value: value,
+});
+
 export const manageMyCart = (value) => ({
   type: "CART_LIST",
   value: value,

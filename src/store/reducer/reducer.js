@@ -23,6 +23,16 @@ const isCustomerLoginDrawerOpen = (
   return state;
 };
 
+const sellerIdInCart = (
+  state = cart.sellerIdInCart,
+  action
+) => {
+  if (action.type === "SELLER_IN_CART") {
+    return action.value;
+  }
+  return state;
+};
+
 const myCart = (state = cart, action) => {
   if (action.type === "CART_LIST") {
     return action.value;
@@ -34,4 +44,5 @@ export default combineReducers({
   isAdminLoggedIn,
   myCart,
   isCustomerLoginDrawerOpen,
+  sellerIdInCart
 });

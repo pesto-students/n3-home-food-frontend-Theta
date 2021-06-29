@@ -33,7 +33,7 @@ export const ProductCrudMenu = (props) => {
         Delete
       </Menu.Item>
       <Menu.Item key="updateProduct">
-        <EditProductModal product={props.product} />
+        <EditProductModal product={props.product} callback={props.callback}/>
       </Menu.Item>
     </Menu>
   );

@@ -14,6 +14,7 @@ import { getUser, sessionId } from "../../../utils/helpers";
 import { withRouter } from "react-router-dom";
 import Navbar from "../navbar/navbar";
 
+
 const SellerDetailWithProducts = (props) => {
   const sellerId = props.match.params.id;
   const { Title } = Typography;
@@ -110,6 +111,7 @@ const SellerDetailWithProducts = (props) => {
                     products={profile.myProducts}
                     reloadCart={getCart}
                     savedCartItem={alreadyInCart.items}
+                    sellerId={sellerId}
                   />
                 )}
               </Col>

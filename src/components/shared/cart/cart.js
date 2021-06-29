@@ -1,23 +1,28 @@
 import { Button, Col, Row } from "antd";
 import "antd/dist/antd.css";
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import axios from "../../../utils/axios";
 import { baseUrl, rupeeSign } from "../../../utils/constant";
 import "./cart.css";
 import emptyCardImage from "../../../images/empty_cart.jpg";
 import Image from "../../shared/image/image";
 import { sessionId } from "../../../utils/helpers";
+import { withRouter } from "react-router-dom";
 
-const Cart = ({ alreadyInCart, reloadCart }) => {
+const Cart = ({ alreadyInCart, reloadCart , ...props }) => {
   const [isLoading, setIsLoding] = useState(false);
 
   let userId = sessionId();
 
+  useEffect(()=>{
+  },[alreadyInCart])
   const addItems = (dish, method) => {
     setIsLoding(true);
     let currentProduct = alreadyInCart.items.filter(
       (item) => item.productId === dish.productId
     );
+
+    console.log('cart', currentProduct[0]);
 
     let cartItem = {};
     if (currentProduct.length > 0) {
@@ -28,16 +33,17 @@ const Cart = ({ alreadyInCart, reloadCart }) => {
         currentProduct[0].quantity = currentProduct[0].quantity - 1;
       }
       cartItem = {
-        productId: dish.productId.id,
+        productId: dish.productId,
         quantity: currentProduct[0].quantity,
         userId: userId,
+        price:currentProduct[0].price
       };
-      console.log(cartItem, currentProduct[0]);
     } else {
       cartItem = {
-        productId: dish.productId.id,
+        productId: dish.productId,
         quantity: 1,
         userId: userId,
+        price:currentProduct[0].price
       };
     }
 
@@ -76,6 +82,11 @@ const Cart = ({ alreadyInCart, reloadCart }) => {
       </Row>
     );
   }
+
+  const onCheckout = () => {
+    props.history.push('/checkout')
+  }
+  
 
   return (
     <>
@@ -134,7 +145,7 @@ const Cart = ({ alreadyInCart, reloadCart }) => {
         </Row>
 
         <Row className="checkout">
-          <Button type="primary" block>
+          <Button type="primary" block onClick={onCheckout}>
             Checkout
           </Button>
         </Row>
@@ -143,4 +154,4 @@ const Cart = ({ alreadyInCart, reloadCart }) => {
   );
 };
 
-export default Cart;
+export default withRouter(Cart);

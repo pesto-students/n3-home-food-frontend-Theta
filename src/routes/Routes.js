@@ -7,6 +7,7 @@ import BrokenLink from "../pages/BrokenLink";
 import CustomerHome from "../pages/customer/customerHome/customerHome";
 import SellerDetailWithProducts from "../components/shared/sellerDetailWithProducts/sellerDetailWithProducts";
 import Orders from "../pages/customer/orders/order";
+import { Checkout } from "../pages/customer/checkout/checkout";
 
 function MainRoutes() {
   return (
@@ -15,6 +16,12 @@ function MainRoutes() {
         <Route path="/" exact>
           <LandingPage />
         </Route>
+
+        <Route path="/checkout" exact>
+        <Checkout/>
+        </Route>
+    
+
 
         <Route path="/admin">
           <AdminLanding />

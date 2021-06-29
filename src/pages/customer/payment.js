@@ -1,6 +1,11 @@
 import { React } from "react";
 import { baseUrl } from '../../utils/constant'
 import axios from "axios";
+import {Button,notification } from "antd";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+
+import { sessionId } from "../../utils/helpers";
 
 function loadScript(src){
     return new Promise(resolve => {
@@ -18,7 +23,10 @@ function loadScript(src){
 
 };
 
-const Payment = () => {
+const Payment = (props) => {
+
+
+  let userId = sessionId();
 
     async function displayRazorpay() {
     const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js')
@@ -45,8 +53,37 @@ const Payment = () => {
               axios
               .post(`${baseUrl}/razorpay/verification`,{response})
               .then((result) => {
-  
+                    
+                // call checkout api and place an order
+       
+                  axios
+                  .post(`${baseUrl}/orders`,{   id: userId,
+                    DeliveryType: props.deliveryType,
+                    sellerId:props.title.sellerIdInCart})
+                  .then((result) => {
+                    
+                      // empty the cart
+                      axios
+                      .put(`${baseUrl}/users/remove-cart/${userId} `)
+                      .then((result) => {
+                        
+                        props.history.push('/customer')
+                        notification.success({
+                          message: `Notification`,
+                          description: "This order has been successfully placed",
+                          placement: "topRight",
+                        });
+                          
+                          
+        
+                      } )
 
+    
+                  } 
+                  ).catch((err) => {
+                    console.error(err);
+                  });
+              
               }
               )
               // alert(response.razorpay_payment_id);
@@ -63,9 +100,14 @@ const Payment = () => {
 };
   return (
     <>
-      <button onClick={displayRazorpay}>Pay now </button>
+      <Button color='primary' onClick={displayRazorpay}>Pay now </Button>
     </>
   );
 };
 
-export default Payment;
+const mapStateToProps = state => {
+  return {
+    title: state
+  };
+};
+export default withRouter(connect(mapStateToProps)(Payment));

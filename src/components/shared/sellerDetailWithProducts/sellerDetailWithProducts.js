@@ -14,7 +14,6 @@ import { getUser, sessionId } from "../../../utils/helpers";
 import { withRouter } from "react-router-dom";
 import Navbar from "../navbar/navbar";
 
-
 const SellerDetailWithProducts = (props) => {
   const sellerId = props.match.params.id;
   const { Title } = Typography;
@@ -27,7 +26,11 @@ const SellerDetailWithProducts = (props) => {
   });
 
   const getCurrentTab = (tab) => {
-    //setCurrentTabValue(tab)
+    console.log(tab);
+    let items = profile.myProducts.filter((item) =>
+      item.productCategory.filter((n) => n.name === tab)
+    );
+    console.log(items);
   };
 
   const getSellerProfile = useCallback(() => {
@@ -82,7 +85,7 @@ const SellerDetailWithProducts = (props) => {
                 <Col md={18}>
                   <Title level={1}>{profile.name}</Title>
                   <Title level={5}>{profile.description}</Title>
-                  <Rate defaultValue={profile.rating}></Rate>
+                  <Rate allowHalf={true} defaultValue={profile.rating}></Rate>
                   <Title className="margin-10" level={5}>
                     Max Amount : {rupeeSign} {profile.max_amount}
                   </Title>

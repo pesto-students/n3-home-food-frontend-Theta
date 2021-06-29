@@ -10,22 +10,21 @@ import Image from "../image/image";
 import SelectBox from "../selectBox/selectBox";
 import "./navbar.css";
 
-
 const { Header } = Layout;
 
-
 const Navbar = (props) => {
-
   const Dispatch = useDispatch();
   const toggleDrawer = () => {
-    Dispatch(setIsCustomerLoginDrawerOpen(true))
+    Dispatch(setIsCustomerLoginDrawerOpen(true));
   };
 
   return (
     <Header className="navbar">
       <Row className="full-width">
         <Col md={10} sm={24} xs={24}>
-          <Image height="70px" width="70px" url={logo} />
+          <Link to="/">
+            <Image height="70px" width="70px" url={logo} />
+          </Link>
         </Col>
         <Col md={14} sm={24} xs={24} className="keep-items-left">
           <SelectBox />
@@ -47,10 +46,9 @@ const Navbar = (props) => {
   );
 };
 
-
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    title: state
+    title: state,
   };
 };
 export default connect(mapStateToProps)(Navbar);

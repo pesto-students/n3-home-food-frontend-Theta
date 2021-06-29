@@ -82,7 +82,9 @@ const CustomerNavbar = ({ updatePincode }) => {
 
       <Row className="full-width">
         <Col md={10} sm={24} xs={24}>
-          <Image height="70px" width="70px" url={logo} />
+          <Link to="/customer">
+            <Image height="70px" width="70px" url={logo} />
+          </Link>
         </Col>
         <Col md={14} sm={24} xs={24} className="keep-items-left">
           <Link to="/my/orders">

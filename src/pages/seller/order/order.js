@@ -29,7 +29,7 @@ const SellerProducts = () => {
 
   const getAllPastOrder = () => {
     axios
-      .get(`/orders/get/${sessionId()}`)
+      .get(`/orders/get-approved/${sessionId()}`)
       .then((result) => {
         setIsLoading(false);
         setPastOrdersItem(result.data);

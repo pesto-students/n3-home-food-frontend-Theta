@@ -17,10 +17,9 @@ const AllProducts = ({ isLoading, products, loadAllProducts }) => {
     setHasMore(true);
   };
 
-
-  const updateProductList = () => {
-    loadAllProducts();
-  };
+  // const updateProductList = () => {
+  //   loadAllProducts();
+  // };
 
   return (
     <>
@@ -59,7 +58,8 @@ const AllProducts = ({ isLoading, products, loadAllProducts }) => {
                         <span className="seller-name">
                           <ProductCrudMenu
                             product={product}
-                            callback={loadAllProducts}                          />
+                            callback={loadAllProducts}
+                          />
                         </span>
                       </div>
                     </div>

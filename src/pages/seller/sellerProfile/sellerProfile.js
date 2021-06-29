@@ -1,15 +1,15 @@
-import { React, useState } from "react";
 import {
-  Col,
-  Row,
+  Button,
   Card,
+  Col,
   Form,
   Input,
-  Button,
-  Typography,
-  Rate,
   Modal,
+  Rate,
+  Row,
+  Typography,
 } from "antd";
+import { React, useState } from "react";
 import Image from "../../../components/shared/image/image";
 
 const { Title } = Typography;
@@ -18,38 +18,38 @@ const SellerProfile = () => {
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const [sellerProfile, setSellerProfile] = useState([
-    {
-      backKeyName: "name",
-      name: "Name",
-      value: "",
-    },
-    {
-      backKeyName: "display_name",
-      name: "Display Name",
-      value: "",
-    },
-    {
-      backKeyName: "phone",
-      name: "phone",
-      value: "",
-    },
-    {
-      backKeyName: "description",
-      name: "Description",
-      value: "",
-    },
-    {
-      backKeyName: "address",
-      name: "Address",
-      value: "",
-    },
-    {
-      backKeyName: "email",
-      name: "Email",
-      value: "",
-    },
-  ]);
+  // const [sellerProfile, setSellerProfile] = useState([
+  //   {
+  //     backKeyName: "name",
+  //     name: "Name",
+  //     value: "",
+  //   },
+  //   {
+  //     backKeyName: "display_name",
+  //     name: "Display Name",
+  //     value: "",
+  //   },
+  //   {
+  //     backKeyName: "phone",
+  //     name: "phone",
+  //     value: "",
+  //   },
+  //   {
+  //     backKeyName: "description",
+  //     name: "Description",
+  //     value: "",
+  //   },
+  //   {
+  //     backKeyName: "address",
+  //     name: "Address",
+  //     value: "",
+  //   },
+  //   {
+  //     backKeyName: "email",
+  //     name: "Email",
+  //     value: "",
+  //   },
+  // ]);
 
   const showModal = () => {
     setVisible(true);

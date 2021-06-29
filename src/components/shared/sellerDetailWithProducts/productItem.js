@@ -1,4 +1,4 @@
-import { Button, Col, Row, Typography } from "antd";
+import { Button, Col, Row, Typography, notification, Tag } from "antd";
 import "antd/dist/antd.css";
 import { React, useState } from "react";
 import axios from "../../../utils/axios";
@@ -7,17 +7,24 @@ import { sessionId } from "../../../utils/helpers";
 import Image from "../image/image";
 import "./sellerDetailWithProducts.css";
 import { useDispatch } from "react-redux";
-import { setSellerIdInCart } from "../../../store/actions/index"
-let userId = sessionId();
+import { setSellerIdInCart } from "../../../store/actions/index";
 
-const ProductItems = ({ products, savedCartItem, reloadCart ,sellerId}) => {
-  const Dispatch = useDispatch()
+const ProductItems = ({ products, savedCartItem, reloadCart, sellerId }) => {
+  const Dispatch = useDispatch();
 
-  console.log(products, "akao");
   const { Title } = Typography;
   const [isLoading, setIsLoding] = useState(false);
 
   const addItems = (dish, method) => {
+    if (!sessionId()) {
+      notification.error({
+        message: "Notification",
+        description: "Please Login to add into cart",
+        placement: "topRight",
+      });
+      return;
+    }
+
     setIsLoding(true);
     let currentProduct = savedCartItem.filter(
       (item) => item.productId === dish.productId
@@ -31,21 +38,20 @@ const ProductItems = ({ products, savedCartItem, reloadCart ,sellerId}) => {
       if (method === "sub") {
         currentProduct[0].quantity = currentProduct[0].quantity - 1;
       }
-      console.log('cartItem', currentProduct[0]);
+      console.log("cartItem", currentProduct[0]);
 
       cartItem = {
         productId: dish.productId,
         quantity: currentProduct[0].quantity,
-        userId: userId,
-        price:currentProduct[0].price
-
+        userId: sessionId(),
+        price: currentProduct[0].price,
       };
     } else {
       cartItem = {
         productId: dish.productId,
         quantity: 1,
-        userId: userId,
-        price:dish.price
+        userId: sessionId(),
+        price: dish.price,
       };
     }
 
@@ -57,7 +63,7 @@ const ProductItems = ({ products, savedCartItem, reloadCart ,sellerId}) => {
       .post(`${baseUrl}/cart`, cartItem)
       .then((result) => {
         setIsLoding(false);
-        Dispatch(setSellerIdInCart(sellerId))
+        Dispatch(setSellerIdInCart(sellerId));
 
         reloadCart();
       })
@@ -66,14 +72,14 @@ const ProductItems = ({ products, savedCartItem, reloadCart ,sellerId}) => {
 
   const getQuantity = (currentItem) => {
     try {
-      console.log('savedCartItem',savedCartItem)
+      console.log("savedCartItem", savedCartItem);
       let current = savedCartItem.filter(
         (item) => item.productId === currentItem.productId
       );
       if (current.length > 0) {
         return current[0].quantity;
       }
-      console.log('current',currentItem)
+      console.log("current", currentItem);
       return 0;
     } catch (e) {
       return 0;
@@ -94,6 +100,9 @@ const ProductItems = ({ products, savedCartItem, reloadCart ,sellerId}) => {
                   <Title level={4}>
                     {dish.name} <span>(Only {dish.quantity} Left)</span>
                   </Title>
+                  {dish.productCategory.map((category) => {
+                    return <Tag color="processing">{category.name}</Tag>;
+                  })}
                   <Title level={5}>{dish.description}</Title>
                   <Row justify="space-between" align="middle">
                     <p level={5}>

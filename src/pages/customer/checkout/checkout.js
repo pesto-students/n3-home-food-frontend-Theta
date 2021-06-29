@@ -1,55 +1,49 @@
-import React from "react";
-import { Steps, Button, message, Card, Radio, Input, Space,Row ,Image} from "antd";
 import {
-  UserOutlined,
-  SolutionOutlined,
   CreditCardOutlined,
-  SmileOutlined,
+  SolutionOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
-import "./checkout.css";
-import Payment from "../payment";
-import emptyCardImage from "../../../images/empty_cart.jpg"
-import CustomerNavbar from "../../../components/shared/customerNavbar/customerNavbar";
+import { Card, Radio, Space, Steps } from "antd";
+import Title from "antd/lib/typography/Title";
+import React from "react";
 import Cart from "../../../components/shared/cart/cart";
+import CustomerNavbar from "../../../components/shared/customerNavbar/customerNavbar";
 import axios from "../../../utils/axios";
 import { baseUrl } from "../../../utils/constant";
 import { sessionId } from "../../../utils/helpers";
-import Title from "antd/lib/typography/Title";
+import Payment from "../payment";
+import "./checkout.css";
 
 const { Step } = Steps;
 
 export class Checkout extends React.Component {
   state = {
     current: 1,
-    value: 'Take-Away',
-    alreadyInCart:{items:[]},
-    isCartLoad:false
+    value: "Take-Away",
+    alreadyInCart: { items: [] },
+    isCartLoad: false,
   };
 
-  componentDidMount = () =>{
+  componentDidMount = () => {
     this.getCart();
+  };
 
-  }
-
-
-
-   getCart = () => {
+  getCart = () => {
     axios
       .get(`${baseUrl}/cart/${sessionId()}`)
       .then((result) => {
-        this.setState({isCartLoad:true})
-         this.setState({alreadyInCart:result.data},() =>{
-           console.log(this.state.alreadyInCart)
-         } )
-
+        this.setState({ isCartLoad: true });
+        this.setState({ alreadyInCart: result.data }, () => {
+          console.log(this.state.alreadyInCart);
+        });
       })
       .catch((err) => {
-        this.setState({isCartLoad:true})
+        this.setState({ isCartLoad: true });
         let cart = {
           items: [],
           subTotal: 0,
         };
-        this.setState({alreadyInCart:cart})
+        this.setState({ alreadyInCart: cart });
 
         console.error(err);
       });
@@ -70,7 +64,7 @@ export class Checkout extends React.Component {
   render() {
     const { current } = this.state;
     const { value } = this.state;
-    const { alreadyInCart } = this.state
+    //  const { alreadyInCart } = this.state;
     const Content1 = (
       <Card hoverable>
         <div className="about-row">
@@ -93,38 +87,45 @@ export class Checkout extends React.Component {
 
     const payment = (
       <Card hoverable>
-        <Payment  deliveryType={value}  />
+        <Payment deliveryType={value} />
       </Card>
     );
 
     return (
       <>
-      <CustomerNavbar />
-      <div className="payment-cointaner">
-        <Steps direction="vertical" onChange={this.onChange} current={current}>
-          <Step
-            title="personal details"
-            icon={<UserOutlined />}
-            description={Content1}
-          />
-          <Step
-            title="Delivery"
-            icon={<SolutionOutlined />}
-            description={deliverMethod}
-          />
-          <Step
-            title="Pay"
-            icon={<CreditCardOutlined />}
-            description={payment}
-          />
-        </Steps>
-        <Card  hoverable style={{width:'40vw'}}>
-                  <Title level={3}>Cart</Title>
-                  <hr />
-                  {this.state.isCartLoad && (
-                    <Cart reloadCart={this.getCart} alreadyInCart={this.state.alreadyInCart} />
-                  )}
-                </Card>
+        <CustomerNavbar />
+        <div className="payment-cointaner">
+          <Steps
+            direction="vertical"
+            onChange={this.onChange}
+            current={current}
+          >
+            <Step
+              title="personal details"
+              icon={<UserOutlined />}
+              description={Content1}
+            />
+            <Step
+              title="Delivery"
+              icon={<SolutionOutlined />}
+              description={deliverMethod}
+            />
+            <Step
+              title="Pay"
+              icon={<CreditCardOutlined />}
+              description={payment}
+            />
+          </Steps>
+          <Card hoverable style={{ width: "40vw" }}>
+            <Title level={3}>Cart</Title>
+            <hr />
+            {this.state.isCartLoad && (
+              <Cart
+                reloadCart={this.getCart}
+                alreadyInCart={this.state.alreadyInCart}
+              />
+            )}
+          </Card>
         </div>
       </>
     );

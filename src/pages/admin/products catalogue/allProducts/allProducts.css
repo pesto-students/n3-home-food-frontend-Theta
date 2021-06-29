@@ -1,0 +1,60 @@
+.ant-card{
+    margin: 10px 20px;
+}
+.andt-card-body{
+    padding: 10px;
+}
+
+.product-image{
+    max-width: 100px;
+    max-height: 150px;
+}
+
+.product-cointaner{
+    overflow: hidden;
+}
+.product-details{
+    display: flex;
+    flex-direction: column;
+    margin: 0px 15px;
+}
+
+.seller-name{
+    font-size: 1.22rem;
+    font-weight: 500;
+    color: #282c3f;
+    margin: 10px;
+}
+
+.cost{
+    font-size: 12px;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    color: #535665;
+    margin: 10px;
+
+}
+
+.max-amount{
+    display: inline-block;
+    line-height: 1.15rem;
+    font-size: 0.93rem;
+    color: #ee9c00;
+    font-weight: 500;
+    font-family: "ProximaNovaCondensedBold";
+}
+
+.loader{
+    display: flex;
+    justify-content: center;
+}
+
+.button-cointaner{
+    display: flex;
+    flex-flow: row-reverse;
+    margin: 10px;
+}
+
+.product-delete{
+    margin-left: auto;
+}

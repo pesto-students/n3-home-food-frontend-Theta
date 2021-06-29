@@ -8,7 +8,7 @@ import { ProductCrudMenu } from "../productCrudMenu";
 import "./allProducts.css";
 import SpinnerLoader from "../../../../components/shared/spinnerLoader/spinnerLoader";
 import DataNotFound from "../../../../components/shared/dataNotFound/dataNotFound";
-const AllProducts = ({ isLoading, products, loadApproveItem }) => {
+const AllProducts = ({ isLoading, products, loadAllProducts }) => {
   const { Title } = Typography;
 
   const [hasMore, setHasMore] = useState(false);
@@ -17,15 +17,16 @@ const AllProducts = ({ isLoading, products, loadApproveItem }) => {
     setHasMore(true);
   };
 
+
   const updateProductList = () => {
-    loadApproveItem();
+    loadAllProducts();
   };
 
   return (
     <>
       <div>
         {/* add product modal */}
-        <AddProductModal callback={updateProductList} />
+        <AddProductModal callback={loadAllProducts} />
 
         <Skeleton loading={isLoading} active>
           {products.length > 0 ? (
@@ -58,8 +59,7 @@ const AllProducts = ({ isLoading, products, loadApproveItem }) => {
                         <span className="seller-name">
                           <ProductCrudMenu
                             product={product}
-                            callback={updateProductList}
-                          />
+                            callback={loadAllProducts}                          />
                         </span>
                       </div>
                     </div>

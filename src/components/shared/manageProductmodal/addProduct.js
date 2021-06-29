@@ -181,25 +181,25 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, fromFor }) => {
 export const AddProductModal = (props) => {
   const [visible, setVisible] = useState(false);
 
+
   const onCreate = (values) => {
     const data = new FormData();
     data.append("image", values.productImage[0].originFileObj);
     data.append("name", values.productName);
     data.append("description", values.description);
     data.append("max_price", values.maxPrice);
-    data.append("category", values.productCategory);
 
     console.log("file,", data);
     axios
       .post(
-        `${baseUrl}/products`,
+        `${baseUrl}/products/admin`,
 
         data
       )
       .then((result) => {
         if (result.status === 200) {
           openNotificationWithIcon("success", "Product Added");
-          props.callback();
+           props.callback();
         } else {
           openNotificationWithIcon("error", "Could Not Add Product");
         }
@@ -239,7 +239,6 @@ export const AddProductModal = (props) => {
 
 export const AddProductSellerModal = (props) => {
   const [visible, setVisible] = useState(false);
-
   const onCreate = (values) => {
     console.log(values);
     try {

@@ -5,7 +5,6 @@ import { React } from "react";
 import { connect, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import logo from "../../../images/logo.png";
-import Payment from "../../../pages/customer/payment";
 import { setIsCustomerLoginDrawerOpen } from "../../../store/actions";
 import Image from "../image/image";
 import SelectBox from "../selectBox/selectBox";
@@ -30,7 +29,6 @@ const Navbar = (props) => {
         </Col>
         <Col md={14} sm={24} xs={24} className="keep-items-left">
           <SelectBox />
-          <Payment />
           <Link to="/seller/login">
             <Button type="link">Become Seller</Button>
           </Link>

@@ -29,7 +29,11 @@ const SellerDetailWithProducts = (props) => {
   });
 
   const getCurrentTab = (tab) => {
-    //setCurrentTabValue(tab)
+    console.log(tab);
+    let items = profile.myProducts.filter((item) =>
+      item.productCategory.filter((n) => n.name === tab)
+    );
+    console.log(items);
   };
 
   const getSellerProfile = useCallback(() => {

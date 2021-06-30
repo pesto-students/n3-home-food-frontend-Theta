@@ -3,6 +3,7 @@ import { React } from "react";
 import { Card, Row, Col, Rate, Tag } from "antd";
 import Title from "antd/lib/typography/Title";
 import { rupeeSign } from "../../../utils/constant";
+import moment from "moment";
 
 const PastOrders = ({ orders }) => {
   return (
@@ -19,7 +20,12 @@ const PastOrders = ({ orders }) => {
               </Col>
               <Col md={12}>
                 <Row justify="end">
-                  <Title level={5}>Received on {item.dateOrdered}</Title>
+                  <Title level={5}>
+                    Received on{" "}
+                    {moment(item.dateOrdered).format(
+                      "dddd, MMMM Do YYYY, h:mm:ss a"
+                    )}
+                  </Title>
                 </Row>
               </Col>
             </Row>
@@ -32,7 +38,15 @@ const PastOrders = ({ orders }) => {
               </Col>
             </Row>
             <Row justify="end">
-              <Rate className="move-from-top" disabled defaultValue={2} />
+              {item.rating === 0 ? (
+                <p>No Rating given</p>
+              ) : (
+                <Rate
+                  className="move-from-top"
+                  disabled
+                  defaultValue={item.rating}
+                />
+              )}
             </Row>
             <hr></hr>
             <Row justify="space-betwee">

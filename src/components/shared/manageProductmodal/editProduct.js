@@ -7,15 +7,12 @@ import {
   message,
   Modal,
   notification,
-  Select,
   Upload,
 } from "antd";
 import "antd/dist/antd.css";
 import axios from "axios";
 import React, { useState } from "react";
 import { baseUrl } from "../../../utils/constant";
-
-const { Option } = Select;
 
 const openNotificationWithIcon = (type, message) => {
   notification[type]({
@@ -111,7 +108,6 @@ const CollectionCreateForm = ({
           name="description"
           label="Description"
           rules={[
- 
             {
               min: 5,
               message: "Product Description must be minimum 5 characters.",
@@ -144,10 +140,7 @@ const CollectionCreateForm = ({
         </Form.Item>
 
         {fromFor === "admin" ? (
-          <Form.Item
-            name="maxPrice"
-            label="Max Price (₹)"
-          >
+          <Form.Item name="maxPrice" label="Max Price (₹)">
             <InputNumber min={1} placeholder="₹" />
           </Form.Item>
         ) : (
@@ -175,14 +168,12 @@ export const EditProductModal = (props) => {
   const onCreate = (values) => {
     const data = new FormData();
 
-    if(typeof(values.productImage) === 'undefined'){
+    if (typeof values.productImage === "undefined") {
       data.append("image", props.product.image);
+    } else {
+      data.append("image", values.productImage[0].originFileObj);
     }
-    else{
-      data.append('image',values.productImage[0].originFileObj)
 
-    }
-    
     data.append("name", values.productName);
     data.append("description", values.description);
     data.append("max_price", values.maxPrice);
@@ -190,10 +181,7 @@ export const EditProductModal = (props) => {
 
     console.log("file,", data);
     axios
-      .put(
-        `${baseUrl}/products/${props.product.id}`,
-        data
-      )
+      .put(`${baseUrl}/products/${props.product.id}`, data)
       .then((result) => {
         if (result.status === 200) {
           openNotificationWithIcon("success", "Product Edited");

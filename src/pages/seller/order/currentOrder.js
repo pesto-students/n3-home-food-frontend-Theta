@@ -1,29 +1,24 @@
+import { Button, Card, Col, notification, Row, Tag } from "antd";
 import "antd/dist/antd.css";
-import React, { useState } from "react";
-import { Card, Row, Tag, Col, Button, notification } from "antd";
 import Title from "antd/lib/typography/Title";
-import { rupeeSign } from "../../../utils/constant";
+import moment from "moment";
+import React from "react";
 import axios from "../../../utils/axios";
-import { sessionId } from "../../../utils/helpers";
+import { rupeeSign } from "../../../utils/constant";
 
 const CurrentOrders = ({ orders, callBack }) => {
-  const [isLoading, setIsLoading] = useState(false);
-
-  const delived = () => {
-    setIsLoading(true);
+  const delived = (order) => {
     axios
-      .post(`/orders/get/${sessionId()}`)
+      .put(`/orders/approve-order/${order.id}`)
       .then((result) => {
         notification.success({
           message: `Notification`,
           description: "Order has been successfully delivered",
           placement: "topRight",
         });
-        setIsLoading(false);
         callBack();
       })
-      .catch((err) => console.error(err))
-      .finally(() => setIsLoading(false));
+      .catch((err) => console.error(err));
   };
 
   return (
@@ -40,7 +35,12 @@ const CurrentOrders = ({ orders, callBack }) => {
               </Col>
               <Col md={12}>
                 <Row justify="end">
-                  <Title level={5}>Received on {item.dateOrdered}</Title>
+                  <Title level={5}>
+                    Received on{" "}
+                    {moment(item.dateOrdered).format(
+                      "dddd, MMMM Do YYYY, h:mm:ss a"
+                    )}
+                  </Title>
                 </Row>
               </Col>
             </Row>
@@ -53,7 +53,11 @@ const CurrentOrders = ({ orders, callBack }) => {
               </Col>
             </Row>
             <Row justify="end">
-              <Button type="primary" loading={isLoading} onClick={delived}>
+              <Button
+                type="primary"
+                // loading={isLoading}
+                onClick={() => delived(item)}
+              >
                 Deliver
               </Button>
             </Row>

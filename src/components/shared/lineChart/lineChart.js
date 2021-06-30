@@ -1,24 +1,29 @@
-import React, { Component } from "react";
+import { useEffect, useRef } from "react";
+import bb, { area, areaSpline } from "billboard.js";
 
-// component and styles
-// import BillboardChart from "react-billboardjs";
+const LineChart = () => {
+  const lineChart = useRef(null);
 
-const CHART_DATA = {
-  columns: [
-    ["data1", 30, 20, 50, 40, 60, 50],
-    ["data2", 200, 130, 90, 240, 130, 220],
-    ["data3", 300, 200, 160, 400, 250, 250],
-  ],
-  type: "line",
+  useEffect(() => {
+    bb.generate({
+      data: {
+        columns: [
+          ["data1", 300, 350, 300, 0, 0, 0],
+          ["data2", 130, 100, 140, 200, 150, 50],
+        ],
+        types: {
+          data1: area(), // for ESM specify as: area()
+          data2: areaSpline(), // for ESM specify as: areaSpline()
+        },
+      },
+      zoom: {
+        enabled: true, // for ESM specify as: zoom()
+        type: "drag",
+      },
+      bindto: lineChart.current,
+    });
+  }, []);
+  return <div ref={lineChart}>kapil</div>;
 };
 
-export default class LineChart extends Component {
-  render() {
-    return(
-      <>
-      </>
-    )
- 
-    // return <BillboardChart data={CHART_DATA} />;
-  }
-}
+export default LineChart;

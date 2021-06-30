@@ -8,6 +8,7 @@ import CustomTabs from "../../components/shared/Tabs/Tabs";
 import { baseUrl } from "../../utils/constant";
 import {
   getCategoryId,
+  getPincode,
   redirectToOriginalPageFromLanding,
 } from "../../utils/helpers";
 import CustomerLogin from "./customerLogin";
@@ -68,6 +69,10 @@ const LandingPage = () => {
     getSellers();
   }, []);
 
+  const getSellerByPincode = (code) => {
+    console.log(code);
+  };
+
   const getCurrentTab = (tab) => {
     getCategorySeller(tab);
     //setCurrentTabValue(tab)
@@ -75,7 +80,7 @@ const LandingPage = () => {
 
   return (
     <Layout className="layout">
-      <Navbar />
+      <Navbar callBack={getSellerByPincode} />
       <Content>
         <Row>
           <Col md={24}>

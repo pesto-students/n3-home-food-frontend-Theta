@@ -16,6 +16,8 @@ import corousel2 from "../../images/courosel-3.jpg";
 
 import "./landing.css";
 import SellerItems from "./sellerItems";
+import { useTranslation } from "react-i18next";
+
 
 const { Content } = Layout;
 const { Title } = Typography;
@@ -26,6 +28,7 @@ const imagesUrls = [
 ];
 
 const LandingPage = () => {
+  const { t } = useTranslation();
   const [seller, setSeller] = useState([]);
   const [loadSeller, setLoadSeller] = useState(false);
   //const [currentTabValue,setCurrentTabValue] = useState("");
@@ -89,7 +92,7 @@ const LandingPage = () => {
         <div className="category-and-seller-container">
           <Row className="category-conatiner">
             <Col md={15} sm={24} xs={24}>
-              <Title level={4}>Category</Title>
+              <Title level={4}>{t('Landing.Sellers')}</Title>
             </Col>
             <Col md={9} sm={24} xs={24} className="keep-items-left">
               <CustomTabs

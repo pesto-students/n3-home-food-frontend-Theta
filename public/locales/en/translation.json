@@ -1,0 +1,36 @@
+{
+    "Header":{
+        "Become Seller":"Become Seller",
+        "Sign In":"Sign In",
+        "Admin":"Admin"
+    },
+    "Landing":{
+        "Sellers":"Sellers"
+    },
+    "ProductItem":{
+        "Only": "Only",
+        "Left":"Left",
+        "Add":"Add"
+    },
+    "Cart":{
+        "Max Amount": "Max Amount",
+        "Products":"Products",
+        "Cart":"Cart",
+        "Add":"Add",
+        "Checkout":"Checkout",
+        "Sub Total":"Sub Total"
+    },
+    "Checkout":{
+        "Cart":"Cart",
+        "Contact No":"Contact No",
+        "Pincode":"Pincode",
+        "Take Away":"Take Away",
+        "Dine In":"Dine In",
+        "Pay":"Pay",
+        "personal details":"personal details",
+        "Delivery":"Delivery"
+    },
+    "Payment":{
+        "Pay now":"Pay now"
+    }
+}

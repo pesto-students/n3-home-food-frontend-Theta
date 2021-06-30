@@ -13,9 +13,11 @@ import Cart from "../cart/cart";
 import { getUser, sessionId } from "../../../utils/helpers";
 import { withRouter } from "react-router-dom";
 import Navbar from "../navbar/navbar";
+import { useTranslation } from "react-i18next";
 
 
 const SellerDetailWithProducts = (props) => {
+  const { t } = useTranslation();
   const sellerId = props.match.params.id;
   const { Title } = Typography;
   const [isLoading, setIsLoading] = useState(true);
@@ -84,7 +86,7 @@ const SellerDetailWithProducts = (props) => {
                   <Title level={5}>{profile.description}</Title>
                   <Rate defaultValue={profile.rating}></Rate>
                   <Title className="margin-10" level={5}>
-                    Max Amount : {rupeeSign} {profile.max_amount}
+                    {t('Cart.Max Amount')} : {rupeeSign} {profile.max_amount}
                   </Title>
                 </Col>
               </Row>
@@ -103,7 +105,7 @@ const SellerDetailWithProducts = (props) => {
               <Col md={6}></Col>
               <Col md={12}>
                 <Title level={3} className="product-text">
-                  Products
+                   {t('Cart.Products')}
                 </Title>
 
                 {isCartLoad && (
@@ -117,7 +119,7 @@ const SellerDetailWithProducts = (props) => {
               </Col>
               <Col md={6}>
                 <Card>
-                  <Title level={3}>Cart</Title>
+                  <Title level={3}> {t('Cart.Cart')} </Title>
                   <hr />
                   {isCartLoad && (
                     <Cart reloadCart={getCart} alreadyInCart={alreadyInCart} />

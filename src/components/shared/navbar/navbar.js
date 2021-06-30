@@ -9,12 +9,14 @@ import { setIsCustomerLoginDrawerOpen } from "../../../store/actions";
 import Image from "../image/image";
 import SelectBox from "../selectBox/selectBox";
 import "./navbar.css";
+import { useTranslation } from "react-i18next";
 
 
 const { Header } = Layout;
 
 
 const Navbar = (props) => {
+  const { t } = useTranslation();
 
   const Dispatch = useDispatch();
   const toggleDrawer = () => {
@@ -30,13 +32,13 @@ const Navbar = (props) => {
         <Col md={14} sm={24} xs={24} className="keep-items-left">
           <SelectBox />
           <Link to="/seller/login">
-            <Button type="link">Become Seller</Button>
+            <Button type="link">{t('Header.Become Seller')}</Button>
           </Link>
           <Button type="link" onClick={toggleDrawer}>
-            Sign In
+            {t('Header.Sign In')}
           </Button>
           <Link to="/admin/login">
-            <Button type="link">Admin</Button>
+            <Button type="link">{t('Header.Admin')}</Button>
           </Link>
           <Button type="link">
             <ShoppingCartOutlined className="cart-icon" />

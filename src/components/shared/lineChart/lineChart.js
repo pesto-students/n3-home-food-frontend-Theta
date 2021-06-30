@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 // component and styles
-import BillboardChart from "react-billboardjs";
+// import BillboardChart from "react-billboardjs";
 
 const CHART_DATA = {
   columns: [
@@ -14,6 +14,11 @@ const CHART_DATA = {
 
 export default class LineChart extends Component {
   render() {
-    return <BillboardChart data={CHART_DATA} />;
+    return(
+      <>
+      </>
+    )
+ 
+    // return <BillboardChart data={CHART_DATA} />;
   }
 }

@@ -8,8 +8,11 @@ import emptyCardImage from "../../../images/empty_cart.jpg";
 import Image from "../../shared/image/image";
 import { sessionId } from "../../../utils/helpers";
 import { withRouter } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Cart = ({ alreadyInCart, reloadCart , ...props }) => {
+  const { t } = useTranslation();
+
   const [isLoading, setIsLoding] = useState(false);
 
   let userId = sessionId();
@@ -109,7 +112,7 @@ const Cart = ({ alreadyInCart, reloadCart , ...props }) => {
                         loading={isLoading}
                         onClick={() => addItems(dish, "add")}
                       >
-                        Add
+                         {t('Cart.Add')}
                       </Button>
                     ) : (
                       <div>
@@ -137,7 +140,7 @@ const Cart = ({ alreadyInCart, reloadCart , ...props }) => {
 
         <hr></hr>
         <Row justify="space-between" className="sub-total">
-          <span className="bold">Sub Total</span>
+          <span className="bold">{t('Cart.Sub Total')}</span>
           <span className="bold">
             {rupeeSign}
             {alreadyInCart.subTotal}
@@ -146,7 +149,7 @@ const Cart = ({ alreadyInCart, reloadCart , ...props }) => {
 
         <Row className="checkout">
           <Button type="primary" block onClick={onCheckout}>
-            Checkout
+             {t('Cart.Checkout')}
           </Button>
         </Row>
       </Row>

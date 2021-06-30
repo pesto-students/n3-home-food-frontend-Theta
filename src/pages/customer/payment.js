@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
 import { sessionId } from "../../utils/helpers";
+import { useTranslation } from "react-i18next";
 
 function loadScript(src){
     return new Promise(resolve => {
@@ -24,6 +25,7 @@ function loadScript(src){
 };
 
 const Payment = (props) => {
+  const { t } = useTranslation();
 
 
   let userId = sessionId();
@@ -100,7 +102,7 @@ const Payment = (props) => {
 };
   return (
     <>
-      <Button color='primary' onClick={displayRazorpay}>Pay now </Button>
+      <Button color='primary' onClick={displayRazorpay}>{t('Payment.Pay now')}</Button>
     </>
   );
 };

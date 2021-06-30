@@ -8,10 +8,13 @@ import Image from "../image/image";
 import "./sellerDetailWithProducts.css";
 import { useDispatch } from "react-redux";
 import { setSellerIdInCart } from "../../../store/actions/index"
+import { useTranslation } from "react-i18next";
+
 let userId = sessionId();
 
 const ProductItems = ({ products, savedCartItem, reloadCart ,sellerId}) => {
   const Dispatch = useDispatch()
+  const { t } = useTranslation();
 
   console.log(products, "akao");
   const { Title } = Typography;
@@ -92,7 +95,7 @@ const ProductItems = ({ products, savedCartItem, reloadCart ,sellerId}) => {
                 </Col>
                 <Col md={22}>
                   <Title level={4}>
-                    {dish.name} <span>(Only {dish.quantity} Left)</span>
+                    {dish.name} <span>({t('ProductItem.Only')} {dish.quantity} {t('ProductItem.Left')})</span>
                   </Title>
                   <Title level={5}>{dish.description}</Title>
                   <Row justify="space-between" align="middle">

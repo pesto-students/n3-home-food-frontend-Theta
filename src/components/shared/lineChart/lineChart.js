@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
-import bb, { area, areaSpline } from "billboard.js";
-
+import bb, { line, zoom } from "billboard.js";
+import "billboard.js/dist/billboard.css";
 const LineChart = () => {
   const lineChart = useRef(null);
 
@@ -8,22 +8,19 @@ const LineChart = () => {
     bb.generate({
       data: {
         columns: [
-          ["data1", 300, 350, 300, 0, 0, 0],
-          ["data2", 130, 100, 140, 200, 150, 50],
+      ["sample", 30, 200, 100, 400, 150, 250, 150, 200, 170, 240, 350, 150, 100, 400, 150, 250, 150, 200, 170, 240, 100, 150, 250, 150, 200, 170, 240, 30, 200, 100, 400, 150, 250, 150, 200, 170, 240, 350, 150, 100, 400, 350, 220, 250, 300, 270, 140, 150, 90, 150, 50, 120, 70, 40]
         ],
-        types: {
-          data1: area(), // for ESM specify as: area()
-          data2: areaSpline(), // for ESM specify as: areaSpline()
-        },
+        type: line(), // for ESM specify as: line()
       },
       zoom: {
-        enabled: true, // for ESM specify as: zoom()
-        type: "drag",
+        enabled: zoom(), // for ESM specify as: zoom()
+        type: "drag"
       },
-      bindto: lineChart.current,
-    });
+      bindto: lineChart.current
+    })
+    
   }, []);
-  return <div ref={lineChart}>kapil</div>;
+  return <div ref={lineChart}>chart</div>;
 };
 
 export default LineChart;

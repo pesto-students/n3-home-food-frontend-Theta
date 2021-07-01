@@ -2,7 +2,13 @@
     "Header":{
         "Become Seller":"Become Seller",
         "Sign In":"Sign In",
-        "Admin":"Admin"
+        "Admin":"Admin",
+        "Enter Pincode":"Enter Pincode",
+        "Save":"Save",
+        "Pincode":"Pincode",
+        "Logout":"Logout",
+        "Orders":"Orders"
+
     },
     "Landing":{
         "Sellers":"Sellers"
@@ -32,5 +38,14 @@
     },
     "Payment":{
         "Pay now":"Pay now"
+    },
+    "MyOrders":{
+        "Delivery Type":"Delivery Type",
+        "Received on":"Received on",
+        "Order No":"Order No",
+        "Contact Number":"Contact Number",
+        "Total":"Total"
+
     }
+
 }

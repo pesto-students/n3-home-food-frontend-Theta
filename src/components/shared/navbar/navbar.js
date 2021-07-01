@@ -45,12 +45,12 @@ const Navbar = ({ callBack }) => {
   return (
     <Header className="navbar">
       <Modal
-        title="Enter Pincode"
+        title={t('Header.Enter Pincode')}
         visible={isPincdeModal}
         initialValues={{
           pincode: currentPincode,
         }}
-        okText="Save"
+        okText={t('Header.Save')}
         onCancel={() => setIsPincodeModal(false)}
         okButtonProps={{
           form: "category-editor-form",
@@ -67,7 +67,7 @@ const Navbar = ({ callBack }) => {
         >
           <Form.Item
             name="pincode"
-            label="Pincode"
+            label={t('Header.Pincode')}
             rules={[
               {
                 required: true,
@@ -96,11 +96,11 @@ const Navbar = ({ callBack }) => {
           <Button type="link">{t('Header.Become Seller')}</Button>
           </Link>
           <Button type="link" onClick={toggleDrawer}>
-            Sign In
+             {t('Header.Sign In')}
           </Button>
 
           <Button type="link" onClick={() => setIsPincodeModal(true)}>
-            Pincode ({currentPincode})
+            {t('Header.Pincode')} ({currentPincode})
           </Button>
 
           <Link to="/admin/login">

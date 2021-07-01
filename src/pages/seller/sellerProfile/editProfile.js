@@ -84,6 +84,7 @@ const CollectionCreateForm = ({ profile, visible, onCreate, onCancel }) => {
           email: profile.email,
           image: profile.image,
           description: profile.description,
+          display_name:profile.display_name
         }}
       >
         <Row gutter={16}>

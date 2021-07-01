@@ -120,7 +120,7 @@ const ProductItems = ({ products, savedCartItem, reloadCart, sellerId }) => {
                         loading={isLoading}
                         onClick={() => addItems(dish, "add")}
                       >
-                        Add
+                        {t("ProductItem.Add")}
                       </Button>
                     ) : (
                       <div>

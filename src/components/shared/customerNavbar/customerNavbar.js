@@ -6,10 +6,12 @@ import { Link } from "react-router-dom";
 import logo from "../../../images/logo.png";
 import { getPincode, setPincode } from "../../../utils/helpers";
 import Image from "../image/image";
+import { useTranslation } from "react-i18next";
 
 const { Header } = Layout;
 
 const CustomerNavbar = ({ updatePincode }) => {
+  const { t } = useTranslation();
   const [isPincdeModal, setIsPincodeModal] = useState(false);
   const [currentPincode, setCurrentPincode] = useState("");
 
@@ -91,14 +93,14 @@ const CustomerNavbar = ({ updatePincode }) => {
         </Col>
         <Col md={14} sm={24} xs={24} className="keep-items-left">
           <Link to="/my/orders">
-            <Button type="link">Orders</Button>
+            <Button type="link">{t('Header.Orders')}</Button>
           </Link>
           <Button type="link" onClick={logout}>
-            Logout{" "}
+            {t('Header.Logout')}{" "}
           </Button>
 
           <Button type="link" onClick={() => setIsPincodeModal(true)}>
-            Pincode ({currentPincode})
+            {t('Header.Pincode')} ({currentPincode})
           </Button>
 
           <Button type="link">

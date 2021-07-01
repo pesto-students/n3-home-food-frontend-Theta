@@ -20,7 +20,7 @@ const LineChart = () => {
     })
     
   }, []);
-  return <div ref={lineChart}>chart</div>;
+  return <div style={{width:'70vw'}} ref={lineChart}>chart</div>;
 };
 
 export default LineChart;

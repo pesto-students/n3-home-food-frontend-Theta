@@ -1,0 +1,5 @@
+.dashboard-card-background{
+    background-color: aquamarine;
+    height: 100px;
+    width:  -webkit-fill-available;
+}

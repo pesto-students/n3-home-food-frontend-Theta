@@ -1,9 +1,51 @@
 {
     "Header":{
-        "Become Seller":"seller bano",
-        "1":"1 You"
+        "Become Seller":"विक्रेता बनें",
+        "Sign In":"दाखिल करना",
+        "Admin":"Admin",
+        "Enter Pincode":"पिनकोड दर्ज करें",
+        "Save":"सेव",
+        "Pincode":"पिन कोड",
+        "Logout":"लॉग आउट",
+        "Orders":"ऑर्डर"
+
     },
     "Landing":{
-        "Category":"kaaategaary"
+        "Sellers":"सेलर्स"
+    },
+    "ProductItem":{
+        "Only": "केवल",
+        "Left":"बचा हुआ",
+        "Add":"जोड़े"
+    },
+    "Cart":{
+        "Max Amount": "अधिकतम राशि",
+        "Products":"आइटम",
+        "Cart":"कार्ट",
+        "Add":"जोड़े",
+        "Checkout":"चेक आउट",
+        "Sub Total":"संपूर्ण"
+    },
+    "Checkout":{
+        "Cart":"कार्ट",
+        "Contact No":"संपर्क नंबर",
+        "Pincode":"पिन कोड",
+        "Take Away":"टेक अवे",
+        "Dine In":"डाईन ईन",
+        "Pay":"पे",
+        "personal details":"व्यक्तिगत विवरण",
+        "Delivery":"डीलेवरी"
+    },
+    "Payment":{
+        "Pay now":"अब भुगतान करें"
+    },
+    "MyOrders":{
+        "Delivery Type":"डीलेवरी प्रकार",
+        "Received on":"प्राप्त हुआ",
+        "Order No":"आदेश संख्या",
+        "Contact Number":"संपर्क नंबर",
+        "Total":"संपूर्ण"
+
     }
+
 }

@@ -2,7 +2,7 @@ import { Button, notification, Col, Form, Input, Row } from "antd";
 import "antd/dist/antd.css";
 import { React } from "react";
 import { connect, useDispatch } from "react-redux";
-
+import { Link } from "react-router-dom";
 import "./sellerRegistration.css";
 import CustomerLogin from "../../landingScreen/customerLogin";
 import { setIsCustomerLoginDrawerOpen } from "../../../store/actions";
@@ -146,13 +146,18 @@ function SellerRegistration() {
               </Row>
 
               <CustomerLogin type="Seller" />
-              <Row gutter={[13, 13]} justify="end">
+              <Row gutter={[13, 13]}>
                 <Button block type="primary" htmlType="submit">
                   Submit
                 </Button>
-                <Button onClick={toggleDrawer} block type="primary">
-                  Login
-                </Button>
+              </Row>
+              <Row gutter={24} className='mt-3'>
+              <Col span={6}></Col>
+              <Col span={12}>
+                <Link onClick={toggleDrawer} block type="primary">
+                  <span>Already a seller, Login? </span>
+                </Link>
+                </Col>
               </Row>
             </Form>
           </div>

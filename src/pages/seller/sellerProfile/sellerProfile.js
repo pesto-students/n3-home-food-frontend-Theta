@@ -43,7 +43,7 @@ const SellerProfile = () => {
             </Col>
             <Col md={18}>
               <Row justify="space-between" align="middle">
-                <Title level={2}>Display name</Title>
+                <Title level={2}>{profile.display_name}</Title>
                 <h4>
                   <WalletOutlined />
                   {"  "}

@@ -5,8 +5,11 @@ import moment from "moment";
 import React from "react";
 import axios from "../../../utils/axios";
 import { rupeeSign } from "../../../utils/constant";
+import { useTranslation } from "react-i18next";
 
 const CustomerCurrentOrders = ({ orders, callBack }) => {
+  const { t } = useTranslation();
+
   const rateOrder = (rate, order) => {
     console.log(order);
     axios
@@ -27,18 +30,18 @@ const CustomerCurrentOrders = ({ orders, callBack }) => {
       {orders.map((item, key) => {
         return (
           <Col md={24}>
-            <Card key={key} style={{ width: "100%" }}>
+            <Card key={key} style={{ width: "100%" }} hoverable={true}>
               <Row justify="space-betwee">
                 <Col md={12}>
                   <Title level={5}>
-                    Delivery Type :{" "}
+                  {t('MyOrders.Delivery Type')} :{" "}
                     <Tag color="processing">{item.DeliveryType}</Tag>
                   </Title>
                 </Col>
                 <Col md={12}>
                   <Row justify="end">
                     <Title level={5}>
-                      Received on{" "}
+                    {t('MyOrders.Received on')} {" "}
                       {moment(item.dateOrdered).format(
                         "dddd, MMMM Do YYYY, h:mm:ss a"
                       )}
@@ -48,10 +51,10 @@ const CustomerCurrentOrders = ({ orders, callBack }) => {
               </Row>
               <Row>
                 <Col md={24}>
-                  <Title level={5}>Order No - {item._id}</Title>
+                  <Title level={5}> {t('MyOrders.Order No')} - {item._id}</Title>
                 </Col>
                 <Col md={24}>
-                  <Title level={5}>Contact Number - {item.user.phone}</Title>
+                  <Title level={5}>{t('MyOrders.Contact Number')} - {item.user.phone}</Title>
                 </Col>
               </Row>
               <Row justify="end">
@@ -77,7 +80,7 @@ const CustomerCurrentOrders = ({ orders, callBack }) => {
                 <Col md={12}>
                   <Row justify="end">
                     <Title level={5}>
-                      Total: {rupeeSign} {item.totalPrice}
+                    {t('MyOrders.Total')} : {rupeeSign} {item.totalPrice}
                     </Title>
                   </Row>
                 </Col>

@@ -2,7 +2,8 @@ import Axios from "axios";
 import { baseUrl } from "./constant";
 import { getUser } from "./helpers";
 
-const user = getUser()
+// const user = getUser()
+const user = ''
 const token = user ? user.token : '' 
 
 const axios = Axios.create({

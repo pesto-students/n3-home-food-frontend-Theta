@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
 import bb, { pie } from "billboard.js";
-import "billboard.js/dist/billboard.css";
 import { Row } from "antd";
 const PieChart = ({dataSource}) => {
   const PieChart = useRef(null);

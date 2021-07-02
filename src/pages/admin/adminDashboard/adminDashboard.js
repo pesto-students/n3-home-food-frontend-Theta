@@ -1,12 +1,11 @@
 import { Card, Col, DatePicker, Row } from "antd";
-import "antd/dist/antd.css";
+ import { antdCss } from '../../../utils/constant'
 import { React, useEffect, useState } from "react";
 import LineChart from "../../../components/shared/lineChart/lineChart";
 import PieChart from "../../../components/shared/pieChart/pieChart";
 import axios from "../../../utils/axios";
 import { baseUrl } from "../../../utils/constant";
 import "./adminDashboard.css"
-import { sessionId } from "../../../utils/helpers";
 
 const { RangePicker } = DatePicker;
 

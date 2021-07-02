@@ -46,7 +46,71 @@
         "Contact Number":"संपर्क नंबर",
         "Total":"संपूर्ण"
 
-    }
-    
+    },
+    "seller":{
+        "registerForm":
+        {
+            "partnerText":"हमारे साथ भागीदार",
+            "description":"लोरेम इप्सम क्या है लोरेम इप्सम प्रिंटिंग और टाइपसेटिंग उद्योग का केवल डमी टेक्स्ट है लोरेम इप्सम 1500 के दशक से उद्योग का मानक डमी टेक्स्ट रहा है जब एक अज्ञात प्रिंटर ने गैली का प्रकार लिया और इसे एक प्रकार की नमूना पुस्तक बनाने के लिए हाथापाई की?",
+            "register": "रजिस्टर",
+            "name": "नाम",
+            "nameValidationAndPlaceholder": "कृपया उपयोगकर्ता नाम दर्ज करें",
+            "displayName": "प्रदर्शन नाम",
+            "displayNameValidationAndPlaceholder": "कृपया प्रदर्शन नाम दर्ज करें",
+            "mobileNumber": "मोबाइल नंबर",
+            "mobileNumberValidationAndPlaceholder": "कृपया मोबाइल नंबर दर्ज करें",
+            "idProof": "आधार कार्ड",
+            "idProofValidationAndPlaceholder": "कृपया आधार कार्ड दर्ज करें",
+            "email": "ईमेल (वैकल्पिक)",
+            "emailValidationAndPlaceholder": "कृपया ईमेल दर्ज करें",
+            "address": "पता",
+            "addressValidationAndPlaceholder": "कृपया पता दर्ज करें",
+            "submit": "सबमिट करें",
+            "loginText": "पहले से ही एक विक्रेता, लॉगिन करें?"
+        },
+        "dashboard":{
+            "dashboardText": "डैशबोर्ड",
+            "productText": "उत्पाद",
+            "profileText": "विक्रेता",
+            "orderText": "आदेश",
+            "totalOrder": "कुल आदेश",
+            "totalIncome": "कुल आय"
+          },
+        "product":  {
+            "allProducts": "सभी उत्पाद",
+            "myProducts": "मेरे उत्पाद",
+            "allApprove": "सभी स्वीकृत",
+            "requestProductButton": "उत्पाद का अनुरोध करें",
+            "addButton": "जोड़ें",
+            "cancelButton": "रद्द करना",
+            "requestForm":{
+                "addProductText": "उत्पाद जोड़ें",
+                "productName": "उत्पाद का नाम",
+                "productNameValidation": "कृपया उत्पाद का नाम दर्ज करें",
+                "productCategory": "उत्पाद श्रेणी",
+                "productCategoryValidation": "कृपया श्रेणी चुनें",
+                "description": "विवरण",
+                "descriptionValidation": "कृपया उत्पाद विवरण दर्ज करें",
+                "price": "मूल्य",
+                "priceValidation": "कृपया मूल्य दर्ज करें"
+            }
+           
+          },
+          "profile":{
+            "editText": "संपादित करें",
+            "editProfileModalTitle": "प्रोफ़ाइल संपादित करें",
+            "profileImageText": "प्रोफ़ाइल छवि"
+          },
+        "order":{
+            "currentOrder": "वर्तमान आदेश",
+            "pastOrder": "पिछले आदेश",
+            "deliveryType": "वितरण प्रकार",
+            "orderNo": "आदेश संख्या",
+            "contactNumber":"संपर्क नंबर",
+            "receivedOn": "प्राप्त",
+            "deliverButton": "वितरित करें",
+            "totalText": "संपूर्ण"
+        }
+   } 
 
 }

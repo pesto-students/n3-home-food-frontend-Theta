@@ -2,6 +2,7 @@ import { UploadOutlined } from "@ant-design/icons";
 import { Button, Col, Form, Input, message, Modal, Row, Upload } from "antd";
 import "antd/dist/antd.css";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import axios from "../../../utils/axios";
 import { baseUrl } from "../../../utils/constant";
 import { sessionId } from "../../../utils/helpers";
@@ -42,7 +43,7 @@ const normFile = (e) => {
 };
 
 const CollectionCreateForm = ({ profile, visible, onCreate, onCancel }) => {
-  console.log(profile, "kaka");
+  const { t } = useTranslation();
   const [form] = Form.useForm();
   const fileList = [
     {
@@ -55,9 +56,9 @@ const CollectionCreateForm = ({ profile, visible, onCreate, onCancel }) => {
   return (
     <Modal
       visible={visible}
-      title="Edit Product"
-      okText="Edit"
-      cancelText="Cancel"
+      title={t("seller.profile.editProfileModalTitle")}
+      okText={t("seller.profile.editText")}
+      cancelText={t("seller.product.cancelButton")}
       onCancel={onCancel}
       onOk={() => {
         form
@@ -84,28 +85,48 @@ const CollectionCreateForm = ({ profile, visible, onCreate, onCancel }) => {
           email: profile.email,
           image: profile.image,
           description: profile.description,
-          display_name:profile.display_name
+          display_name: profile.display_name,
         }}
       >
         <Row gutter={16}>
           <Col span={24}>
             <Form.Item
               name="name"
-              label="Name"
-              rules={[{ required: true, message: "Please Enter User Name" }]}
+              label={t("seller.registerForm.name")}
+              rules={[
+                {
+                  required: true,
+                  message: t(
+                    "seller.registerForm.nameValidationAndPlaceholder"
+                  ),
+                },
+              ]}
             >
-              <Input placeholder="Please Enter User Name" />
+              <Input
+                placeholder={t(
+                  "seller.registerForm.nameValidationAndPlaceholder"
+                )}
+              />
             </Form.Item>
           </Col>
           <Col span={24}>
             <Form.Item
               name="display_name"
-              label="Display Name"
-              rules={[{ required: true, message: "Please Enter Display Name" }]}
+              label={t("seller.registerForm.displayName")}
+              rules={[
+                {
+                  required: true,
+                  message: t(
+                    "seller.registerForm.displayNameValidationAndPlaceholder"
+                  ),
+                },
+              ]}
             >
               <Input
                 style={{ width: "100%" }}
-                placeholder="Please Enter Display Name"
+                placeholder={t(
+                  "seller.registerForm.displayNameValidationAndPlaceholder"
+                )}
               />
             </Form.Item>
           </Col>
@@ -126,14 +147,21 @@ const CollectionCreateForm = ({ profile, visible, onCreate, onCancel }) => {
           <Col span={24}>
             <Form.Item
               name="phone"
-              label="Mobile Number"
+              label={t("seller.registerForm.mobileNumber")}
               rules={[
-                { required: true, message: "Please Enter Mobile Number" },
+                {
+                  required: true,
+                  message: t(
+                    "seller.registerForm.mobileNumberValidationAndPlaceholder"
+                  ),
+                },
               ]}
             >
               <Input
                 style={{ width: "100%" }}
-                placeholder="Please enter Mobile Number"
+                placeholder={t(
+                  "seller.registerForm.mobileNumberValidationAndPlaceholder"
+                )}
               />
             </Form.Item>
           </Col>
@@ -142,12 +170,21 @@ const CollectionCreateForm = ({ profile, visible, onCreate, onCancel }) => {
           <Col span={12}>
             <Form.Item
               name="idProof"
-              label="Aadhaar Card"
-              rules={[{ required: true, message: "Please Enter Aadhaar Card" }]}
+              label={t("seller.registerForm.idProof")}
+              rules={[
+                {
+                  required: true,
+                  message: t(
+                    "seller.registerForm.idProofValidationAndPlaceholder"
+                  ),
+                },
+              ]}
             >
               <Input
                 style={{ width: "100%" }}
-                placeholder="Please Enter Aadhaar Card"
+                placeholder={t(
+                  "seller.registerForm.idProofValidationAndPlaceholder"
+                )}
               />
             </Form.Item>
           </Col>
@@ -155,12 +192,21 @@ const CollectionCreateForm = ({ profile, visible, onCreate, onCancel }) => {
           <Col span={12}>
             <Form.Item
               name="email"
-              label="Email (optional)"
-              rules={[{ required: false, message: "Please Enter Email" }]}
+              label={t("seller.registerForm.email")}
+              rules={[
+                {
+                  required: false,
+                  message: t(
+                    "seller.registerForm.emailValidationAndPlaceholder"
+                  ),
+                },
+              ]}
             >
               <Input
                 style={{ width: "100%" }}
-                placeholder="Please Enter Email"
+                placeholder={t(
+                  "seller.registerForm.emailValidationAndPlaceholder"
+                )}
               />
             </Form.Item>
           </Col>
@@ -170,22 +216,29 @@ const CollectionCreateForm = ({ profile, visible, onCreate, onCancel }) => {
           <Col span={24}>
             <Form.Item
               name="adress"
-              label="Address"
+              label={t("seller.registerForm.address")}
               rules={[
                 {
                   required: true,
-                  message: "Please Enter Address",
+                  message: t(
+                    "seller.registerForm.addressValidationAndPlaceholder"
+                  ),
                 },
               ]}
             >
-              <Input.TextArea rows={4} placeholder="Please Enter Address" />
+              <Input.TextArea
+                rows={4}
+                placeholder={t(
+                  "seller.registerForm.addressValidationAndPlaceholder"
+                )}
+              />
             </Form.Item>
           </Col>
         </Row>
 
         <Form.Item
           name="image"
-          label="Profile Image"
+          label={t("seller.profile.profileImageText")}
           valuePropName="image"
           getValueFromEvent={normFile}
           extra=""
@@ -207,6 +260,7 @@ const CollectionCreateForm = ({ profile, visible, onCreate, onCancel }) => {
 
 export const EditProfile = ({ profile }) => {
   const [visible, setVisible] = useState(false);
+  const { t } = useTranslation();
 
   const onCreate = (values) => {
     let obj = {
@@ -245,7 +299,7 @@ export const EditProfile = ({ profile }) => {
           setVisible(true);
         }}
       >
-        Edit
+        {t("seller.profile.editText")}
       </Button>
       <CollectionCreateForm
         profile={profile}

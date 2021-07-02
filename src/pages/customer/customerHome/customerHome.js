@@ -31,10 +31,10 @@ const CustomerHome = () => {
     if (user === null) window.location.href = "/";
   }, [user]);
 
-  const getSellers = () => {
+  const getSellers = (pinCode) => {
     setLoadSeller(false);
     axios
-      .get(`${baseUrl}/sellers`)
+      .get(`${baseUrl}/sellers/pincode/${pinCode}`)
       .then((result) => {
         setSeller(result.data);
         setLoadSeller(true);
@@ -57,16 +57,18 @@ const CustomerHome = () => {
         })
         .catch((err) => console.error(err));
     } else {
-      getSellers();
+      getSellers(pincode);
     }
   };
 
   const updatePincode = (pincode) => {
     setPincode(pincode);
+    getSellers(pincode);
   };
 
   useEffect(() => {
     setPincode(getPincode());
+
     getSellers();
   }, [pincode]);
 

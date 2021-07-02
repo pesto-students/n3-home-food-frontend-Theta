@@ -4,8 +4,10 @@ import { Card, Row, Col, Rate, Tag } from "antd";
 import Title from "antd/lib/typography/Title";
 import { rupeeSign } from "../../../utils/constant";
 import moment from "moment";
+import { useTranslation } from "react-i18next";
 
 const PastOrders = ({ orders }) => {
+  const { t } = useTranslation();
   return (
     <>
       {orders.map((item, key) => {
@@ -14,14 +16,15 @@ const PastOrders = ({ orders }) => {
             <Row justify="space-betwee">
               <Col md={12}>
                 <Title level={5}>
-                  Delivery Type :{" "}
+                  {t("seller.order.deliveryType")} :{" "}
                   <Tag color="processing">{item.DeliveryType}</Tag>
                 </Title>
               </Col>
               <Col md={12}>
                 <Row justify="end">
                   <Title level={5}>
-                    Received on{" "}
+                    {t("seller.order.receivedOn")}
+                    {"  "}
                     {moment(item.dateOrdered).format(
                       "dddd, MMMM Do YYYY, h:mm:ss a"
                     )}
@@ -31,10 +34,16 @@ const PastOrders = ({ orders }) => {
             </Row>
             <Row>
               <Col md={24}>
-                <Title level={5}>Order No - {item._id}</Title>
+                <Title level={5}>
+                  {" "}
+                  {t("seller.order.orderNo")}- {item._id}
+                </Title>
               </Col>
               <Col md={24}>
-                <Title level={5}>Contact Number - {item.user.phone}</Title>
+                <Title level={5}>
+                  {" "}
+                  {t("seller.order.contactNumber")}- {item.user.phone}
+                </Title>
               </Col>
             </Row>
             <Row justify="end">
@@ -60,7 +69,7 @@ const PastOrders = ({ orders }) => {
               <Col md={12}>
                 <Row justify="end">
                   <Title level={5}>
-                    Total: {rupeeSign} {item.totalPrice}
+                    {t("seller.order.totalText")}: {rupeeSign} {item.totalPrice}
                   </Title>
                 </Row>
               </Col>

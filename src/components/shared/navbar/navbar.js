@@ -1,7 +1,8 @@
+import { React, useEffect, useState } from "react";
 import { ShoppingCartOutlined } from "@ant-design/icons";
-import { Button, Col, Layout, Row, Modal, Form, Input } from "antd";
+import { Button, Col, Form, Input, Layout, Modal, Row } from "antd";
 import "antd/dist/antd.css";
-import { React, useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { connect, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import logo from "../../../images/logo.png";
@@ -10,7 +11,6 @@ import { getPincode, setPincode } from "../../../utils/helpers";
 import Image from "../image/image";
 import SelectBox from "../selectBox/selectBox";
 import "./navbar.css";
-import { useTranslation } from "react-i18next";
 
 const { Header } = Layout;
 
@@ -19,7 +19,7 @@ const Navbar = ({ callBack }) => {
   const Dispatch = useDispatch();
   const [currentPincode, setCurrentPincode] = useState("");
 
-  const [isPincdeModal, setIsPincodeModal] = useState(false);
+  const [openPincdeModal, setOpenPincodeModal] = useState(false);
 
   const toggleDrawer = () => {
     Dispatch(setIsCustomerLoginDrawerOpen(true));
@@ -28,30 +28,30 @@ const Navbar = ({ callBack }) => {
   useEffect(() => {
     let code = getPincode();
     if (code) {
-      setIsPincodeModal(false);
+      setOpenPincodeModal(false);
       setCurrentPincode(code);
     } else {
-      setIsPincodeModal(true);
+      setOpenPincodeModal(true);
     }
   }, []);
 
   const submitPincode = (pincode) => {
     let code = pincode.pincode;
     setPincode(code);
-    setIsPincodeModal(false);
+    setOpenPincodeModal(false);
     setCurrentPincode(code);
     callBack(code);
   };
   return (
     <Header className="navbar">
       <Modal
-        title={t('Header.Enter Pincode')}
-        visible={isPincdeModal}
+        title={t("Header.Enter Pincode")}
+        visible={openPincdeModal}
         initialValues={{
           pincode: currentPincode,
         }}
-        okText={t('Header.Save')}
-        onCancel={() => setIsPincodeModal(false)}
+        okText={t("Header.Save")}
+        onCancel={() => setOpenPincodeModal(false)}
         okButtonProps={{
           form: "category-editor-form",
 
@@ -67,7 +67,7 @@ const Navbar = ({ callBack }) => {
         >
           <Form.Item
             name="pincode"
-            label={t('Header.Pincode')}
+            label={t("Header.Pincode")}
             rules={[
               {
                 required: true,
@@ -93,18 +93,18 @@ const Navbar = ({ callBack }) => {
         <Col md={14} sm={24} xs={24} className="keep-items-left">
           <SelectBox />
           <Link to="/seller/login">
-          <Button type="link">{t('Header.Become Seller')}</Button>
+            <Button type="link">{t("Header.Become Seller")}</Button>
           </Link>
           <Button type="link" onClick={toggleDrawer}>
-             {t('Header.Sign In')}
+            {t("Header.Sign In")}
           </Button>
 
-          <Button type="link" onClick={() => setIsPincodeModal(true)}>
-            {t('Header.Pincode')} ({currentPincode})
+          <Button type="link" onClick={() => setOpenPincodeModal(true)}>
+            {t("Header.Pincode")} {currentPincode && `(${currentPincode})`}
           </Button>
 
           <Link to="/admin/login">
-          <Button type="link">{t('Header.Admin')}</Button>
+            <Button type="link">{t("Header.Admin")}</Button>
           </Link>
           <Button type="link">
             <ShoppingCartOutlined className="cart-icon" />

@@ -8,8 +8,10 @@ import TabTag from "../../../components/shared/tag/tag";
 import { sessionId } from "../../../utils/helpers";
 import axios from "../../../utils/axios";
 import SpinnerLoader from "../../../components/shared/spinnerLoader/spinnerLoader";
+import { useTranslation } from "react-i18next";
 
 const SellerProducts = () => {
+  const { t } = useTranslation();
   const { TabPane } = Tabs;
 
   const [isLoading, setIsLoading] = useState(true);
@@ -50,7 +52,12 @@ const SellerProducts = () => {
   return (
     <Tabs defaultActiveKey="1">
       <TabPane
-        tab={<TabTag count={currentOrdersItem.length} text="Current Orders " />}
+        tab={
+          <TabTag
+            count={currentOrdersItem.length}
+            text={t("seller.order.currentOrder")}
+          />
+        }
         key="1"
       >
         {!isLoading ? (
@@ -62,7 +69,12 @@ const SellerProducts = () => {
         )}
       </TabPane>
       <TabPane
-        tab={<TabTag count={pastOrdersItem.length} text="Past Orders" />}
+        tab={
+          <TabTag
+            count={pastOrdersItem.length}
+            text={t("seller.order.pastOrder")}
+          />
+        }
         key="2"
       >
         {!isLoading ? (

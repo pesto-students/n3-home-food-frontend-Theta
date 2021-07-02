@@ -11,14 +11,11 @@ import corousel1 from "../../images/courosel.jpg";
 import { baseUrl } from "../../utils/constant";
 import {
   getCategoryId,
-
-  redirectToOriginalPageFromLanding
+  redirectToOriginalPageFromLanding,
 } from "../../utils/helpers";
 import CustomerLogin from "./customerLogin";
 import "./landing.css";
 import SellerItems from "./sellerItems";
-
-
 
 const { Content } = Layout;
 const { Title } = Typography;
@@ -31,13 +28,13 @@ const imagesUrls = [
 const LandingPage = () => {
   const { t } = useTranslation();
   const [seller, setSeller] = useState([]);
-  const [loadSeller, setLoadSeller] = useState(false);
-  //const [currentTabValue,setCurrentTabValue] = useState("");
+  const [loadSeller, setLoadSeller] = useState(true);
+  const [pincode, setPincode] = useState("");
 
-  const getSellers = () => {
+  const getSellers = (code) => {
     setLoadSeller(false);
     axios
-      .get(`${baseUrl}/sellers`)
+      .get(`${baseUrl}/sellers/pincode/${code}`)
       .then((result) => {
         setSeller(result.data);
         setLoadSeller(true);
@@ -60,17 +57,17 @@ const LandingPage = () => {
         })
         .catch((err) => console.error(err));
     } else {
-      getSellers();
+      getSellers(pincode);
     }
   };
 
   useEffect(() => {
     redirectToOriginalPageFromLanding();
-    getSellers();
   }, []);
 
   const getSellerByPincode = (code) => {
-    console.log(code);
+    setPincode(code);
+    getSellers(code);
   };
 
   const getCurrentTab = (tab) => {
@@ -97,7 +94,7 @@ const LandingPage = () => {
         <div className="category-and-seller-container">
           <Row className="category-conatiner">
             <Col md={15} sm={24} xs={24}>
-              <Title level={4}>{t('Landing.Sellers')}</Title>
+              <Title level={4}>{t("Landing.Sellers")}</Title>
             </Col>
             <Col md={9} sm={24} xs={24} className="keep-items-left">
               <CustomTabs

@@ -33,6 +33,7 @@ const CustomerNavbar = ({ updatePincode }) => {
     if (code) {
       setIsPincodeModal(false);
       setCurrentPincode(code);
+      updatePincode(code);
     } else {
       setIsPincodeModal(true);
     }
@@ -93,14 +94,14 @@ const CustomerNavbar = ({ updatePincode }) => {
         </Col>
         <Col md={14} sm={24} xs={24} className="keep-items-left">
           <Link to="/my/orders">
-            <Button type="link">{t('Header.Orders')}</Button>
+            <Button type="link">{t("Header.Orders")}</Button>
           </Link>
           <Button type="link" onClick={logout}>
-            {t('Header.Logout')}{" "}
+            {t("Header.Logout")}{" "}
           </Button>
 
           <Button type="link" onClick={() => setIsPincodeModal(true)}>
-            {t('Header.Pincode')} ({currentPincode})
+            {t("Header.Pincode")} {currentPincode && `(${currentPincode})`}
           </Button>
 
           <Button type="link">

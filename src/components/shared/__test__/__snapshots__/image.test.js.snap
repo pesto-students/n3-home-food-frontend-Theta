@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`data not found 1`] = `
+<img
+  alt="not found"
+  height={200}
+  onError={[Function]}
+  src=""
+  style={
+    Object {
+      "backgroundPosition": "center",
+      "borderRadius": undefined,
+    }
+  }
+  width={200}
+/>
+`;

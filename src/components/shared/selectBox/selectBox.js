@@ -1,11 +1,10 @@
 import { Select } from "antd";
-import { Suspense } from "react";
 import { useTranslation } from "react-i18next";
 
 const { Option } = Select;
 
 const SelectBox = () => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
 
   const handleChange = (event) => {
     console.log(event)

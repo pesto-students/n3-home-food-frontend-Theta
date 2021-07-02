@@ -1,3 +1,4 @@
+import * as React from "react";
 import { useEffect, useRef, useState } from "react";
 import bb, { line, zoom } from "billboard.js";
 import "billboard.js/dist/billboard.css";

@@ -6,17 +6,24 @@ import PieChart from "../../../components/shared/pieChart/pieChart";
 import axios from "../../../utils/axios";
 import { baseUrl } from "../../../utils/constant";
 import "./sellerGraphs.css";
+import { sessionId } from "../../../utils/helpers";
 
 const { RangePicker } = DatePicker;
 
 function SellerGraphs() {
-  const [lineGraphData, setLineGraphData] = useState(["sample", 30, 200, 100]);
+  const [lineGraphData, setLineGraphData] = useState(["revenue", 30, 200, 100]);
+  const [revenueData, setrevenueData] = useState();
+  const [orderCountData, setorderCountData] = useState();
+  const [pieGraphData, setPieGraphData] = useState([ ["data1", 30], ["data2", 120],]);
 
+  useEffect(() => {
+    getSellerDetails();
+  }, []);
 
   const getGraphDetails = () => {
-    let lineGraphDataMock = ["sample"];
+    let lineGraphDataMock = ["revenue"];
     axios
-      .get(`${baseUrl}/orders/get-revenue-seller/60d8771f867ff965d12a670c`)
+      .get(`${baseUrl}/orders/get-revenue-seller/${sessionId()}`)
       .then((result) => {
         result.data.forEach((element) => {
           lineGraphDataMock.push(element.totalPrice);
@@ -28,9 +35,41 @@ function SellerGraphs() {
       });
   };
 
+  const getSellerDetails = () => {
+    axios
+      .get(`${baseUrl}/orders/seller-wallet/${sessionId()}`)
+
+      .then((result) => {
+        result.data.Orders.length
+          ? setorderCountData(result.data.Orders.length)
+          : setorderCountData(0);
+        setrevenueData(result.data.totalPrice);
+      })
+
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  const getPieChartDetails = () => {
+    axios
+      .get(`${baseUrl}/orders/orders-category-wise`)
+
+      .then((result) => {
+        result.data.categoryWiseOrder.length
+          ? setPieGraphData(result.data.categoryWiseOrder)
+          : setPieGraphData(0);
+      })
+
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
   const onChange = (value, dateString) => {
     console.log("Formatted Selected Time: ", dateString);
     getGraphDetails();
+    getPieChartDetails();
   };
 
   return (
@@ -41,12 +80,12 @@ function SellerGraphs() {
         <Card hoverable={true} className="card-detailed">
           <div>
             <h5>Total Orders</h5>
-            <h5>5</h5>
+            <h5>{orderCountData}</h5>
           </div>
         </Card>
         <Card hoverable={true} className="card-detailed">
           <h5>Total Income</h5>
-          <h5>200</h5>
+          <h5>{revenueData}</h5>
         </Card>
       </Row>
       <Row justify="center">
@@ -59,7 +98,7 @@ function SellerGraphs() {
       </Row>
       <Row justify="center">
         <div id="chart">
-          <PieChart />
+          <PieChart dataSource={pieGraphData} />
         </div>
       </Row>
     </div>

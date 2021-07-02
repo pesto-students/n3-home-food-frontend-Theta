@@ -2,16 +2,13 @@ import { useEffect, useRef } from "react";
 import bb, { pie } from "billboard.js";
 import "billboard.js/dist/billboard.css";
 import { Row } from "antd";
-const PieChart = () => {
+const PieChart = ({dataSource}) => {
   const PieChart = useRef(null);
 
   useEffect(() => {
     bb.generate({
         data: {
-          columns: [
-          ["data1", 30],
-          ["data2", 120]
-          ],
+          columns:dataSource,
           type: pie(), // for ESM specify as: pie()
         //   onclick: function(d, i) {
         //   console.log("onclick", d, i);
@@ -26,7 +23,7 @@ const PieChart = () => {
       bindto: PieChart.current
     })
     
-  }, []);
+  }, [dataSource]);
   return(
     <>
    <div style={{width:'70vw'}} ref={PieChart}>chart</div>

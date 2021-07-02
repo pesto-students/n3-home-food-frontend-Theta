@@ -1,17 +1,14 @@
 import {
-  CreditCardOutlined, SolutionOutlined, UserOutlined
+  CreditCardOutlined,
+  SolutionOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
-import {
-  Card,
-  Radio,
-
-  Space, Steps
-} from "antd";
+import { Card, Radio, Space, Steps } from "antd";
 import Title from "antd/lib/typography/Title";
 import React from "react";
 import { Translation } from "react-i18next";
-import Cart from "../../../components/shared/cart/cart";
-import CustomerNavbar from "../../../components/shared/customerNavbar/customerNavbar";
+import Cart from "components/cart/cart";
+import CustomerNavbar from "components/customerNavbar/customerNavbar";
 import axios from "utils/axios";
 import { baseUrl } from "utils/constant";
 import { sessionId } from "utils/helpers";

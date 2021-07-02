@@ -1,11 +1,10 @@
 import { Card, Col, DatePicker, Row } from "antd";
- import { antdCss } from 'utils/constant'
 import { React, useEffect, useState } from "react";
-import LineChart from "../../../components/shared/lineChart/lineChart";
-import PieChart from "../../../components/shared/pieChart/pieChart";
+import LineChart from "components/lineChart/lineChart";
+import PieChart from "components/pieChart/pieChart";
 import axios from "utils/axios";
 import { baseUrl } from "utils/constant";
-import "./adminDashboard.css"
+import "./adminDashboard.css";
 
 const { RangePicker } = DatePicker;
 
@@ -40,9 +39,7 @@ function AdminDashboard() {
     axios
       .get(`${baseUrl}/orders/allcount`)
       .then((result) => {
-        result.data
-          ? setadminData(result.data)
-          : setadminData(0);
+        result.data ? setadminData(result.data) : setadminData(0);
       })
 
       .catch((err) => {

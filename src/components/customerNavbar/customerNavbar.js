@@ -5,7 +5,7 @@ import { React, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "images/logo.png";
 import { getPincode, setPincode } from "utils/helpers";
-import Image from "image/image";
+import Image from "components/image/image";
 import { useTranslation } from "react-i18next";
 
 const { Header } = Layout;
@@ -37,7 +37,7 @@ const CustomerNavbar = ({ updatePincode }) => {
     } else {
       setIsPincodeModal(true);
     }
-  }, []);
+  }, [updatePincode]);
 
   // const savePincode = () => {
   //   let form = document.getElementById("myForm").nodeValue;

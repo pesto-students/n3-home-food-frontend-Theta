@@ -2,11 +2,11 @@ import { Card, Row, Skeleton } from "antd";
 import "antd/dist/antd.css";
 import React, { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { RejectSellerModal } from "../../../../components/manageSellerModal/rejectSeller";
+import { RejectSellerModal } from "components/manageSellerModal/rejectSeller";
 import item from "images/seller.png";
 import "./sellerApproval.css";
-import DataNotFound from "../../../../components/shared/dataNotFound/dataNotFound";
-import SpinnerLoader from "../../../../components/shared/spinnerLoader/spinnerLoader";
+import DataNotFound from "components/dataNotFound/dataNotFound";
+import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
 
 const SellerApproval = ({ isLoading, sellers, callback }) => {
   const [hasMore, setHasMore] = useState(false);

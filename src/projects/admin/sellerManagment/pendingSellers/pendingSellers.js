@@ -3,11 +3,11 @@ import "antd/dist/antd.css";
 import axios from "axios";
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { RejectSellerModal } from "../../../../components/manageSellerModal/rejectSeller";
+import { RejectSellerModal } from "components/manageSellerModal/rejectSeller";
 import item from "images/south-indian.jpg";
 import { baseUrl } from "utils/constant";
 import "./pendingSeller.css";
-import DataNotFound from "../../../../components/shared/dataNotFound/dataNotFound";
+import DataNotFound from "components/dataNotFound/dataNotFound";
 
 const openNotificationWithIcon = (type, message) => {
   notification[type]({

@@ -1,11 +1,11 @@
 import { React } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import LandingPage from "../landingScreen/Landing";
-import SellerLanding from "../projects/seller/sellerLanding/sellerLanding";
+import LandingPage from "landingScreen/Landing";
+import SellerLanding from "projects/seller/sellerLanding/sellerLanding";
 import AdminLanding from "../projects/admin/adminLanding/adminLanding";
-import BrokenLink from "../components/shared/BrokenLink";
+import BrokenLink from "components/BrokenLink";
 import CustomerHome from "../projects/customer/customerHome/customerHome";
-import SellerDetailWithProducts from "../components/shared/sellerDetailWithProducts/sellerDetailWithProducts";
+import SellerDetailWithProducts from "components/sellerDetailWithProducts/sellerDetailWithProducts";
 import Orders from "../projects/customer/orders/order";
 import { Checkout } from "../projects/customer/checkout/checkout";
 
@@ -18,10 +18,8 @@ function MainRoutes() {
         </Route>
 
         <Route path="/checkout" exact>
-        <Checkout/>
+          <Checkout />
         </Route>
-    
-
 
         <Route path="/admin">
           <AdminLanding />

@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { connect, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import logo from "images/logo.png";
-import { setIsCustomerLoginDrawerOpen } from "../../../store/actions";
+import { setIsCustomerLoginDrawerOpen } from "store/actions";
 import { getPincode, setPincode } from "utils/helpers";
 import Image from "../image/image";
 import SelectBox from "../selectBox/selectBox";

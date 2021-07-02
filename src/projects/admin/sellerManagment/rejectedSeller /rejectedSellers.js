@@ -4,7 +4,7 @@ import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import item from "images/seller.png";
 import "../Seller Approval/sellerApproval.css";
-import DataNotFound from "../../../../components/shared/dataNotFound/dataNotFound";
+import DataNotFound from "components/dataNotFound/dataNotFound";
 const RejectedSellers = ({ isLoading, sellers }) => {
   const fetchMoreData = () => {
     // axios

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import bb, { line, zoom } from "billboard.js";
 import { Row } from "antd";
 const LineChart = (props) => {

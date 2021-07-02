@@ -2,13 +2,13 @@ import { Card, Row, Skeleton, Typography } from "antd";
 import "antd/dist/antd.css";
 import React, { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import Image from "../../../../components/shared/image/image";
-import { AppoveProductModal } from "../../../../components/shared/manageProductmodal/approveProduct";
-import { ReassignProduct } from "../../../../components/shared/manageProductmodal/reassignProduct";
-import { RejectProductModal } from "../../../../components/shared/manageProductmodal/rejectProduct";
+import Image from "components/image/image";
+import { AppoveProductModal } from "components/manageProductmodal/approveProduct";
+import { ReassignProduct } from "components/manageProductmodal/reassignProduct";
+import { RejectProductModal } from "components/manageProductmodal/rejectProduct";
 import "./productApproval.css";
-import SpinnerLoader from "../../../../components/shared/spinnerLoader/spinnerLoader";
-import DataNotFound from "../../../../components/shared/dataNotFound/dataNotFound";
+import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
+import DataNotFound from "components/dataNotFound/dataNotFound";
 
 const ProductApproval = ({ isLoading, products, loadPenindgProducts }) => {
   const { Title } = Typography;

@@ -1,7 +1,7 @@
 import { Card, Col, Rate, Row, Typography } from "antd";
 import { React, useEffect, useState } from "react";
-import Image from "../../../components/shared/image/image";
-import SpinnerLoader from "../../../components/shared/spinnerLoader/spinnerLoader";
+import Image from "components/image/image";
+import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
 import axios from "utils/axios";
 import { baseUrl, rupeeSign } from "utils/constant";
 import { sessionId } from "utils/helpers";

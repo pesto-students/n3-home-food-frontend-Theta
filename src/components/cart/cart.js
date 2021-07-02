@@ -5,11 +5,11 @@ import { Button, Col, Row } from "antd";
 import axios from "utils/axios";
 // import { baseUrl, rupeeSign } from "utils/constant";
 // import { LINKS, STRINGS } from 'utils/constants';
-import { baseUrl, rupeeSign } from 'utils/constant';
+import { baseUrl, rupeeSign } from "utils/constant";
 
 import "./cart.css";
 import emptyCardImage from "images/empty_cart.jpg";
-import Image from "components/shared/image/image";
+import Image from "components/image/image";
 import { sessionId } from "utils/helpers";
 import { withRouter } from "react-router-dom";
 import { useTranslation } from "react-i18next";

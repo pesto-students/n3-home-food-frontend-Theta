@@ -1,6 +1,6 @@
 import * as React from "react";
 import renderer from "react-test-renderer";
-import DataNotFound from "components/shared/dataNotFound/dataNotFound";
+import DataNotFound from "components/dataNotFound/dataNotFound";
 
 it("data not found", () => {
   const tree = renderer.create(<DataNotFound text="No Data Found!" />).toJSON();

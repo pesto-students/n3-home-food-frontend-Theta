@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import "./sellerRegistration.css";
-import CustomerLogin from "../../../landingScreen/customerLogin";
-import { setIsCustomerLoginDrawerOpen } from "../../../store/actions";
+import CustomerLogin from "landingScreen/customerLogin";
+import { setIsCustomerLoginDrawerOpen } from "store/actions";
 import axios from "utils/axios";
 
 function SellerRegistration() {

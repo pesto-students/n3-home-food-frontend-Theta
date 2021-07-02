@@ -18,12 +18,12 @@ import "antd/dist/antd.css";
 import axios from "utils/axios";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import Image from "../../../../components/shared/image/image";
+import Image from "components/image/image";
 import item from "images/south-indian.jpg";
 import { baseUrl } from "utils/constant";
 import { sessionId } from "utils/helpers";
-import SpinnerLoader from "../../../../components/shared/spinnerLoader/spinnerLoader";
-import DataNotFound from "../../../../components/shared/dataNotFound/dataNotFound";
+import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
+import DataNotFound from "components/dataNotFound/dataNotFound";
 const MyProducts = ({ products, isLoading, callback }) => {
   const { Option } = Select;
   const { Title } = Typography;

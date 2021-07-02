@@ -2,7 +2,7 @@ import { Menu, Dropdown, notification } from "antd";
 import { MoreOutlined } from "@ant-design/icons";
 import axios from "utils/axios";
 import { baseUrl } from "utils/constant";
-import { EditProductModal } from "../../../components/shared/manageProductmodal/editProduct";
+import { EditProductModal } from "components/manageProductmodal/editProduct";
 
 const openNotificationWithIcon = (type, message) => {
   notification[type]({
@@ -33,7 +33,7 @@ export const ProductCrudMenu = (props) => {
         Delete
       </Menu.Item>
       <Menu.Item key="updateProduct">
-        <EditProductModal product={props.product} callback={props.callback}/>
+        <EditProductModal product={props.product} callback={props.callback} />
       </Menu.Item>
     </Menu>
   );

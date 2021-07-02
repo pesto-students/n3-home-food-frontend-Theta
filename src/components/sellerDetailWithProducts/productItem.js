@@ -7,7 +7,7 @@ import { sessionId } from "utils/helpers";
 import Image from "../image/image";
 import "./sellerDetailWithProducts.css";
 import { useDispatch } from "react-redux";
-import { setSellerIdInCart } from "../../../store/actions/index";
+import { setSellerIdInCart } from "store/actions/index";
 import { useTranslation } from "react-i18next";
 
 const ProductItems = ({ products, savedCartItem, reloadCart, sellerId }) => {

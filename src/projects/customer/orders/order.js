@@ -2,8 +2,8 @@ import { Row } from "antd";
 import "./order.css";
 import "antd/dist/antd.css";
 import React, { useEffect, useState } from "react";
-import CustomerNavbar from "../../../components/shared/customerNavbar/customerNavbar";
-import SpinnerLoader from "../../../components/shared/spinnerLoader/spinnerLoader";
+import CustomerNavbar from "components/customerNavbar/customerNavbar";
+import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
 import axios from "utils/axios";
 import CustomerCurrentOrders from "./customerCurrentOrders";
 

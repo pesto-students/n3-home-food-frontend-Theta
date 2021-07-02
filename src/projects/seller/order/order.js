@@ -4,10 +4,10 @@ import React, { useEffect, useState } from "react";
 // import axios from "utils/axios";
 import CurrentOrders from "./currentOrder";
 import PastOrders from "./pastOrder";
-import TabTag from "../../../components/shared/tag/tag";
+import TabTag from "components/tag/tag";
 import { sessionId } from "utils/helpers";
 import axios from "utils/axios";
-import SpinnerLoader from "../../../components/shared/spinnerLoader/spinnerLoader";
+import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
 import { useTranslation } from "react-i18next";
 
 const SellerProducts = () => {

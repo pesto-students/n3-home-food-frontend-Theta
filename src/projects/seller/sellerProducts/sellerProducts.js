@@ -7,7 +7,7 @@ import AllProducts from "./allProduct/allProducts";
 import MyProducts from "./myProducts/myProducts";
 import { sessionId } from "utils/helpers";
 import { useTranslation } from "react-i18next";
-import TabTag from "../../../components/shared/tag/tag";
+import TabTag from "components/tag/tag";
 
 const SellerProducts = () => {
   const { t } = useTranslation();

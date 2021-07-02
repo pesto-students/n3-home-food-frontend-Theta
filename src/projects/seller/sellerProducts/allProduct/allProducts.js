@@ -12,12 +12,12 @@ import "antd/dist/antd.css";
 import axios from "axios";
 import React, { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import Image from "../../../../components/shared/image/image";
-import { AddProductSellerModal } from "../../../../components/shared/manageProductmodal/addProduct";
+import Image from "components/image/image";
+import { AddProductSellerModal } from "components/manageProductmodal/addProduct";
 import item from "images/south-indian.jpg";
 import { baseUrl } from "utils/constant";
 import { getCategoryId, sessionId } from "utils/helpers";
-import SpinnerLoader from "../../../../components/shared/spinnerLoader/spinnerLoader";
+import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
 import { useTranslation } from "react-i18next";
 
 const AllProducts = ({ products, isLoading, callback }) => {

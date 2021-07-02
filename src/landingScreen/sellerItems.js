@@ -1,7 +1,7 @@
 import { Row, Col } from "antd";
-import SellerCard from "../components/shared/sellerCard/sellerCard";
-import ServiceNotFound from "../components/shared/serviceNotFound/serviceNotFound";
-import SpinnerLoader from "../components/shared/spinnerLoader/spinnerLoader";
+import SellerCard from "components/sellerCard/sellerCard";
+import ServiceNotFound from "components/serviceNotFound/serviceNotFound";
+import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
 import { Link } from "react-router-dom";
 
 const SellerItems = ({ loading, seller }) => {

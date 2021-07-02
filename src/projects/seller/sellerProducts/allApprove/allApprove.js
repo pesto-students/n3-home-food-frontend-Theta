@@ -2,9 +2,9 @@ import { Card, Row, Skeleton, Tag, Typography } from "antd";
 import "antd/dist/antd.css";
 import React, { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import Image from "../../../../components/shared/image/image";
+import Image from "components/image/image";
 import item from "images/south-indian.jpg";
-import SpinnerLoader from "../../../../components/shared/spinnerLoader/spinnerLoader";
+import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
 
 const AllApprove = ({ products, isLoading }) => {
   const { Title } = Typography;

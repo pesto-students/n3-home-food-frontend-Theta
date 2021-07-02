@@ -1,15 +1,14 @@
 import { Drawer } from "antd";
-import React, { useState,useEffect } from "react";
-import Login from "../components/shared/login/login";
+import React, { useState, useEffect } from "react";
+import Login from "components/login/login";
 import { connect } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setIsCustomerLoginDrawerOpen } from "../store/actions";
 
 const CustomerLogin = (props) => {
-
-  useEffect(()=>{
+  useEffect(() => {
     setVisible(props.title.isCustomerLoginDrawerOpen);
-  },[props.title.isCustomerLoginDrawerOpen])
+  }, [props.title.isCustomerLoginDrawerOpen]);
 
   const [visible, setVisible] = useState(true);
   const Dispatch = useDispatch();
@@ -17,11 +16,10 @@ const CustomerLogin = (props) => {
   // const showDrawer = () => {
   //   setVisible(true);
   // };
- 
+
   const onClose = () => {
     setVisible(!props.title.isCustomerLoginDrawerOpen);
-     Dispatch(setIsCustomerLoginDrawerOpen(false))
-
+    Dispatch(setIsCustomerLoginDrawerOpen(false));
   };
 
   return (
@@ -33,15 +31,14 @@ const CustomerLogin = (props) => {
       onClose={onClose}
       visible={visible}
     >
-      <Login userType={props.type}/>
+      <Login userType={props.type} />
     </Drawer>
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    title: state
+    title: state,
   };
 };
 export default connect(mapStateToProps)(CustomerLogin);
-

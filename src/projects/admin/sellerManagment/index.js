@@ -6,7 +6,7 @@ import RejectedSellers from "./rejectedSeller /rejectedSellers";
 import PendingSellers from "./pendingSellers/pendingSellers";
 import axios from "utils/axios";
 import { baseUrl } from "utils/constant";
-import TabTag from "../../../components/shared/tag/tag";
+import TabTag from "components/tag/tag";
 // import AllProducts from './allProducts/allProducts';
 // import ProductApproval from './product Approval/productApproval';
 

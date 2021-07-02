@@ -2,12 +2,12 @@ import { Carousel, Col, Layout, Row, Typography } from "antd";
 import "antd/dist/antd.css";
 import axios from "axios";
 import { React, useEffect, useState } from "react";
-import Image from "../../../components/shared/image/image";
-import CustomerNavbar from "../../../components/shared/customerNavbar/customerNavbar";
-import CustomTabs from "../../../components/shared/Tabs/Tabs";
+import Image from "components/image/image";
+import CustomerNavbar from "components/customerNavbar/customerNavbar";
+import CustomTabs from "components/Tabs/Tabs";
 import { baseUrl } from "utils/constant";
 import { getCategoryId, getPincode, getUser } from "utils/helpers";
-import SellerItems from "../../../landingScreen/sellerItems";
+import SellerItems from "landingScreen/sellerItems";
 
 const { Content } = Layout;
 const { Title } = Typography;

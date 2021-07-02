@@ -5,7 +5,7 @@ import AllProducts from "./allProducts/allProducts";
 import ProductApproval from "./product Approval/productApproval";
 import { baseUrl } from "utils/constant";
 import axios from "utils/axios";
-import TabTag from "../../../components/shared/tag/tag";
+import TabTag from "components/tag/tag";
 
 const { TabPane } = Tabs;
 

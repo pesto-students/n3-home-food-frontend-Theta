@@ -18,9 +18,7 @@ const SellerManagment = () => {
   const [rejectedSellersItems, setRejectedSellersItems] = useState([]);
   const [pendingSellersItems, setPendingSellersItems] = useState([]);
 
-  const callback = (key) => {
-    console.log(key);
-  };
+  const callback = (key) => {};
 
   const rejectedSeller = () => {
     axios

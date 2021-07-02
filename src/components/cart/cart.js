@@ -28,8 +28,6 @@ const Cart = ({ alreadyInCart, reloadCart, ...props }) => {
       (item) => item.productId === dish.productId
     );
 
-    console.log("cart", currentProduct[0]);
-
     let cartItem = {};
     if (currentProduct.length > 0) {
       if (method === "add") {
@@ -57,7 +55,6 @@ const Cart = ({ alreadyInCart, reloadCart, ...props }) => {
   };
 
   const updateCart = (cartItem) => {
-    console.log("cartitem-update", cartItem);
     axios
       .post(`${baseUrl}/cart`, cartItem)
       .then((result) => {

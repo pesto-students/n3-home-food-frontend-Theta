@@ -19,7 +19,6 @@ const RejectedSellers = ({ isLoading, sellers }) => {
   // const onChange = (checked) => {
   //   if (false) {
   //   }
-  //   console.log(`switch to ${checked}`);
   // };
 
   return (

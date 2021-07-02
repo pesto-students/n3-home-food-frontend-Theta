@@ -63,7 +63,6 @@ function AdminDashboard() {
   };
 
   const onChange = (value, dateString) => {
-    console.log("Formatted Selected Time: ", dateString);
     getGraphDetails();
     getPieChartDetails();
   };

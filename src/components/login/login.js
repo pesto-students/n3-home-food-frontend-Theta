@@ -27,7 +27,6 @@ const Login = ({ userType }) => {
     setButtonLoding(true);
     configureCaptcha();
     const phoneNumber = "+91" + phone;
-    console.log(phoneNumber);
     const appVerifier = window.recaptchaVerifier;
     firebase
       .auth()
@@ -47,7 +46,6 @@ const Login = ({ userType }) => {
         // ...
       })
       .catch((error) => {
-        console.log(error);
         // Error; SMS not sent
         // ...
         setButtonLoding(false);

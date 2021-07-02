@@ -11,7 +11,6 @@ const CustomerCurrentOrders = ({ orders, callBack }) => {
   const { t } = useTranslation();
 
   const rateOrder = (rate, order) => {
-    console.log(order);
     axios
       .put(`/orders/rate/${order.id}`, { rating: rate })
       .then((result) => {
@@ -34,14 +33,14 @@ const CustomerCurrentOrders = ({ orders, callBack }) => {
               <Row justify="space-betwee">
                 <Col md={12}>
                   <Title level={5}>
-                  {t('MyOrders.Delivery Type')} :{" "}
+                    {t("MyOrders.Delivery Type")} :{" "}
                     <Tag color="processing">{item.DeliveryType}</Tag>
                   </Title>
                 </Col>
                 <Col md={12}>
                   <Row justify="end">
                     <Title level={5}>
-                    {t('MyOrders.Received on')} {" "}
+                      {t("MyOrders.Received on")}{" "}
                       {moment(item.dateOrdered).format(
                         "dddd, MMMM Do YYYY, h:mm:ss a"
                       )}
@@ -51,10 +50,15 @@ const CustomerCurrentOrders = ({ orders, callBack }) => {
               </Row>
               <Row>
                 <Col md={24}>
-                  <Title level={5}> {t('MyOrders.Order No')} - {item._id}</Title>
+                  <Title level={5}>
+                    {" "}
+                    {t("MyOrders.Order No")} - {item._id}
+                  </Title>
                 </Col>
                 <Col md={24}>
-                  <Title level={5}>{t('MyOrders.Contact Number')} - {item.user.phone}</Title>
+                  <Title level={5}>
+                    {t("MyOrders.Contact Number")} - {item.user.phone}
+                  </Title>
                 </Col>
               </Row>
               <Row justify="end">
@@ -80,7 +84,7 @@ const CustomerCurrentOrders = ({ orders, callBack }) => {
                 <Col md={12}>
                   <Row justify="end">
                     <Title level={5}>
-                    {t('MyOrders.Total')} : {rupeeSign} {item.totalPrice}
+                      {t("MyOrders.Total")} : {rupeeSign} {item.totalPrice}
                     </Title>
                   </Row>
                 </Col>

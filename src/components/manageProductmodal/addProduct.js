@@ -33,7 +33,6 @@ const props = {
   },
   onChange(info) {
     if (info.file.status !== "uploading") {
-      console.log(info.file, info.fileList);
     }
     if (info.file.status === "done") {
       message.success(`${info.file.name} file uploaded successfully`);
@@ -44,8 +43,6 @@ const props = {
 };
 
 const normFile = (e) => {
-  console.log("Upload event:", e);
-
   if (Array.isArray(e)) {
     return e;
   }
@@ -71,9 +68,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, fromFor }) => {
             form.resetFields();
             onCreate(values);
           })
-          .catch((info) => {
-            console.log("Validate Failed:", info);
-          });
+          .catch((info) => {});
       }}
     >
       <Form
@@ -203,7 +198,6 @@ export const AddProductModal = (props) => {
     data.append("description", values.description);
     data.append("max_price", values.maxPrice);
 
-    console.log("file,", data);
     axios
       .post(
         `${baseUrl}/products/admin`,
@@ -256,7 +250,6 @@ export const AddProductSellerModal = (props) => {
 
   const [visible, setVisible] = useState(false);
   const onCreate = (values) => {
-    console.log(values);
     try {
       const data = new FormData();
       data.append("image", values.productImage[0].originFileObj);

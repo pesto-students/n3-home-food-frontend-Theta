@@ -15,7 +15,6 @@ export const ProductCrudMenu = (props) => {
     axios
       .delete(`${baseUrl}/products/${props.product.id}`)
       .then((result) => {
-        console.log(result);
         if (result.status === 200) {
           openNotificationWithIcon("success", "Product Deleted");
           props.callback();

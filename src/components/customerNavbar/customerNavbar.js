@@ -12,7 +12,7 @@ const { Header } = Layout;
 
 const CustomerNavbar = ({ updatePincode }) => {
   const { t } = useTranslation();
-  const [isPincdeModal, setIsPincodeModal] = useState(false);
+  const [isPincodeModal, setIsPincodeModal] = useState(false);
   const [currentPincode, setCurrentPincode] = useState("");
 
   const logout = () => {
@@ -39,16 +39,11 @@ const CustomerNavbar = ({ updatePincode }) => {
     }
   }, [updatePincode]);
 
-  // const savePincode = () => {
-  //   let form = document.getElementById("myForm").nodeValue;
-  //   console.log(form.target);
-  // };
-
   return (
     <Header className="navbar">
       <Modal
         title="Enter Pincode"
-        visible={isPincdeModal}
+        visible={isPincodeModal}
         okText="Save"
         onCancel={() => setIsPincodeModal(false)}
         okButtonProps={{

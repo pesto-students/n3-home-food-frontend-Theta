@@ -72,7 +72,6 @@ function SellerGraphs() {
   };
 
   const onChange = (value, dateString) => {
-    console.log("Formatted Selected Time: ", dateString);
     getGraphDetails();
     getPieChartDetails();
   };

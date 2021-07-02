@@ -7,7 +7,6 @@ import "./seller.css";
 const { Meta } = Card;
 
 const SellerCard = ({ detail }) => {
-  console.log(detail);
   return (
     <Card
       hoverable

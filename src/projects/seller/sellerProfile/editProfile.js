@@ -22,7 +22,6 @@ const props = {
   },
   onChange(info) {
     if (info.file.status !== "uploading") {
-      console.log(info.file, info.fileList);
     }
     if (info.file.status === "done") {
       message.success(`${info.file.name} file uploaded successfully`);
@@ -33,8 +32,6 @@ const props = {
 };
 
 const normFile = (e) => {
-  console.log("Upload event:", e);
-
   if (Array.isArray(e)) {
     return e;
   }
@@ -67,9 +64,7 @@ const CollectionCreateForm = ({ profile, visible, onCreate, onCancel }) => {
             form.resetFields();
             onCreate(values);
           })
-          .catch((info) => {
-            console.log("Validate Failed:", info);
-          });
+          .catch((info) => {});
       }}
     >
       <Form

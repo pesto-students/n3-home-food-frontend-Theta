@@ -41,9 +41,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
             form.resetFields();
             onCreate(values);
           })
-          .catch((info) => {
-            console.log("Validate Failed:", info);
-          });
+          .catch((info) => {});
       }}
     >
       {isLoading}
@@ -68,7 +66,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
           <Select placeholder="Please select a Product">
             {products.map((product, i) => (
               <Option value={product.id}>
-                <span >{product.name}</span>
+                <span>{product.name}</span>
                 {/* <span className="cost">
                   <p className="max-amount">Max Amount</p> &nbsp; ₹
                   {product.max_price}
@@ -86,17 +84,14 @@ export const ReassignProduct = (props) => {
   const [visible, setVisible] = useState(false);
 
   const onCreate = (values) => {
-    console.log("Received values of form: ", values);
-
     axios
-      .put(
-        `${baseUrl}/products/product-reassign/${props.productId}`,
-        { existingProductId: values.existingProductId }
-      )
+      .put(`${baseUrl}/products/product-reassign/${props.productId}`, {
+        existingProductId: values.existingProductId,
+      })
       .then((result) => {
         if (result.status === 200) {
           openNotificationWithIcon("success", "Product Reassigned");
-          props.callback()
+          props.callback();
         } else {
           openNotificationWithIcon("error", "Could Not Reassign Product ");
         }

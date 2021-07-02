@@ -40,7 +40,6 @@ const ProductItems = ({ products, savedCartItem, reloadCart, sellerId }) => {
       if (method === "sub") {
         currentProduct[0].quantity = currentProduct[0].quantity - 1;
       }
-      console.log("cartItem", currentProduct[0]);
 
       cartItem = {
         productId: dish.productId,
@@ -74,14 +73,12 @@ const ProductItems = ({ products, savedCartItem, reloadCart, sellerId }) => {
 
   const getQuantity = (currentItem) => {
     try {
-      console.log("savedCartItem", savedCartItem);
       let current = savedCartItem.filter(
         (item) => item.productId === currentItem.productId
       );
       if (current.length > 0) {
         return current[0].quantity;
       }
-      console.log("current", currentItem);
       return 0;
     } catch (e) {
       return 0;

@@ -6,7 +6,6 @@ import cart from "../data/cart";
 
 const isAdminLoggedIn = (state = initialState.isAdminLoggedIn, action) => {
   if (action.type === "ADMIN_LOGGED") {
-    console.log("state", action.value);
     return action.value;
   }
 
@@ -23,10 +22,7 @@ const isCustomerLoginDrawerOpen = (
   return state;
 };
 
-const sellerIdInCart = (
-  state = cart.sellerIdInCart,
-  action
-) => {
+const sellerIdInCart = (state = cart.sellerIdInCart, action) => {
   if (action.type === "SELLER_IN_CART") {
     return action.value;
   }
@@ -44,5 +40,5 @@ export default combineReducers({
   isAdminLoggedIn,
   myCart,
   isCustomerLoginDrawerOpen,
-  sellerIdInCart
+  sellerIdInCart,
 });

@@ -7,7 +7,7 @@ import {
   message,
   Modal,
   notification,
-  Upload
+  Upload,
 } from "antd";
 import "antd/dist/antd.css";
 import axios from "axios";
@@ -29,7 +29,6 @@ const props = {
   },
   onChange(info) {
     if (info.file.status !== "uploading") {
-      console.log(info.file, info.fileList);
     }
     if (info.file.status === "done") {
       message.success(`${info.file.name} file uploaded successfully`);
@@ -40,8 +39,6 @@ const props = {
 };
 
 const normFile = (e) => {
-  console.log("Upload event:", e);
-
   if (Array.isArray(e)) {
     return e;
   }
@@ -79,9 +76,7 @@ const CollectionCreateForm = ({
             form.resetFields();
             onCreate(values);
           })
-          .catch((info) => {
-            console.log("Validate Failed:", info);
-          });
+          .catch((info) => {});
       }}
     >
       <Form
@@ -179,7 +174,6 @@ export const EditProductModal = (props) => {
     data.append("max_price", values.maxPrice);
     data.append("category", values.productCategory);
 
-    console.log("file,", data);
     axios
       .put(`${baseUrl}/products/${props.product.id}`, data)
       .then((result) => {

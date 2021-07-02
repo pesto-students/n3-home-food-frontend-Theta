@@ -9,9 +9,7 @@ import TabTag from "components/tag/tag";
 
 const { TabPane } = Tabs;
 
-function callback(key) {
-  console.log(key);
-}
+function callback(key) {}
 
 const ProductCatalogue = () => {
   const [approveProducts, setApproveProducts] = useState([]);

@@ -15,7 +15,6 @@ export const loginUser = async (info) => {
   let response = await axios
     .post(url, info)
     .then((response) => {
-      console.log(response);
       setUser(response.data);
       if (response.data.userType === "Admin") {
         window.location.href = "/admin/dashboard";

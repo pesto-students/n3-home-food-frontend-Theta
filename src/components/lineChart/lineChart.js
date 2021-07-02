@@ -6,7 +6,6 @@ const LineChart = (props) => {
   const lineChart = useRef(null);
 
   useEffect(() => {
-    console.log("data");
     bb.generate({
       data: {
         columns: [props.dataSource],

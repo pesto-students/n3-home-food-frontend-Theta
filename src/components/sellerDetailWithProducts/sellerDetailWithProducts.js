@@ -15,7 +15,6 @@ import { withRouter } from "react-router-dom";
 import Navbar from "../navbar/navbar";
 import { useTranslation } from "react-i18next";
 
-
 const SellerDetailWithProducts = (props) => {
   const { t } = useTranslation();
   const sellerId = props.match.params.id;
@@ -29,11 +28,9 @@ const SellerDetailWithProducts = (props) => {
   });
 
   const getCurrentTab = (tab) => {
-    console.log(tab);
     let items = profile.myProducts.filter((item) =>
       item.productCategory.filter((n) => n.name === tab)
     );
-    console.log(items);
   };
 
   const getSellerProfile = useCallback(() => {
@@ -90,7 +87,7 @@ const SellerDetailWithProducts = (props) => {
                   <Title level={5}>{profile.description}</Title>
                   <Rate defaultValue={profile.rating}></Rate>
                   <Title className="margin-10" level={5}>
-                    {t('Cart.Max Amount')} : {rupeeSign} {profile.max_amount}
+                    {t("Cart.Max Amount")} : {rupeeSign} {profile.max_amount}
                   </Title>
                 </Col>
               </Row>
@@ -109,7 +106,7 @@ const SellerDetailWithProducts = (props) => {
               <Col md={6}></Col>
               <Col md={12}>
                 <Title level={3} className="product-text">
-                   {t('Cart.Products')}
+                  {t("Cart.Products")}
                 </Title>
 
                 {isCartLoad && (
@@ -123,7 +120,7 @@ const SellerDetailWithProducts = (props) => {
               </Col>
               <Col md={6}>
                 <Card>
-                  <Title level={3}> {t('Cart.Cart')} </Title>
+                  <Title level={3}> {t("Cart.Cart")} </Title>
                   <hr />
                   {isCartLoad && (
                     <Cart reloadCart={getCart} alreadyInCart={alreadyInCart} />

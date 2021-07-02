@@ -1,4 +1,4 @@
-import React,{Suspense} from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
@@ -8,29 +8,29 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import reducers from "./store/reducer/reducer";
-import { saveToLocalStorage, loadToLocalStorage} from './store/encryptStore'
+import { saveToLocalStorage, loadToLocalStorage } from "./store/encryptStore";
 
 // use multi laungauage
-import './i18next'
+import "./i18next";
 
 let createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 export let store = createStoreWithMiddleware(reducers);
-const persistedState = loadToLocalStorage()
+const persistedState = loadToLocalStorage();
 
- store = createStoreWithMiddleware(
-  reducers,persistedState,
+store = createStoreWithMiddleware(
+  reducers,
+  persistedState,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
-store.subscribe(()=> saveToLocalStorage(store.getState()))
-
+store.subscribe(() => saveToLocalStorage(store.getState()));
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Router >
-        <Suspense fallback={(<div>Loading...</div>)}> 
-        <App />
+      <Router>
+        <Suspense fallback={<div>Loading...</div>}>
+          <App />
         </Suspense>
       </Router>
     </Provider>

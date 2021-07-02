@@ -34,9 +34,7 @@ export class Checkout extends React.Component {
       .get(`${baseUrl}/cart/${sessionId()}`)
       .then((result) => {
         this.setState({ isCartLoad: true });
-        this.setState({ alreadyInCart: result.data }, () => {
-          console.log(this.state.alreadyInCart);
-        });
+        this.setState({ alreadyInCart: result.data }, () => {});
       })
       .catch((err) => {
         this.setState({ isCartLoad: true });
@@ -51,14 +49,12 @@ export class Checkout extends React.Component {
   };
 
   onDeliveryChange = (e) => {
-    console.log("radio checked", e.target.value);
     this.setState({
       value: e.target.value,
     });
   };
 
   onChange = (current) => {
-    console.log("onChange:", current);
     this.setState({ current });
   };
 

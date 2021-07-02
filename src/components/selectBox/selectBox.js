@@ -7,20 +7,19 @@ const SelectBox = () => {
   const { i18n } = useTranslation();
 
   const handleChange = (event) => {
-    console.log(event)
     i18n.changeLanguage(event);
   };
 
   return (
     <>
-    <Select
-      defaultValue="English"
-      style={{ width: 120 }}
-      onChange={handleChange}
-    >
-      <Option value="en">English</Option>
-      <Option value="hn">Hindi</Option>
-    </Select>
+      <Select
+        defaultValue="English"
+        style={{ width: 120 }}
+        onChange={handleChange}
+      >
+        <Option value="en">English</Option>
+        <Option value="hn">Hindi</Option>
+      </Select>
     </>
   );
 };

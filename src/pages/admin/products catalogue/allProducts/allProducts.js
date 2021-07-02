@@ -2,12 +2,12 @@ import { Card, Row, Skeleton, Typography } from "antd";
 import "antd/dist/antd.css";
 import React, { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
+import DataNotFound from "../../../../components/shared/dataNotFound/dataNotFound";
 import Image from "../../../../components/shared/image/image";
 import { AddProductModal } from "../../../../components/shared/manageProductmodal/addProduct";
+import SpinnerLoader from "../../../../components/shared/spinnerLoader/spinnerLoader";
 import { ProductCrudMenu } from "../productCrudMenu";
 import "./allProducts.css";
-import SpinnerLoader from "../../../../components/shared/spinnerLoader/spinnerLoader";
-import DataNotFound from "../../../../components/shared/dataNotFound/dataNotFound";
 const AllProducts = ({ isLoading, products, loadAllProducts }) => {
   const { Title } = Typography;
 
@@ -18,9 +18,9 @@ const AllProducts = ({ isLoading, products, loadAllProducts }) => {
   };
 
 
-  const updateProductList = () => {
-    loadAllProducts();
-  };
+  // const updateProductList = () => {
+  //   loadAllProducts();
+  // };
 
   return (
     <>

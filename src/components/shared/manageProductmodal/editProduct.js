@@ -7,7 +7,7 @@ import {
   message,
   Modal,
   notification,
-  Upload,
+  Upload
 } from "antd";
 import "antd/dist/antd.css";
 import axios from "axios";

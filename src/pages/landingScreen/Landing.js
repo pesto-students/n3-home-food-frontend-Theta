@@ -2,21 +2,20 @@ import { Carousel, Col, Layout, Row, Typography } from "antd";
 import "antd/dist/antd.css";
 import axios from "axios";
 import { React, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import Image from "../../components/shared/image/image";
 import Navbar from "../../components/shared/navbar/navbar";
 import CustomTabs from "../../components/shared/Tabs/Tabs";
+import corousel2 from "../../images/courosel-3.jpg";
+import corousel1 from "../../images/courosel.jpg";
 import { baseUrl } from "../../utils/constant";
 import {
   getCategoryId,
   redirectToOriginalPageFromLanding,
 } from "../../utils/helpers";
 import CustomerLogin from "./customerLogin";
-import corousel1 from "../../images/courosel.jpg";
-import corousel2 from "../../images/courosel-3.jpg";
-
 import "./landing.css";
 import SellerItems from "./sellerItems";
-import { useTranslation } from "react-i18next";
 
 const { Content } = Layout;
 const { Title } = Typography;

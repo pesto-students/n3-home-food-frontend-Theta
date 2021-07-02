@@ -88,7 +88,7 @@ const { Header, Content, Footer, Sider } = Layout;
             {user === 'Seller' ?
               <div
                 className="site-layout-background"
-                style={{ padding: 24, minHeight: 360 }}
+                style={{ padding: 0, minHeight: 360 }}
               >
                <Switch>
               

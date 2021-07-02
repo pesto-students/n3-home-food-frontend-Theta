@@ -1,32 +1,22 @@
-import React from "react";
 import {
-  Steps,
-  Button,
-  message,
+  CreditCardOutlined, SolutionOutlined, UserOutlined
+} from "@ant-design/icons";
+import {
   Card,
   Radio,
-  Input,
-  Space,
-  Row,
-  Image,
+
+  Space, Steps
 } from "antd";
-import {
-  UserOutlined,
-  SolutionOutlined,
-  CreditCardOutlined,
-  SmileOutlined,
-} from "@ant-design/icons";
-import "./checkout.css";
-import Payment from "../payment";
-import emptyCardImage from "../../../images/empty_cart.jpg";
-import CustomerNavbar from "../../../components/shared/customerNavbar/customerNavbar";
+import Title from "antd/lib/typography/Title";
+import React from "react";
+import { Translation } from "react-i18next";
 import Cart from "../../../components/shared/cart/cart";
+import CustomerNavbar from "../../../components/shared/customerNavbar/customerNavbar";
 import axios from "../../../utils/axios";
 import { baseUrl } from "../../../utils/constant";
 import { sessionId } from "../../../utils/helpers";
-import Title from "antd/lib/typography/Title";
-import { Translation } from "react-i18next";
-import { useTranslation } from "react-i18next";
+import Payment from "../payment";
+import "./checkout.css";
 
 const { Step } = Steps;
 
@@ -78,7 +68,7 @@ export class Checkout extends React.Component {
   render() {
     const { current } = this.state;
     const { value } = this.state;
-    const { alreadyInCart } = this.state;
+    // const { alreadyInCart } = this.state;
 
     const Content1 = (
       <Translation>

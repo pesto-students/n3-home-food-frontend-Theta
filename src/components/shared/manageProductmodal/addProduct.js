@@ -13,10 +13,11 @@ import {
 import "antd/dist/antd.css";
 import axios from "axios";
 import React, { useState } from "react";
+
+import { useTranslation } from "react-i18next";
 import { baseUrl } from "../../../utils/constant";
 
 const { Option } = Select;
-
 const openNotificationWithIcon = (type, message) => {
   notification[type]({
     message: message,
@@ -53,11 +54,13 @@ const normFile = (e) => {
 };
 
 const CollectionCreateForm = ({ visible, onCreate, onCancel, fromFor }) => {
+  const { t } = useTranslation();
+
   const [form] = Form.useForm();
   return (
     <Modal
       visible={visible}
-      title="Add Product"
+      title={t("seller.product.requestForm.addProductText")}
       okText="Add"
       cancelText="Cancel"
       onCancel={onCancel}
@@ -83,29 +86,38 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, fromFor }) => {
       >
         <Form.Item
           name="productName"
-          label="Product Name"
+          label={t("seller.product.requestForm.productName")}
           rules={[
             {
               required: true,
-              message: "Please input the Product Name!",
+              message: t("seller.product.requestForm.productNameValidation"),
             },
             { min: 5, message: "Product Name must be minimum 5 characters." },
           ]}
         >
-          <Input />
+          <Input
+            placeholder={t("seller.product.requestForm.productNameValidation")}
+          />
         </Form.Item>
         {fromFor !== "admin" && (
           <Form.Item
             name="productCategory"
-            label="Product Category"
+            label={t("seller.product.requestForm.productCategory")}
             rules={[
               {
                 required: true,
-                message: "Please input the Product Category!",
+                message: t(
+                  "seller.product.requestForm.productCategoryValidation"
+                ),
               },
             ]}
           >
-            <Select mode="multiple" placeholder="Please select a Category">
+            <Select
+              mode="multiple"
+              placeholder={t(
+                "seller.product.requestForm.productCategoryValidation"
+              )}
+            >
               <Option value="60c906ce35453e14cd3f4ee3">Breakfast</Option>
               <Option value="60ccfb4516659e249450ed49">Lunch</Option>
               <Option value="60ccfea78d901732e097e2ee">Snacks</Option>
@@ -115,11 +127,11 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, fromFor }) => {
         )}
         <Form.Item
           name="description"
-          label="Description"
+          label={t("seller.product.requestForm.description")}
           rules={[
             {
               required: true,
-              message: "Please input the Product Description!",
+              message: t("seller.product.requestForm.descriptionValidation"),
             },
             {
               min: 5,
@@ -131,7 +143,10 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, fromFor }) => {
             },
           ]}
         >
-          <Input type="textarea" />
+          <Input
+            type="textarea"
+            placeholder={t("seller.product.requestForm.descriptionValidation")}
+          />
         </Form.Item>
 
         <Form.Item
@@ -162,11 +177,11 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, fromFor }) => {
         ) : (
           <Form.Item
             name="maxPrice"
-            label="Price (₹)"
+            label={t("seller.product.requestForm.price")}
             rules={[
               {
                 required: true,
-                message: "Please Enter Price!",
+                message: t("seller.product.requestForm.priceValidation"),
               },
             ]}
           >
@@ -180,7 +195,6 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, fromFor }) => {
 
 export const AddProductModal = (props) => {
   const [visible, setVisible] = useState(false);
-
 
   const onCreate = (values) => {
     const data = new FormData();
@@ -199,7 +213,7 @@ export const AddProductModal = (props) => {
       .then((result) => {
         if (result.status === 200) {
           openNotificationWithIcon("success", "Product Added");
-           props.callback();
+          props.callback();
         } else {
           openNotificationWithIcon("error", "Could Not Add Product");
         }
@@ -238,6 +252,8 @@ export const AddProductModal = (props) => {
 };
 
 export const AddProductSellerModal = (props) => {
+  const { t } = useTranslation();
+
   const [visible, setVisible] = useState(false);
   const onCreate = (values) => {
     console.log(values);
@@ -280,7 +296,7 @@ export const AddProductSellerModal = (props) => {
             setVisible(true);
           }}
         >
-          Request Product
+          {t("seller.product.requestProductButton")}
         </Button>
       </div>
 

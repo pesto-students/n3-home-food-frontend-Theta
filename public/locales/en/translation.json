@@ -46,6 +46,76 @@
         "Contact Number":"Contact Number",
         "Total":"Total"
 
-    }
+    },
+    "seller":{
+         "registerForm":
+         {
+             "partnerText":"Partner with us",
+             "description":"What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the  industry's standard dummy text ever since the 1500s when a unknown printer took a galley of type and scrambled it to make a  type specimen book it has?",
+             "register":"Register",
+             "name":"Name",
+             "nameValidationAndPlaceholder":"Please Enter User Name",
+             "displayName":"Display Name",
+             "displayNameValidationAndPlaceholder":"Please Enter Display Name",
+             "mobileNumber":"Mobile Number",
+             "mobileNumberValidationAndPlaceholder":"Please Enter Mobile Number",
+             "idProof":"Aadhaar Card",
+             "idProofValidationAndPlaceholder":"Please Enter Aadhaar Card",
+             "email":"Email (optional)",
+             "emailValidationAndPlaceholder":"Please Enter Email",
+             "address":"Address",
+             "addressValidationAndPlaceholder":"Please Enter Address",
+             "submit":" Submit",
+             "loginText":"Already a seller, Login?"
+
+            },
+        "dashboard":{
+            "dashboardText":"Dashboard",
+            "productText":"Product",
+            "profileText":"Seller",
+            "orderText":"Order",
+            "totalOrder":"Total Orders",
+            "totalIncome":"Total Income"
+        },
+        "product":{
+            "allProducts":"All Products",
+            "myProducts":"My Products",
+            "allApprove":"All Approve",
+            "requestProductButton":"Request Product",
+            "addButton":"Add",
+            "cancelButton":"Cancel",
+            "requestForm":{
+                "addProductText":"Add Product",
+                "productName":"Product Name",
+                "productNameValidation":"Please input the Product Name",
+                "productCategory":"Product Category",
+                "productCategoryValidation":"Please Select Category",
+                "description":"Description",
+                "descriptionValidation":"Please Input the Product Description",
+                "price":"Price",
+                "priceValidation":"Please Enter Price"
+
+            }
+        },
+        "profile":{
+          "editText":"Edit",
+          "profileImageText":"Profile Image",
+          "editProfileModalTitle":"Edit Profile"
+        },
+        "order":
+        {
+            "currentOrder":"Current Order",
+            "pastOrder":"Past Order",
+            "deliveryType":"Delivery Type",
+            "orderNo":"Order No",
+            "contactNumber":"Contact Number",
+            "receivedOn":"Received on",
+            "deliverButton":"Deliver",
+            "totalText":"Total"
+
+
+        }
+         
+    } 
 
 }

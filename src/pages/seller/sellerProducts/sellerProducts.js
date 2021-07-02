@@ -6,9 +6,11 @@ import AllApprove from "./allApprove/allApprove";
 import AllProducts from "./allProduct/allProducts";
 import MyProducts from "./myProducts/myProducts";
 import { sessionId } from "../../../utils/helpers";
+import { useTranslation } from "react-i18next";
 import TabTag from "../../../components/shared/tag/tag";
 
 const SellerProducts = () => {
+  const { t } = useTranslation();
   const { TabPane } = Tabs;
   const [allProducts, setAllProducts] = useState([]);
   const [myProducts, setMyProducts] = useState([]);
@@ -61,7 +63,12 @@ const SellerProducts = () => {
   return (
     <Tabs defaultActiveKey="1">
       <TabPane
-        tab={<TabTag count={allProducts.length} text="All Products " />}
+        tab={
+          <TabTag
+            count={allProducts.length}
+            text={t("seller.product.allProducts")}
+          />
+        }
         key="1"
       >
         <AllProducts
@@ -71,7 +78,12 @@ const SellerProducts = () => {
         />{" "}
       </TabPane>
       <TabPane
-        tab={<TabTag count={myProducts.length} text="My Products" />}
+        tab={
+          <TabTag
+            count={myProducts.length}
+            text={t("seller.product.myProducts")}
+          />
+        }
         key="2"
       >
         <MyProducts
@@ -81,7 +93,12 @@ const SellerProducts = () => {
         />
       </TabPane>
       <TabPane
-        tab={<TabTag count={allApprove.length} text="All Approve" />}
+        tab={
+          <TabTag
+            count={allApprove.length}
+            text={t("seller.product.allApprove")}
+          />
+        }
         key="3"
       >
         <AllApprove products={allApprove} isLoading={isLoading} />

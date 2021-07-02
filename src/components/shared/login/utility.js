@@ -3,8 +3,7 @@ import { setUser } from "../../../utils/helpers";
 import { notification } from "antd";
 
 export const loginUser = async (info) => {
-  console.log(info);
-  let url = "";
+  let url;
   if (info.customerType === "Admin") {
     url = "/admin/login";
   } else if (info.customerType === "Seller") {

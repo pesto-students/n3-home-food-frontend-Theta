@@ -4,9 +4,11 @@ import Title from "antd/lib/typography/Title";
 import moment from "moment";
 import React from "react";
 import axios from "../../../utils/axios";
+import { useTranslation } from "react-i18next";
 import { rupeeSign } from "../../../utils/constant";
 
 const CurrentOrders = ({ orders, callBack }) => {
+  const { t } = useTranslation();
   const delived = (order) => {
     axios
       .put(`/orders/approve-order/${order.id}`)
@@ -29,14 +31,15 @@ const CurrentOrders = ({ orders, callBack }) => {
             <Row justify="space-betwee">
               <Col md={12}>
                 <Title level={5}>
-                  Delivery Type :{" "}
+                  {t("seller.order.deliveryType")} :{" "}
                   <Tag color="processing">{item.DeliveryType}</Tag>
                 </Title>
               </Col>
               <Col md={12}>
                 <Row justify="end">
                   <Title level={5}>
-                    Received on{" "}
+                    {t("seller.order.receivedOn")}
+                    {"  "}
                     {moment(item.dateOrdered).format(
                       "dddd, MMMM Do YYYY, h:mm:ss a"
                     )}
@@ -46,10 +49,14 @@ const CurrentOrders = ({ orders, callBack }) => {
             </Row>
             <Row>
               <Col md={24}>
-                <Title level={5}>Order No - {item._id}</Title>
+                <Title level={5}>
+                  {t("seller.order.orderNo")} - {item._id}
+                </Title>
               </Col>
               <Col md={24}>
-                <Title level={5}>Contact Number - {item.user.phone}</Title>
+                <Title level={5}>
+                  {t("seller.order.contactNumber")}- {item.user.phone}
+                </Title>
               </Col>
             </Row>
             <Row justify="end">
@@ -58,7 +65,7 @@ const CurrentOrders = ({ orders, callBack }) => {
                 // loading={isLoading}
                 onClick={() => delived(item)}
               >
-                Deliver
+                {t("seller.order.deliverButton")}
               </Button>
             </Row>
             <hr></hr>
@@ -73,7 +80,7 @@ const CurrentOrders = ({ orders, callBack }) => {
               <Col md={12}>
                 <Row justify="end">
                   <Title level={5}>
-                    Total: {rupeeSign} {item.totalPrice}
+                    {t("seller.order.totalText")}: {rupeeSign} {item.totalPrice}
                   </Title>
                 </Row>
               </Col>

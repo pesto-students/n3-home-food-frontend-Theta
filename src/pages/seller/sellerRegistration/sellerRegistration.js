@@ -3,12 +3,16 @@ import "antd/dist/antd.css";
 import { React } from "react";
 import { connect, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
 import "./sellerRegistration.css";
 import CustomerLogin from "../../landingScreen/customerLogin";
 import { setIsCustomerLoginDrawerOpen } from "../../../store/actions";
 import axios from "../../../utils/axios";
 
 function SellerRegistration() {
+  const { t } = useTranslation();
+
   const Dispatch = useDispatch();
 
   const toggleDrawer = () => {
@@ -39,43 +43,53 @@ function SellerRegistration() {
       <Row style={{ height: "100vh" }}>
         <Col md={16} className="left-container">
           <div className="left-container-content">
-            <h1>Partner with us</h1>
-            <p>
-              What is Lorem Ipsum Lorem Ipsum is simply dummy text of the
-              printing and typesetting industry Lorem Ipsum has been the
-              industry's standard dummy text ever since the 1500s when an
-              unknown printer took a galley of type and scrambled it to make a
-              type specimen book it has?
-            </p>
+            <h1> {t("seller.registerForm.partnerText")}</h1>
+            <p>{t("seller.registerForm.description")}</p>
           </div>
         </Col>
         <Col md={8}>
           <div className="right-container">
-            <h4 align="center">Register</h4>
+            <h4 align="center">{t("seller.registerForm.register")}</h4>
             <Form layout="vertical" hideRequiredMark onFinish={registerSeller}>
               <Row gutter={16}>
                 <Col span={24}>
                   <Form.Item
                     name="name"
-                    label="Name"
+                    label={t("seller.registerForm.name")}
                     rules={[
-                      { required: true, message: "Please Enter User Name" },
+                      {
+                        required: true,
+                        message: t(
+                          "seller.registerForm.nameValidationAndPlaceholder"
+                        ),
+                      },
                     ]}
                   >
-                    <Input placeholder="Please Enter User Name" />
+                    <Input
+                      placeholder={t(
+                        "seller.registerForm.nameValidationAndPlaceholder"
+                      )}
+                    />
                   </Form.Item>
                 </Col>
                 <Col span={24}>
                   <Form.Item
                     name="display_name"
-                    label="Display Name"
+                    label={t("seller.registerForm.displayName")}
                     rules={[
-                      { required: true, message: "Please Enter Display Name" },
+                      {
+                        required: true,
+                        message: t(
+                          "seller.registerForm.displayNameValidationAndPlaceholder"
+                        ),
+                      },
                     ]}
                   >
                     <Input
                       style={{ width: "100%" }}
-                      placeholder="Please Enter Display Name"
+                      placeholder={t(
+                        "seller.registerForm.displayNameValidationAndPlaceholder"
+                      )}
                     />
                   </Form.Item>
                 </Col>
@@ -83,14 +97,21 @@ function SellerRegistration() {
                 <Col span={24}>
                   <Form.Item
                     name="phone"
-                    label="Mobile Number"
+                    label={t("seller.registerForm.mobileNumber")}
                     rules={[
-                      { required: true, message: "Please Enter Mobile Number" },
+                      {
+                        required: true,
+                        message: t(
+                          "seller.registerForm.mobileNumberValidationAndPlaceholder"
+                        ),
+                      },
                     ]}
                   >
                     <Input
                       style={{ width: "100%" }}
-                      placeholder="Please enter Mobile Number"
+                      placeholder={t(
+                        "seller.registerForm.mobileNumberValidationAndPlaceholder"
+                      )}
                     />
                   </Form.Item>
                 </Col>
@@ -99,14 +120,21 @@ function SellerRegistration() {
                 <Col span={12}>
                   <Form.Item
                     name="idProof"
-                    label="Aadhaar Card"
+                    label={t("seller.registerForm.idProof")}
                     rules={[
-                      { required: true, message: "Please Enter Aadhaar Card" },
+                      {
+                        required: true,
+                        message: t(
+                          "seller.registerForm.idProofValidationAndPlaceholder"
+                        ),
+                      },
                     ]}
                   >
                     <Input
                       style={{ width: "100%" }}
-                      placeholder="Please Enter Aadhaar Card"
+                      placeholder={t(
+                        "seller.registerForm.idProofValidationAndPlaceholder"
+                      )}
                     />
                   </Form.Item>
                 </Col>
@@ -114,12 +142,21 @@ function SellerRegistration() {
                 <Col span={12}>
                   <Form.Item
                     name="email"
-                    label="Email (optional)"
-                    rules={[{ required: false, message: "Please Enter Email" }]}
+                    label={t("seller.registerForm.email")}
+                    rules={[
+                      {
+                        required: false,
+                        message: t(
+                          "seller.registerForm.emailValidationAndPlaceholder"
+                        ),
+                      },
+                    ]}
                   >
                     <Input
                       style={{ width: "100%" }}
-                      placeholder="Please Enter Email"
+                      placeholder={t(
+                        "seller.registerForm.emailValidationAndPlaceholder"
+                      )}
                     />
                   </Form.Item>
                 </Col>
@@ -129,17 +166,21 @@ function SellerRegistration() {
                 <Col span={24}>
                   <Form.Item
                     name="adress"
-                    label="Address"
+                    label={t("seller.registerForm.address")}
                     rules={[
                       {
                         required: true,
-                        message: "Please Enter Address",
+                        message: t(
+                          "seller.registerForm.addressValidationAndPlaceholder"
+                        ),
                       },
                     ]}
                   >
                     <Input.TextArea
                       rows={4}
-                      placeholder="Please Enter Address"
+                      placeholder={t(
+                        "seller.registerForm.addressValidationAndPlaceholder"
+                      )}
                     />
                   </Form.Item>
                 </Col>
@@ -148,15 +189,15 @@ function SellerRegistration() {
               <CustomerLogin type="Seller" />
               <Row gutter={[13, 13]}>
                 <Button block type="primary" htmlType="submit">
-                  Submit
+                  {t("seller.registerForm.submit")}
                 </Button>
               </Row>
-              <Row gutter={24} className='mt-3'>
-              <Col span={6}></Col>
-              <Col span={12}>
-                <Link onClick={toggleDrawer} block type="primary">
-                  <span>Already a seller, Login? </span>
-                </Link>
+              <Row gutter={24} className="mt-3">
+                <Col span={6}></Col>
+                <Col span={12}>
+                  <Link onClick={toggleDrawer} block type="primary">
+                    <span> {t("seller.registerForm.loginText")}</span>
+                  </Link>
                 </Col>
               </Row>
             </Form>

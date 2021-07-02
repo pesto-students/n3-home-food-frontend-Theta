@@ -18,8 +18,10 @@ import item from "../../../../images/south-indian.jpg";
 import { baseUrl } from "../../../../utils/constant";
 import { getCategoryId, sessionId } from "../../../../utils/helpers";
 import SpinnerLoader from "../../../../components/shared/spinnerLoader/spinnerLoader";
+import { useTranslation } from "react-i18next";
 
 const AllProducts = ({ products, isLoading, callback }) => {
+  const { t } = useTranslation();
   const { Title } = Typography;
   const { Option } = Select;
 
@@ -139,7 +141,7 @@ const AllProducts = ({ products, isLoading, callback }) => {
                     type="primary"
                     onClick={() => handdleOpenCategoryModal(product)}
                   >
-                    Add
+                    {t("seller.product.addButton")}
                   </Button>
                 </Row>
               </Card>

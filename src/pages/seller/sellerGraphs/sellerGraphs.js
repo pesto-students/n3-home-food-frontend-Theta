@@ -6,15 +6,20 @@ import PieChart from "../../../components/shared/pieChart/pieChart";
 import axios from "../../../utils/axios";
 import { baseUrl } from "../../../utils/constant";
 import "./sellerGraphs.css";
+import { useTranslation } from "react-i18next";
 import { sessionId } from "../../../utils/helpers";
 
 const { RangePicker } = DatePicker;
 
 function SellerGraphs() {
+  const { t } = useTranslation();
   const [lineGraphData, setLineGraphData] = useState(["revenue", 30, 200, 100]);
   const [revenueData, setrevenueData] = useState();
   const [orderCountData, setorderCountData] = useState();
-  const [pieGraphData, setPieGraphData] = useState([ ["data1", 30], ["data2", 120],]);
+  const [pieGraphData, setPieGraphData] = useState([
+    ["data1", 30],
+    ["data2", 120],
+  ]);
 
   useEffect(() => {
     getSellerDetails();
@@ -79,12 +84,12 @@ function SellerGraphs() {
       <Row className="number-cards" justify="center">
         <Card hoverable={true} className="card-detailed">
           <div>
-            <h5>Total Orders</h5>
+            <h5>{t("seller.dashboard.totalOrder")}</h5>
             <h5>{orderCountData}</h5>
           </div>
         </Card>
         <Card hoverable={true} className="card-detailed">
-          <h5>Total Income</h5>
+          <h5>{t("seller.dashboard.totalIncome")}</h5>
           <h5>{revenueData}</h5>
         </Card>
       </Row>

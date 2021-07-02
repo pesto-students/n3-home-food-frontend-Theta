@@ -1,0 +1,18 @@
+.dashboard-card-background{
+    background-color: #002140;
+    height: 100px;
+    width:  -webkit-fill-available;
+}
+
+.number-cards{
+    margin-top: -6%;
+}
+
+.card-detailed{
+    width: 200px;
+    height: 100px;
+    text-align: center;
+    background-color: azure;
+    display: flex;
+    flex-flow: column;
+}

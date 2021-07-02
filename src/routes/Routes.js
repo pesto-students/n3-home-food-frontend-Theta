@@ -1,13 +1,13 @@
 import { React } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import LandingPage from "../pages/landingScreen/Landing";
-import SellerLanding from "../pages/seller/sellerLanding/sellerLanding";
-import AdminLanding from "../pages/admin/adminLanding/adminLanding";
-import BrokenLink from "../pages/BrokenLink";
-import CustomerHome from "../pages/customer/customerHome/customerHome";
+import LandingPage from "../landingScreen/Landing";
+import SellerLanding from "../projects/seller/sellerLanding/sellerLanding";
+import AdminLanding from "../projects/admin/adminLanding/adminLanding";
+import BrokenLink from "../components/shared/BrokenLink";
+import CustomerHome from "../projects/customer/customerHome/customerHome";
 import SellerDetailWithProducts from "../components/shared/sellerDetailWithProducts/sellerDetailWithProducts";
-import Orders from "../pages/customer/orders/order";
-import { Checkout } from "../pages/customer/checkout/checkout";
+import Orders from "../projects/customer/orders/order";
+import { Checkout } from "../projects/customer/checkout/checkout";
 
 function MainRoutes() {
   return (

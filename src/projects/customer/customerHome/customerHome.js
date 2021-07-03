@@ -1,28 +1,22 @@
 import { Carousel, Col, Layout, Row, Typography } from "antd";
 import "antd/dist/antd.css";
-import axios from "axios";
-import { React, useEffect, useState } from "react";
+import { React, useEffect, useState, useCallback } from "react";
 import Image from "components/image/image";
 import CustomerNavbar from "components/customerNavbar/customerNavbar";
 import CustomTabs from "components/Tabs/Tabs";
-import { baseUrl } from "utils/constant";
 import { getCategoryId, getPincode, getUser } from "utils/helpers";
 import SellerItems from "landingScreen/sellerItems";
+import { getSeller, getCategorySeller } from "utils/api";
+import { bannerImage } from "utils/constant";
 
 const { Content } = Layout;
 const { Title } = Typography;
-const imagesUrls = [
-  "https://image.shutterstock.com/image-photo/fresh-green-food-cooking-concept-600w-1615988773.jpg",
-  "https://image.shutterstock.com/image-photo/organic-clean-vegetables-assorted-cooking-600w-334204937.jpg",
-  "https://image.shutterstock.com/z/stock-vector-delicious-fluffy-pancake-in-frying-pan-fresh-fruit-and-honey-toppings-in-d-illustration-food-ad-1120833698.jpg",
-];
+const imagesUrls = bannerImage;
 
 const CustomerHome = () => {
   const [seller, setSeller] = useState([]);
   const [loadSeller, setLoadSeller] = useState(false);
   const [pincode, setPincode] = useState(false);
-
-  //const [currentTabValue,setCurrentTabValue] = useState("");
 
   const user = getUser() ? getUser().userType : null;
   useEffect(() => {
@@ -31,49 +25,44 @@ const CustomerHome = () => {
     if (user === null) window.location.href = "/";
   }, [user]);
 
-  const getSellers = (pinCode) => {
+  const getSellersByPincode = useCallback(async () => {
     setLoadSeller(false);
-    axios
-      .get(`${baseUrl}/sellers/pincode/${pinCode}`)
-      .then((result) => {
-        setSeller(result.data);
+    try {
+      let response = await getSeller(pincode);
+      if (response.status === 200) {
+        setSeller(response.data);
         setLoadSeller(true);
-      })
-      .catch((err) => console.error(err));
-  };
+      }
+    } catch (error) {}
+  }, [pincode]);
 
-  const getCategorySeller = (category) => {
+  const getAllSellerByCategory = async (category) => {
+    setLoadSeller(false);
+
     if (category !== "All") {
-      setLoadSeller(false);
-      axios
-        .get(
-          `${baseUrl}/sellers/get/SellersByCategory?categoryId=${getCategoryId(
-            category
-          )}`
-        )
-        .then((result) => {
-          setSeller(result.data);
+      try {
+        let response = await getCategorySeller(getCategoryId(category));
+        if (response.status === 200) {
+          setSeller(response.data);
           setLoadSeller(true);
-        })
-        .catch((err) => console.error(err));
+        }
+      } catch (error) {}
     } else {
-      getSellers(pincode);
+      getSellersByPincode(pincode);
     }
   };
 
-  const updatePincode = (pincode) => {
-    setPincode(pincode);
-    getSellers(pincode);
+  const updatePincode = (code) => {
+    setPincode(code);
   };
 
   useEffect(() => {
     setPincode(getPincode());
-
-    getSellers();
-  }, [pincode]);
+    getSellersByPincode();
+  }, [getSellersByPincode]);
 
   const getCurrentTab = (tab) => {
-    getCategorySeller(tab);
+    getAllSellerByCategory(tab);
   };
 
   return (

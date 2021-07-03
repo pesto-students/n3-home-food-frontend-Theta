@@ -3,10 +3,8 @@ import { Button, Col, Form, Input, message, Modal, Row, Upload } from "antd";
 import "antd/dist/antd.css";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import axios from "utils/axios";
-import { baseUrl } from "utils/constant";
 import { sessionId } from "utils/helpers";
-
+import { editProfile } from "../utils/api";
 // const openNotificationWithIcon = (type, message) => {
 //   notification[type]({
 //     message: message,
@@ -54,7 +52,7 @@ const CollectionCreateForm = ({ profile, visible, onCreate, onCancel }) => {
     <Modal
       visible={visible}
       title={t("seller.profile.editProfileModalTitle")}
-      okText={t("seller.profile.editText")}
+      okText={t("Header.Save")}
       cancelText={t("seller.product.cancelButton")}
       onCancel={onCancel}
       onOk={() => {
@@ -257,7 +255,7 @@ export const EditProfile = ({ profile }) => {
   const [visible, setVisible] = useState(false);
   const { t } = useTranslation();
 
-  const onCreate = (values) => {
+  const onCreate = async (values) => {
     let obj = {
       name: values.name,
       email: values.email,
@@ -270,20 +268,12 @@ export const EditProfile = ({ profile }) => {
       image: "url",
     };
 
-    axios
-      .put(`${baseUrl}/sellers/edit/${sessionId()}`, obj)
-      .then((result) => {
-        if (result.status === 200) {
-          alert("doen");
-          props.callback();
-        } else {
-          alert("not doen");
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-      })
-      .finally(() => {});
+    try {
+      let response = await editProfile(sessionId(), obj);
+      if (response.status === 200) {
+        props.callback();
+      }
+    } catch (error) {}
   };
 
   return (

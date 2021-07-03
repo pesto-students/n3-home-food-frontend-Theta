@@ -1,8 +1,7 @@
 import { Menu, Dropdown, notification } from "antd";
 import { MoreOutlined } from "@ant-design/icons";
-import axios from "utils/axios";
-import { baseUrl } from "utils/constant";
 import { EditProductModal } from "components/manageProductmodal/editProduct";
+import { adminDeleteProduct } from "../utils/api";
 
 const openNotificationWithIcon = (type, message) => {
   notification[type]({
@@ -10,20 +9,17 @@ const openNotificationWithIcon = (type, message) => {
   });
 };
 
-export const ProductCrudMenu = (props) => {
+export const ProductCrudMenu = ({ callback, product }) => {
   const deleteProduct = () => {
-    axios
-      .delete(`${baseUrl}/products/${props.product.id}`)
-      .then((result) => {
-        if (result.status === 200) {
-          openNotificationWithIcon("success", "Product Deleted");
-          props.callback();
-        } else {
-          openNotificationWithIcon("warning", "could not Product Deleted");
-        }
-      })
-      .catch((err) => console.error(err))
-      .finally(() => {});
+    try {
+      const response = adminDeleteProduct(product.id);
+      if (response.status === 200) {
+        openNotificationWithIcon("success", "Product Deleted");
+        callback();
+      } else {
+        openNotificationWithIcon("warning", "could not Product Deleted");
+      }
+    } catch (error) {}
   };
 
   const menu = (
@@ -32,7 +28,7 @@ export const ProductCrudMenu = (props) => {
         Delete
       </Menu.Item>
       <Menu.Item key="updateProduct">
-        <EditProductModal product={props.product} callback={props.callback} />
+        <EditProductModal product={product} callback={callback} />
       </Menu.Item>
     </Menu>
   );

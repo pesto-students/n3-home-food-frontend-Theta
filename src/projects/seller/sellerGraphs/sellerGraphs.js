@@ -1,4 +1,4 @@
-import React,{  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Col, DatePicker, Row } from "antd";
 import "antd/dist/antd.css";
 import LineChart from "components/lineChart/lineChart";
@@ -10,7 +10,7 @@ import {
   getGraphDetailSeller,
   getSellerDetailsWallet,
   getSellerPieChartData,
-} from "utils/api";
+} from "../utils/api";
 
 const { RangePicker } = DatePicker;
 

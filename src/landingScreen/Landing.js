@@ -1,29 +1,24 @@
 import { Carousel, Col, Layout, Row, Typography } from "antd";
 import "antd/dist/antd.css";
-import axios from "axios";
 import { React, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Image from "components/image/image";
 import Navbar from "components/navbar/navbar";
 import CustomTabs from "components/Tabs/Tabs";
-import corousel2 from "images/courosel-3.jpg";
-import corousel1 from "images/courosel.jpg";
-import { baseUrl } from "utils/constant";
 import {
   getCategoryId,
+  getPincode,
   redirectToOriginalPageFromLanding,
 } from "utils/helpers";
 import CustomerLogin from "./customerLogin";
 import "./landing.css";
 import SellerItems from "./sellerItems";
+import { getAllSellerByPincode, getAllSellerByCategory } from "utils/api";
+import { bannerImage } from "utils/constant";
 
 const { Content } = Layout;
 const { Title } = Typography;
-const imagesUrls = [
-  corousel1,
-  corousel2,
-  "https://image.shutterstock.com/z/stock-vector-delicious-fluffy-pancake-in-frying-pan-fresh-fruit-and-honey-toppings-in-d-illustration-food-ad-1120833698.jpg",
-];
+const imagesUrls = bannerImage;
 
 const LandingPage = () => {
   const { t } = useTranslation();
@@ -31,31 +26,27 @@ const LandingPage = () => {
   const [loadSeller, setLoadSeller] = useState(true);
   const [pincode, setPincode] = useState("");
 
-  const getSellers = (code) => {
+  const getSellers = async (code) => {
     setLoadSeller(false);
-    axios
-      .get(`${baseUrl}/sellers/pincode/${code}`)
-      .then((result) => {
-        setSeller(result.data);
+    try {
+      const response = await getAllSellerByPincode(code);
+      if (response.status === 200) {
+        setSeller(response.data);
         setLoadSeller(true);
-      })
-      .catch((err) => console.error(err));
+      }
+    } catch (error) {}
   };
 
-  const getCategorySeller = (category) => {
+  const getCategorySeller = async (category) => {
     if (category !== "All") {
-      setLoadSeller(false);
-      axios
-        .get(
-          `${baseUrl}/sellers/get/SellersByCategory?categoryId=${getCategoryId(
-            category
-          )}`
-        )
-        .then((result) => {
-          setSeller(result.data);
+      try {
+        setLoadSeller(false);
+        const response = await getAllSellerByCategory(getCategoryId(category));
+        if (response.status === 200) {
+          setSeller(response.data);
           setLoadSeller(true);
-        })
-        .catch((err) => console.error(err));
+        }
+      } catch (error) {}
     } else {
       getSellers(pincode);
     }
@@ -63,6 +54,7 @@ const LandingPage = () => {
 
   useEffect(() => {
     redirectToOriginalPageFromLanding();
+    getSellers(getPincode());
   }, []);
 
   const getSellerByPincode = (code) => {

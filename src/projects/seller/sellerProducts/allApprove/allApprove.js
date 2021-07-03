@@ -12,13 +12,6 @@ const AllApprove = ({ products, isLoading }) => {
 
   const fetchMoreData = () => {
     setIshasMore(true);
-    // axios
-    // .get("`${baseUrl}/products/get/approved")
-    // .then((result) => {
-    //   setproducts(products.concat(result.data));
-    // })
-    // .catch((err) => console.error(err))
-    // .finally(() => setIsLoading(false));
   };
 
   return (

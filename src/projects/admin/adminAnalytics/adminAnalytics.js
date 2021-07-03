@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Card, Col, DatePicker, Row } from "antd";
 import LineChart from "components/lineChart/lineChart";
 import PieChart from "components/pieChart/pieChart";
-import axios from "utils/axios";
-import { baseUrl } from "utils/constant";
 import "./adminDashboard.css";
+import {
+  getAdminGraphDetails,
+  getAllOrderCount,
+  getAdminCategoryChartDetails,
+} from "../utils/api";
 
 const { RangePicker } = DatePicker;
 
@@ -20,46 +23,37 @@ function AdminDashboard() {
     getAdminDetails();
   }, []);
 
-  const getGraphDetails = () => {
+  const getGraphDetails = async () => {
     let lineGraphDataMock = ["revenue"];
-    axios
-      .get(`${baseUrl}/orders/get-total-revenue`)
-      .then((result) => {
-        result.data.forEach((element) => {
+    try {
+      const response = await getAdminGraphDetails();
+      if (response.status === 200) {
+        response.data.forEach((element) => {
           lineGraphDataMock.push(element.totalPrice);
         });
         setLineGraphData(lineGraphDataMock);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+      }
+    } catch (error) {}
   };
 
-  const getAdminDetails = () => {
-    axios
-      .get(`${baseUrl}/orders/allcount`)
-      .then((result) => {
-        result.data ? setadminData(result.data) : setadminData(0);
-      })
-
-      .catch((err) => {
-        console.error(err);
-      });
+  const getAdminDetails = async () => {
+    try {
+      const response = await getAllOrderCount();
+      if (response.status === 200) {
+        response.data ? setadminData(response.data) : setadminData(0);
+      }
+    } catch (error) {}
   };
 
-  const getPieChartDetails = () => {
-    axios
-      .get(`${baseUrl}/orders/orders-category-wise`)
-
-      .then((result) => {
-        result.data.categoryWiseOrder.length
-          ? setPieGraphData(result.data.categoryWiseOrder)
+  const getPieChartDetails = async () => {
+    try {
+      const response = await getAdminCategoryChartDetails();
+      if (response.status === 200) {
+        response.data.categoryWiseOrder.length
+          ? setPieGraphData(response.data.categoryWiseOrder)
           : setPieGraphData(0);
-      })
-
-      .catch((err) => {
-        console.error(err);
-      });
+      }
+    } catch (error) {}
   };
 
   const onChange = (value, dateString) => {

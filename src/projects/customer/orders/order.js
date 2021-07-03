@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import CustomerNavbar from "components/customerNavbar/customerNavbar";
 import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
 import CustomerCurrentOrders from "./customerCurrentOrders";
-import { getAllCurrentOrder } from "utils/api";
+import { getAllCurrentOrder } from "../utils/api";
 
 const SellerProducts = () => {
   const [isLoading, setIsLoading] = useState(true);

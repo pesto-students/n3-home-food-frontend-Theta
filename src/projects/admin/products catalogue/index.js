@@ -3,9 +3,8 @@ import "antd/dist/antd.css";
 import { Tabs } from "antd";
 import AllProducts from "./allProducts/allProducts";
 import ProductApproval from "./product Approval/productApproval";
-import { baseUrl } from "utils/constant";
-import axios from "utils/axios";
 import TabTag from "components/tag/tag";
+import { getAllPendingProduct, getAllApprovedProduct } from "../utils/api";
 
 const { TabPane } = Tabs;
 
@@ -17,24 +16,24 @@ const ProductCatalogue = () => {
 
   const [isLoading, setIsLoading] = useState(true);
 
-  const allPending = () => {
-    axios
-      .get(`${baseUrl}/products/get/pending`)
-      .then((result) => {
-        setPendingproducts(result.data);
-      })
-      .catch((err) => console.error(err))
-      .finally(() => setIsLoading(false));
+  const allPending = async () => {
+    try {
+      const response = await getAllPendingProduct();
+      if (response.status === 200) {
+        setIsLoading(false);
+        setPendingproducts(response.data);
+      }
+    } catch (error) {}
   };
 
-  const allApproved = () => {
-    axios
-      .get(`${baseUrl}/products/get/approved`)
-      .then((result) => {
-        setApproveProducts(result.data);
-      })
-      .catch((err) => console.error(err))
-      .finally(() => setIsLoading(false));
+  const allApproved = async () => {
+    try {
+      const response = await getAllApprovedProduct();
+      if (response.status === 200) {
+        setIsLoading(false);
+        setApproveProducts(response.data);
+      }
+    } catch (error) {}
   };
 
   useEffect(() => {

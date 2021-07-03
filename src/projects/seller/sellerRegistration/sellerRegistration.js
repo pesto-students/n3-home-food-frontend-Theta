@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 import "./sellerRegistration.css";
 import CustomerLogin from "landingScreen/customerLogin";
 import { setIsCustomerLoginDrawerOpen } from "store/actions";
-import axios from "utils/axios";
+import { registerSeller } from "../utils/api";
 
 function SellerRegistration() {
   const { t } = useTranslation();
@@ -19,10 +19,10 @@ function SellerRegistration() {
     Dispatch(setIsCustomerLoginDrawerOpen(true));
   };
 
-  const registerSeller = async (form) => {
-    let response = await axios
-      .post("/sellers/register", form)
-      .then((response) => {
+  const newAccount = async (form) => {
+    try {
+      const response = await registerSeller(form);
+      if (response.status === 200) {
         notification.success({
           message: "Great",
           description: "Successfully Register login with your mobile number",
@@ -31,11 +31,8 @@ function SellerRegistration() {
         setTimeout(() => {
           toggleDrawer();
         }, [2000]);
-      })
-      .catch((error) => {
-        return error.response;
-      });
-    return response;
+      }
+    } catch (error) {}
   };
 
   return (
@@ -50,7 +47,7 @@ function SellerRegistration() {
         <Col md={8}>
           <div className="right-container">
             <h4 align="center">{t("seller.registerForm.register")}</h4>
-            <Form layout="vertical" hideRequiredMark onFinish={registerSeller}>
+            <Form layout="vertical" hideRequiredMark onFinish={newAccount}>
               <Row gutter={16}>
                 <Col span={24}>
                   <Form.Item

@@ -9,16 +9,15 @@ import {
   Typography,
 } from "antd";
 import "antd/dist/antd.css";
-import axios from "axios";
 import React, { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Image from "components/image/image";
 import { AddProductSellerModal } from "components/manageProductmodal/addProduct";
 import item from "images/south-indian.jpg";
-import { baseUrl } from "utils/constant";
 import { getCategoryId, sessionId } from "utils/helpers";
 import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
 import { useTranslation } from "react-i18next";
+import { setAddProductIntoMyProduct } from "projects/seller/utils/api";
 
 const AllProducts = ({ products, isLoading, callback }) => {
   const { t } = useTranslation();
@@ -39,7 +38,7 @@ const AllProducts = ({ products, isLoading, callback }) => {
     // .finally(() => setIsLoading(false));
   };
 
-  const addToMyProduct = () => {
+  const addToMyProduct = async () => {
     if (selectedCategory.length === 0) {
       notification.error({
         message: `Notification`,
@@ -48,12 +47,15 @@ const AllProducts = ({ products, isLoading, callback }) => {
       });
       return;
     }
-    axios
-      .put(`${baseUrl}/sellers/${sessionId()}`, {
-        products: [currentProduct._id],
-        category: selectedCategory,
-      })
-      .then((result) => {
+
+    let obj = {
+      products: [currentProduct._id],
+      category: selectedCategory,
+    };
+
+    try {
+      const response = await setAddProductIntoMyProduct(sessionId(), obj);
+      if (response.status === 200) {
         setIsCategoryModal(false);
         notification.success({
           message: `Notification`,
@@ -61,15 +63,14 @@ const AllProducts = ({ products, isLoading, callback }) => {
           placement: "topRight",
         });
         callback();
-      })
-      .catch((err) => {
-        notification.error({
-          message: `Notification`,
-          description: "Something went wrong",
-          placement: "topRight",
-        });
+      }
+    } catch (error) {
+      notification.error({
+        message: `Notification`,
+        description: "Something went wrong",
+        placement: "topRight",
       });
-    // .finally(() => setIsLoading(false));
+    }
   };
 
   const handdleCloseCategoryModal = () => {

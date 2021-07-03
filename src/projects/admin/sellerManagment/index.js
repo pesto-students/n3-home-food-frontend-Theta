@@ -4,9 +4,12 @@ import { Tabs } from "antd";
 import SellerApproval from "./Seller Approval/sellerApproval";
 import RejectedSellers from "./rejectedSeller /rejectedSellers";
 import PendingSellers from "./pendingSellers/pendingSellers";
-import axios from "utils/axios";
-import { baseUrl } from "utils/constant";
 import TabTag from "components/tag/tag";
+import {
+  getAllRejectedSeller,
+  getAllApproveSeller,
+  getAllPendingSeller,
+} from "../utils/api";
 // import AllProducts from './allProducts/allProducts';
 // import ProductApproval from './product Approval/productApproval';
 
@@ -20,34 +23,34 @@ const SellerManagment = () => {
 
   const callback = (key) => {};
 
-  const rejectedSeller = () => {
-    axios
-      .get(`${baseUrl}/sellers/get/rejected`)
-      .then((result) => {
-        setRejectedSellersItems(result.data);
-      })
-      .catch((err) => console.error(err))
-      .finally(() => setIsLoading(false));
+  const rejectedSeller = async () => {
+    try {
+      const response = await getAllRejectedSeller();
+      if (response.status === 200) {
+        setRejectedSellersItems(response.data);
+        setIsLoading(false);
+      }
+    } catch (error) {}
   };
 
-  const approveSeller = () => {
-    axios
-      .get(`${baseUrl}/sellers`)
-      .then((result) => {
-        setApproveSellersItems(result.data);
-      })
-      .catch((err) => console.error(err))
-      .finally(() => setIsLoading(false));
+  const approveSeller = async () => {
+    try {
+      const response = await getAllApproveSeller();
+      if (response.status === 200) {
+        setApproveSellersItems(response.data);
+        setIsLoading(false);
+      }
+    } catch (error) {}
   };
 
-  const pendingSeller = () => {
-    axios
-      .get(`${baseUrl}/sellers/get/pending`)
-      .then((result) => {
-        setPendingSellersItems(result.data);
-      })
-      .catch((err) => console.error(err))
-      .finally(() => setIsLoading(false));
+  const pendingSeller = async () => {
+    try {
+      const response = await getAllPendingSeller();
+      if (response.status === 200) {
+        setPendingSellersItems(response.data);
+        setIsLoading(false);
+      }
+    } catch (error) {}
   };
 
   useEffect(() => {

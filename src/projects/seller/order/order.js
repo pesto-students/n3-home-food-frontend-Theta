@@ -7,7 +7,7 @@ import TabTag from "components/tag/tag";
 import { sessionId } from "utils/helpers";
 import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
 import { useTranslation } from "react-i18next";
-import { getAllCurrentOrderSeller, getAllPastOrderSeller } from "utils/api";
+import { getAllCurrentOrderSeller, getAllPastOrderSeller } from "../utils/api";
 
 const SellerProducts = () => {
   const { t } = useTranslation();

@@ -14,15 +14,15 @@ import {
   Skeleton,
   Typography,
 } from "antd";
-import axios from "utils/axios";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Image from "components/image/image";
 import item from "images/south-indian.jpg";
-import { baseUrl } from "utils/constant";
 import { sessionId } from "utils/helpers";
 import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
 import DataNotFound from "components/dataNotFound/dataNotFound";
+import { updateProduct, deleteMyProduct } from "projects/seller/utils/api";
+
 const MyProducts = ({ products, isLoading, callback }) => {
   const { Option } = Select;
   const { Title } = Typography;
@@ -40,16 +40,9 @@ const MyProducts = ({ products, isLoading, callback }) => {
 
   const fetchMoreData = () => {
     setIshasMore(true);
-    // axios
-    // .get("`${baseUrl}/products/get/approved")
-    // .then((result) => {
-    //   setproducts(products.concat(result.data));
-    // })
-    // .catch((err) => console.error(err))
-    // .finally(() => setIsLoading(false));
   };
 
-  const editProduct = () => {
+  const editProduct = async () => {
     if (SelectedCategory.length === 0) {
       notification.error({
         message: `Notification`,
@@ -59,24 +52,23 @@ const MyProducts = ({ products, isLoading, callback }) => {
       return;
     }
 
-    let product = {
+    const product = {
       productid: currentProductId,
       product_price: price,
       category: SelectedCategory,
       product_quantity: quantity,
     };
-    axios
-      .put(`/sellers/update-product-quantitiy/${sessionId()}`, { ...product })
-      .then((result) => {
+    try {
+      const response = await updateProduct(sessionId(), product);
+      if (response.status === 200) {
         notification.success({
           message: `Notification`,
           description: "Product updated successfully",
           placement: "topRight",
         });
         callback();
-        //setMyProducts(products.concat(result.data));
-      })
-      .catch((err) => console.error(err));
+      }
+    } catch (error) {}
   };
 
   const editableProduct = (key) => {
@@ -90,13 +82,14 @@ const MyProducts = ({ products, isLoading, callback }) => {
     setMyProducts([...products]);
   };
 
-  const deleteProduct = (key) => {
+  const deleteProduct = async (key) => {
     const item = products[key];
-    axios
-      .put(`${baseUrl}/sellers/delete-product/${sessionId()}`, {
+
+    try {
+      const response = await deleteMyProduct(sessionId(), {
         productId: item._id,
-      })
-      .then((result) => {
+      });
+      if (response.status === 200) {
         notification.success({
           message: `Notification`,
           description: "Product successfully deleted",
@@ -105,8 +98,8 @@ const MyProducts = ({ products, isLoading, callback }) => {
         products.splice(key, 1);
         setMyProducts([...products]);
         callback();
-      })
-      .catch((err) => console.error(err));
+      }
+    } catch (error) {}
   };
 
   const changeCategory = (categoryies) => {

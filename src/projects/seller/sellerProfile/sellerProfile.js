@@ -1,11 +1,11 @@
-import React,{  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Col, Rate, Row, Typography } from "antd";
 import Image from "components/image/image";
 import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
-import axios from "utils/axios";
-import { baseUrl, rupeeSign } from "utils/constant";
+import { rupeeSign } from "utils/constant";
 import { sessionId } from "utils/helpers";
 import { EditProfile } from "./editProfile";
+import { getSellerProfile } from "../utils/api";
 import { WalletOutlined } from "@ant-design/icons";
 
 const { Title } = Typography;
@@ -14,16 +14,19 @@ const SellerProfile = () => {
   const [isloading, setIsLoading] = useState(true);
   const [profile, setProfile] = useState({});
 
-  useEffect(() => {
-    axios
-      .get(`${baseUrl}/sellers/${sessionId()}`)
-      .then((result) => {
-        setProfile(result.data);
+  const sellerProfile = async () => {
+    try {
+      const response = await getSellerProfile(sessionId());
+      console.log(response);
+      if (response.status === 200) {
+        setProfile(response.data);
         setIsLoading(false);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+      }
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    sellerProfile();
   }, []);
 
   return (

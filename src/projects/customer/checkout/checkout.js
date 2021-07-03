@@ -12,7 +12,7 @@ import CustomerNavbar from "components/customerNavbar/customerNavbar";
 import { sessionId } from "utils/helpers";
 import Payment from "../payment";
 import "./checkout.css";
-import { getUserCart } from "utils/api";
+import { getUserCart } from "../utils/api";
 
 const { Step } = Steps;
 

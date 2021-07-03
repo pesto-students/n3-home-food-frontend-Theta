@@ -5,7 +5,7 @@ import moment from "moment";
 import React from "react";
 import { rupeeSign } from "utils/constant";
 import { useTranslation } from "react-i18next";
-import { putRateToOrder } from "utils/api";
+import { putRateToOrder } from "../utils/api";
 
 const CustomerCurrentOrders = ({ orders, callBack }) => {
   const { t } = useTranslation();

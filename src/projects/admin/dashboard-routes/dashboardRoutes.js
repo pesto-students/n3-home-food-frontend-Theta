@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import AdminDashboard from "../adminDashboard/adminDashboard";
+import AdminAnalytics from "../adminAnalytics/adminAnalytics";
 import ProductCatalogue from "../products catalogue";
 import SellerManagment from "../sellerManagment";
 
@@ -9,7 +9,7 @@ function DashboardRoutes() {
     <>
       <Switch>
         <Route path="/admin/dashboard" exact>
-          <AdminDashboard />
+          <AdminAnalytics />
         </Route>
         <Route path="/admin/product">
           <ProductCatalogue />

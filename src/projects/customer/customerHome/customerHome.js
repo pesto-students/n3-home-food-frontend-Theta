@@ -1,4 +1,4 @@
-import  React, {useEffect, useState ,useCallback } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Carousel, Col, Layout, Row, Typography } from "antd";
 import "antd/dist/antd.css";
 import Image from "components/image/image";
@@ -6,7 +6,7 @@ import CustomerNavbar from "components/customerNavbar/customerNavbar";
 import CustomTabs from "components/Tabs/Tabs";
 import { getCategoryId, getPincode, getUser } from "utils/helpers";
 import SellerItems from "landingScreen/sellerItems";
-import { getSeller, getCategorySeller } from "utils/api";
+import { getSeller, getCategorySeller } from "../utils/api";
 import { bannerImage } from "utils/constant";
 
 const { Content } = Layout;

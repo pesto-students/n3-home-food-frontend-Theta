@@ -1,12 +1,11 @@
 import { Button, Card, notification, Row, Skeleton } from "antd";
 import "antd/dist/antd.css";
-import axios from "axios";
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { RejectSellerModal } from "components/manageSellerModal/rejectSeller";
 import item from "images/south-indian.jpg";
-import { baseUrl } from "utils/constant";
 import "./pendingSeller.css";
+import { approveSellerById } from "projects/admin/utils/api";
 import DataNotFound from "components/dataNotFound/dataNotFound";
 
 const openNotificationWithIcon = (type, message) => {
@@ -16,31 +15,17 @@ const openNotificationWithIcon = (type, message) => {
 };
 
 const PendingSellers = ({ callback, sellers, isLoading }) => {
-  const fetchMoreData = () => {
-    // axios
-    // .get("`${baseUrl}/products/get/approved")
-    // .then((result) => {
-    //   setproducts(products.concat(result.data));
-    // })
-    // .catch((err) => console.error(err))
-    // .finally(() => setIsLoading(false));
-  };
+  const fetchMoreData = () => {};
 
-  const approveSellerbyId = (id) => {
-    axios
-      .put(`${baseUrl}/sellers/approve/${id}`)
-      .then((result) => {
-        if (result.status === 200) {
-          openNotificationWithIcon("success", "Seller Approved");
-        } else {
-          openNotificationWithIcon("error", "Could Not Approve Seller");
-        }
-      })
-      .catch((err) => {
-        console.error(err);
+  const approveSeller = async (id) => {
+    try {
+      const response = await approveSellerById(id);
+      if (response.status === 200) {
+        openNotificationWithIcon("success", "Seller Approved");
+      } else {
         openNotificationWithIcon("error", "Could Not Approve Seller");
-      })
-      .finally(() => {});
+      }
+    } catch (error) {}
   };
 
   const updateSellerList = () => {
@@ -50,8 +35,6 @@ const PendingSellers = ({ callback, sellers, isLoading }) => {
   return (
     <>
       <div>
-        {/* add product modal */}
-
         <Skeleton loading={isLoading} active>
           {sellers.length > 0 ? (
             <InfiniteScroll
@@ -79,7 +62,7 @@ const PendingSellers = ({ callback, sellers, isLoading }) => {
                           style={{ margin: "10px" }}
                           type="primary"
                           onClick={() => {
-                            approveSellerbyId(seller.id);
+                            approveSeller(seller.id);
                             updateSellerList();
                           }}
                         >

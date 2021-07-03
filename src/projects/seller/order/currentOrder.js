@@ -4,7 +4,7 @@ import Title from "antd/lib/typography/Title";
 import moment from "moment";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { orderDelived } from "utils/api";
+import { orderDelived } from "../utils/api";
 import { rupeeSign } from "utils/constant";
 
 const CurrentOrders = ({ orders, callBack }) => {

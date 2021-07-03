@@ -1,6 +1,6 @@
-export const baseUrl = "http://localhost:8080/api/v1";
+//export const baseUrl = "http://localhost:8080/api/v1";
 export const rupeeSign = "₹";
-// export const baseUrl = "https://pesto-home-food-backend.herokuapp.com/api/v1";
+export const baseUrl = "https://pesto-home-food-backend.herokuapp.com/api/v1";
 
 export const bannerImage = [
   "https://image.shutterstock.com/image-photo/fresh-green-food-cooking-concept-600w-1615988773.jpg",

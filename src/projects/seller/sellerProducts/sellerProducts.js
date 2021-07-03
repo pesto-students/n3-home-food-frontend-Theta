@@ -1,13 +1,17 @@
 import { Tabs } from "antd";
 import "antd/dist/antd.css";
 import React, { useEffect, useState } from "react";
-import axios from "utils/axios";
 import AllApprove from "./allApprove/allApprove";
 import AllProducts from "./allProduct/allProducts";
 import MyProducts from "./myProducts/myProducts";
 import { sessionId } from "utils/helpers";
 import { useTranslation } from "react-i18next";
 import TabTag from "components/tag/tag";
+import {
+  getSellerApprovedProduct,
+  getAllProduct,
+  getSellerListedProduct,
+} from "../utils/api";
 
 const SellerProducts = () => {
   const { t } = useTranslation();
@@ -17,34 +21,34 @@ const SellerProducts = () => {
   const [allApprove, setAllApprove] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const getApproved = () => {
-    axios
-      .get(`/products/get/pending`)
-      .then((result) => {
-        setAllApprove(result.data);
+  const getApproved = async () => {
+    try {
+      const response = await getSellerApprovedProduct();
+      if (response.status === 200) {
+        setAllApprove(response.data);
         setIsLoading(false);
-      })
-      .catch((err) => console.error(err));
+      }
+    } catch (error) {}
   };
 
-  const getAllProducts = () => {
-    axios
-      .get(`/products/get/approved`)
-      .then((result) => {
-        setAllProducts(result.data);
+  const getAllProducts = async () => {
+    try {
+      const response = await getAllProduct();
+      if (response.status === 200) {
+        setAllProducts(response.data);
         setIsLoading(false);
-      })
-      .catch((err) => console.error(err));
+      }
+    } catch (error) {}
   };
 
-  const getMyProducts = () => {
-    axios
-      .get(`/sellers/get/getproducts?sellerid=${sessionId()}`)
-      .then((result) => {
-        setMyProducts(result.data[0].myProducts);
+  const getMyProducts = async () => {
+    try {
+      const response = await getSellerListedProduct(sessionId());
+      if (response.status === 200) {
+        setMyProducts(response.data[0].myProducts);
         setIsLoading(false);
-      })
-      .catch((err) => console.error(err));
+      }
+    } catch (error) {}
   };
 
   useEffect(() => {

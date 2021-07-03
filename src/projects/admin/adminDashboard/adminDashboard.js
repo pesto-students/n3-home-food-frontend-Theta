@@ -1,5 +1,5 @@
+import React, { useEffect, useState } from "react";
 import { Card, Col, DatePicker, Row } from "antd";
-import { React, useEffect, useState } from "react";
 import LineChart from "components/lineChart/lineChart";
 import PieChart from "components/pieChart/pieChart";
 import axios from "utils/axios";

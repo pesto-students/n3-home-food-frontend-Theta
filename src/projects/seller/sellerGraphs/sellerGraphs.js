@@ -1,11 +1,11 @@
+import React from 'react'
 import { Card, Col, DatePicker, Row } from "antd";
 import "antd/dist/antd.css";
-import { React, useEffect, useState } from "react";
-import LineChart from "components/lineChart/lineChart";
-import PieChart from "components/pieChart/pieChart";
+ import {  useEffect, useState } from "react";
+import LineChart from "components/lineChart/lineChart"
+ import PieChart from "components/pieChart/pieChart";
 import axios from "utils/axios";
 import { baseUrl } from "utils/constant";
-import "./sellerGraphs.css";
 import { useTranslation } from "react-i18next";
 import { sessionId } from "utils/helpers";
 
@@ -45,6 +45,7 @@ function SellerGraphs() {
       .get(`${baseUrl}/orders/seller-wallet/${sessionId()}`)
 
       .then((result) => {
+        console.log(result)
         result.data.Orders.length
           ? setorderCountData(result.data.Orders.length)
           : setorderCountData(0);

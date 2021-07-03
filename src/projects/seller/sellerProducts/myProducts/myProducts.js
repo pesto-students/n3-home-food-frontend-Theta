@@ -14,7 +14,6 @@ import {
   Skeleton,
   Typography,
 } from "antd";
-import "antd/dist/antd.css";
 import axios from "utils/axios";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";

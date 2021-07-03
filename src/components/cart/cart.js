@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { Button, Col, Row } from "antd";
-// import "antd/dist/antd.css";
 import axios from "utils/axios";
-// import { baseUrl, rupeeSign } from "utils/constant";
-// import { LINKS, STRINGS } from 'utils/constants';
 import { baseUrl, rupeeSign } from "utils/constant";
 
 import "./cart.css";

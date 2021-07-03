@@ -1,5 +1,5 @@
+import React from "react";
 import "antd/dist/antd.css";
-import { React } from "react";
 import { Card, Row, Col, Rate, Tag } from "antd";
 import Title from "antd/lib/typography/Title";
 import { rupeeSign } from "utils/constant";

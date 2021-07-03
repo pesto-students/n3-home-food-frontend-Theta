@@ -1,7 +1,6 @@
 import { Tabs, Row } from "antd";
 import "antd/dist/antd.css";
 import React, { useEffect, useState } from "react";
-// import axios from "utils/axios";
 import CurrentOrders from "./currentOrder";
 import PastOrders from "./pastOrder";
 import TabTag from "components/tag/tag";

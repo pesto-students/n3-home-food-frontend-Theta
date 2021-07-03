@@ -1,5 +1,5 @@
+import React,{  useEffect, useState } from "react";
 import { Card, Col, Rate, Row, Typography } from "antd";
-import { React, useEffect, useState } from "react";
 import Image from "components/image/image";
 import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
 import axios from "utils/axios";

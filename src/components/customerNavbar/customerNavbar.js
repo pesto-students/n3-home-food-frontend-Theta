@@ -1,7 +1,7 @@
+import  React, {useEffect, useState } from "react";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { Button, Col, Layout, Row, Modal, Input, Form } from "antd";
 import "antd/dist/antd.css";
-import { React, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "images/logo.png";
 import { getPincode, setPincode } from "utils/helpers";

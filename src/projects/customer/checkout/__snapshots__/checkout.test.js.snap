@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checkout component should render correctly in "debug" mode 1`] = `ShallowWrapper {}`;
+
+exports[`Seller products Dashboard component should render correctly in "debug" mode 1`] = `ShallowWrapper {}`;

@@ -3,24 +3,25 @@ import "antd/dist/antd.css";
 import Title from "antd/lib/typography/Title";
 import moment from "moment";
 import React from "react";
-import axios from "utils/axios";
 import { useTranslation } from "react-i18next";
+import { orderDelived } from "utils/api";
 import { rupeeSign } from "utils/constant";
 
 const CurrentOrders = ({ orders, callBack }) => {
   const { t } = useTranslation();
-  const delived = (order) => {
-    axios
-      .put(`/orders/approve-order/${order.id}`)
-      .then((result) => {
+
+  const delived = async (order) => {
+    try {
+      const response = await orderDelived(order.id);
+      if (response.status === 200) {
         notification.success({
           message: `Notification`,
           description: "Order has been successfully delivered",
           placement: "topRight",
         });
         callBack();
-      })
-      .catch((err) => console.error(err));
+      }
+    } catch (error) {}
   };
 
   return (

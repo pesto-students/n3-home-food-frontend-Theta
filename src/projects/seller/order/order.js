@@ -5,9 +5,9 @@ import CurrentOrders from "./currentOrder";
 import PastOrders from "./pastOrder";
 import TabTag from "components/tag/tag";
 import { sessionId } from "utils/helpers";
-import axios from "utils/axios";
 import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
 import { useTranslation } from "react-i18next";
+import { getAllCurrentOrderSeller, getAllPastOrderSeller } from "utils/api";
 
 const SellerProducts = () => {
   const { t } = useTranslation();
@@ -18,24 +18,24 @@ const SellerProducts = () => {
   const [currentOrdersItem, setCurrentOrdersItem] = useState([]);
   const [pastOrdersItem, setPastOrdersItem] = useState([]);
 
-  const getAllCurrentOrder = () => {
-    axios
-      .get(`/orders/get/${sessionId()}`)
-      .then((result) => {
-        setCurrentOrdersItem(result.data);
+  const getAllCurrentOrder = async () => {
+    try {
+      const response = await getAllCurrentOrderSeller(sessionId());
+      if (response.status === 200) {
+        setCurrentOrdersItem(response.data);
         setIsLoading(false);
-      })
-      .catch((err) => console.error(err));
+      }
+    } catch (error) {}
   };
 
-  const getAllPastOrder = () => {
-    axios
-      .get(`/orders/get-approved/${sessionId()}`)
-      .then((result) => {
+  const getAllPastOrder = async () => {
+    try {
+      const response = await getAllPastOrderSeller(sessionId());
+      if (response.status === 200) {
         setIsLoading(false);
-        setPastOrdersItem(result.data);
-      })
-      .catch((err) => console.error(err));
+        setPastOrdersItem(response.data);
+      }
+    } catch (error) {}
   };
 
   useEffect(() => {

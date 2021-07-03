@@ -3,25 +3,25 @@ import "antd/dist/antd.css";
 import Title from "antd/lib/typography/Title";
 import moment from "moment";
 import React from "react";
-import axios from "utils/axios";
 import { rupeeSign } from "utils/constant";
 import { useTranslation } from "react-i18next";
+import { putRateToOrder } from "utils/api";
 
 const CustomerCurrentOrders = ({ orders, callBack }) => {
   const { t } = useTranslation();
 
-  const rateOrder = (rate, order) => {
-    axios
-      .put(`/orders/rate/${order.id}`, { rating: rate })
-      .then((result) => {
+  const rateOrder = async (rate, order) => {
+    try {
+      const response = await putRateToOrder(order.id, { rating: rate });
+      if (response.status === 200) {
         notification.success({
           message: `Notification`,
           description: `Order reviewed with ${rate} stars`,
           placement: "topRight",
         });
         callBack();
-      })
-      .catch((err) => console.error(err));
+      }
+    } catch (error) {}
   };
 
   return (

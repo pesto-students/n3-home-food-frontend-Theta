@@ -9,11 +9,10 @@ import React from "react";
 import { Translation } from "react-i18next";
 import Cart from "components/cart/cart";
 import CustomerNavbar from "components/customerNavbar/customerNavbar";
-import axios from "utils/axios";
-import { baseUrl } from "utils/constant";
 import { sessionId } from "utils/helpers";
 import Payment from "../payment";
 import "./checkout.css";
+import { getUserCart } from "utils/api";
 
 const { Step } = Steps;
 
@@ -29,23 +28,21 @@ export class Checkout extends React.Component {
     this.getCart();
   };
 
-  getCart = () => {
-    axios
-      .get(`${baseUrl}/cart/${sessionId()}`)
-      .then((result) => {
+  getCart = async () => {
+    try {
+      const response = await getUserCart(sessionId());
+      if (response.status === 200) {
         this.setState({ isCartLoad: true });
-        this.setState({ alreadyInCart: result.data }, () => {});
-      })
-      .catch((err) => {
-        this.setState({ isCartLoad: true });
-        let cart = {
-          items: [],
-          subTotal: 0,
-        };
-        this.setState({ alreadyInCart: cart });
-
-        console.error(err);
-      });
+        this.setState({ alreadyInCart: response.data }, () => {});
+      }
+    } catch (error) {
+      this.setState({ isCartLoad: true });
+      let cart = {
+        items: [],
+        subTotal: 0,
+      };
+      this.setState({ alreadyInCart: cart });
+    }
   };
 
   onDeliveryChange = (e) => {

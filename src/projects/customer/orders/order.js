@@ -4,35 +4,35 @@ import "antd/dist/antd.css";
 import React, { useEffect, useState } from "react";
 import CustomerNavbar from "components/customerNavbar/customerNavbar";
 import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
-import axios from "utils/axios";
 import CustomerCurrentOrders from "./customerCurrentOrders";
+import { getAllCurrentOrder } from "utils/api";
 
 const SellerProducts = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const [currentOrdersItem, setCurrentOrdersItem] = useState([]);
 
-  const getAllCurrentOrder = () => {
-    axios
-      .get(`/orders/`)
-      .then((result) => {
-        setCurrentOrdersItem(result.data);
+  const getOrder = async () => {
+    try {
+      const response = await getAllCurrentOrder();
+      if (response.status === 200) {
+        setCurrentOrdersItem(response.data);
         setIsLoading(false);
-      })
-      .catch((err) => console.error(err));
+      }
+    } catch (error) {}
   };
 
   useEffect(() => {
-    getAllCurrentOrder();
+    getOrder();
   }, []);
 
   const refreshOrder = () => {
-    getAllCurrentOrder();
+    getOrder();
   };
 
   return (
     <>
-      <CustomerNavbar />
+      <CustomerNavbar updatePincode={() => 0} />
 
       <div className="my-order">
         <h4>My Orders</h4>

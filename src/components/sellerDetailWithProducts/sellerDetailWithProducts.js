@@ -28,9 +28,9 @@ const SellerDetailWithProducts = (props) => {
   });
 
   const getCurrentTab = (tab) => {
-    let items = profile.myProducts.filter((item) =>
-      item.productCategory.filter((n) => n.name === tab)
-    );
+    // profile.myProducts.filter((item) =>
+    //   item.productCategory.filter((n) => n.name === tab)
+    // );
   };
 
   const getSellerProfile = useCallback(() => {

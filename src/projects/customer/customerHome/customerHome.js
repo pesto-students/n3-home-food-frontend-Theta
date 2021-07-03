@@ -38,7 +38,6 @@ const CustomerHome = () => {
 
   const getAllSellerByCategory = async (category) => {
     setLoadSeller(false);
-
     if (category !== "All") {
       try {
         let response = await getCategorySeller(getCategoryId(category));

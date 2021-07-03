@@ -3,11 +3,14 @@ import "antd/dist/antd.css";
 import { React, useEffect, useState } from "react";
 import LineChart from "components/lineChart/lineChart";
 import PieChart from "components/pieChart/pieChart";
-import axios from "utils/axios";
-import { baseUrl } from "utils/constant";
 import "./sellerGraphs.css";
 import { useTranslation } from "react-i18next";
 import { sessionId } from "utils/helpers";
+import {
+  getGraphDetailSeller,
+  getSellerDetailsWallet,
+  getSellerPieChartData,
+} from "utils/api";
 
 const { RangePicker } = DatePicker;
 
@@ -25,50 +28,40 @@ function SellerGraphs() {
     getSellerDetails();
   }, []);
 
-  const getGraphDetails = () => {
-    let lineGraphDataMock = ["revenue"];
-    axios
-      .get(`${baseUrl}/orders/get-revenue-seller/${sessionId()}`)
-      .then((result) => {
-        result.data.forEach((element) => {
+  const getGraphDetails = async () => {
+    try {
+      let lineGraphDataMock = ["revenue"];
+      const response = await getGraphDetailSeller(sessionId());
+      if (response.status === 200) {
+        response.data.forEach((element) => {
           lineGraphDataMock.push(element.totalPrice);
         });
         setLineGraphData(lineGraphDataMock);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+      }
+    } catch (error) {}
   };
 
-  const getSellerDetails = () => {
-    axios
-      .get(`${baseUrl}/orders/seller-wallet/${sessionId()}`)
-
-      .then((result) => {
-        result.data.Orders.length
-          ? setorderCountData(result.data.Orders.length)
+  const getSellerDetails = async () => {
+    try {
+      const response = await getSellerDetailsWallet(sessionId());
+      if (response.status === 200) {
+        response.data.Orders.length
+          ? setorderCountData(response.data.Orders.length)
           : setorderCountData(0);
-        setrevenueData(result.data.totalPrice);
-      })
-
-      .catch((err) => {
-        console.error(err);
-      });
+        setrevenueData(response.data.totalPrice);
+      }
+    } catch (error) {}
   };
 
-  const getPieChartDetails = () => {
-    axios
-      .get(`${baseUrl}/orders/orders-category-wise`)
-
-      .then((result) => {
-        result.data.categoryWiseOrder.length
-          ? setPieGraphData(result.data.categoryWiseOrder)
+  const getPieChartDetails = async () => {
+    try {
+      const response = await getSellerPieChartData();
+      if (response.status === 200) {
+        response.data.categoryWiseOrder.length
+          ? setPieGraphData(response.data.categoryWiseOrder)
           : setPieGraphData(0);
-      })
-
-      .catch((err) => {
-        console.error(err);
-      });
+      }
+    } catch (error) {}
   };
 
   const onChange = (value, dateString) => {

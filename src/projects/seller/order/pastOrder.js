@@ -3,9 +3,9 @@ import React from "react";
 import { Card, Row, Col, Rate, Tag } from "antd";
 import Title from "antd/lib/typography/Title";
 import { rupeeSign } from "utils/constant";
-import moment from "moment";
 import DataNotFound from "components/dataNotFound/dataNotFound";
 import { useTranslation } from "react-i18next";
+import { orderTimeFormat } from "utils/helpers";
 
 const PastOrders = ({ orders }) => {
   const { t } = useTranslation();
@@ -35,9 +35,7 @@ const PastOrders = ({ orders }) => {
                   <Title level={5}>
                     {t("seller.order.receivedOn")}
                     {"  "}
-                    {moment(item.dateOrdered).format(
-                      "dddd, MMMM Do YYYY, h:mm:ss a"
-                    )}
+                    {orderTimeFormat(item.dateOrdered)}
                   </Title>
                 </Row>
               </Col>

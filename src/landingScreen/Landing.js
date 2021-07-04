@@ -40,7 +40,10 @@ const LandingPage = () => {
     if (category !== "All") {
       try {
         setLoadSeller(false);
-        const response = await getAllSellerByCategory(getCategoryId(category));
+        const response = await getAllSellerByCategory(
+          getCategoryId(category),
+          pincode
+        );
         if (response.status === 200) {
           setSeller(response.data);
           setLoadSeller(true);
@@ -54,6 +57,7 @@ const LandingPage = () => {
   useEffect(() => {
     redirectToOriginalPageFromLanding();
     getSellers(getPincode());
+    setPincode(getPincode());
   }, []);
 
   const getSellerByPincode = (code) => {

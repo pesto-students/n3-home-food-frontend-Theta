@@ -17,7 +17,6 @@ const SellerProfile = () => {
   const sellerProfile = async () => {
     try {
       const response = await getSellerProfile(sessionId());
-      console.log(response);
       if (response.status === 200) {
         setProfile(response.data);
         setIsLoading(false);

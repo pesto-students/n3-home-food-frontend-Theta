@@ -1,11 +1,11 @@
 import { Card, Col, notification, Rate, Row, Tag } from "antd";
 
 import Title from "antd/lib/typography/Title";
-import moment from "moment";
 import React from "react";
 import { rupeeSign } from "utils/constant";
 import { useTranslation } from "react-i18next";
 import { putRateToOrder } from "../utils/api";
+import { orderTimeFormat } from "utils/helpers";
 
 const CustomerCurrentOrders = ({ orders, callBack }) => {
   const { t } = useTranslation();
@@ -41,9 +41,7 @@ const CustomerCurrentOrders = ({ orders, callBack }) => {
                   <Row justify="end">
                     <Title level={5}>
                       {t("MyOrders.Received on")}{" "}
-                      {moment(item.dateOrdered).format(
-                        "dddd, MMMM Do YYYY, h:mm:ss a"
-                      )}
+                      {orderTimeFormat(item.dateOrdered)}
                     </Title>
                   </Row>
                 </Col>

@@ -40,7 +40,10 @@ const CustomerHome = () => {
     setLoadSeller(false);
     if (category !== "All") {
       try {
-        let response = await getCategorySeller(getCategoryId(category));
+        let response = await getCategorySeller(
+          getCategoryId(category),
+          pincode
+        );
         if (response.status === 200) {
           setSeller(response.data);
           setLoadSeller(true);

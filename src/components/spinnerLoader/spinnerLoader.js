@@ -1,14 +1,12 @@
-import {React} from "react";
-import {Spin} from "antd"
-
-
+import { React } from "react";
+import { Spin, Tooltip } from "antd";
 
 const SpinnerLoader = () => {
-  return (        
-       <Spin size="large"/>
-
+  return (
+    <Tooltip placement="bottom" title="Loding">
+      <Spin size="large" />
+    </Tooltip>
   );
-}
+};
 
 export default SpinnerLoader;
- 

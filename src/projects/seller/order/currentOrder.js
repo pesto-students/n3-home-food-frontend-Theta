@@ -1,12 +1,12 @@
 import { Button, Card, Col, notification, Row, Tag } from "antd";
 
 import Title from "antd/lib/typography/Title";
-import moment from "moment";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { orderDelived } from "../utils/api";
 import { rupeeSign } from "utils/constant";
 import DataNotFound from "components/dataNotFound/dataNotFound";
+import { orderTimeFormat } from "utils/helpers";
 
 const CurrentOrders = ({ orders, callBack }) => {
   const { t } = useTranslation();
@@ -50,9 +50,7 @@ const CurrentOrders = ({ orders, callBack }) => {
                   <Title level={5}>
                     {t("seller.order.receivedOn")}
                     {"  "}
-                    {moment(item.dateOrdered).format(
-                      "dddd, MMMM Do YYYY, h:mm:ss a"
-                    )}
+                    {orderTimeFormat(item.dateOrdered)}
                   </Title>
                 </Row>
               </Col>

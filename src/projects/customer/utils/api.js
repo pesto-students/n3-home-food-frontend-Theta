@@ -12,9 +12,9 @@ export const getSeller = async (pincode) => {
   return response;
 };
 
-export const getCategorySeller = async (category) => {
+export const getCategorySeller = async (category, code) => {
   let response = await axios
-    .get(`sellers/get/SellersByCategory?categoryId=${category}`)
+    .get(`sellers/get/SellersByCategory?categoryId=${category}&pincode=${code}`)
     .then((response) => {
       return response;
     })

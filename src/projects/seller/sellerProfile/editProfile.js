@@ -1,6 +1,6 @@
 import { UploadOutlined } from "@ant-design/icons";
 import { Button, Col, Form, Input, message, Modal, Row, Upload } from "antd";
-import "antd/dist/antd.css";
+
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { sessionId } from "utils/helpers";

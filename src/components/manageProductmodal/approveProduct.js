@@ -1,5 +1,5 @@
 import { Button, Form, InputNumber, Modal, notification } from "antd";
-import "antd/dist/antd.css";
+
 import axios from "axios";
 import React, { useState } from "react";
 

@@ -1,5 +1,5 @@
 import { Col, Row } from "antd";
-import "antd/dist/antd.css";
+
 import { React } from "react";
 import { connect } from "react-redux";
 import Login from "components/login/login";
@@ -13,11 +13,8 @@ function AdminLogin() {
           <div className="left-container-content">
             <h1>Manage all the seller in your area</h1>
             <p>
-              What is Lorem Ipsum Lorem Ipsum is simply dummy text of the
-              printing and typesetting industry Lorem Ipsum has been the
-              industry's standard dummy text ever since the 1500s when an
-              unknown printer took a galley of type and scrambled it to make a
-              type specimen book it has?
+              You can manage the seller of your area also you can control the
+              product of seller and more
             </p>
           </div>
         </Col>

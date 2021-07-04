@@ -10,9 +10,9 @@ const openNotificationWithIcon = (type, message) => {
 };
 
 export const ProductCrudMenu = ({ callback, product }) => {
-  const deleteProduct = () => {
+  const deleteProduct = async () => {
     try {
-      const response = adminDeleteProduct(product.id);
+      const response = await adminDeleteProduct(product.id);
       if (response.status === 200) {
         openNotificationWithIcon("success", "Product Deleted");
         callback();

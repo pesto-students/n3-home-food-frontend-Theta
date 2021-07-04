@@ -1,7 +1,7 @@
 import { React, useEffect, useState } from "react";
 // import { ShoppingCartOutlined } from "@ant-design/icons";
 import { Button, Col, Form, Input, Layout, Modal, Row } from "antd";
-import "antd/dist/antd.css";
+
 import { useTranslation } from "react-i18next";
 import { connect, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";

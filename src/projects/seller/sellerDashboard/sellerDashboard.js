@@ -5,7 +5,7 @@ import {
 } from "@ant-design/icons";
 import "./sellerDashboard.css";
 import { Layout, Menu } from "antd";
-import "antd/dist/antd.css";
+
 import React, { useState, useEffect } from "react";
 import { Link, Route } from "react-router-dom";
 import { getUser } from "utils/helpers";

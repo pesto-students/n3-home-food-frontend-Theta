@@ -1,5 +1,5 @@
 import { Button, notification, Col, Form, Input, Row } from "antd";
-import "antd/dist/antd.css";
+
 import { React } from "react";
 import { connect, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";

@@ -9,7 +9,7 @@ import {
   notification,
   Upload,
 } from "antd";
-import "antd/dist/antd.css";
+
 import axios from "axios";
 import React, { useState } from "react";
 import { baseUrl } from "utils/constant";

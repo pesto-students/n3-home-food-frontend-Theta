@@ -1,5 +1,5 @@
 import { Tabs } from "antd";
-import "antd/dist/antd.css";
+
 import React, { useEffect, useState } from "react";
 import AllApprove from "./allApprove/allApprove";
 import AllProducts from "./allProduct/allProducts";

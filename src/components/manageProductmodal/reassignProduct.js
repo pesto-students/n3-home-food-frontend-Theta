@@ -1,5 +1,5 @@
 import { Button, Form, Modal, notification, Select } from "antd";
-import "antd/dist/antd.css";
+
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { baseUrl } from "utils/constant";

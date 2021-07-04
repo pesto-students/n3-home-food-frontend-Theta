@@ -1,5 +1,5 @@
 import { Button, Form, Input, notification } from "antd";
-import "antd/dist/antd.css";
+
 import React, { useState } from "react";
 import firebase from "utils/firebase";
 import "./login.css";

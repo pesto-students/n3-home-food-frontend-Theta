@@ -10,12 +10,13 @@ import {
   Select,
   Upload,
 } from "antd";
-import "antd/dist/antd.css";
+
 import axios from "axios";
 import React, { useState } from "react";
 
 import { useTranslation } from "react-i18next";
 import { baseUrl } from "utils/constant";
+import { getCategoryId } from "utils/helpers";
 
 const { Option } = Select;
 const openNotificationWithIcon = (type, message) => {
@@ -113,10 +114,10 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, fromFor }) => {
                 "seller.product.requestForm.productCategoryValidation"
               )}
             >
-              <Option value="60c906ce35453e14cd3f4ee3">Breakfast</Option>
-              <Option value="60ccfb4516659e249450ed49">Lunch</Option>
-              <Option value="60ccfea78d901732e097e2ee">Snacks</Option>
-              <Option value="60cf33b093112a14d5da3897">Dinner</Option>
+              <Option value={getCategoryId("Breakfast")}>Breakfast</Option>
+              <Option value={getCategoryId("Lunch")}>Lunch</Option>
+              <Option value={getCategoryId("Snacks")}>Snacks</Option>
+              <Option value={getCategoryId("Dinner")}>Dinner</Option>
             </Select>
           </Form.Item>
         )}

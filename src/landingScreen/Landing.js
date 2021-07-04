@@ -1,5 +1,5 @@
 import { Carousel, Col, Layout, Row, Typography } from "antd";
-import "antd/dist/antd.css";
+
 import { React, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Image from "components/image/image";

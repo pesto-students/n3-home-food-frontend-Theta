@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { Carousel, Col, Layout, Row, Typography } from "antd";
-import "antd/dist/antd.css";
+
 import Image from "components/image/image";
 import CustomerNavbar from "components/customerNavbar/customerNavbar";
 import CustomTabs from "components/Tabs/Tabs";

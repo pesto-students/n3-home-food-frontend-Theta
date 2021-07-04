@@ -1,6 +1,6 @@
 import { Row } from "antd";
 import "./order.css";
-import "antd/dist/antd.css";
+
 import React, { useEffect, useState } from "react";
 import CustomerNavbar from "components/customerNavbar/customerNavbar";
 import SpinnerLoader from "components/spinnerLoader/spinnerLoader";

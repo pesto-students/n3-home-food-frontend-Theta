@@ -1,5 +1,5 @@
 import { Card, Row, Skeleton, Typography } from "antd";
-import "antd/dist/antd.css";
+
 import React, { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Image from "components/image/image";

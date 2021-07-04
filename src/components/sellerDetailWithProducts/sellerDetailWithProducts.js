@@ -1,4 +1,3 @@
-import "antd/dist/antd.css";
 import { React, useEffect, useState, useCallback } from "react";
 import { Row, Col, Typography, Rate, Card } from "antd";
 import "./sellerDetailWithProducts.css";
@@ -46,29 +45,33 @@ const SellerDetailWithProducts = ({ match }) => {
       .get(`${baseUrl}/sellers/get/getproducts?sellerid=${sellerId}`)
       .then((result) => {
         setProfile(result.data[0]);
-        setAllProduct([...result.data[0].myProducts]);
+        setAllProduct(result.data[0].myProducts);
         setIsLoading(false);
       })
       .catch((err) => console.error(err));
   }, [sellerId]);
 
   const getCart = () => {
-    axios
-      .get(`${baseUrl}/cart/${sessionId()}`)
-      .then((result) => {
-        setAlreadyInCart(result.data);
-        setIsCartLoad(true);
-      })
-      .catch((err) => {
-        setIsCartLoad(true);
-        let cart = {
-          items: [],
-          subTotal: 0,
-        };
-        setAlreadyInCart(cart);
+    if (sessionId()) {
+      axios
+        .get(`${baseUrl}/cart/${sessionId()}`)
+        .then((result) => {
+          setAlreadyInCart(result.data);
+          setIsCartLoad(true);
+        })
+        .catch((err) => {
+          setIsCartLoad(true);
+          let cart = {
+            items: [],
+            subTotal: 0,
+          };
+          setAlreadyInCart(cart);
 
-        console.error(err);
-      });
+          console.error(err);
+        });
+    } else {
+      setIsCartLoad(true);
+    }
   };
 
   useEffect(() => {
@@ -139,7 +142,7 @@ const SellerDetailWithProducts = ({ match }) => {
                   />
                 )}
               </Col>
-              <Col md={6}>
+              <Col md={6} xs={12} sm={12}>
                 <Card>
                   <Title level={3}> {t("Cart.Cart")} </Title>
                   <hr />

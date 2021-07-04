@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Card, Col, DatePicker, Row } from "antd";
-import "antd/dist/antd.css";
+
 import LineChart from "components/lineChart/lineChart";
 import PieChart from "components/pieChart/pieChart";
 import "./sellerGraphs.css";
@@ -11,6 +11,7 @@ import {
   getSellerDetailsWallet,
   getSellerPieChartData,
 } from "../utils/api";
+import { rupeeSign } from "utils/constant";
 
 const { RangePicker } = DatePicker;
 
@@ -77,12 +78,15 @@ function SellerGraphs() {
         <Card hoverable={true} className="card-detailed">
           <div>
             <h5>{t("seller.dashboard.totalOrder")}</h5>
-            <h5>{orderCountData}</h5>
+            <h5>{orderCountData ? orderCountData : 0}</h5>
           </div>
         </Card>
         <Card hoverable={true} className="card-detailed">
           <h5>{t("seller.dashboard.totalIncome")}</h5>
-          <h5>{revenueData}</h5>
+          <h5>
+            {rupeeSign}
+            {revenueData ? revenueData : 0}
+          </h5>
         </Card>
       </Row>
       <Row justify="center">

@@ -1,5 +1,5 @@
 import { Button, Card, notification, Row, Skeleton } from "antd";
-import "antd/dist/antd.css";
+
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { RejectSellerModal } from "components/manageSellerModal/rejectSeller";
@@ -22,6 +22,7 @@ const PendingSellers = ({ callback, sellers, isLoading }) => {
       const response = await approveSellerById(id);
       if (response.status === 200) {
         openNotificationWithIcon("success", "Seller Approved");
+        callback();
       } else {
         openNotificationWithIcon("error", "Could Not Approve Seller");
       }

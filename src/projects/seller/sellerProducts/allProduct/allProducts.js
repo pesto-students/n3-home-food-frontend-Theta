@@ -8,12 +8,11 @@ import {
   Skeleton,
   Typography,
 } from "antd";
-import "antd/dist/antd.css";
+
 import React, { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Image from "components/image/image";
 import { AddProductSellerModal } from "components/manageProductmodal/addProduct";
-import item from "images/south-indian.jpg";
 import { getCategoryId, sessionId } from "utils/helpers";
 import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
 import { useTranslation } from "react-i18next";
@@ -131,7 +130,11 @@ const AllProducts = ({ products, isLoading, callback }) => {
                   <div className="container">
                     <div className="row">
                       <div className="product-cointaner">
-                        <Image url={item} height="100" width="150"></Image>
+                        <Image
+                          url={product.image}
+                          height="100"
+                          width="150"
+                        ></Image>
                       </div>
                       <div className="product-details ">
                         <Title level={4}>{product.name}</Title>

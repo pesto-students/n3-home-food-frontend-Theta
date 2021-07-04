@@ -9,7 +9,7 @@ import React from "react";
 import { Translation } from "react-i18next";
 import Cart from "components/cart/cart";
 import CustomerNavbar from "components/customerNavbar/customerNavbar";
-import { sessionId, setPincode } from "utils/helpers";
+import { getUser, sessionId, setPincode } from "utils/helpers";
 import Payment from "../payment";
 import "./checkout.css";
 import { getUserCart } from "../utils/api";
@@ -25,6 +25,11 @@ export class Checkout extends React.Component {
   };
 
   componentDidMount = () => {
+    const user = getUser() ? getUser().userType : null;
+
+    if (user === "Seller") window.location.href = "/seller/dashboard";
+    if (user === "Admin") window.location.href = "/admin/dashboard";
+    if (user === null) window.location.href = "/";
     this.getCart();
   };
 

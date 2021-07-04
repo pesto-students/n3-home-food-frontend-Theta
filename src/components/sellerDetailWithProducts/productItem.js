@@ -1,5 +1,5 @@
 import { Button, Col, Row, Typography, notification, Tag } from "antd";
-import "antd/dist/antd.css";
+
 import { React, useState } from "react";
 import axios from "utils/axios";
 import { baseUrl, rupeeSign } from "utils/constant";

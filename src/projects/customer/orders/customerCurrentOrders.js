@@ -1,5 +1,5 @@
 import { Card, Col, notification, Rate, Row, Tag } from "antd";
-import "antd/dist/antd.css";
+
 import Title from "antd/lib/typography/Title";
 import moment from "moment";
 import React from "react";

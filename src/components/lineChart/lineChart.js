@@ -2,13 +2,13 @@ import * as React from "react";
 import { useEffect, useRef } from "react";
 import bb, { line, zoom } from "billboard.js";
 import { Row } from "antd";
-const LineChart = (props) => {
+const LineChart = ({ dataSource }) => {
   const lineChart = useRef(null);
 
   useEffect(() => {
     bb.generate({
       data: {
-        columns: [props.dataSource],
+        columns: [dataSource],
         type: line(), // for ESM specify as: line()
       },
       zoom: {
@@ -17,7 +17,7 @@ const LineChart = (props) => {
       },
       bindto: lineChart.current,
     });
-  }, [props.dataSource]);
+  }, [dataSource]);
 
   return (
     <>

@@ -5,7 +5,7 @@ import {
   PieChartOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
-import "antd/dist/antd.css";
+
 import { Link } from "react-router-dom";
 import Image from "components/image/image";
 import logo from "images/logo.png";

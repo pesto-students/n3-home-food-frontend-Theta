@@ -1,5 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`testing seller graphs component MyComponent should render correctly in "debug" mode 1`] = `ShallowWrapper {}`;
-
 exports[`testing seller graphs component Seller Graph Component should render correctly in "debug" mode 1`] = `ShallowWrapper {}`;

@@ -1,11 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Orders component Orders Component should render correctly in "debug" mode 1`] = `ShallowWrapper {}`;
-
 exports[`Orders component should render correctly in "debug" mode 1`] = `ShallowWrapper {}`;
 
 exports[`Past Order Component should render correctly in "debug" mode 1`] = `ShallowWrapper {}`;
 
 exports[`current Order Component should render correctly in "debug" mode 1`] = `ShallowWrapper {}`;
-
-exports[`testing seller graphs component Seller Graph Component should render correctly in "debug" mode 1`] = `ShallowWrapper {}`;

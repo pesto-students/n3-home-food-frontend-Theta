@@ -9,7 +9,7 @@ import React from "react";
 import { Translation } from "react-i18next";
 import Cart from "components/cart/cart";
 import CustomerNavbar from "components/customerNavbar/customerNavbar";
-import { sessionId } from "utils/helpers";
+import { sessionId, setPincode } from "utils/helpers";
 import Payment from "../payment";
 import "./checkout.css";
 import { getUserCart } from "../utils/api";
@@ -94,12 +94,16 @@ export class Checkout extends React.Component {
       </Card>
     );
 
+    const changePincode = (code) => {
+      setPincode(code);
+    };
+
     return (
       <>
         <Translation>
           {(t, { i18n }) => (
             <>
-              <CustomerNavbar />
+              <CustomerNavbar updatePincode={changePincode} />
               <div className="payment-cointaner">
                 <Steps
                   direction="vertical"
@@ -130,6 +134,7 @@ export class Checkout extends React.Component {
                   <hr />
                   {this.state.isCartLoad && (
                     <Cart
+                      showCheckout={false}
                       reloadCart={this.getCart}
                       alreadyInCart={this.state.alreadyInCart}
                     />

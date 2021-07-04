@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from "react";
-import { ShoppingCartOutlined } from "@ant-design/icons";
+// import { ShoppingCartOutlined } from "@ant-design/icons";
 import { Button, Col, Form, Input, Layout, Modal, Row } from "antd";
 import "antd/dist/antd.css";
 import { useTranslation } from "react-i18next";
@@ -11,6 +11,7 @@ import { getPincode, setPincode } from "utils/helpers";
 import Image from "../image/image";
 import SelectBox from "../selectBox/selectBox";
 import "./navbar.css";
+import CustomerLogin from "landingScreen/customerLogin";
 
 const { Header } = Layout;
 
@@ -47,9 +48,6 @@ const Navbar = ({ callBack }) => {
       <Modal
         title={t("Header.Enter Pincode")}
         visible={openPincdeModal}
-        initialValues={{
-          pincode: currentPincode,
-        }}
         okText={t("Header.Save")}
         onCancel={() => setOpenPincodeModal(false)}
         okButtonProps={{
@@ -62,6 +60,9 @@ const Navbar = ({ callBack }) => {
         <Form
           layout="vertical"
           id="category-editor-form"
+          initialValues={{
+            pincode: currentPincode,
+          }}
           hideRequiredMark
           onFinish={submitPincode}
         >
@@ -106,10 +107,11 @@ const Navbar = ({ callBack }) => {
           <Link to="/admin/login">
             <Button type="link">{t("Header.Admin")}</Button>
           </Link>
-          <Button type="link">
+          {/* <Button type="link">
             <ShoppingCartOutlined className="cart-icon" />
-          </Button>
+          </Button> */}
         </Col>
+        <CustomerLogin type="Customer" />
       </Row>
     </Header>
   );

@@ -6,6 +6,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { orderDelived } from "../utils/api";
 import { rupeeSign } from "utils/constant";
+import DataNotFound from "components/dataNotFound/dataNotFound";
 
 const CurrentOrders = ({ orders, callBack }) => {
   const { t } = useTranslation();
@@ -23,6 +24,14 @@ const CurrentOrders = ({ orders, callBack }) => {
       }
     } catch (error) {}
   };
+
+  if (orders.length === 0) {
+    return (
+      <Row className="m-2 mt-4" justify="center">
+        <DataNotFound text="No Data Found!" />
+      </Row>
+    );
+  }
 
   return (
     <>

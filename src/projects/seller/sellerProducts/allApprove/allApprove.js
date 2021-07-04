@@ -3,6 +3,7 @@ import "antd/dist/antd.css";
 import React, { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Image from "components/image/image";
+import DataNotFound from "components/dataNotFound/dataNotFound";
 import item from "images/south-indian.jpg";
 import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
 
@@ -18,36 +19,42 @@ const AllApprove = ({ products, isLoading }) => {
     <>
       <div>
         <Skeleton loading={isLoading} active>
-          <InfiniteScroll
-            dataLength={products.length}
-            next={fetchMoreData}
-            hasMore={ishasMore}
-            loader={
-              <Row className="m-2 mt-4" justify="center">
-                <SpinnerLoader />
-              </Row>
-            }
-          >
-            {products.map((product, i) => (
-              <Card key={i} hoverable>
-                <div className="container">
-                  <div className="row">
-                    <div className="product-cointaner">
-                      <Image url={item} height="100" width="150"></Image>
-                    </div>
-                    <div className="product-details ">
-                      <Title level={4}>{product.name}</Title>
-                      <span>Max Amount: ₹ {product.max_price}</span>
-                      <Row>
-                        {" "}
-                        <Tag color="warning">{product.status}</Tag>
-                      </Row>
+          {products.length > 0 ? (
+            <InfiniteScroll
+              dataLength={products.length}
+              next={fetchMoreData}
+              hasMore={ishasMore}
+              loader={
+                <Row className="m-2 mt-4" justify="center">
+                  <SpinnerLoader />
+                </Row>
+              }
+            >
+              {products.map((product, i) => (
+                <Card key={i} hoverable>
+                  <div className="container">
+                    <div className="row">
+                      <div className="product-cointaner">
+                        <Image url={item} height="100" width="150"></Image>
+                      </div>
+                      <div className="product-details ">
+                        <Title level={4}>{product.name}</Title>
+                        <span>Max Amount: ₹ {product.max_price}</span>
+                        <Row>
+                          {" "}
+                          <Tag color="warning">{product.status}</Tag>
+                        </Row>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Card>
-            ))}
-          </InfiniteScroll>
+                </Card>
+              ))}
+            </InfiniteScroll>
+          ) : (
+            <Row className="m-2 mt-4" justify="center">
+              <DataNotFound text="No Data Found!" />
+            </Row>
+          )}
         </Skeleton>
       </div>
     </>

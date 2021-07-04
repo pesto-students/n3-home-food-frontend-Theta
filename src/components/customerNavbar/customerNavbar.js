@@ -1,4 +1,4 @@
-import  React, {useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { Button, Col, Layout, Row, Modal, Input, Form } from "antd";
 import "antd/dist/antd.css";
@@ -99,9 +99,11 @@ const CustomerNavbar = ({ updatePincode }) => {
             {t("Header.Pincode")} {currentPincode && `(${currentPincode})`}
           </Button>
 
-          <Button type="link">
-            <ShoppingCartOutlined className="cart-icon" />
-          </Button>
+          <Link to="/checkout">
+            <Button type="link">
+              <ShoppingCartOutlined className="cart-icon" />
+            </Button>
+          </Link>
         </Col>
       </Row>
     </Header>

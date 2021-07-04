@@ -4,10 +4,20 @@ import { Card, Row, Col, Rate, Tag } from "antd";
 import Title from "antd/lib/typography/Title";
 import { rupeeSign } from "utils/constant";
 import moment from "moment";
+import DataNotFound from "components/dataNotFound/dataNotFound";
 import { useTranslation } from "react-i18next";
 
 const PastOrders = ({ orders }) => {
   const { t } = useTranslation();
+
+  if (orders.length === 0) {
+    return (
+      <Row className="m-2 mt-4" justify="center">
+        <DataNotFound text="No Data Found!" />
+      </Row>
+    );
+  }
+
   return (
     <>
       {orders.map((item, key) => {

@@ -6,6 +6,7 @@ import CustomerNavbar from "components/customerNavbar/customerNavbar";
 import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
 import CustomerCurrentOrders from "./customerCurrentOrders";
 import { getAllCurrentOrder } from "../utils/api";
+import { getUser, setPincode } from "utils/helpers";
 
 const SellerProducts = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -22,6 +23,13 @@ const SellerProducts = () => {
     } catch (error) {}
   };
 
+  const user = getUser() ? getUser().userType : null;
+  useEffect(() => {
+    if (user === "Seller") window.location.href = "/seller/dashboard";
+    if (user === "Admin") window.location.href = "/admin/dashboard";
+    if (user === null) window.location.href = "/";
+  }, [user]);
+
   useEffect(() => {
     getOrder();
   }, []);
@@ -30,12 +38,17 @@ const SellerProducts = () => {
     getOrder();
   };
 
+  const updatePincode = (code) => {
+    setPincode(code);
+  };
+
   return (
     <>
-      <CustomerNavbar updatePincode={() => 0} />
+      <CustomerNavbar updatePincode={updatePincode} />
 
       <div className="my-order">
         <h4>My Orders</h4>
+
         {!isLoading ? (
           <CustomerCurrentOrders
             callBack={refreshOrder}

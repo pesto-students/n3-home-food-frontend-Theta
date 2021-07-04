@@ -10,7 +10,6 @@ import {
   getPincode,
   redirectToOriginalPageFromLanding,
 } from "utils/helpers";
-import CustomerLogin from "./customerLogin";
 import "./landing.css";
 import SellerItems from "./sellerItems";
 import { getAllSellerByPincode, getAllSellerByCategory } from "utils/api";
@@ -95,7 +94,6 @@ const LandingPage = () => {
               />
             </Col>
           </Row>
-          <CustomerLogin type="Customer" />
           <SellerItems loading={loadSeller} seller={seller} />
         </div>
       </Content>

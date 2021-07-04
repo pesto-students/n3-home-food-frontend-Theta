@@ -36,9 +36,9 @@ export const getAllCurrentOrder = async () => {
   return response;
 };
 
-export const getUserCart = async () => {
+export const getUserCart = async (id) => {
   let response = await axios
-    .get(`/cart/`)
+    .get(`/cart/${id}`)
     .then((response) => {
       return response;
     })

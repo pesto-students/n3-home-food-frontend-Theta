@@ -17,6 +17,7 @@ import item from "images/south-indian.jpg";
 import { getCategoryId, sessionId } from "utils/helpers";
 import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
 import { useTranslation } from "react-i18next";
+import DataNotFound from "components/dataNotFound/dataNotFound";
 import { setAddProductIntoMyProduct } from "projects/seller/utils/api";
 
 const AllProducts = ({ products, isLoading, callback }) => {
@@ -114,40 +115,46 @@ const AllProducts = ({ products, isLoading, callback }) => {
         </Modal>
 
         <Skeleton loading={isLoading} active>
-          <InfiniteScroll
-            dataLength={products.length}
-            next={fetchMoreData}
-            hasMore={true}
-            loader={
-              <Row className="m-2 mt-4" justify="center">
-                <SpinnerLoader />
-              </Row>
-            }
-          >
-            {products.map((product, i) => (
-              <Card key={i} hoverable>
-                <div className="container">
-                  <div className="row">
-                    <div className="product-cointaner">
-                      <Image url={item} height="100" width="150"></Image>
-                    </div>
-                    <div className="product-details ">
-                      <Title level={4}>{product.name}</Title>
-                      <span>Max Amount ₹{product.max_price}</span>
+          {products.length > 0 ? (
+            <InfiniteScroll
+              dataLength={products.length}
+              next={fetchMoreData}
+              hasMore={true}
+              loader={
+                <Row className="m-2 mt-4" justify="center">
+                  <SpinnerLoader />
+                </Row>
+              }
+            >
+              {products.map((product, i) => (
+                <Card key={i} hoverable>
+                  <div className="container">
+                    <div className="row">
+                      <div className="product-cointaner">
+                        <Image url={item} height="100" width="150"></Image>
+                      </div>
+                      <div className="product-details ">
+                        <Title level={4}>{product.name}</Title>
+                        <span>Max Amount ₹{product.max_price}</span>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <Row justify="end">
-                  <Button
-                    type="primary"
-                    onClick={() => handdleOpenCategoryModal(product)}
-                  >
-                    {t("seller.product.addButton")}
-                  </Button>
-                </Row>
-              </Card>
-            ))}
-          </InfiniteScroll>
+                  <Row justify="end">
+                    <Button
+                      type="primary"
+                      onClick={() => handdleOpenCategoryModal(product)}
+                    >
+                      {t("seller.product.addButton")}
+                    </Button>
+                  </Row>
+                </Card>
+              ))}
+            </InfiniteScroll>
+          ) : (
+            <Row className="m-2 mt-4" justify="center">
+              <DataNotFound text="No Data Found!" />
+            </Row>
+          )}
         </Skeleton>
       </div>
     </>

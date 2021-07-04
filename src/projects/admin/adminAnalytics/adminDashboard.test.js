@@ -1,7 +1,7 @@
 import * as React from "react";
 import Enzyme, { shallow } from "enzyme";
 import EnzymeAdapter from "enzyme-adapter-react-16";
-import AdminAnalytics from "./AdminAnalytics";
+import AdminAnalytics from "./adminAnalytics";
 
 Enzyme.configure({ adapter: new EnzymeAdapter() });
 

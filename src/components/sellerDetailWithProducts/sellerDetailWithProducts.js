@@ -10,17 +10,20 @@ import { baseUrl, rupeeSign } from "utils/constant";
 import axios from "utils/axios";
 import SpinnerLoader from "../spinnerLoader/spinnerLoader";
 import Cart from "../cart/cart";
-import { getUser, sessionId } from "utils/helpers";
+import { getUser, sessionId, setPincode } from "utils/helpers";
 import { withRouter } from "react-router-dom";
 import Navbar from "../navbar/navbar";
 import { useTranslation } from "react-i18next";
+import DataNotFound from "components/dataNotFound/dataNotFound";
 
-const SellerDetailWithProducts = (props) => {
+const SellerDetailWithProducts = ({ match }) => {
   const { t } = useTranslation();
-  const sellerId = props.match.params.id;
+  const sellerId = match.params.id;
   const { Title } = Typography;
   const [isLoading, setIsLoading] = useState(true);
   const [isCartLoad, setIsCartLoad] = useState(false);
+
+  const [allProduct, setAllProduct] = useState(false);
 
   const [profile, setProfile] = useState({});
   const [alreadyInCart, setAlreadyInCart] = useState({
@@ -28,9 +31,14 @@ const SellerDetailWithProducts = (props) => {
   });
 
   const getCurrentTab = (tab) => {
-    // profile.myProducts.filter((item) =>
-    //   item.productCategory.filter((n) => n.name === tab)
-    // );
+    if (tab === "All") {
+      setAllProduct([...profile.myProducts]);
+      return;
+    }
+    let items = profile.myProducts.filter(
+      (item) => item.productCategory.filter((n) => n.name === tab).length > 0
+    );
+    setAllProduct([...items]);
   };
 
   const getSellerProfile = useCallback(() => {
@@ -38,6 +46,7 @@ const SellerDetailWithProducts = (props) => {
       .get(`${baseUrl}/sellers/get/getproducts?sellerid=${sellerId}`)
       .then((result) => {
         setProfile(result.data[0]);
+        setAllProduct([...result.data[0].myProducts]);
         setIsLoading(false);
       })
       .catch((err) => console.error(err));
@@ -67,9 +76,17 @@ const SellerDetailWithProducts = (props) => {
     getCart();
   }, [getSellerProfile]);
 
+  const uddatePincode = (code) => {
+    setPincode(code);
+  };
+
   return (
     <>
-      {getUser() ? <CustomerNavbar></CustomerNavbar> : <Navbar />}
+      {getUser() ? (
+        <CustomerNavbar updatePincode={uddatePincode}></CustomerNavbar>
+      ) : (
+        <Navbar callBack={uddatePincode} />
+      )}
       {isLoading === true ? (
         <Row justify="center">
           <SpinnerLoader />
@@ -109,9 +126,13 @@ const SellerDetailWithProducts = (props) => {
                   {t("Cart.Products")}
                 </Title>
 
+                {allProduct.length === 0 && (
+                  <DataNotFound text="Items Not Found"></DataNotFound>
+                )}
+
                 {isCartLoad && (
                   <ProductItems
-                    products={profile.myProducts}
+                    products={allProduct}
                     reloadCart={getCart}
                     savedCartItem={alreadyInCart.items}
                     sellerId={sellerId}

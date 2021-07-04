@@ -11,7 +11,7 @@ import { sessionId } from "utils/helpers";
 import { withRouter } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-const Cart = ({ alreadyInCart, reloadCart, ...props }) => {
+const Cart = ({ alreadyInCart, reloadCart, showCheckout, ...props }) => {
   const { t } = useTranslation();
 
   const [isLoading, setIsLoding] = useState(false);
@@ -144,9 +144,11 @@ const Cart = ({ alreadyInCart, reloadCart, ...props }) => {
         </Row>
 
         <Row className="checkout">
-          <Button type="primary" block onClick={onCheckout}>
-            {t("Cart.Checkout")}
-          </Button>
+          {showCheckout === false ? null : (
+            <Button type="primary" block onClick={onCheckout}>
+              {t("Cart.Checkout")}
+            </Button>
+          )}
         </Row>
       </Row>
     </>

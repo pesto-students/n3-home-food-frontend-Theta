@@ -1,7 +1,7 @@
 import * as React from "react";
 import Enzyme, { shallow } from "enzyme";
 import EnzymeAdapter from "enzyme-adapter-react-16";
-import AdminDashboard from "../adminDashboard/adminDashboard";
+import AdminDashboard from "./dashboard";
 
 Enzyme.configure({ adapter: new EnzymeAdapter() });
 

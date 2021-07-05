@@ -5,14 +5,51 @@
 }
 
 .number-cards{
-    margin-top: -6%;
+    margin-top: 0
 }
 
 .card-detailed{
     width: 200px;
     height: 100px;
     text-align: center;
-    background-color: azure;
     display: flex;
     flex-flow: column;
+}
+
+.small-box {
+    border-radius: .25rem;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.bg-info {
+    background-color: #17a2b8!important;
+}
+
+.count{
+    color: #fff;
+    font-size: 2.2rem;
+    font-weight:600;
+    margin:7px
+}
+
+.status-name{
+    color: #fff;
+}
+
+
+.ant-card-body {
+    padding: 5px 18px;
+    text-align: left;
+}
+
+.card-icon{
+    font-size: 48px;
+    margin: 5px 70px;
+    color: #fff;
+}
+
+.main-items{
+    display: flex;
+    flex-flow: row;
 }

@@ -1,8 +1,8 @@
 import axios from "utils/axios";
 
-export const getAdminGraphDetails = async () => {
+export const getAdminGraphDetails = async (dateString) => {
   let response = await axios
-    .get(`/orders/get-total-revenue`)
+    .get(`/orders/get-total-revenue?startDate=${dateString[0]}&endDate=${dateString[1]}`)
     .then((response) => {
       return response;
     })
@@ -24,9 +24,23 @@ export const getAllOrderCount = async () => {
   return response;
 };
 
-export const getAdminCategoryChartDetails = async () => {
+export const getAdminCategoryChart = async () => {
   let response = await axios
-    .get(`/orders/orders-category-wise`)
+    .get(`/orders/categories`)
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+  return response;
+};
+
+// /categories
+
+export const getAdminCategoryChartDetails = async (dateString) => {
+  let response = await axios
+    .get(`/orders/categories?startDate=${dateString[0]}&endDate=${dateString[1]}`)
     .then((response) => {
       return response;
     })

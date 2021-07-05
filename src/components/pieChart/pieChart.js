@@ -8,7 +8,7 @@ const PieChart = ({dataSource}) => {
   useEffect(() => {
     bb.generate({
         data: {
-          columns:dataSource,
+          columns:dataSource ,
           type: pie(), // for ESM specify as: pie()
         //   onclick: function(d, i) {
         //   console.log("onclick", d, i);
@@ -26,7 +26,7 @@ const PieChart = ({dataSource}) => {
   }, [dataSource]);
   return(
     <>
-   <div style={{width:'70vw'}} ref={PieChart}>chart</div>
+   <div  ref={PieChart}>chart</div>
    <Row justify='center'><h4>Categories Sold</h4></Row>
    </>
   )

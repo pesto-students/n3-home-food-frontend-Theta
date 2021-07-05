@@ -134,7 +134,11 @@ const Cart = ({ alreadyInCart, reloadCart, showCheckout, ...props }) => {
           );
         })}
 
-        <hr></hr>
+        <hr>
+        
+        
+        
+        </hr>
         <Row justify="space-between" className="sub-total">
           <span className="bold">{t("Cart.Sub Total")}</span>
           <span className="bold">

@@ -138,6 +138,7 @@ const AllProducts = ({ products, isLoading, callback }) => {
                       </div>
                       <div className="product-details ">
                         <Title level={4}>{product.name}</Title>
+                        <p>{product.description}</p>
                         <span>Max Amount ₹{product.max_price}</span>
                       </div>
                     </div>

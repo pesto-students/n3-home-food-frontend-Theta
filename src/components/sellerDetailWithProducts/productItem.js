@@ -18,6 +18,7 @@ const ProductItems = ({ products, savedCartItem, reloadCart, sellerId }) => {
   const [isLoading, setIsLoding] = useState(false);
 
   const addItems = (dish, method) => {
+    console.log(sessionId());
     if (!sessionId()) {
       notification.error({
         message: "Notification",

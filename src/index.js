@@ -1,12 +1,14 @@
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
+import { Row } from "antd";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { HashRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
+import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
 import reducers from "./store/reducer/reducer";
 import { saveToLocalStorage, loadToLocalStorage } from "./store/encryptStore";
 
@@ -29,7 +31,13 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <Router>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense
+          fallback={
+            <Row className="center">
+              <SpinnerLoader />
+            </Row>
+          }
+        >
           <App />
         </Suspense>
       </Router>

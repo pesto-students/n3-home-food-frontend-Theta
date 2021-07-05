@@ -22,6 +22,14 @@ function SellerRegistration() {
   const newAccount = async (form) => {
     try {
       const response = await registerSeller(form);
+      if (response.status === 400) {
+        notification.error({
+          message: "Error",
+          description: response.data,
+          placement: "topLeft",
+        });
+        return;
+      }
       if (response.status === 200) {
         notification.success({
           message: "Great",

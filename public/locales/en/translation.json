@@ -50,6 +50,8 @@
     "seller":{
          "registerForm":
          {
+             "formDescription":"Description",
+            "formDescriptionNameValidationAndPlaceholder":"Please Enter Description",
              "partnerText":"Partner with us",
              "description":"Prepare Food at your home and sell it to people nearby you and earn",
              "register":"Register",

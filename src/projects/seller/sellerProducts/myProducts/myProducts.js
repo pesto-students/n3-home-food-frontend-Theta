@@ -17,7 +17,6 @@ import {
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Image from "components/image/image";
-import item from "images/south-indian.jpg";
 import { sessionId } from "utils/helpers";
 import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
 import DataNotFound from "components/dataNotFound/dataNotFound";
@@ -152,12 +151,18 @@ const MyProducts = ({ products, isLoading, callback }) => {
                   <div className="container">
                     <div className="row">
                       <div className="product-cointaner">
-                        <Image url={item} height="100" width="150"></Image>
+                        <Image
+                          url={product.image}
+                          height="100"
+                          width="150"
+                        ></Image>
                       </div>
                       <div className="product-details ">
                         <Title level={4}>
                           {product.name ? product.name : "Static for now"}
                         </Title>
+                        <p>{product.description}</p>
+
                         <Row style={{ marginBottom: 20 }}>
                           {product.edit ? (
                             <Form.Item

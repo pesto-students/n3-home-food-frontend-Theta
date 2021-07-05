@@ -123,6 +123,27 @@ const CollectionCreateForm = ({ profile, visible, onCreate, onCancel }) => {
               />
             </Form.Item>
           </Col>
+          <Col span={24}>
+            <Form.Item
+              name="description"
+              label={t("seller.registerForm.formDescription")}
+              rules={[
+                {
+                  required: true,
+                  message: t(
+                    "seller.registerForm.formDescriptionNameValidationAndPlaceholder"
+                  ),
+                },
+              ]}
+            >
+              <Input
+                style={{ width: "100%" }}
+                placeholder={t(
+                  "seller.registerForm.formDescriptionNameValidationAndPlaceholder"
+                )}
+              />
+            </Form.Item>
+          </Col>
 
           <Col span={24}>
             <Form.Item
@@ -251,27 +272,29 @@ const CollectionCreateForm = ({ profile, visible, onCreate, onCancel }) => {
   );
 };
 
-export const EditProfile = ({ profile }) => {
+export const EditProfile = ({ profile, callBack }) => {
   const [visible, setVisible] = useState(false);
   const { t } = useTranslation();
 
   const onCreate = async (values) => {
-    let obj = {
-      name: values.name,
-      email: values.email,
-      password: "password",
-      phone: values.phone,
-      adress: values.adress,
-      idProof: values.idProof,
-      description: values.description,
-      pincode: Number(values.pincode),
-      image: "url",
-    };
+    console.log(values);
+    const data = new FormData();
+
+    data.append("name", values.name);
+    data.append("email", values.email);
+    data.append("phone", values.phone);
+    data.append("adress", values.adress);
+    data.append("idProof", values.idProof);
+    data.append("description", values.description);
+    data.append("pincode", Number(values.pincode));
+    data.append("image", values.image[0].originFileObj);
 
     try {
-      let response = await editProfile(sessionId(), obj);
+      let response = await editProfile(sessionId(), data);
       if (response.status === 200) {
-        props.callback();
+        callBack();
+        setVisible(false);
+        console.log(response, response.status);
       }
     } catch (error) {}
   };

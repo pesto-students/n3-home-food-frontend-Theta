@@ -18,6 +18,7 @@ const ProductItems = ({ products, savedCartItem, reloadCart, sellerId }) => {
   const [isLoading, setIsLoding] = useState(false);
 
   const addItems = (dish, method) => {
+    console.log(sessionId());
     if (!sessionId()) {
       notification.error({
         message: "Notification",
@@ -86,64 +87,68 @@ const ProductItems = ({ products, savedCartItem, reloadCart, sellerId }) => {
   };
 
   return (
-    <>
-      <Row>
-        {products.map((dish, key) => {
-          return (
-            <Col sm={24} xs={24} md={24} key={key} className="product-row">
-              <Row>
-                <Col md={2}>
-                  <Image url={dish.image} height="40" width="40"></Image>
-                </Col>
-                <Col md={22}>
-                  <Title level={4}>
-                    {dish.name}{" "}
-                    <span>
-                      ({t("ProductItem.Only")} {dish.quantity}{" "}
-                      {t("ProductItem.Left")})
-                    </span>{" "}
-                  </Title>
+    <Row>
+      {products.map((dish, key) => {
+        return (
+          <Col sm={24} xs={24} md={24} key={key} className="product-row">
+            <Row>
+              <Col md={2} sm={4} xs={4}>
+                <Image url={dish.image} height="40" width="40"></Image>
+              </Col>
+              <Col md={22} sm={20} xs={18}>
+                <Title level={4} className="dish-head">
+                  {dish.name}{" "}
+                  <span>
+                    ({t("ProductItem.Only")} {dish.quantity}{" "}
+                    {t("ProductItem.Left")})
+                  </span>{" "}
+                </Title>
+
+                <Title level={5} className="dish-description">
+                  {dish.description}
+                </Title>
+
+                <Row className="category-tags">
                   {dish.productCategory.map((category) => {
                     return <Tag color="processing">{category.name}</Tag>;
                   })}
-                  <Title level={5}>{dish.description}</Title>
-                  <Row justify="space-between" align="middle">
-                    <p level={5}>
-                      {rupeeSign} {dish.price}
-                    </p>
+                </Row>
+                <Row justify="space-between" align="middle">
+                  <p level={5}>
+                    {rupeeSign} {dish.price}
+                  </p>
 
-                    {getQuantity(dish) === 0 ? (
+                  {getQuantity(dish) === 0 ? (
+                    <Button
+                      loading={isLoading}
+                      onClick={() => addItems(dish, "add")}
+                    >
+                      {t("ProductItem.Add")}
+                    </Button>
+                  ) : (
+                    <div>
+                      <Button
+                        loading={isLoading}
+                        onClick={() => addItems(dish, "sub")}
+                      >
+                        -
+                      </Button>
+                      <Button>{getQuantity(dish)}</Button>
                       <Button
                         loading={isLoading}
                         onClick={() => addItems(dish, "add")}
                       >
-                        {t("ProductItem.Add")}
+                        +
                       </Button>
-                    ) : (
-                      <div>
-                        <Button
-                          loading={isLoading}
-                          onClick={() => addItems(dish, "sub")}
-                        >
-                          -
-                        </Button>
-                        <Button>{getQuantity(dish)}</Button>
-                        <Button
-                          loading={isLoading}
-                          onClick={() => addItems(dish, "add")}
-                        >
-                          +
-                        </Button>
-                      </div>
-                    )}
-                  </Row>
-                </Col>
-              </Row>
-            </Col>
-          );
-        })}
-      </Row>
-    </>
+                    </div>
+                  )}
+                </Row>
+              </Col>
+            </Row>
+          </Col>
+        );
+      })}
+    </Row>
   );
 };
 

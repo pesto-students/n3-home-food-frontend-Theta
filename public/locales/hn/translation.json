@@ -50,6 +50,9 @@
     "seller":{
         "registerForm":
         {
+            
+            "formDescription": "विवरण",
+            "fromDescriptionNameValidationAndPlaceholder": "कृपया विवरण दर्ज करें",
             "partnerText":"हमारे साथ भागीदार",
             "description":"अपने घर पर खाना बनाएं और अपने आस-पास के लोगों को बेचें और कमाएं",
             "register": "रजिस्टर",

@@ -74,7 +74,7 @@ const LandingPage = () => {
     <Layout className="layout">
       <Navbar callBack={getSellerByPincode} />
       <Content>
-        <Row>
+        <Row className="banner">
           <Col md={24}>
             <Carousel autoplay>
               {imagesUrls.map((image, index) => {

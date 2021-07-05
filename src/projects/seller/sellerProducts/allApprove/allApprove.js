@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Image from "components/image/image";
 import DataNotFound from "components/dataNotFound/dataNotFound";
-import item from "images/south-indian.jpg";
 import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
 
 const AllApprove = ({ products, isLoading }) => {
@@ -35,10 +34,15 @@ const AllApprove = ({ products, isLoading }) => {
                   <div className="container">
                     <div className="row">
                       <div className="product-cointaner">
-                        <Image url={item} height="100" width="150"></Image>
+                        <Image
+                          url={product.image}
+                          height="100"
+                          width="150"
+                        ></Image>
                       </div>
                       <div className="product-details ">
                         <Title level={4}>{product.name}</Title>
+                        <p>{product.description}</p>
                         <span>Max Amount: ₹ {product.max_price}</span>
                         <Row>
                           {" "}

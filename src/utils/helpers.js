@@ -37,6 +37,7 @@ export const getCategoryId = (category) => {
 
 export const sessionId = () => {
   let user = getUser();
+
   return user ? user.id : "";
 };
 

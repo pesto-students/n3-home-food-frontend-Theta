@@ -4,12 +4,12 @@
     display: flex;
     background:#000000d9;
     color: #fff;
-    padding: 25px;
+    padding: 40px;
 }
 .seller-banner h1,.seller-banner h5{
     color: #fff;
 }
-.row{
+.image-and-detail{
     width: 100%;
 }
 .margin-10{
@@ -20,11 +20,50 @@
 }
 .product-row{
     margin:15px 0px;
-    padding-bottom: 25px;
-    border-bottom: 1px solid rgb(218, 196, 196);
+    border-bottom: 1px solid #7777771c;
+    padding-bottom:10px
 }
 
-.product-text{border-bottom: 1px solid #777;
-    padding-bottom: 25px;
+.product-text{
+    border-bottom: 1px solid #7777771c;
+    padding-bottom: 15px;
+    font-size: 20px !important;
 
 }
+
+.dish-head{
+    font-size: 15px !important;
+    margin: 0px !important;
+    color: #777 !important;
+}
+.dish-description{
+    font-size: 13px !important;
+    margin: 0px !important;
+
+    color: #777 !important;
+}
+.category-tags{
+    margin:15px 0px;
+}
+
+.seller-details{
+    margin-left: 20px;
+}
+
+@media screen and (max-width: 500px) {
+    .seller-banner{
+        height: auto;
+        width: 100%;
+        display: flex;
+        background:#000000d9;
+        color: #fff;
+        padding: 0px
+    }
+    .seller-details{
+           margin: 0px;
+           align-items: center;
+           text-align: center;
+           padding: 10px 10px;
+           justify-content: center;
+    }
+        }

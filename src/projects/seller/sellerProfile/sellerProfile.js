@@ -14,7 +14,7 @@ const SellerProfile = () => {
   const [isloading, setIsLoading] = useState(true);
   const [profile, setProfile] = useState({});
 
-  const sellerProfile = async () => {
+  const getProfile = async () => {
     try {
       const response = await getSellerProfile(sessionId());
       if (response.status === 200) {
@@ -25,7 +25,7 @@ const SellerProfile = () => {
   };
 
   useEffect(() => {
-    sellerProfile();
+    getProfile();
   }, []);
 
   return (
@@ -38,9 +38,7 @@ const SellerProfile = () => {
                 height={150}
                 width={150}
                 radius={"100%"}
-                url={
-                  "https://image.shutterstock.com/image-photo/fresh-green-food-cooking-concept-600w-1615988773.jpg"
-                }
+                url={profile.image}
               />
             </Col>
             <Col md={18}>
@@ -69,7 +67,7 @@ const SellerProfile = () => {
             </Col>
           </Row>
           <Row justify="end">
-            <EditProfile profile={profile} />
+            <EditProfile callBack={getProfile} profile={profile} />
           </Row>
         </Card>
       ) : (

@@ -59,9 +59,9 @@ export const getSellerProfile = async (sessionId) => {
   return response;
 };
 
-export const getGraphDetailSeller = async (sessionId) => {
+export const getGraphDetailSeller = async (dateString,sessionId) => {
   let response = await axios
-    .get(`/orders/get-revenue-seller/${sessionId}`)
+    .get(`/orders/get-revenue-seller/${sessionId}?startDate=${dateString[0]}&endDate=${dateString[1]}`)
     .then((response) => {
       return response;
     })
@@ -83,9 +83,10 @@ export const getSellerDetailsWallet = async (sessionId) => {
   return response;
 };
 
-export const getSellerPieChartData = async () => {
+export const getSellerPieChartData = async (dateString,sessionId) => {
+  //  sessionId = "60e1667429c1630022088549"
   let response = await axios
-    .get(`/orders/orders-category-wise`)
+    .get(`/orders/categories-seller/${sessionId}?startDate=${dateString[0]}&endDate=${dateString[1]}`)
     .then((response) => {
       return response;
     })

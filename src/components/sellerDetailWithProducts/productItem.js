@@ -32,7 +32,6 @@ const ProductItems = ({ products, savedCartItem, reloadCart, sellerId }) => {
     let currentProduct = savedCartItem.filter(
       (item) => item.productId === dish.productId
     );
-
     let cartItem = {};
     if (currentProduct.length > 0) {
       if (method === "add") {

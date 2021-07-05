@@ -34,21 +34,22 @@ const Cart = ({ alreadyInCart, reloadCart, showCheckout, ...props }) => {
         currentProduct[0].quantity = currentProduct[0].quantity - 1;
       }
       cartItem = {
-        productId: dish.productId,
+        productId: dish.productId.id,
         quantity: currentProduct[0].quantity,
         userId: userId,
         price: currentProduct[0].price,
       };
     } else {
       cartItem = {
-        productId: dish.productId,
+        productId: dish.productId.id,
         quantity: 1,
         userId: userId,
         price: currentProduct[0].price,
       };
     }
 
-    updateCart(cartItem);
+    console.log('cartItem',cartItem)
+   updateCart(cartItem);
   };
 
   const updateCart = (cartItem) => {
@@ -96,7 +97,7 @@ const Cart = ({ alreadyInCart, reloadCart, showCheckout, ...props }) => {
               <Row>
                 <Col md={22}>
                   <Row justify="space-between">
-                    <span> Panner ({dish.quantity})</span>
+                    <span> {dish.productId.name} ({dish.quantity})</span>
                     <span>
                       {rupeeSign} {dish.price}
                     </span>

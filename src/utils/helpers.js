@@ -37,11 +37,8 @@ export const getCategoryId = (category) => {
 
 export const sessionId = () => {
   let user = getUser();
-  if (user.hasOwnProperty("userId")) {
-    return user ? user.userId : "";
-  } else {
-    return user ? user.id : "";
-  }
+
+  return user ? user.id : "";
 };
 
 export const setPincode = (code) => {

@@ -5,7 +5,7 @@ import CustomerNavbar from "../customerNavbar/customerNavbar";
 import Image from "../image/image";
 import CustomTabs from "../Tabs/Tabs";
 import ProductItems from "./productItem";
-import { baseUrl, rupeeSign } from "utils/constant";
+import { baseUrl } from "utils/constant";
 import axios from "utils/axios";
 import SpinnerLoader from "../spinnerLoader/spinnerLoader";
 import Cart from "../cart/cart";
@@ -98,17 +98,17 @@ const SellerDetailWithProducts = ({ match }) => {
         <Row>
           <Col md={24}>
             <div className="seller-banner">
-              <Row gutter={["30"]} className="row">
-                <Col md={6}>
-                  <Image url="" height="250" width="100%"></Image>
+              <Row className="image-and-detail">
+                <Col md={6} sm={24} xs={24}>
+                  <Image url="" height="100%" width="100%"></Image>
                 </Col>
-                <Col md={18}>
+                <Col md={16} sm={24} xs={24} className="seller-details">
                   <Title level={1}>{profile.name}</Title>
                   <Title level={5}>{profile.description}</Title>
                   <Rate defaultValue={profile.rating}></Rate>
-                  <Title className="margin-10" level={5}>
+                  {/* <Title className="margin-10" level={5}>
                     {t("Cart.Max Amount")} : {rupeeSign} {profile.max_amount}
-                  </Title>
+                  </Title> */}
                 </Col>
               </Row>
             </div>
@@ -123,8 +123,8 @@ const SellerDetailWithProducts = ({ match }) => {
             </Row>
 
             <Row>
-              <Col md={6}></Col>
-              <Col md={12}>
+              <Col md={6} sm={2} xs={2}></Col>
+              <Col md={12} sm={22} xs={22}>
                 <Title level={3} className="product-text">
                   {t("Cart.Products")}
                 </Title>
@@ -142,10 +142,11 @@ const SellerDetailWithProducts = ({ match }) => {
                   />
                 )}
               </Col>
-              <Col md={6} xs={12} sm={12}>
+              <Col md={6} xs={24} sm={24}>
                 <Card>
-                  <Title level={3}> {t("Cart.Cart")} </Title>
-                  <hr />
+                  <Title className="product-text" level={3}>
+                    {t("Cart.Cart")}
+                  </Title>
                   {isCartLoad && (
                     <Cart reloadCart={getCart} alreadyInCart={alreadyInCart} />
                   )}

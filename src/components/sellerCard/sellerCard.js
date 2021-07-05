@@ -14,12 +14,16 @@ const SellerCard = ({ detail }) => {
       cover={<Image height="150px" width="100%" url={detail.image} />}
     >
       <Meta title={detail.display_name} description={detail.phone} />
-      <Rate
-        className="move-from-top"
-        disabled
-        allowHalf={true}
-        defaultValue={detail.rating}
-      ></Rate>
+      {detail.rating > 0 ? (
+        <Rate
+          className="move-from-top"
+          disabled
+          allowHalf={true}
+          defaultValue={detail.rating}
+        ></Rate>
+      ) : (
+        <p className="no-rating">No Rating</p>
+      )}
     </Card>
   );
 };

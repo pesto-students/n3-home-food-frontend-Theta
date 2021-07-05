@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from "react";
-// import { ShoppingCartOutlined } from "@ant-design/icons";
-import { Button, Col, Form, Input, Layout, Modal, Row } from "antd";
+import { MenuUnfoldOutlined } from "@ant-design/icons";
+import { Button, Col, Form, Input, Layout, Modal, Row, Drawer } from "antd";
 
 import { useTranslation } from "react-i18next";
 import { connect, useDispatch } from "react-redux";
@@ -19,7 +19,7 @@ const Navbar = ({ callBack }) => {
   const { t } = useTranslation();
   const Dispatch = useDispatch();
   const [currentPincode, setCurrentPincode] = useState("");
-
+  const [visibleResponsiveNavbar, setVisibleResponsiveNavbar] = useState(false);
   const [openPincdeModal, setOpenPincodeModal] = useState(false);
 
   const toggleDrawer = () => {
@@ -43,6 +43,14 @@ const Navbar = ({ callBack }) => {
     setCurrentPincode(code);
     callBack(code);
   };
+
+  const onOpenResponsive = () => {
+    setVisibleResponsiveNavbar(true);
+  };
+  const onCloseResponsive = () => {
+    setVisibleResponsiveNavbar(false);
+  };
+
   return (
     <Header className="navbar">
       <Modal
@@ -85,11 +93,41 @@ const Navbar = ({ callBack }) => {
         </Form>
       </Modal>
 
+      <Drawer
+        title="Home Food"
+        placement="left"
+        closable={false}
+        onClose={onCloseResponsive}
+        visible={visibleResponsiveNavbar}
+      >
+        <Col md={14} sm={24} xs={24} className="responsive-items">
+          <SelectBox />
+          <Link to="/seller/login">
+            <Button type="link">{t("Header.Become Seller")}</Button>
+          </Link>
+          <Button type="link" onClick={toggleDrawer}>
+            {t("Header.Sign In")}
+          </Button>
+
+          <Button type="link" onClick={() => setOpenPincodeModal(true)}>
+            {t("Header.Pincode")} {currentPincode && `(${currentPincode})`}
+          </Button>
+
+          <Link to="/admin/login">
+            <Button type="link">{t("Header.Admin")}</Button>
+          </Link>
+        </Col>
+      </Drawer>
+
       <Row className="full-width">
-        <Col md={10} sm={24} xs={24}>
+        <Col md={10} sm={24} xs={24} className="logo-bar">
           <Link to="/">
             <Image height="70px" width="70px" url={logo} />
           </Link>
+          <MenuUnfoldOutlined
+            className="hamburger"
+            onClick={onOpenResponsive}
+          />
         </Col>
         <Col md={14} sm={24} xs={24} className="keep-items-left">
           <SelectBox />
@@ -107,9 +145,6 @@ const Navbar = ({ callBack }) => {
           <Link to="/admin/login">
             <Button type="link">{t("Header.Admin")}</Button>
           </Link>
-          {/* <Button type="link">
-            <ShoppingCartOutlined className="cart-icon" />
-          </Button> */}
         </Col>
         <CustomerLogin type="Customer" />
       </Row>

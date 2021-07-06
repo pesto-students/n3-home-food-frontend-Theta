@@ -32,6 +32,10 @@ function SellerGraphs() {
     getPieChartDetails([startDate,endDate])
   }, []);
 
+  useEffect(()=> {
+    console.log(lineGraphData,pieGraphData)
+  },[pieGraphData,lineGraphData])
+
   
   const getGraphDetails = async (dateString) => {
     let lineGraphDataMock = ["revenue"];
@@ -45,8 +49,13 @@ function SellerGraphs() {
 
         });
         let dataSource = [dateGraphData , lineGraphDataMock]
-        console.log(dataSource)
-        setLineGraphData(dataSource);
+        console.log(lineGraphDataMock.length)
+
+        setLineGraphData(dataSource)
+        // (lineGraphDataMock.length > 1 )
+        //   ? setLineGraphData(dataSource)
+        //   : setLineGraphData()
+        
       }
     } catch (error) {}
   };
@@ -65,13 +74,9 @@ function SellerGraphs() {
 
   const getPieChartDetails = async (dateString) => {
     try {
-      const response = await getSellerPieChartData(dateString);
+      const response = await getSellerPieChartData(dateString,sessionId());
       if (response.status === 200) {
         let categoryArray = [];
-        response.data
-          ? setPieGraphData(response.data.orderItems)
-          : setPieGraphData(0);
-        // console.log(response.data[1])
         response.data.forEach((order) => {
           order.categories.forEach((ordercat) => {
             ordercat.orderItems.items.forEach((element) => {
@@ -99,12 +104,12 @@ function SellerGraphs() {
           }
         });
 
-        setPieGraphData([
+        !(lunch === 0 && breakfast === 0 && dinner === 0 && snacks === 0) ? setPieGraphData([
           ["Lunch", lunch],
           ["Breakfast", breakfast],
           ["Snacks", snacks],
           ["Dinner", dinner],
-        ])
+        ]) : setPieGraphData()
       }
     } catch (error) {}
   };

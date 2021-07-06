@@ -91,10 +91,10 @@ const ProductItems = ({ products, savedCartItem, reloadCart, sellerId }) => {
         return (
           <Col sm={24} xs={24} md={24} key={key} className="product-row">
             <Row>
-              <Col md={2} sm={4} xs={4}>
-                <Image url={dish.image} height="40" width="40"></Image>
+              <Col md={6} sm={8} xs={8}>
+                <Image url={dish.image} height="95" width="95"></Image>
               </Col>
-              <Col md={22} sm={20} xs={18}>
+              <Col md={18} sm={14} xs={14}>
                 <Title level={4} className="dish-head">
                   {dish.name}{" "}
                   <span>

@@ -71,12 +71,12 @@ const CustomerHome = () => {
     <Layout className="layout">
       <CustomerNavbar updatePincode={updatePincode} />
       <Content>
-        <Row>
-          <Col md={24}>
+        <Row justify='center'>
+          <Col md={22} >
             <Carousel autoplay>
               {imagesUrls.map((image, index) => {
                 return (
-                  <Image key={index} height="500px" width="100%" url={image} />
+                  <Image key={index} height="300px" width="100%" url={image} />
                 );
               })}
             </Carousel>

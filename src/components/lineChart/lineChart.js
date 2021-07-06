@@ -35,12 +35,13 @@ const LineChart = ({ dataSource }) => {
 
   return (
     <>
+      <Row justify="center" className='mt-2'>
+        <h4>My Income</h4>
+      </Row>
       <div  ref={lineChart}>
         chart
       </div>
-      <Row justify="center">
-        <h4>My Income</h4>
-      </Row>
+    
     </>
   );
 };

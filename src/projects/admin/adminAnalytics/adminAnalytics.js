@@ -10,7 +10,7 @@ import {
   getAdminCategoryChart,
 } from "../utils/api";
 import moment from "moment";
-import { ShoppingCartOutlined, MoneyCollectOutlined, UserAddOutlined , UsergroupAddOutlined} from "@ant-design/icons";
+import { ShoppingCartOutlined, MoneyCollectOutlined, UserAddOutlined , UsergroupAddOutlined,FilterOutlined} from "@ant-design/icons";
 
 const { RangePicker } = DatePicker;
 
@@ -148,7 +148,7 @@ function AdminDashboard() {
       </Row>
 
       <Row justify="center" className='m-2'>
-        <RangePicker onChange={onChange} />
+      <FilterOutlined className='funnel'/> <RangePicker onChange={onChange} />
       </Row>
       <Row justify="center" className='m-4'>
         <Col id="chart" span={12}>

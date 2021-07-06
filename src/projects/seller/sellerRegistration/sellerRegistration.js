@@ -200,9 +200,9 @@ function SellerRegistration() {
               <Row gutter={24} className="mt-3">
                 <Col span={6}></Col>
                 <Col span={12}>
-                  <Link onClick={toggleDrawer} block type="primary">
+                  {/* <Link onClick={toggleDrawer} block type="primary">
                     <span> {t("seller.registerForm.loginText")}</span>
-                  </Link>
+                  </Link> */}
                 </Col>
               </Row>
             </Form>

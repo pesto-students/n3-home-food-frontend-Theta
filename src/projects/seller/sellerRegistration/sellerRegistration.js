@@ -2,7 +2,6 @@ import { Button, notification, Col, Form, Input, Row } from "antd";
 
 import { React } from "react";
 import { connect, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import "./sellerRegistration.css";

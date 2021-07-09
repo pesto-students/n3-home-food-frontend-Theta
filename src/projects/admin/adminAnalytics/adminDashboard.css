@@ -1,3 +1,5 @@
+
+
 .dashboard-card-background{
     background-color: #002140;
     height: 100px;
@@ -20,6 +22,7 @@
     border-radius: .25rem;
     display: block;
     margin-bottom: 20px;
+    width: 184px;
 }
 
 .bg-info {

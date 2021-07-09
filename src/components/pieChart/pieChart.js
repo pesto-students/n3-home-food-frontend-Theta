@@ -10,9 +10,6 @@ const PieChart = ({dataSource}) => {
         data: {
           columns:dataSource ,
           type: pie(), // for ESM specify as: pie()
-        //   onclick: function(d, i) {
-        //   console.log("onclick", d, i);
-        //  },
           onover: function(d, i) {
           console.log("onover", d, i);
          },
@@ -26,7 +23,7 @@ const PieChart = ({dataSource}) => {
   }, [dataSource]);
   return(
     <>
-   <Row justify='center' className='mt-1'><h4>Categories Sold</h4></Row>
+   {/* <Row justify='center' className='mt-1'><h4>Categories Sold</h4></Row> */}
    <div  ref={PieChart}>chart</div>
    </>
   )

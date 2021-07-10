@@ -47,7 +47,11 @@ const AdminDashBoard = () => {
   return (
     <>
       <Layout style={{ minHeight: "100vh" }}>
-        <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
+        <Sider
+          collapsible
+          collapsed={collapsed}
+          onCollapse={onCollapse}
+        >
           <div className="home-food-logo">
             <Image
               url={logo}
@@ -84,7 +88,7 @@ const AdminDashBoard = () => {
           <Content style={{ margin: "20px 16px" }}>
             <div
               className="site-layout-background"
-              style={{ padding: 24, minHeight: 360 }}
+              style={{ padding: 12, minHeight: 360 }}
             >
               {user === "Admin" && <DashboardRoutes />}
             </div>

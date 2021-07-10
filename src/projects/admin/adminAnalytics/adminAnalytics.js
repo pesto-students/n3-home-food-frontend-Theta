@@ -137,10 +137,6 @@ function AdminDashboard() {
 
   return (
     <div>
-      <Row>
-        <h2>Dashboard</h2>
-      </Row>
-
       <Row className="number-cards" justify="center">
         <Card
           hoverable={true}
@@ -187,23 +183,24 @@ function AdminDashboard() {
         </Card>
       </Row>
 
-      <Row justify="center" className="m-2">
-        <FilterOutlined className="funnel" />{" "}
+      <Row justify="end" className="m-1">
         <RangePicker onChange={onChange} />
+        <FilterOutlined className="funnel" />
       </Row>
-      <Row justify="center" className="m-4">
-        <Col id="chart" span={12}>
-          <Card hoverable={true}>
-            {lineGraphData && <LineChart dataSource={lineGraphData} />}
-            {!lineGraphData && <span>No Data Found </span>}
-          </Card>
-        </Col>
-        <Col span={12}>
+      <Row justify="center">
+        <Col md={8} sm={24} xs={24}>
           <Card hoverable={true}>
             <div id="chart">
               {pieGraphData && <PieChart dataSource={pieGraphData} />}
               {!pieGraphData && <span>No Data Found </span>}
             </div>
+          </Card>
+        </Col>
+
+        <Col id="chart" md={16} sm={24} xs={24}>
+          <Card hoverable={true} className="pt-2 pl-2 pr-2">
+            {lineGraphData && <LineChart dataSource={lineGraphData} />}
+            {!lineGraphData && <span>No Data Found </span>}
           </Card>
         </Col>
       </Row>

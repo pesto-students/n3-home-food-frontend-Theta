@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export const setUser = (user) => {
   return localStorage.setItem("user", JSON.stringify(user));
 };
@@ -35,7 +37,7 @@ export const getCategoryId = (category) => {
 
 export const sessionId = () => {
   let user = getUser();
-  console.log(user);
+  // console.log('user.id ',user.id )
   return user ? user.id : "";
 };
 
@@ -45,4 +47,8 @@ export const setPincode = (code) => {
 
 export const getPincode = () => {
   return localStorage.getItem("pincode");
+};
+
+export const orderTimeFormat = (date) => {
+  return moment(date).format("dddd, MMMM Do YYYY, h:mm a");
 };

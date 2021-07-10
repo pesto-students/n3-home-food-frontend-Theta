@@ -1,9 +1,9 @@
 import { Button, Form, Input, Modal, notification } from "antd";
-import "antd/dist/antd.css";
+
 import axios from "axios";
 import React, { useState } from "react";
 import { Switch } from "antd";
-import { baseUrl } from "../../utils/constant";
+import { baseUrl } from "utils/constant";
 
 const openNotificationWithIcon = (type, message) => {
   notification[type]({
@@ -27,9 +27,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
             form.resetFields();
             onCreate(values);
           })
-          .catch((info) => {
-            console.log("Validate Failed:", info);
-          });
+          .catch((info) => {});
       }}
     >
       <Form
@@ -48,8 +46,10 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
               required: true,
               message: "Please input the Rejection Reason!",
             },
-            { min: 5, message: "Rejection Reason must be minimum 5 characters." },
-
+            {
+              min: 5,
+              message: "Rejection Reason must be minimum 5 characters.",
+            },
           ]}
         >
           <Input />
@@ -63,8 +63,6 @@ export const RejectSellerModal = (props) => {
   const [visible, setVisible] = useState(false);
   const [switchChecked, setSwitchChecked] = useState(props.switchChecked);
   const onCreate = (values) => {
-    console.log("Received values of form: ", values);
-
     axios
       .put(`${baseUrl}/sellers/reject/${props.sellerId}`, {
         rejection_reason: values.rejectReason,
@@ -72,7 +70,7 @@ export const RejectSellerModal = (props) => {
       .then((result) => {
         if (result.status === 200) {
           openNotificationWithIcon("success", "Seller Rejected");
-          props.callback()
+          props.callback();
         } else {
           openNotificationWithIcon("error", "Could Not Reject Seller ");
         }
@@ -97,7 +95,7 @@ export const RejectSellerModal = (props) => {
           if (result.status === 200) {
             setSwitchChecked(true);
             openNotificationWithIcon("success", "Seller Approved");
-            props.callback()
+            props.callback();
           } else {
             openNotificationWithIcon("error", "Could Not Approve Seller");
           }
@@ -108,7 +106,6 @@ export const RejectSellerModal = (props) => {
         })
         .finally(() => {});
     }
-    console.log(`switch to ${checked}`);
   };
 
   return (
@@ -118,13 +115,13 @@ export const RejectSellerModal = (props) => {
           <Switch checked={switchChecked} size="small" onChange={onChange} />
         ) : (
           <Button
-          type="primary"
-          onClick={() => {
-            setVisible(true);
-          }}
-        >
-          Reject
-        </Button>
+            type="primary"
+            onClick={() => {
+              setVisible(true);
+            }}
+          >
+            Reject
+          </Button>
         )}
       </div>
 

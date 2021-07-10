@@ -1,5 +1,6 @@
-import "./App.css";
-import MainRoutes from "./routes/Routes";
+import React from 'react'
+import "App.css";
+import MainRoutes from "routes/Routes";
 
 function App() {
   return <MainRoutes />;

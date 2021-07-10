@@ -2,7 +2,13 @@
     "Header":{
         "Become Seller":"Become Seller",
         "Sign In":"Sign In",
-        "Admin":"Admin"
+        "Admin":"Admin",
+        "Enter Pincode":"Enter Pincode",
+        "Save":"Save",
+        "Pincode":"Pincode",
+        "Logout":"Logout",
+        "Orders":"Orders"
+
     },
     "Landing":{
         "Sellers":"Sellers"
@@ -32,5 +38,86 @@
     },
     "Payment":{
         "Pay now":"Pay now"
-    }
+    },
+    "MyOrders":{
+        "Delivery Type":"Delivery Type",
+        "Received on":"Received on",
+        "Order No":"Order No",
+        "Contact Number":"Contact Number",
+        "Total":"Total"
+
+    },
+    "seller":{
+         "registerForm":
+         {
+             "formDescription":"Description",
+            "formDescriptionNameValidationAndPlaceholder":"Please Enter Description",
+             "partnerText":"Partner with us",
+             "description":"Prepare Food at your home and sell it to people nearby you and earn",
+             "register":"Register",
+             "name":"Name",
+             "nameValidationAndPlaceholder":"Please Enter User Name",
+             "displayName":"Display Name",
+             "displayNameValidationAndPlaceholder":"Please Enter Display Name",
+             "mobileNumber":"Mobile Number",
+             "mobileNumberValidationAndPlaceholder":"Please Enter Mobile Number",
+             "idProof":"Aadhaar Card",
+             "idProofValidationAndPlaceholder":"Please Enter Aadhaar Card",
+             "email":"Email (optional)",
+             "emailValidationAndPlaceholder":"Please Enter Email",
+             "address":"Address",
+             "addressValidationAndPlaceholder":"Please Enter Address",
+             "submit":" Submit",
+             "loginText":"Already a seller, Login?"
+
+            },
+        "dashboard":{
+            "dashboardText":"Dashboard",
+            "productText":"Product",
+            "profileText":"Seller",
+            "orderText":"Order",
+            "totalOrder":"Total Orders",
+            "totalIncome":"Total Income"
+        },
+        "product":{
+            "allProducts":"All Products",
+            "myProducts":"My Products",
+            "allApprove":"All Approve",
+            "requestProductButton":"Request Product",
+            "addButton":"Add",
+            "cancelButton":"Cancel",
+            "requestForm":{
+                "addProductText":"Add Product",
+                "productName":"Product Name",
+                "productNameValidation":"Please input the Product Name",
+                "productCategory":"Product Category",
+                "productCategoryValidation":"Please Select Category",
+                "description":"Description",
+                "descriptionValidation":"Please Input the Product Description",
+                "price":"Price",
+                "priceValidation":"Please Enter Price"
+
+            }
+        },
+        "profile":{
+          "editText":"Edit",
+          "profileImageText":"Profile Image",
+          "editProfileModalTitle":"Edit Profile"
+        },
+        "order":
+        {
+            "currentOrder":"Current Order",
+            "pastOrder":"Past Order",
+            "deliveryType":"Delivery Type",
+            "orderNo":"Order No",
+            "contactNumber":"Contact Number",
+            "receivedOn":"Received on",
+            "deliverButton":"Deliver",
+            "totalText":"Total"
+
+
+        }
+         
+    } 
+
 }

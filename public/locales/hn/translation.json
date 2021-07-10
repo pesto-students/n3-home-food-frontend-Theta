@@ -1,9 +1,119 @@
 {
     "Header":{
-        "Become Seller":"seller bano",
-        "1":"1 You"
+        "Become Seller":"विक्रेता बनें",
+        "Sign In":"दाखिल करना",
+        "Admin":"Admin",
+        "Enter Pincode":"पिनकोड दर्ज करें",
+        "Save":"सेव",
+        "Pincode":"पिन कोड",
+        "Logout":"लॉग आउट",
+        "Orders":"ऑर्डर"
+
     },
     "Landing":{
-        "Category":"kaaategaary"
-    }
+        "Sellers":"सेलर्स"
+    },
+    "ProductItem":{
+        "Only": "केवल",
+        "Left":"बचा हुआ",
+        "Add":"जोड़े"
+    },
+    "Cart":{
+        "Max Amount": "अधिकतम राशि",
+        "Products":"आइटम",
+        "Cart":"कार्ट",
+        "Add":"जोड़े",
+        "Checkout":"चेक आउट",
+        "Sub Total":"संपूर्ण"
+    },
+    "Checkout":{
+        "Cart":"कार्ट",
+        "Contact No":"संपर्क नंबर",
+        "Pincode":"पिन कोड",
+        "Take Away":"टेक अवे",
+        "Dine In":"डाईन ईन",
+        "Pay":"पे",
+        "personal details":"व्यक्तिगत विवरण",
+        "Delivery":"डीलेवरी"
+    },
+    "Payment":{
+        "Pay now":"अब भुगतान करें"
+    },
+    "MyOrders":{
+        "Delivery Type":"डीलेवरी प्रकार",
+        "Received on":"प्राप्त हुआ",
+        "Order No":"आदेश संख्या",
+        "Contact Number":"संपर्क नंबर",
+        "Total":"संपूर्ण"
+
+    },
+    "seller":{
+        "registerForm":
+        {
+            
+            "formDescription": "विवरण",
+            "fromDescriptionNameValidationAndPlaceholder": "कृपया विवरण दर्ज करें",
+            "partnerText":"हमारे साथ भागीदार",
+            "description":"अपने घर पर खाना बनाएं और अपने आस-पास के लोगों को बेचें और कमाएं",
+            "register": "रजिस्टर",
+            "name": "नाम",
+            "nameValidationAndPlaceholder": "कृपया उपयोगकर्ता नाम दर्ज करें",
+            "displayName": "प्रदर्शन नाम",
+            "displayNameValidationAndPlaceholder": "कृपया प्रदर्शन नाम दर्ज करें",
+            "mobileNumber": "मोबाइल नंबर",
+            "mobileNumberValidationAndPlaceholder": "कृपया मोबाइल नंबर दर्ज करें",
+            "idProof": "आधार कार्ड",
+            "idProofValidationAndPlaceholder": "कृपया आधार कार्ड दर्ज करें",
+            "email": "ईमेल (वैकल्पिक)",
+            "emailValidationAndPlaceholder": "कृपया ईमेल दर्ज करें",
+            "address": "पता",
+            "addressValidationAndPlaceholder": "कृपया पता दर्ज करें",
+            "submit": "सबमिट करें",
+            "loginText": "पहले से ही एक विक्रेता, लॉगिन करें?"
+        },
+        "dashboard":{
+            "dashboardText": "डैशबोर्ड",
+            "productText": "उत्पाद",
+            "profileText": "विक्रेता",
+            "orderText": "आदेश",
+            "totalOrder": "कुल आदेश",
+            "totalIncome": "कुल आय"
+          },
+        "product":  {
+            "allProducts": "सभी उत्पाद",
+            "myProducts": "मेरे उत्पाद",
+            "allApprove": "सभी स्वीकृत",
+            "requestProductButton": "उत्पाद का अनुरोध करें",
+            "addButton": "जोड़ें",
+            "cancelButton": "रद्द करना",
+            "requestForm":{
+                "addProductText": "उत्पाद जोड़ें",
+                "productName": "उत्पाद का नाम",
+                "productNameValidation": "कृपया उत्पाद का नाम दर्ज करें",
+                "productCategory": "उत्पाद श्रेणी",
+                "productCategoryValidation": "कृपया श्रेणी चुनें",
+                "description": "विवरण",
+                "descriptionValidation": "कृपया उत्पाद विवरण दर्ज करें",
+                "price": "मूल्य",
+                "priceValidation": "कृपया मूल्य दर्ज करें"
+            }
+           
+          },
+          "profile":{
+            "editText": "संपादित करें",
+            "editProfileModalTitle": "प्रोफ़ाइल संपादित करें",
+            "profileImageText": "प्रोफ़ाइल छवि"
+          },
+        "order":{
+            "currentOrder": "वर्तमान आदेश",
+            "pastOrder": "पिछले आदेश",
+            "deliveryType": "वितरण प्रकार",
+            "orderNo": "आदेश संख्या",
+            "contactNumber":"संपर्क नंबर",
+            "receivedOn": "प्राप्त",
+            "deliverButton": "वितरित करें",
+            "totalText": "संपूर्ण"
+        }
+   } 
+
 }

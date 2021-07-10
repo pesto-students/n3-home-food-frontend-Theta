@@ -43,7 +43,7 @@ const Payment = (props) => {
       .then((result) => {
         data = result.data;
         var options = {
-          key: "rzp_test_d0CoHtYXgWcl5z", // Enter the Key ID generated from the Dashboard
+          key: process.env.RAZORPAY_KEY, // Enter the Key ID generated from the Dashboard
           amount: data.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
           currency: data.currency,
           name: "Home Food",
@@ -80,9 +80,6 @@ const Payment = (props) => {
                     console.error(err);
                   });
               });
-            // alert(response.razorpay_payment_id);
-            // alert(response.razorpay_order_id);
-            // alert(response.razorpay_signature)
           },
         };
         const paymentObject = new window.Razorpay(options);

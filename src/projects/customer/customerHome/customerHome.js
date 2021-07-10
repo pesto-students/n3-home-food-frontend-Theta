@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { Carousel, Col, Layout, Row, Typography } from "antd";
+import { Carousel, Col, Layout, Row, Typography, notification } from "antd";
 
 import Image from "components/image/image";
 import CustomerNavbar from "components/customerNavbar/customerNavbar";
@@ -33,7 +33,15 @@ const CustomerHome = () => {
         setSeller(response.data);
         setLoadSeller(true);
       }
-    } catch (error) {}
+    } catch (error) {
+      notification.error({
+        message: "Error",
+        description: error.response
+          ? error.response.data
+          : "Something went wrong",
+        placement: "topLeft",
+      });
+    }
   }, [pincode]);
 
   const getAllSellerByCategory = async (category) => {
@@ -48,7 +56,13 @@ const CustomerHome = () => {
           setSeller(response.data);
           setLoadSeller(true);
         }
-      } catch (error) {}
+      } catch (error) {
+        notification.error({
+          message: "Error",
+          description: error.response,
+          placement: "topLeft",
+        });
+      }
     } else {
       getSellersByPincode(pincode);
     }
@@ -71,8 +85,8 @@ const CustomerHome = () => {
     <Layout className="layout">
       <CustomerNavbar updatePincode={updatePincode} />
       <Content>
-        <Row justify='center'>
-          <Col md={22} >
+        <Row justify="center">
+          <Col md={22}>
             <Carousel autoplay>
               {imagesUrls.map((image, index) => {
                 return (

@@ -1,4 +1,4 @@
-import { Tabs } from "antd";
+import { Tabs, notification } from "antd";
 
 import React, { useEffect, useState } from "react";
 import AllApprove from "./allApprove/allApprove";
@@ -28,7 +28,15 @@ const SellerProducts = () => {
         setAllApprove(response.data);
         setIsLoading(false);
       }
-    } catch (error) {}
+    } catch (error) {
+      notification.error({
+        message: "Error",
+        description: error.response
+          ? error.response.data
+          : "Something went wrong",
+        placement: "topLeft",
+      });
+    }
   };
 
   const getAllProducts = async () => {
@@ -38,7 +46,15 @@ const SellerProducts = () => {
         setAllProducts(response.data);
         setIsLoading(false);
       }
-    } catch (error) {}
+    } catch (error) {
+      notification.error({
+        message: "Error",
+        description: error.response
+          ? error.response.data
+          : "Something went wrong",
+        placement: "topLeft",
+      });
+    }
   };
 
   const getMyProducts = async () => {
@@ -48,7 +64,15 @@ const SellerProducts = () => {
         setMyProducts(response.data[0].myProducts);
         setIsLoading(false);
       }
-    } catch (error) {}
+    } catch (error) {
+      notification.error({
+        message: "Error",
+        description: error.response
+          ? error.response.data
+          : "Something went wrong",
+        placement: "topLeft",
+      });
+    }
   };
 
   useEffect(() => {

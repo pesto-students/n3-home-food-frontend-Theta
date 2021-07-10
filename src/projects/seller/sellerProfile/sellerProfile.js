@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, Col, Rate, Row, Typography } from "antd";
+import { Card, Col, Rate, Row, Typography, notification } from "antd";
 import Image from "components/image/image";
 import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
 import { rupeeSign } from "utils/constant";
@@ -21,7 +21,15 @@ const SellerProfile = () => {
         setProfile(response.data);
         setIsLoading(false);
       }
-    } catch (error) {}
+    } catch (error) {
+      notification.error({
+        message: "Error",
+        description: error.response
+          ? error.response.data
+          : "Something went wrong",
+        placement: "topLeft",
+      });
+    }
   };
 
   useEffect(() => {

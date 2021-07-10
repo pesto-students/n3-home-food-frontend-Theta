@@ -1,4 +1,4 @@
-import { Carousel, Col, Layout, Row, Typography } from "antd";
+import { Carousel, Col, Layout, Row, Typography, notification } from "antd";
 
 import { React, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -33,7 +33,15 @@ const LandingPage = () => {
         setSeller(response.data);
         setLoadSeller(true);
       }
-    } catch (error) {}
+    } catch (error) {
+      notification.error({
+        message: "Error",
+        description: error.response
+          ? error.response.data
+          : "Something went wrong",
+        placement: "topLeft",
+      });
+    }
   };
 
   const getCategorySeller = async (category) => {
@@ -48,7 +56,14 @@ const LandingPage = () => {
           setSeller(response.data);
           setLoadSeller(true);
         }
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+        notification.error({
+          message: "Error",
+          description: error.response,
+          placement: "topLeft",
+        });
+      }
     } else {
       getSellers(pincode);
     }
@@ -74,7 +89,7 @@ const LandingPage = () => {
     <Layout className="layout">
       <Navbar callBack={getSellerByPincode} />
       <Content>
-        <Row className="banner" justify='center'>
+        <Row className="banner" justify="center">
           <Col md={22}>
             <Carousel autoplay>
               {imagesUrls.map((image, index) => {

@@ -1,9 +1,7 @@
-import { Button, Form, Input, Modal, notification } from "antd";
-
-import axios from "axios";
 import React, { useState } from "react";
+import { Button, Form, Input, Modal, notification } from "antd";
 import { Switch } from "antd";
-import { baseUrl } from "utils/constant";
+import { rejectSeller, approveSeller } from "../utils/api";
 
 const openNotificationWithIcon = (type, message) => {
   notification[type]({
@@ -62,49 +60,37 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
 export const RejectSellerModal = (props) => {
   const [visible, setVisible] = useState(false);
   const [switchChecked, setSwitchChecked] = useState(props.switchChecked);
-  const onCreate = (values) => {
-    axios
-      .put(`${baseUrl}/sellers/reject/${props.sellerId}`, {
-        rejection_reason: values.rejectReason,
-      })
-      .then((result) => {
-        if (result.status === 200) {
-          openNotificationWithIcon("success", "Seller Rejected");
-          props.callback();
-        } else {
-          openNotificationWithIcon("error", "Could Not Reject Seller ");
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        openNotificationWithIcon("error", "Could Not Reject Seller");
-      })
-      .finally(() => {});
+  const onCreate = async (values) => {
+    const response = rejectSeller(props.sellerId).catch((err) => {
+      console.error(err);
+      openNotificationWithIcon("error", "Could Not Reject Seller");
+    });
+    if (response.status === 200) {
+      openNotificationWithIcon("success", "Seller Rejected");
+      props.callback();
+    } else {
+      openNotificationWithIcon("error", "Could Not Reject Seller ");
+    }
     setSwitchChecked(false);
     setVisible(false);
   };
 
-  const onChange = (checked) => {
+  const onChange = async (checked) => {
     if (!checked) {
       // show the modal
       setVisible(true);
     } else {
-      axios
-        .put(`${baseUrl}/sellers/approve/${props.sellerId}`)
-        .then((result) => {
-          if (result.status === 200) {
-            setSwitchChecked(true);
-            openNotificationWithIcon("success", "Seller Approved");
-            props.callback();
-          } else {
-            openNotificationWithIcon("error", "Could Not Approve Seller");
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-          openNotificationWithIcon("error", "Could Not Approve Seller");
-        })
-        .finally(() => {});
+      const response = await approveSeller(props.sellerId).catch((err) => {
+        console.error(err);
+        openNotificationWithIcon("error", "Could Not Approve Seller");
+      });
+      if (response.status === 200) {
+        setSwitchChecked(true);
+        openNotificationWithIcon("success", "Seller Approved");
+        props.callback();
+      } else {
+        openNotificationWithIcon("error", "Could Not Approve Seller");
+      }
     }
   };
 

@@ -21,7 +21,15 @@ const CustomerCurrentOrders = ({ orders, callBack }) => {
         });
         callBack();
       }
-    } catch (error) {}
+    } catch (error) {
+      notification.error({
+        message: "Error",
+        description: error.response
+          ? error.response.data
+          : "Something went wrong",
+        placement: "topLeft",
+      });
+    }
   };
 
   return (

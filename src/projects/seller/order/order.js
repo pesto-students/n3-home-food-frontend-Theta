@@ -1,4 +1,4 @@
-import { Tabs, Row } from "antd";
+import { Tabs, Row, notification } from "antd";
 
 import React, { useEffect, useState } from "react";
 import CurrentOrders from "./currentOrder";
@@ -25,7 +25,15 @@ const SellerProducts = () => {
         setCurrentOrdersItem(response.data);
         setIsLoading(false);
       }
-    } catch (error) {}
+    } catch (error) {
+      notification.error({
+        message: "Error",
+        description: error.response
+          ? error.response.data
+          : "Something went wrong",
+        placement: "topLeft",
+      });
+    }
   };
 
   const getAllPastOrder = async () => {
@@ -35,7 +43,15 @@ const SellerProducts = () => {
         setIsLoading(false);
         setPastOrdersItem(response.data);
       }
-    } catch (error) {}
+    } catch (error) {
+      notification.error({
+        message: "Error",
+        description: error.response
+          ? error.response.data
+          : "Something went wrong",
+        placement: "topLeft",
+      });
+    }
   };
 
   useEffect(() => {

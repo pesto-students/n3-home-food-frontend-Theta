@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, Col, DatePicker, Row } from "antd";
+import { Card, Col, DatePicker, Row, notification } from "antd";
 import LineChart from "components/lineChart/lineChart";
 import PieChart from "components/pieChart/pieChart";
 import "./adminDashboard.css";
@@ -47,7 +47,15 @@ function AdminDashboard() {
         console.log(dataSource);
         setLineGraphData(dataSource);
       }
-    } catch (error) {}
+    } catch (error) {
+      notification.error({
+        message: "Error",
+        description: error.response
+          ? error.response.data
+          : "Something went wrong",
+        placement: "topLeft",
+      });
+    }
   };
 
   const getAdminDetails = async () => {
@@ -56,7 +64,15 @@ function AdminDashboard() {
       if (response.status === 200) {
         response.data ? setadminData(response.data) : setadminData(0);
       }
-    } catch (error) {}
+    } catch (error) {
+      notification.error({
+        message: "Error",
+        description: error.response
+          ? error.response.data
+          : "Something went wrong",
+        placement: "topLeft",
+      });
+    }
   };
 
   const getOrderDetailsCateogryWise = async (dateString) => {
@@ -102,7 +118,15 @@ function AdminDashboard() {
           ["Dinner", dinner],
         ]);
       }
-    } catch (error) {}
+    } catch (error) {
+      notification.error({
+        message: "Error",
+        description: error.response
+          ? error.response.data
+          : "Something went wrong",
+        placement: "topLeft",
+      });
+    }
   };
 
   const onChange = (value, dateString) => {

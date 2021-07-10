@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 
 import { Button, Col, Row } from "antd";
-import axios from "utils/axios";
-import { baseUrl, rupeeSign } from "utils/constant";
-
+import { rupeeSign } from "utils/constant";
+import { updateCartItem } from "../utils/api";
 import "./cart.css";
 import emptyCardImage from "images/empty_cart.jpg";
 import Image from "components/image/image";
@@ -48,18 +47,15 @@ const Cart = ({ alreadyInCart, reloadCart, showCheckout, ...props }) => {
       };
     }
 
-    console.log('cartItem',cartItem)
-   updateCart(cartItem);
+    updateCart(cartItem);
   };
 
-  const updateCart = (cartItem) => {
-    axios
-      .post(`${baseUrl}/cart`, cartItem)
-      .then((result) => {
-        setIsLoding(false);
-        reloadCart();
-      })
-      .catch((err) => console.error(err));
+  const updateCart = async (cartItem) => {
+    const response = await updateCartItem(cartItem);
+    if (response.status === 200) {
+      setIsLoding(false);
+      reloadCart();
+    }
   };
 
   const getQuantity = (currentItem) => {
@@ -97,7 +93,10 @@ const Cart = ({ alreadyInCart, reloadCart, showCheckout, ...props }) => {
               <Row>
                 <Col md={22}>
                   <Row justify="space-between">
-                    <span> {dish.productId.name} ({dish.quantity})</span>
+                    <span>
+                      {" "}
+                      {dish.productId.name} ({dish.quantity})
+                    </span>
                     <span>
                       {rupeeSign} {dish.price}
                     </span>
@@ -135,11 +134,7 @@ const Cart = ({ alreadyInCart, reloadCart, showCheckout, ...props }) => {
           );
         })}
 
-        <hr>
-        
-        
-        
-        </hr>
+        <hr></hr>
         <Row justify="space-between" className="sub-total">
           <span className="bold">{t("Cart.Sub Total")}</span>
           <span className="bold">

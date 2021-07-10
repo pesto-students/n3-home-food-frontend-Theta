@@ -24,7 +24,7 @@ const CustomerLogin = (props) => {
 
   return (
     <Drawer
-      title={`${props.type} Login`}
+      title={`Login`}
       placement="right"
       width={400}
       closable={true}

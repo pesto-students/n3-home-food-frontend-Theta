@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Tabs } from "antd";
+import { Tabs, notification } from "antd";
 import AllProducts from "./allProducts/allProducts";
 import ProductApproval from "./product Approval/productApproval";
 import TabTag from "components/tag/tag";
@@ -23,7 +23,15 @@ const ProductCatalogue = () => {
         setIsLoading(false);
         setPendingproducts(response.data);
       }
-    } catch (error) {}
+    } catch (error) {
+      notification.error({
+        message: "Error",
+        description: error.response
+          ? error.response.data
+          : "Something went wrong",
+        placement: "topLeft",
+      });
+    }
   };
 
   const allApproved = async () => {
@@ -33,7 +41,15 @@ const ProductCatalogue = () => {
         setIsLoading(false);
         setApproveProducts(response.data);
       }
-    } catch (error) {}
+    } catch (error) {
+      notification.error({
+        message: "Error",
+        description: error.response
+          ? error.response.data
+          : "Something went wrong",
+        placement: "topLeft",
+      });
+    }
   };
 
   useEffect(() => {

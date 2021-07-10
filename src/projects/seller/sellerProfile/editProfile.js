@@ -1,5 +1,15 @@
 import { UploadOutlined } from "@ant-design/icons";
-import { Button, Col, Form, Input, message, Modal, Row, Upload } from "antd";
+import {
+  Button,
+  Col,
+  Form,
+  Input,
+  message,
+  Modal,
+  Row,
+  Upload,
+  notification,
+} from "antd";
 
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -296,7 +306,15 @@ export const EditProfile = ({ profile, callBack }) => {
         setVisible(false);
         console.log(response, response.status);
       }
-    } catch (error) {}
+    } catch (error) {
+      notification.error({
+        message: "Error",
+        description: error.response
+          ? error.response.data
+          : "Something went wrong",
+        placement: "topLeft",
+      });
+    }
   };
 
   return (

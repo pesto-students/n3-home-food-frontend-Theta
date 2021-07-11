@@ -1,11 +1,12 @@
 import React from 'react';
 import { useEffect, useRef } from "react";
-import bb, { pie } from "billboard.js";
+import bb, { pie ,donut} from "billboard.js";
 import { Row } from "antd";
+import './pieChart.css'
 const PieChart = ({dataSource}) => {
   const PieChart = useRef(null);
 
-  useEffect(() => {
+useEffect(() => {
     bb.generate({
         data: {
           columns:dataSource ,
@@ -17,13 +18,18 @@ const PieChart = ({dataSource}) => {
           console.log("onout", d, i);
          }
         },
+        pie: {
+          innerRadius: 20
+        },
       bindto: PieChart.current
     })
     
   }, [dataSource]);
   return(
     <>
-   {/* <Row justify='center' className='mt-1'><h4>Categories Sold</h4></Row> */}
+   <Row justify="start" className='mt-1'>
+        <h5>Categories Sold</h5>
+      </Row>
    <div  ref={PieChart}>chart</div>
    </>
   )

@@ -23,6 +23,7 @@
     display: block;
     margin-bottom: 20px;
     width: 184px;
+    height: 100px;
 }
 
 .bg-info {
@@ -61,4 +62,55 @@
         font-size: 24px;
         margin: 5px 17px;  
         color: #F7BB41;  
+}
+
+.card-details{
+    margin: 15px 5px;
+    display: flex;
+    flex-flow: column;
+}
+
+.class-container{
+    display: flex;
+    flex-flow: row;
+}
+
+.stat-card{
+    height: 111%;
+    margin: -5px -18px;
+}
+
+.icon-container{
+    background-color: #ffce6bf7;
+}
+
+.ant-card-body {
+    /* padding: 0px; */
+    height: 100%;
+}
+
+.icon{
+        display: flex;
+        justify-content: center;
+        font-size: xx-large;
+        height: 100%;
+        margin-top: 45%;
+        color: #fff;
+}
+
+.stat-count{
+    font-weight: 600;
+    margin-bottom: -6px;
+    margin-left: 10px;
+    color: grey;
+}
+
+.stat-title{
+    color: #F7BB41;
+    font-weight: 600;
+}
+
+.no-graph-found{
+    display: flex;
+    justify-content: center;
 }

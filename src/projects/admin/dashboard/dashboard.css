@@ -71,3 +71,30 @@
   /* background: orange !important; */
 }
 /* .header-navbar */
+
+.ant-menu-dark .ant-menu-item-selected .ant-menu-item-active .ant-menu-item-icon, .ant-menu-dark .ant-menu-item-selected .anticon {
+  color: black;
+}
+
+.ant-menu-dark .ant-menu-item-selected .ant-menu-title-active .ant-menu-item-icon, .ant-menu-dark .ant-menu-item-selected .anticon {
+  color: black;
+}
+
+.ant-menu-item ant-menu-item-selected{
+  color: #141414;
+}
+
+.ant-layout-sider-zero-width-trigger {
+  background: #F7BB41;
+  top: 73px;
+}
+
+.menu-item-custom{
+  color: #141414;
+
+}
+
+.sidebar-icon{
+  font-size: 20px !important;  
+
+}

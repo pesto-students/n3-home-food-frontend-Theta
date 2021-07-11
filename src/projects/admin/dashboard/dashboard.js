@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import {
-  DesktopOutlined,
+  ShopFilled,
   FileOutlined,
-  PieChartOutlined,
+  PieChartFilled,
+  UsergroupAddOutlined
 } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 
@@ -48,6 +49,8 @@ const AdminDashBoard = () => {
     <>
       <Layout style={{ minHeight: "100vh" }}>
         <Sider
+          breakpoint="md"
+          collapsedWidth="0"
           collapsible
           collapsed={collapsed}
           onCollapse={onCollapse}
@@ -67,22 +70,22 @@ const AdminDashBoard = () => {
             selectedKeys={[activeTab]}
             mode="inline"
           >
-            <Menu.Item key="1" icon={<PieChartOutlined />}>
-              <Link to="/admin/dashboard">Dashboard</Link>
+            <Menu.Item key="1" icon={<PieChartFilled className='sidebar-icon'/>}>
+              <Link to="/admin/dashboard" style={{color:'black'}}>Dashboard</Link>
             </Menu.Item>
 
-            <Menu.Item key="2" icon={<DesktopOutlined />}>
-              <Link to="/admin/product">Product</Link>
+            <Menu.Item key="2" icon={<ShopFilled className='sidebar-icon'/>}>
+              <Link to="/admin/product" style={{color:'black'}}>Product</Link>
             </Menu.Item>
 
-            <Menu.Item key="3" icon={<FileOutlined />}>
-              <Link to="/admin/seller">Seller</Link>
+            <Menu.Item key="3" icon={<UsergroupAddOutlined className='sidebar-icon'/>}>
+              <Link to="/admin/seller" style={{color:'black'}}>Seller</Link>
             </Menu.Item>
           </Menu>
         </Sider>
         <Layout className="site-layout">
           <Header className="header-navbar">
-            <h1>Admin</h1>
+            <h1 >Admin</h1>
             <AvatarMenu />
           </Header>
           <Content style={{ margin: "20px 16px" }}>

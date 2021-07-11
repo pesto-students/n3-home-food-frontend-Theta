@@ -5,8 +5,6 @@ import CustomerNavbar from "../customerNavbar/customerNavbar";
 import Image from "../image/image";
 import CustomTabs from "../Tabs/Tabs";
 import ProductItems from "./productItem";
-import { baseUrl } from "utils/constant";
-import axios from "utils/axios";
 import SpinnerLoader from "../spinnerLoader/spinnerLoader";
 import Cart from "../cart/cart";
 import { getUser, sessionId, setPincode } from "utils/helpers";
@@ -14,6 +12,7 @@ import { withRouter } from "react-router-dom";
 import Navbar from "../navbar/navbar";
 import { useTranslation } from "react-i18next";
 import DataNotFound from "components/dataNotFound/dataNotFound";
+import { fetchSellerProfile, fetchCart } from "../utils/api";
 
 const SellerDetailWithProducts = ({ match }) => {
   const { t } = useTranslation();
@@ -21,9 +20,7 @@ const SellerDetailWithProducts = ({ match }) => {
   const { Title } = Typography;
   const [isLoading, setIsLoading] = useState(true);
   const [isCartLoad, setIsCartLoad] = useState(false);
-
   const [allProduct, setAllProduct] = useState(false);
-
   const [profile, setProfile] = useState({});
   const [alreadyInCart, setAlreadyInCart] = useState({
     items: [],
@@ -40,35 +37,27 @@ const SellerDetailWithProducts = ({ match }) => {
     setAllProduct([...items]);
   };
 
-  const getSellerProfile = useCallback(() => {
-    axios
-      .get(`${baseUrl}/sellers/get/getproducts?sellerid=${sellerId}`)
-      .then((result) => {
-        setProfile(result.data[0]);
-        setAllProduct(result.data[0].myProducts);
-        setIsLoading(false);
-      })
-      .catch((err) => console.error(err));
+  const getSellerProfile = useCallback(async () => {
+    const response = await fetchSellerProfile(sellerId);
+    if (response.status === 200) {
+      setProfile(response.data[0]);
+      setAllProduct(response.data[0].myProducts);
+      setIsLoading(false);
+    }
   }, [sellerId]);
 
   const getCart = () => {
     if (sessionId()) {
-      axios
-        .get(`${baseUrl}/cart/${sessionId()}`)
-        .then((result) => {
-          setAlreadyInCart(result.data);
-          setIsCartLoad(true);
-        })
-        .catch((err) => {
-          setIsCartLoad(true);
-          let cart = {
-            items: [],
-            subTotal: 0,
-          };
-          setAlreadyInCart(cart);
-
-          console.error(err);
-        });
+      const response = fetchCart(sessionId()).catch((e) => {
+        setIsCartLoad(true);
+        let cart = {
+          items: [],
+          subTotal: 0,
+        };
+        setAlreadyInCart(cart);
+      });
+      setAlreadyInCart(response.data);
+      setIsCartLoad(true);
     } else {
       setIsCartLoad(true);
     }
@@ -106,9 +95,6 @@ const SellerDetailWithProducts = ({ match }) => {
                   <Title level={1}>{profile.name}</Title>
                   <Title level={5}>{profile.description}</Title>
                   <Rate defaultValue={profile.rating}></Rate>
-                  {/* <Title className="margin-10" level={5}>
-                    {t("Cart.Max Amount")} : {rupeeSign} {profile.max_amount}
-                  </Title> */}
                 </Col>
               </Row>
             </div>

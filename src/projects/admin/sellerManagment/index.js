@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Tabs } from "antd";
+import { Tabs, notification } from "antd";
 import SellerApproval from "./Seller Approval/sellerApproval";
 import RejectedSellers from "./rejectedSeller /rejectedSellers";
 import PendingSellers from "./pendingSellers/pendingSellers";
@@ -30,7 +30,15 @@ const SellerManagment = () => {
         setRejectedSellersItems(response.data);
         setIsLoading(false);
       }
-    } catch (error) {}
+    } catch (error) {
+      notification.error({
+        message: "Error",
+        description: error.response
+          ? error.response.data
+          : "Something went wrong",
+        placement: "topLeft",
+      });
+    }
   };
 
   const approveSeller = async () => {
@@ -40,7 +48,15 @@ const SellerManagment = () => {
         setApproveSellersItems(response.data);
         setIsLoading(false);
       }
-    } catch (error) {}
+    } catch (error) {
+      notification.error({
+        message: "Error",
+        description: error.response
+          ? error.response.data
+          : "Something went wrong",
+        placement: "topLeft",
+      });
+    }
   };
 
   const pendingSeller = async () => {
@@ -50,7 +66,15 @@ const SellerManagment = () => {
         setPendingSellersItems(response.data);
         setIsLoading(false);
       }
-    } catch (error) {}
+    } catch (error) {
+      notification.error({
+        message: "Error",
+        description: error.response
+          ? error.response.data
+          : "Something went wrong",
+        placement: "topLeft",
+      });
+    }
   };
 
   useEffect(() => {

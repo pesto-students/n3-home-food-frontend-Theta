@@ -1,14 +1,14 @@
 import { Button, Col, Row, Typography, notification, Tag } from "antd";
 
 import { React, useState } from "react";
-import axios from "utils/axios";
-import { baseUrl, rupeeSign } from "utils/constant";
+import { rupeeSign } from "utils/constant";
 import { sessionId } from "utils/helpers";
 import Image from "../image/image";
 import "./sellerDetailWithProducts.css";
 import { useDispatch } from "react-redux";
 import { setSellerIdInCart } from "store/actions/index";
 import { useTranslation } from "react-i18next";
+import { updateCartItem } from "../utils/api";
 
 const ProductItems = ({ products, savedCartItem, reloadCart, sellerId }) => {
   const Dispatch = useDispatch();
@@ -59,16 +59,13 @@ const ProductItems = ({ products, savedCartItem, reloadCart, sellerId }) => {
     updateCart(cartItem);
   };
 
-  const updateCart = (cartItem) => {
-    axios
-      .post(`${baseUrl}/cart`, cartItem)
-      .then((result) => {
-        setIsLoding(false);
-        Dispatch(setSellerIdInCart(sellerId));
-
-        reloadCart();
-      })
-      .catch((err) => console.error(err));
+  const updateCart = async (cartItem) => {
+    const response = await updateCartItem(cartItem);
+    if (response.status === 200) {
+      setIsLoding(false);
+      Dispatch(setSellerIdInCart(sellerId));
+      reloadCart();
+    }
   };
 
   const getQuantity = (currentItem) => {

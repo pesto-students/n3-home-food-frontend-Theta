@@ -2,7 +2,6 @@ import { Button, notification, Col, Form, Input, Row } from "antd";
 
 import { React } from "react";
 import { connect, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import "./sellerRegistration.css";
@@ -40,7 +39,15 @@ function SellerRegistration() {
           toggleDrawer();
         }, [2000]);
       }
-    } catch (error) {}
+    } catch (error) {
+      notification.error({
+        message: "Error",
+        description: error.response
+          ? error.response.data
+          : "Something went wrong",
+        placement: "topLeft",
+      });
+    }
   };
 
   return (

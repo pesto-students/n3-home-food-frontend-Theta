@@ -1,4 +1,4 @@
-import { Row } from "antd";
+import { Row, notification } from "antd";
 import "./order.css";
 
 import React, { useEffect, useState } from "react";
@@ -20,7 +20,15 @@ const SellerProducts = () => {
         setCurrentOrdersItem(response.data);
         setIsLoading(false);
       }
-    } catch (error) {}
+    } catch (error) {
+      notification.error({
+        message: "Error",
+        description: error.response
+          ? error.response.data
+          : "Something went wrong",
+        placement: "topLeft",
+      });
+    }
   };
 
   const user = getUser() ? getUser().userType : null;

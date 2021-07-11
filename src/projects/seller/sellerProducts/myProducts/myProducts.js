@@ -17,8 +17,9 @@ import {
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Image from "components/image/image";
-import { sessionId } from "utils/helpers";
+import { sessionId, getCategoryId } from "utils/helpers";
 import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
+
 import DataNotFound from "components/dataNotFound/dataNotFound";
 import { updateProduct, deleteMyProduct } from "projects/seller/utils/api";
 
@@ -67,7 +68,15 @@ const MyProducts = ({ products, isLoading, callback }) => {
         });
         callback();
       }
-    } catch (error) {}
+    } catch (error) {
+      notification.error({
+        message: "Error",
+        description: error.response
+          ? error.response.data
+          : "Something went wrong",
+        placement: "topLeft",
+      });
+    }
   };
 
   const editableProduct = (key) => {
@@ -98,7 +107,15 @@ const MyProducts = ({ products, isLoading, callback }) => {
         setMyProducts([...products]);
         callback();
       }
-    } catch (error) {}
+    } catch (error) {
+      notification.error({
+        message: "Error",
+        description: error.response
+          ? error.response.data
+          : "Something went wrong",
+        placement: "topLeft",
+      });
+    }
   };
 
   const changeCategory = (categoryies) => {
@@ -182,16 +199,16 @@ const MyProducts = ({ products, isLoading, callback }) => {
                                 onChange={changeCategory}
                                 placeholder="Please select a Category"
                               >
-                                <Option value="60c906ce35453e14cd3f4ee3">
+                                <Option value={getCategoryId("Breakfast")}>
                                   Breakfast
                                 </Option>
-                                <Option value="60ccfb4516659e249450ed49">
+                                <Option value={getCategoryId("Lunch")}>
                                   Lunch
                                 </Option>
-                                <Option value="60ccfea78d901732e097e2ee">
-                                  Snacks
+                                <Option value={getCategoryId("Snack")}>
+                                  Snack
                                 </Option>
-                                <Option value="60cf33b093112a14d5da3897">
+                                <Option value={getCategoryId("Dinner")}>
                                   Dinner
                                 </Option>
                               </Select>

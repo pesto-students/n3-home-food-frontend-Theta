@@ -15,7 +15,6 @@ const Login = ({ userType }) => {
       {
         size: "invisible",
         callback: (response) => {
-          // reCAPTCHA solved, allow signInWithPhoneNumber.
           onSignInSubmit();
         },
         defaultCountry: "IN",
@@ -32,8 +31,6 @@ const Login = ({ userType }) => {
       .auth()
       .signInWithPhoneNumber(phoneNumber, appVerifier)
       .then((confirmationResult) => {
-        // SMS sent. Prompt user to type the code from the message, then sign the
-        // user in with confirmationResult.confirm(code).
         sethasMobile(true);
         setButtonLoding(false);
 
@@ -43,13 +40,9 @@ const Login = ({ userType }) => {
           description: "OTP has been sent. Please Enter OTP ",
           placement: "topLeft",
         });
-        // ...
       })
       .catch((error) => {
-        // Error; SMS not sent
-        // ...
         setButtonLoding(false);
-
         notification.error({
           message: "Error",
           description: "SMS not sent",
@@ -63,7 +56,6 @@ const Login = ({ userType }) => {
     window.confirmationResult
       .confirm(code)
       .then((result) => {
-        // User signed in successfully.
         setButtonLoding(false);
         const user = result.user;
         loginUser({ phone: user.phoneNumber.slice(3), customerType: userType });

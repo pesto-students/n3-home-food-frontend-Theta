@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, Col, DatePicker, Row } from "antd";
-import Image from "components/image/image";
+import { Card, Col, DatePicker, Row, notification } from "antd";
 import LineChart from "components/lineChart/lineChart";
 import PieChart from "components/pieChart/pieChart";
 import "./adminDashboard.css";
@@ -8,7 +7,6 @@ import {
   getAdminGraphDetails,
   getAllOrderCount,
   getAdminCategoryChartDetails,
-  getAdminCategoryChart,
 } from "../utils/api";
 import moment from "moment";
 import {
@@ -19,13 +17,15 @@ import {
   FilterOutlined,
 } from "@ant-design/icons";
 import noGraph from 'images/no_graph.png'
+import Image from "components/image/image";
+
 const { RangePicker } = DatePicker;
 
 function AdminDashboard() {
   const [lineGraphData, setLineGraphData] = useState();
   const [adminData, setadminData] = useState({});
   const [pieGraphData, setPieGraphData] = useState();
-  const [categoryData, setCategoryData] = useState([]);
+  // const [categoryData, setCategoryData] = useState([]);
 
   useEffect(() => {
     let startDate = moment().subtract(1, "day").format("YYYY-MM-DD");
@@ -49,7 +49,15 @@ function AdminDashboard() {
         console.log(dataSource);
         setLineGraphData(dataSource);
       }
-    } catch (error) {}
+    } catch (error) {
+      notification.error({
+        message: "Error",
+        description: error.response
+          ? error.response.data
+          : "Something went wrong",
+        placement: "topLeft",
+      });
+    }
   };
 
   const getAdminDetails = async () => {
@@ -58,7 +66,15 @@ function AdminDashboard() {
       if (response.status === 200) {
         response.data ? setadminData(response.data) : setadminData(0);
       }
-    } catch (error) {}
+    } catch (error) {
+      notification.error({
+        message: "Error",
+        description: error.response
+          ? error.response.data
+          : "Something went wrong",
+        placement: "topLeft",
+      });
+    }
   };
 
   const getOrderDetailsCateogryWise = async (dateString) => {
@@ -66,9 +82,9 @@ function AdminDashboard() {
       const response = await getAdminCategoryChartDetails(dateString);
       if (response.status === 200) {
         let categoryArray = [];
-        response.data
-          ? setCategoryData(response.data.orderItems)
-          : setCategoryData(0);
+        // response.data
+        //   ? setCategoryData(response.data.orderItems)
+        //   : setCategoryData(0);
         // console.log(response.data[1])
         response.data.forEach((order) => {
           order.categories.forEach((ordercat) => {
@@ -104,7 +120,15 @@ function AdminDashboard() {
           ["Dinner", dinner],
         ]);
       }
-    } catch (error) {}
+    } catch (error) {
+      notification.error({
+        message: "Error",
+        description: error.response
+          ? error.response.data
+          : "Something went wrong",
+        placement: "topLeft",
+      });
+    }
   };
 
   const onChange = (value, dateString) => {

@@ -26,7 +26,15 @@ const PendingSellers = ({ callback, sellers, isLoading }) => {
       } else {
         openNotificationWithIcon("error", "Could Not Approve Seller");
       }
-    } catch (error) {}
+    } catch (error) {
+      notification.error({
+        message: "Error",
+        description: error.response
+          ? error.response.data
+          : "Something went wrong",
+        placement: "topLeft",
+      });
+    }
   };
 
   const updateSellerList = () => {

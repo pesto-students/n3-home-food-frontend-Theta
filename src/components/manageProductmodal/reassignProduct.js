@@ -1,8 +1,7 @@
 import { Button, Form, Modal, notification, Select } from "antd";
 
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { baseUrl } from "utils/constant";
+import { reassignProduct, getApproveProduct } from "../utils/api";
 
 let { Option } = Select;
 const openNotificationWithIcon = (type, message) => {
@@ -18,13 +17,13 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .get(`${baseUrl}/products/get/approved`)
-      .then((result) => {
-        setproducts(result.data);
-      })
-      .catch((err) => console.error(err))
-      .finally(() => setIsLoading(false));
+    const getProducts = async () => {
+      const response = await getApproveProduct().catch(() => {
+        setIsLoading(false);
+      });
+      setproducts(response.data);
+    };
+    getProducts();
   }, []);
 
   return (
@@ -83,24 +82,19 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
 export const ReassignProduct = (props) => {
   const [visible, setVisible] = useState(false);
 
-  const onCreate = (values) => {
-    axios
-      .put(`${baseUrl}/products/product-reassign/${props.productId}`, {
-        existingProductId: values.existingProductId,
-      })
-      .then((result) => {
-        if (result.status === 200) {
-          openNotificationWithIcon("success", "Product Reassigned");
-          props.callback();
-        } else {
-          openNotificationWithIcon("error", "Could Not Reassign Product ");
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        openNotificationWithIcon("error", "Could Not Reassigned Product");
-      })
-      .finally(() => {});
+  const onCreate = async (values) => {
+    const response = await reassignProduct(props.productId, {
+      existingProductId: values.existingProductId,
+    }).catch(() => {
+      openNotificationWithIcon("error", "Could Not Reassigned Product");
+    });
+    if (response.status === 200) {
+      openNotificationWithIcon("success", "Product Reassigned");
+      props.callback();
+    } else {
+      openNotificationWithIcon("error", "Could Not Reassign Product ");
+    }
+
     setVisible(false);
   };
 

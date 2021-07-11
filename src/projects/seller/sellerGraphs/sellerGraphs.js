@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, Col, DatePicker, Row } from "antd";
+import { Card, Col, DatePicker, Row, notification } from "antd";
 
 import LineChart from "components/lineChart/lineChart";
 import PieChart from "components/pieChart/pieChart";
@@ -12,7 +12,7 @@ import {
   getSellerPieChartData,
 } from "../utils/api";
 import { rupeeSign } from "utils/constant";
-import { ShoppingCartOutlined, MoneyCollectOutlined} from "@ant-design/icons";
+import { ShoppingCartOutlined, MoneyCollectOutlined } from "@ant-design/icons";
 import moment from "moment";
 
 const { RangePicker } = DatePicker;
@@ -25,39 +25,44 @@ function SellerGraphs() {
   const [pieGraphData, setPieGraphData] = useState();
 
   useEffect(() => {
-    let startDate = moment().subtract(1, 'day').format('YYYY-MM-DD')
-    let endDate = moment().format('YYYY-MM-DD')
+    let startDate = moment().subtract(1, "day").format("YYYY-MM-DD");
+    let endDate = moment().format("YYYY-MM-DD");
     getSellerDetails();
-    getGraphDetails([startDate,endDate])
-    getPieChartDetails([startDate,endDate])
+    getGraphDetails([startDate, endDate]);
+    getPieChartDetails([startDate, endDate]);
   }, []);
 
-  useEffect(()=> {
-    console.log(lineGraphData,pieGraphData)
-  },[pieGraphData,lineGraphData])
+  useEffect(() => {
+    console.log(lineGraphData, pieGraphData);
+  }, [pieGraphData, lineGraphData]);
 
-  
   const getGraphDetails = async (dateString) => {
     let lineGraphDataMock = ["revenue"];
-    let dateGraphData = ['x']
+    let dateGraphData = ["x"];
     try {
-      const response = await getGraphDetailSeller(dateString,sessionId());
+      const response = await getGraphDetailSeller(dateString, sessionId());
       if (response.status === 200) {
         response.data.forEach((element) => {
           lineGraphDataMock.push(element.totalPrice);
           dateGraphData.push(element._id);
-
         });
-        let dataSource = [dateGraphData , lineGraphDataMock]
-        console.log(lineGraphDataMock.length)
+        let dataSource = [dateGraphData, lineGraphDataMock];
+        console.log(lineGraphDataMock.length);
 
-        setLineGraphData(dataSource)
+        setLineGraphData(dataSource);
         // (lineGraphDataMock.length > 1 )
         //   ? setLineGraphData(dataSource)
         //   : setLineGraphData()
-        
       }
-    } catch (error) {}
+    } catch (error) {
+      notification.error({
+        message: "Error",
+        description: error.response
+          ? error.response.data
+          : "Something went wrong",
+        placement: "topLeft",
+      });
+    }
   };
 
   const getSellerDetails = async () => {
@@ -69,12 +74,20 @@ function SellerGraphs() {
           : setorderCountData(0);
         setrevenueData(response.data.totalPrice);
       }
-    } catch (error) {}
+    } catch (error) {
+      notification.error({
+        message: "Error",
+        description: error.response
+          ? error.response.data
+          : "Something went wrong",
+        placement: "topLeft",
+      });
+    }
   };
 
   const getPieChartDetails = async (dateString) => {
     try {
-      const response = await getSellerPieChartData(dateString,sessionId());
+      const response = await getSellerPieChartData(dateString, sessionId());
       if (response.status === 200) {
         let categoryArray = [];
         response.data.forEach((order) => {
@@ -104,14 +117,24 @@ function SellerGraphs() {
           }
         });
 
-        !(lunch === 0 && breakfast === 0 && dinner === 0 && snacks === 0) ? setPieGraphData([
-          ["Lunch", lunch],
-          ["Breakfast", breakfast],
-          ["Snacks", snacks],
-          ["Dinner", dinner],
-        ]) : setPieGraphData()
+        !(lunch === 0 && breakfast === 0 && dinner === 0 && snacks === 0)
+          ? setPieGraphData([
+              ["Lunch", lunch],
+              ["Breakfast", breakfast],
+              ["Snacks", snacks],
+              ["Dinner", dinner],
+            ])
+          : setPieGraphData();
       }
-    } catch (error) {}
+    } catch (error) {
+      notification.error({
+        message: "Error",
+        description: error.response
+          ? error.response.data
+          : "Something went wrong",
+        placement: "topLeft",
+      });
+    }
   };
 
   const onChange = (value, dateString) => {
@@ -121,52 +144,58 @@ function SellerGraphs() {
 
   return (
     <div>
-      <Row><h2>Dashboard</h2></Row>
-
+      <Row>
+        <h2>Dashboard</h2>
+      </Row>
 
       <Row className="number-cards" justify="center">
-      <Card hoverable={true} className="card-detailed small-box bg-info position">
-        <div className="main-items">
-        <h2 className='count' >{orderCountData ? orderCountData : 0}</h2>
-        <ShoppingCartOutlined className='card-icon'/>
-        </div>
-        <h5  className="status-name">{t("seller.dashboard.totalOrder")}</h5>
-      </Card>
+        <Card
+          hoverable={true}
+          className="card-detailed small-box bg-info position"
+        >
+          <div className="main-items">
+            <h2 className="count">{orderCountData ? orderCountData : 0}</h2>
+            <ShoppingCartOutlined className="card-icon" />
+          </div>
+          <h5 className="status-name">{t("seller.dashboard.totalOrder")}</h5>
+        </Card>
 
-      <Card hoverable={true} className="card-detailed small-box bg-info position">
-        <div className="main-items">
-        <h2 className='count' >   {rupeeSign}
-            {revenueData ? revenueData : 0}</h2>
-        <MoneyCollectOutlined className='card-icon'/>
-        </div>
-        <h5  className="status-name">{t("seller.dashboard.totalIncome")}</h5>
-      </Card>
-
-
+        <Card
+          hoverable={true}
+          className="card-detailed small-box bg-info position"
+        >
+          <div className="main-items">
+            <h2 className="count">
+              {" "}
+              {rupeeSign}
+              {revenueData ? revenueData : 0}
+            </h2>
+            <MoneyCollectOutlined className="card-icon" />
+          </div>
+          <h5 className="status-name">{t("seller.dashboard.totalIncome")}</h5>
+        </Card>
       </Row>
 
-      <Row justify="center" className='m-2'>
+      <Row justify="center" className="m-2">
         <RangePicker onChange={onChange} />
       </Row>
-      <Row justify="center" className='m-4'>
+      <Row justify="center" className="m-4">
         <Col id="chart" span={12}>
-        <Card hoverable={true}>
-        {lineGraphData &&   <LineChart dataSource={lineGraphData} /> }
-         {!lineGraphData && <span >No Data Found </span> }
-        </Card>
+          <Card hoverable={true}>
+            {lineGraphData && <LineChart dataSource={lineGraphData} />}
+            {!lineGraphData && <span>No Data Found </span>}
+          </Card>
         </Col>
         <Col span={12}>
-        <Card hoverable={true}>
-        <div id="chart">
-         {pieGraphData && <PieChart dataSource={pieGraphData} /> }
-         {!pieGraphData && <span >No Data Found </span> }
-        </div>
-        </Card>
+          <Card hoverable={true}>
+            <div id="chart">
+              {pieGraphData && <PieChart dataSource={pieGraphData} />}
+              {!pieGraphData && <span>No Data Found </span>}
+            </div>
+          </Card>
         </Col>
       </Row>
-
     </div>
-  
   );
 }
 

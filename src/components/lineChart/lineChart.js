@@ -22,9 +22,9 @@ const LineChart = ({ dataSource }) => {
           type: "timeseries",
           tick: {
             count: 4,
-            format: "%Y-%m-%d"
-          }
-        }
+            format: "%Y-%m-%d",
+          },
+        },
       },
       bindto: lineChart.current,
     });
@@ -36,10 +36,9 @@ const LineChart = ({ dataSource }) => {
         <h5>My Income</h5>
       </Row>
 
-      <div style={{height:'300px'}} ref={lineChart}>
+      <div style={{ height: "300px" }} ref={lineChart}>
         chart
       </div>
-    
     </>
   );
 };

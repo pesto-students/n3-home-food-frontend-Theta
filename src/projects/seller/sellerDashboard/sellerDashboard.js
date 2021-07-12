@@ -1,7 +1,8 @@
 import {
-  DesktopOutlined,
-  FileOutlined,
+  ShopFilled,
+  DropboxOutlined,
   PieChartOutlined,
+  UserOutlined
 } from "@ant-design/icons";
 import "./sellerDashboard.css";
 import { Layout, Menu } from "antd";
@@ -18,6 +19,7 @@ import Image from "components/image/image";
 import { AvatarMenu } from "projects/admin/header/header";
 import { Switch } from "react-router-dom";
 import Orders from "../order/order";
+import seller from 'images/chef-avatar.webp'
 const { Header, Content, Footer, Sider } = Layout;
 
 const SellerDashBoard = () => {
@@ -52,7 +54,13 @@ const SellerDashBoard = () => {
   return (
     <>
       <Layout style={{ minHeight: "100vh" }}>
-        <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
+        <Sider
+          breakpoint="md"
+          collapsedWidth="0"
+          collapsible
+          collapsed={collapsed}
+          onCollapse={onCollapse}
+        >
           <div className="home-food-logo">
             <Image
               url={logo}
@@ -68,33 +76,33 @@ const SellerDashBoard = () => {
             selectedKeys={[activeTab]}
             mode="inline"
           >
-            <Menu.Item key="1" icon={<PieChartOutlined />}>
-              <Link to="/seller/dashboard">
+            <Menu.Item key="1" icon={<PieChartOutlined className='sidebar-icon' />}>
+              <Link to="/seller/dashboard" style={{color:'black'}}>
                 {t("seller.dashboard.dashboardText")}
               </Link>
             </Menu.Item>
 
-            <Menu.Item key="2" icon={<DesktopOutlined />}>
-              <Link to="/seller/product">
+            <Menu.Item key="2" icon={<ShopFilled className='sidebar-icon'/>}>
+              <Link to="/seller/product" style={{color:'black'}}>
                 {t("seller.dashboard.productText")}
               </Link>
             </Menu.Item>
 
-            <Menu.Item key="3" icon={<FileOutlined />}>
-              <Link to="/seller/profile">
+            <Menu.Item key="3" icon={<UserOutlined className='sidebar-icon'/>}>
+              <Link to="/seller/profile" style={{color:'black'}}>
                 {t("seller.dashboard.profileText")}
               </Link>
             </Menu.Item>
 
-            <Menu.Item key="4" icon={<FileOutlined />}>
-              <Link to="/seller/orders">{t("seller.dashboard.orderText")}</Link>
+            <Menu.Item key="4" icon={<DropboxOutlined className='sidebar-icon'/>}>
+              <Link to="/seller/orders" style={{color:'black'}}>{t("seller.dashboard.orderText")}</Link>
             </Menu.Item>
           </Menu>
         </Sider>
         <Layout className="site-layout">
           <Header className="header-navbar">
             <h1>Seller</h1>
-            <AvatarMenu />
+            <AvatarMenu image={seller}/>
           </Header>
           <Content style={{ margin: "20px 16px" }}>
             {user === "Seller" ? (
@@ -125,7 +133,7 @@ const SellerDashBoard = () => {
             )}
           </Content>
           <Footer style={{ textAlign: "center" }}>
-            Home Food ©2021 Created by Pesto Theta
+            Home Food ©2021 Created by Ninja-3 Pesto Theta
           </Footer>
         </Layout>
       </Layout>

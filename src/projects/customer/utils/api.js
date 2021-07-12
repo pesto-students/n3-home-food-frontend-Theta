@@ -1,4 +1,5 @@
 import axios from "utils/axios";
+import { getCategoryId } from "utils/helpers";
 
 export const getSeller = async (pincode) => {
   let response = await axios
@@ -9,6 +10,32 @@ export const getSeller = async (pincode) => {
     .catch((error) => {
       return error.response;
     });
+  return response;
+};
+
+export const getSellerByPage = async (pincode, page, tabSelected) => {
+  let response
+  if (tabSelected !== "All") {
+    response = await axios
+    .get(`sellers/get/SellersByCategoryFilter?categoryId=${getCategoryId(tabSelected)}&pincode=${pincode}&page=${page}`)
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+  } else {
+     response = await axios
+    .get(`/sellers/pincode/${pincode}?page=${page}`)
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+  }
+
+
   return response;
 };
 

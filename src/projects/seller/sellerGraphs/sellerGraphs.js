@@ -12,8 +12,14 @@ import {
   getSellerPieChartData,
 } from "../utils/api";
 import { rupeeSign } from "utils/constant";
-import { ShoppingCartOutlined, MoneyCollectOutlined } from "@ant-design/icons";
+import {
+  ShoppingCartOutlined,
+  MoneyCollectOutlined,
+  FilterOutlined,
+} from "@ant-design/icons";
 import moment from "moment";
+import Image from "components/image/image";
+import noGraph from 'images/no_graph.png'
 
 const { RangePicker } = DatePicker;
 
@@ -144,54 +150,64 @@ function SellerGraphs() {
 
   return (
     <div>
-      <Row>
-        <h2>Dashboard</h2>
-      </Row>
-
       <Row className="number-cards" justify="center">
-        <Card
-          hoverable={true}
-          className="card-detailed small-box bg-info position"
-        >
-          <div className="main-items">
-            <h2 className="count">{orderCountData ? orderCountData : 0}</h2>
-            <ShoppingCartOutlined className="card-icon" />
-          </div>
-          <h5 className="status-name">{t("seller.dashboard.totalOrder")}</h5>
+        <Card hoverable={true} className="small-box">
+          <Row className="stat-card">
+            <Col span={8} className="icon-container">
+              <ShoppingCartOutlined className="icon" />{" "}
+            </Col>
+            <Col span={16}>
+              <div className="card-details">
+                <h6 className="stat-title"> Total Orders</h6>
+                <h4 className="stat-count">
+                  {orderCountData ? orderCountData : 0}
+                </h4>
+              </div>
+            </Col>
+          </Row>
         </Card>
 
-        <Card
-          hoverable={true}
-          className="card-detailed small-box bg-info position"
-        >
-          <div className="main-items">
-            <h2 className="count">
-              {" "}
-              {rupeeSign}
-              {revenueData ? revenueData : 0}
-            </h2>
-            <MoneyCollectOutlined className="card-icon" />
-          </div>
-          <h5 className="status-name">{t("seller.dashboard.totalIncome")}</h5>
+        <Card hoverable={true} className="small-box">
+          <Row className="stat-card">
+            <Col span={8} className="icon-container">
+              <MoneyCollectOutlined className="icon" />{" "}
+            </Col>
+            <Col span={16}>
+              <div className="card-details">
+                <h6 className="stat-title"> Total Income</h6>
+                <h4 className="stat-count">
+                  {" "}
+                  {rupeeSign}
+                  {revenueData ? revenueData : 0}
+                </h4>
+              </div>
+            </Col>
+          </Row>
         </Card>
       </Row>
 
-      <Row justify="center" className="m-2">
+      <Row justify="end" className="m-1">
         <RangePicker onChange={onChange} />
+        <FilterOutlined className="funnel" />
       </Row>
       <Row justify="center" className="m-4">
-        <Col id="chart" span={12}>
-          <Card hoverable={true}>
-            {lineGraphData && <LineChart dataSource={lineGraphData} />}
-            {!lineGraphData && <span>No Data Found </span>}
-          </Card>
-        </Col>
-        <Col span={12}>
+        <Col md={8} sm={24} xs={24}>
           <Card hoverable={true}>
             <div id="chart">
               {pieGraphData && <PieChart dataSource={pieGraphData} />}
-              {!pieGraphData && <span>No Data Found </span>}
+              {!pieGraphData && (
+                <Image height="150" width="150" url={noGraph}></Image>
+              )}
             </div>
+          </Card>
+        </Col>
+
+        <Col id="chart" md={16} sm={24} xs={24}>
+          <Card hoverable={true}>
+            {lineGraphData && <LineChart dataSource={lineGraphData} />}
+            {!lineGraphData && (
+              <Image height="150" width="150" url={noGraph}></Image>
+            )}
           </Card>
         </Col>
       </Row>

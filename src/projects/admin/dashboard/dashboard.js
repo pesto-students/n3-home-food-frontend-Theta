@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
-  ShopFilled,
-  FileOutlined,
+  ShopFilled ,
   PieChartFilled,
   UsergroupAddOutlined
 } from "@ant-design/icons";
@@ -14,6 +13,7 @@ import { getUser } from "utils/helpers";
 import DashboardRoutes from "../dashboard-routes/dashboardRoutes";
 import { AvatarMenu } from "../header/header";
 import "./dashboard.css";
+import admin from '../../../images/admin.png'
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -86,7 +86,7 @@ const AdminDashBoard = () => {
         <Layout className="site-layout">
           <Header className="header-navbar">
             <h1 >Admin</h1>
-            <AvatarMenu />
+            <AvatarMenu image={admin}/>
           </Header>
           <Content style={{ margin: "20px 16px" }}>
             <div

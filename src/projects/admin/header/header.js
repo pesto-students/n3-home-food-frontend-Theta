@@ -3,8 +3,7 @@ import { Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import { setAsAdminLoggedOut } from "store/actions";
-import admin from '../../../images/admin.png'
-export const AvatarMenu = () => {
+export const AvatarMenu = ({image}) => {
   const Dispatch = useDispatch();
 
   const onClick = ({ key }) => {
@@ -37,7 +36,7 @@ export const AvatarMenu = () => {
         <Avatar
           className="ant-dropdown-link"
           size="large"
-          src={admin}
+          src={image}
         />
       </Dropdown>
     </>

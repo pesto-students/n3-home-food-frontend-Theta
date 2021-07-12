@@ -74,7 +74,7 @@
         "dashboard":{
             "dashboardText":"Dashboard",
             "productText":"Product",
-            "profileText":"Seller",
+            "profileText":"Profile",
             "orderText":"Order",
             "totalOrder":"Total Orders",
             "totalIncome":"Total Income"

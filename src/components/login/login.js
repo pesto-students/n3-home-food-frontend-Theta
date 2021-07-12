@@ -4,10 +4,12 @@ import React, { useState } from "react";
 import firebase from "utils/firebase";
 import "./login.css";
 import { loginUser } from "./utility";
+import { useTranslation } from "react-i18next";
 
 const Login = ({ userType }) => {
   const [hasMoile, sethasMobile] = useState(false);
   const [buttonLoding, setButtonLoding] = useState(false);
+  const { t } = useTranslation();
 
   const configureCaptcha = () => {
     window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
@@ -36,16 +38,16 @@ const Login = ({ userType }) => {
 
         window.confirmationResult = confirmationResult;
         notification.success({
-          message: "Verifying",
-          description: "OTP has been sent. Please Enter OTP ",
+          message: t("Message.Verified"),
+          description: t("Message.OTPHasBeenSent"),
           placement: "topLeft",
         });
       })
       .catch((error) => {
         setButtonLoding(false);
         notification.error({
-          message: "Error",
-          description: "SMS not sent",
+          message: t("Message.Error"),
+          description: t("Message.SMS not sent"),
           placement: "topLeft",
         });
       });
@@ -60,8 +62,8 @@ const Login = ({ userType }) => {
         const user = result.user;
         loginUser({ phone: user.phoneNumber.slice(3), customerType: userType });
         notification.success({
-          message: "Verified",
-          description: "OTP Verified",
+          message: t("Message.Verified"),
+          description: t("Message.OTPVerified"),
           placement: "topLeft",
         });
         // ...
@@ -70,8 +72,8 @@ const Login = ({ userType }) => {
         setButtonLoding(false);
 
         notification.error({
-          message: "Error",
-          description: "OTP not verified",
+          message: t("Message.Error"),
+          description: t("Message.OTP not verified"),
           placement: "topLeft",
         });
       });
@@ -93,11 +95,11 @@ const Login = ({ userType }) => {
           rules={[
             {
               required: true,
-              message: "Please input your phone",
+              message: t("Landing.EnterPhoneValidation"),
             },
           ]}
         >
-          <Input placeholder="Phone" />
+          <Input placeholder={t("Landing.Phone")} />
         </Form.Item>
         {!hasMoile && (
           <Button
@@ -107,7 +109,7 @@ const Login = ({ userType }) => {
             htmlType="submit"
             className="login-form-button"
           >
-            SEND OTP
+            {t("Landing.SendOtp")}
           </Button>
         )}
       </Form>
@@ -126,11 +128,11 @@ const Login = ({ userType }) => {
             rules={[
               {
                 required: false,
-                message: "Enter OTP",
+                message: t("Landing.EnterOTP"),
               },
             ]}
           >
-            <Input placeholder="OTP" />
+            <Input placeholder={t("Landing.Otp")} />
           </Form.Item>
 
           <Form.Item>
@@ -141,7 +143,7 @@ const Login = ({ userType }) => {
               htmlType="submit"
               className="login-form-button"
             >
-              Verify OTP
+              {t("Landing.VerifyOTP")}
             </Button>
           </Form.Item>
         </Form>

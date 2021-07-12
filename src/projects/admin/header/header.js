@@ -1,9 +1,8 @@
 import { Menu, Dropdown, message } from "antd";
 import { Avatar } from "antd";
-import { UserOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import { setAsAdminLoggedOut } from "store/actions";
-import admin from '../../../images/admin.png'
+import admin from "../../../images/admin.png";
 export const AvatarMenu = () => {
   const Dispatch = useDispatch();
 
@@ -34,11 +33,7 @@ export const AvatarMenu = () => {
   return (
     <>
       <Dropdown overlay={menu} trigger={["click"]}>
-        <Avatar
-          className="ant-dropdown-link"
-          size="large"
-          src={admin}
-        />
+        <Avatar className="ant-dropdown-link" size="large" src={admin} />
       </Dropdown>
     </>
   );

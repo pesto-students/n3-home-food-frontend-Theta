@@ -1,38 +1,37 @@
-import React from 'react';
+import React from "react";
 import { useEffect, useRef } from "react";
-import bb, { pie ,donut} from "billboard.js";
+import bb, { pie } from "billboard.js";
 import { Row } from "antd";
-import './pieChart.css'
-const PieChart = ({dataSource}) => {
+import "./pieChart.css";
+const PieChart = ({ dataSource }) => {
   const PieChart = useRef(null);
 
-useEffect(() => {
+  useEffect(() => {
     bb.generate({
-        data: {
-          columns:dataSource ,
-          type: pie(), // for ESM specify as: pie()
-          onover: function(d, i) {
+      data: {
+        columns: dataSource,
+        type: pie(), // for ESM specify as: pie()
+        onover: function (d, i) {
           console.log("onover", d, i);
-         },
-          onout: function(d, i) {
+        },
+        onout: function (d, i) {
           console.log("onout", d, i);
-         }
         },
-        pie: {
-          innerRadius: 20
-        },
-      bindto: PieChart.current
-    })
-    
+      },
+      pie: {
+        innerRadius: 20,
+      },
+      bindto: PieChart.current,
+    });
   }, [dataSource]);
-  return(
+  return (
     <>
-   <Row justify="start" className='mt-1'>
+      <Row justify="start" className="mt-1">
         <h5>Categories Sold</h5>
       </Row>
-   <div  ref={PieChart}>chart</div>
-   </>
-  )
+      <div ref={PieChart}>chart</div>
+    </>
+  );
 };
 
 export default PieChart;

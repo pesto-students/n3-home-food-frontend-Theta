@@ -21,8 +21,8 @@ const ProductItems = ({ products, savedCartItem, reloadCart, sellerId }) => {
     console.log(sessionId());
     if (!sessionId()) {
       notification.error({
-        message: "Notification",
-        description: "Please Login to add into cart",
+        message: t("Message.Notification"),
+        description: t("Message.PleaseLogin"),
         placement: "topRight",
       });
       return;

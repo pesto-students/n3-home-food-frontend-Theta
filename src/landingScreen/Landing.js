@@ -1,10 +1,17 @@
-import { Carousel, Col, Layout, Row, Typography, notification } from "antd";
+import {
+  Carousel,
+  Col,
+  Tabs,
+  Layout,
+  Row,
+  Typography,
+  notification,
+} from "antd";
 
 import { React, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Image from "components/image/image";
 import Navbar from "components/navbar/navbar";
-import CustomTabs from "components/Tabs/Tabs";
 import {
   getCategoryId,
   getPincode,
@@ -17,6 +24,9 @@ import { bannerImage } from "utils/constant";
 
 const { Content } = Layout;
 const { Title } = Typography;
+const categoryList = ["All", "Breakfast", "Lunch", "Snack", "Dinner"];
+const { TabPane } = Tabs;
+
 const imagesUrls = bannerImage;
 
 const LandingPage = () => {
@@ -26,7 +36,6 @@ const LandingPage = () => {
   const [pincode, setPincode] = useState("");
 
   const getSellers = async (code) => {
-    setLoadSeller(false);
     try {
       const response = await getAllSellerByPincode(code);
       if (response.status === 200) {
@@ -34,6 +43,8 @@ const LandingPage = () => {
         setLoadSeller(true);
       }
     } catch (error) {
+      setLoadSeller(false);
+
       notification.error({
         message: "Error",
         description: error.response
@@ -44,12 +55,12 @@ const LandingPage = () => {
     }
   };
 
-  const getCategorySeller = async (category) => {
-    if (category !== "All") {
+  const getCategorySeller = async (categoryKey) => {
+    if (categoryKey !== "0") {
       try {
         setLoadSeller(false);
         const response = await getAllSellerByCategory(
-          getCategoryId(category),
+          getCategoryId(categoryList[Number(categoryKey)]),
           pincode
         );
         if (response.status === 200) {
@@ -107,10 +118,13 @@ const LandingPage = () => {
               <Title level={4}>{t("Landing.Sellers")}</Title>
             </Col>
             <Col md={9} sm={24} xs={24} className="keep-items-left">
-              <CustomTabs
-                currentTab={getCurrentTab}
-                list={["All", "Breakfast", "Lunch", "Snack", "Dinner"]}
-              />
+              <Tabs onChange={getCurrentTab}>
+                <TabPane tab={t("Landing.All")} key="0" />
+                <TabPane tab={t("Landing.breakfast")} key="1" />
+                <TabPane tab={t("Landing.lunch")} key="2" />
+                <TabPane tab={t("Landing.snacks")} key="3" />
+                <TabPane tab={t("Landing.dinner")} key="4" />
+              </Tabs>
             </Col>
           </Row>
           <SellerItems loading={loadSeller} seller={seller} />

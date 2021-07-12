@@ -1,9 +1,8 @@
 import { React, useEffect, useState, useCallback } from "react";
-import { Row, Col, Typography, Rate, Card } from "antd";
+import { Row, Col, Typography, Rate, Card, Tabs } from "antd";
 import "./sellerDetailWithProducts.css";
 import CustomerNavbar from "../customerNavbar/customerNavbar";
 import Image from "../image/image";
-import CustomTabs from "../Tabs/Tabs";
 import ProductItems from "./productItem";
 import SpinnerLoader from "../spinnerLoader/spinnerLoader";
 import Cart from "../cart/cart";
@@ -14,7 +13,10 @@ import { useTranslation } from "react-i18next";
 import DataNotFound from "components/dataNotFound/dataNotFound";
 import { fetchSellerProfile, fetchCart } from "../utils/api";
 
+const categoryList = ["All", "Breakfast", "Lunch", "Snack", "Dinner"];
+
 const SellerDetailWithProducts = ({ match }) => {
+  const { TabPane } = Tabs;
   const { t } = useTranslation();
   const sellerId = match.params.id;
   const { Title } = Typography;
@@ -27,12 +29,14 @@ const SellerDetailWithProducts = ({ match }) => {
   });
 
   const getCurrentTab = (tab) => {
-    if (tab === "All") {
+    if (tab === "0") {
       setAllProduct([...profile.myProducts]);
       return;
     }
     let items = profile.myProducts.filter(
-      (item) => item.productCategory.filter((n) => n.name === tab).length > 0
+      (item) =>
+        item.productCategory.filter((n) => n.name === categoryList[Number(tab)])
+          .length > 0
     );
     setAllProduct([...items]);
   };
@@ -46,9 +50,9 @@ const SellerDetailWithProducts = ({ match }) => {
     }
   }, [sellerId]);
 
-  const getCart = () => {
+  const getCart = async () => {
     if (sessionId()) {
-      const response = fetchCart(sessionId()).catch((e) => {
+      const response = await fetchCart(sessionId()).catch((e) => {
         setIsCartLoad(true);
         let cart = {
           items: [],
@@ -101,10 +105,13 @@ const SellerDetailWithProducts = ({ match }) => {
 
             <Row justify="center" className="margin-10">
               <div className="category-tabs">
-                <CustomTabs
-                  currentTab={getCurrentTab}
-                  list={["All", "Breakfast", "Lunch", "Snack", "Dinner"]}
-                />
+                <Tabs onChange={getCurrentTab}>
+                  <TabPane tab={t("Landing.All")} key="0" />
+                  <TabPane tab={t("Landing.breakfast")} key="1" />
+                  <TabPane tab={t("Landing.lunch")} key="2" />
+                  <TabPane tab={t("Landing.snacks")} key="3" />
+                  <TabPane tab={t("Landing.dinner")} key="4" />
+                </Tabs>
               </div>
             </Row>
 
@@ -116,7 +123,7 @@ const SellerDetailWithProducts = ({ match }) => {
                 </Title>
 
                 {allProduct.length === 0 && (
-                  <DataNotFound text="Items Not Found"></DataNotFound>
+                  <DataNotFound text={t("Header.notFound")}></DataNotFound>
                 )}
 
                 {isCartLoad && (

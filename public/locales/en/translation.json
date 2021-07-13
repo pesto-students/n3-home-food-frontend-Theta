@@ -12,6 +12,9 @@
     },
     "Header":{
         "Become Seller":"Become Seller",
+        "NotFound":"No Data Found",
+        "MyIncome":"My Income",
+
         "Sign In":"Sign In",
         "Admin":"Admin",
         "notFound":"Items Not Found",

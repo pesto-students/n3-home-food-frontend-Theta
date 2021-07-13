@@ -11,6 +11,8 @@
     },
     "Header":{
         "Become Seller":"विक्रेता बनें",
+        "NotFound": "कोई डेटा नहीं मिला",
+        "MyIncome": "मेरी आय",
         "Sign In":"दाखिल करना",
         "Admin":"व्यवस्थापक",
         "Enter Pincode":"पिनकोड दर्ज करें",

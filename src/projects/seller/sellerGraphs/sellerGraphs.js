@@ -14,6 +14,7 @@ import {
 import { rupeeSign } from "utils/constant";
 import { ShoppingCartOutlined, MoneyCollectOutlined } from "@ant-design/icons";
 import moment from "moment";
+import DataNotFound from "components/dataNotFound/dataNotFound";
 
 const { RangePicker } = DatePicker;
 
@@ -145,7 +146,7 @@ function SellerGraphs() {
   return (
     <div>
       <Row>
-        <h2>Dashboard</h2>
+        <h2>{t("seller.dashboard.dashboardText")}</h2>
       </Row>
 
       <Row className="number-cards" justify="center">
@@ -183,14 +184,14 @@ function SellerGraphs() {
         <Col id="chart" span={12}>
           <Card hoverable={true}>
             {lineGraphData && <LineChart dataSource={lineGraphData} />}
-            {!lineGraphData && <span>No Data Found </span>}
+            {!lineGraphData && <DataNotFound />}
           </Card>
         </Col>
         <Col span={12}>
           <Card hoverable={true}>
             <div id="chart">
               {pieGraphData && <PieChart dataSource={pieGraphData} />}
-              {!pieGraphData && <span>No Data Found </span>}
+              {!pieGraphData && <DataNotFound />}
             </div>
           </Card>
         </Col>

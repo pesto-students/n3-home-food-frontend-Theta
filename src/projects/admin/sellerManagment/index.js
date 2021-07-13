@@ -20,6 +20,7 @@ const SellerManagment = () => {
   const [approveSellerItems, setApproveSellersItems] = useState([]);
   const [rejectedSellersItems, setRejectedSellersItems] = useState([]);
   const [pendingSellersItems, setPendingSellersItems] = useState([]);
+  const [page, setPage] = useState(2);
 
   const callback = (key) => {};
 
@@ -41,9 +42,9 @@ const SellerManagment = () => {
     }
   };
 
-  const approveSeller = async () => {
+  const approveSeller = async (page) => {
     try {
-      const response = await getAllApproveSeller();
+      const response = await getAllApproveSeller(page);
       if (response.status === 200) {
         setApproveSellersItems(response.data);
         setIsLoading(false);
@@ -77,8 +78,13 @@ const SellerManagment = () => {
     }
   };
 
+  const fetchMoreSellers = () =>{
+    console.log('fetch more')
+    approveSeller(page)
+  }
+
   useEffect(() => {
-    approveSeller();
+    approveSeller(1);
     rejectedSeller();
     pendingSeller();
   }, []);
@@ -93,6 +99,7 @@ const SellerManagment = () => {
           sellers={approveSellerItems}
           isLoading={isLoading}
           callback={approveSeller}
+          fetchMoreSellers={fetchMoreSellers}
         />
       </TabPane>
       <TabPane

@@ -8,19 +8,17 @@ import { AddProductModal } from "components/manageProductmodal/addProduct";
 import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
 import { ProductCrudMenu } from "../productCrudMenu";
 import "./allProducts.css";
-const AllProducts = ({ isLoading, products, loadAllProducts }) => {
+const AllProducts = ({
+  isLoading,
+  products,
+  loadAllProducts,
+  fetchMoreAllProducts,
+}) => {
   const { Title } = Typography;
 
-  const [hasMore, setHasMore] = useState(false);
-
-  const fetchMoreData = () => {
-    setHasMore(true);
+  const fetchMoreProducts = () => {
+    fetchMoreAllProducts()
   };
-
-  // const updateProductList = () => {
-  //   loadAllProducts();
-  // };
-
   return (
     <>
       <div>
@@ -31,13 +29,8 @@ const AllProducts = ({ isLoading, products, loadAllProducts }) => {
           {products.length > 0 ? (
             <InfiniteScroll
               dataLength={products.length}
-              next={fetchMoreData}
-              hasMore={hasMore}
-              loader={
-                <Row className="m-2 mt-4" justify="center">
-                  <SpinnerLoader />
-                </Row>
-              }
+              next={fetchMoreProducts}
+              hasMore={true}
             >
               {products.map((product, i) => (
                 <Card key={i} hoverable>

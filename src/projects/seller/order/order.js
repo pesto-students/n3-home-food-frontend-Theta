@@ -14,15 +14,43 @@ const SellerProducts = () => {
   const { TabPane } = Tabs;
 
   const [isLoading, setIsLoading] = useState(true);
+  const [page, setPage] = useState(2);
+  const [CurrentOrderPage, setCurrentOrderPage] = useState(2);
 
   const [currentOrdersItem, setCurrentOrdersItem] = useState([]);
   const [pastOrdersItem, setPastOrdersItem] = useState([]);
-
-  const getAllCurrentOrder = async () => {
+  
+  const getAllCurrentOrder = async (page) => {
     try {
-      const response = await getAllCurrentOrderSeller(sessionId());
+      const response = await getAllCurrentOrderSeller(sessionId(),page);
       if (response.status === 200) {
-        setCurrentOrdersItem(response.data);
+          let updatedOrders = []
+          response.data.forEach(element => {
+            updatedOrders.push(element)
+          } )
+          setCurrentOrdersItem(currentOrdersItem => [...currentOrdersItem , ...updatedOrders]);
+          setIsLoading(false);
+      }
+    } catch (error) {
+      notification.error({
+        message: "Error",
+        description: error.response
+          ? error.response.data
+          : "Something went wrong",
+        placement: "topLeft",
+      });
+    }
+  };
+
+  const getAllPastOrder = async (page) => {
+    try {
+      const response = await getAllPastOrderSeller(sessionId(),page);
+      if (response.status === 200) {
+        let updatedOrders = []
+        response.data.forEach(element => {
+          updatedOrders.push(element)
+        } )
+        setPastOrdersItem(pastOrdersItem => [...pastOrdersItem , ...updatedOrders]);
         setIsLoading(false);
       }
     } catch (error) {
@@ -36,32 +64,24 @@ const SellerProducts = () => {
     }
   };
 
-  const getAllPastOrder = async () => {
-    try {
-      const response = await getAllPastOrderSeller(sessionId());
-      if (response.status === 200) {
-        setIsLoading(false);
-        setPastOrdersItem(response.data);
-      }
-    } catch (error) {
-      notification.error({
-        message: "Error",
-        description: error.response
-          ? error.response.data
-          : "Something went wrong",
-        placement: "topLeft",
-      });
-    }
+  const fetchMoreProducts = () => {
+    setPage(page + 1);
+    getAllPastOrder(page);
+  };
+
+  const fetchMoreActiveOrders = () => {
+    setCurrentOrderPage(CurrentOrderPage + 1);
+    getAllCurrentOrder(CurrentOrderPage);
   };
 
   useEffect(() => {
-    getAllCurrentOrder();
-    getAllPastOrder();
+    getAllCurrentOrder(1);
+    getAllPastOrder(1);
   }, []);
 
   const refreshOrder = () => {
-    getAllCurrentOrder();
-    getAllPastOrder();
+    getAllCurrentOrder(1);
+    getAllPastOrder(1);
   };
 
   return (
@@ -76,7 +96,7 @@ const SellerProducts = () => {
         key="1"
       >
         {!isLoading ? (
-          <CurrentOrders callBack={refreshOrder} orders={currentOrdersItem} />
+          <CurrentOrders callBack={refreshOrder} orders={currentOrdersItem} fetchMoreProducts={fetchMoreActiveOrders} />
         ) : (
           <Row justify="center">
             <SpinnerLoader />
@@ -93,7 +113,10 @@ const SellerProducts = () => {
         key="2"
       >
         {!isLoading ? (
-          <PastOrders orders={pastOrdersItem} />
+          <PastOrders
+            orders={pastOrdersItem}
+            fetchMoreProducts={fetchMoreProducts}
+          />
         ) : (
           <Row justify="center">
             <SpinnerLoader />

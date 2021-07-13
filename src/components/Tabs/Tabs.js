@@ -11,8 +11,8 @@ const CustomTabs = ({ list, currentTab }) => {
 
   return (
     <Tabs defaultActiveKey={list[0]} onChange={callback}>
-      {list.map((tab) => {
-        return <TabPane tab={tab} key={tab} />;
+      {list.map((tab, key) => {
+        return <TabPane tab={tab} key={key} />;
       })}
     </Tabs>
   );

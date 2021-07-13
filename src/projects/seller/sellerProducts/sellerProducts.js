@@ -20,14 +20,19 @@ const SellerProducts = () => {
   const [myProducts, setMyProducts] = useState([]);
   const [allApprove, setAllApprove] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [page, setPage] = useState(2);
 
-  const getApproved = async () => {
+  const getApproved = async (page) => {
     try {
-      const response = await getSellerApprovedProduct();
+      const response = await getSellerApprovedProduct(page);
       if (response.status === 200) {
-        setAllApprove(response.data);
-        setIsLoading(false);
-      }
+          let updatedProducts = []
+          response.data.forEach(element => {
+            updatedProducts.push(element)
+          } )
+          setAllApprove(allApprove => [...allApprove , ...updatedProducts]);
+          setIsLoading(false);
+     }
     } catch (error) {
       notification.error({
         message: "Error",
@@ -39,11 +44,15 @@ const SellerProducts = () => {
     }
   };
 
-  const getAllProducts = async () => {
+  const getAllProducts = async (page) => {
     try {
-      const response = await getAllProduct();
+      const response = await getAllProduct(page);
       if (response.status === 200) {
-        setAllProducts(response.data);
+        let updatedProducts = []
+        response.data.forEach(element => {
+          updatedProducts.push(element)
+        } )
+        setAllProducts(allProducts => [...allProducts , ...updatedProducts]);
         setIsLoading(false);
       }
     } catch (error) {
@@ -75,9 +84,14 @@ const SellerProducts = () => {
     }
   };
 
+  const fetchMoreProducts = () => {
+    setPage(page+1)
+    getAllProducts(page);
+  }
+
   useEffect(() => {
-    getApproved();
-    getAllProducts();
+    getApproved(1);
+    getAllProducts(1);
     getMyProducts();
   }, []);
 
@@ -88,8 +102,11 @@ const SellerProducts = () => {
 
   useEffect(() => {}, [allProducts, myProducts, allApprove]);
 
+  const callback =()=> {
+
+  }
   return (
-    <Tabs defaultActiveKey="1">
+    <Tabs defaultActiveKey="1" onChange={callback}>
       <TabPane
         tab={
           <TabTag
@@ -103,6 +120,7 @@ const SellerProducts = () => {
           products={allProducts}
           isLoading={isLoading}
           callback={allProductCallback}
+          fetchMoreProducts = {fetchMoreProducts}
         />{" "}
       </TabPane>
       <TabPane

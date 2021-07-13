@@ -1,9 +1,17 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { Carousel, Col, Layout, Row, Typography, notification } from "antd";
+import {
+  Carousel,
+  Col,
+  Layout,
+  Row,
+  Typography,
+  notification,
+  Tabs,
+} from "antd";
+import { useTranslation } from "react-i18next";
 
 import Image from "components/image/image";
 import CustomerNavbar from "components/customerNavbar/customerNavbar";
-import CustomTabs from "components/Tabs/Tabs";
 import { getCategoryId, getPincode, getUser } from "utils/helpers";
 import SellerItems from "landingScreen/sellerItems";
 import { getSeller, getCategorySeller,getSellerByPage } from "../utils/api";
@@ -12,8 +20,12 @@ import { bannerImage } from "utils/constant";
 const { Content } = Layout;
 const { Title } = Typography;
 const imagesUrls = bannerImage;
+const categoryList = ["All", "Breakfast", "Lunch", "Snack", "Dinner"];
+const { TabPane } = Tabs;
 
 const CustomerHome = () => {
+  const { t } = useTranslation();
+
   const [seller, setSeller] = useState([]);
   const [loadSeller, setLoadSeller] = useState(false);
   const [pincode, setPincode] = useState(false);
@@ -51,12 +63,12 @@ const CustomerHome = () => {
     }
   }, [pincode]);
 
-  const getAllSellerByCategory = async (category) => {
+  const getAllSellerByCategory = async (categoryKey) => {
     setLoadSeller(false);
-    if (category !== "All") {
+    if (categoryKey !== "0") {
       try {
         let response = await getCategorySeller(
-          getCategoryId(category),
+          getCategoryId(categoryList[Number(categoryKey)]),
           pincode
         );
         if (response.status === 200) {
@@ -77,7 +89,6 @@ const CustomerHome = () => {
 
   
   const fetchMoreSellers = useCallback(async () => {
-    // setLoadSeller(false);
     setPage(page+1)
     try {
       let response = await getSellerByPage(pincode,page,tabSelected);
@@ -87,7 +98,6 @@ const CustomerHome = () => {
           updatedSeller.push(element)
         } )
           setSeller(seller => [...seller , ...updatedSeller]);
-        //  setLoadSeller(true);
       }
     } catch (error) {
       notification.error({
@@ -137,13 +147,16 @@ const CustomerHome = () => {
         <div className="category-and-seller-container">
           <Row className="category-conatiner">
             <Col md={15} sm={24} xs={24}>
-              <Title level={4}>Category</Title>
+              <Title level={4}>{t("Landing.Sellers")}</Title>
             </Col>
             <Col md={9} sm={24} xs={24} className="keep-items-left">
-              <CustomTabs
-                currentTab={getCurrentTab}
-                list={["All", "Breakfast", "Lunch", "Snack", "Dinner"]}
-              />
+              <Tabs onChange={getCurrentTab}>
+                <TabPane tab={t("Landing.All")} key="0" />
+                <TabPane tab={t("Landing.breakfast")} key="1" />
+                <TabPane tab={t("Landing.lunch")} key="2" />
+                <TabPane tab={t("Landing.snacks")} key="3" />
+                <TabPane tab={t("Landing.dinner")} key="4" />
+              </Tabs>
             </Col>
           </Row>
           <SellerItems loading={loadSeller} seller={seller} fetchMoreSellers={fetchMoreSellers}/>

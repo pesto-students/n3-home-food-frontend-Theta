@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   ShopFilled ,
   PieChartFilled,
-  UsergroupAddOutlined
+  UsergroupAddOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 
@@ -70,16 +70,28 @@ const AdminDashBoard = () => {
             selectedKeys={[activeTab]}
             mode="inline"
           >
-            <Menu.Item key="1" icon={<PieChartFilled className='sidebar-icon'/>}>
-              <Link to="/admin/dashboard" style={{color:'black'}}>Dashboard</Link>
+            <Menu.Item
+              key="1"
+              icon={<PieChartFilled className="sidebar-icon" />}
+            >
+              <Link to="/admin/dashboard" style={{ color: "black" }}>
+                Dashboard
+              </Link>
             </Menu.Item>
 
-            <Menu.Item key="2" icon={<ShopFilled className='sidebar-icon'/>}>
-              <Link to="/admin/product" style={{color:'black'}}>Product</Link>
+            <Menu.Item key="2" icon={<ShopFilled className="sidebar-icon" />}>
+              <Link to="/admin/product" style={{ color: "black" }}>
+                Product
+              </Link>
             </Menu.Item>
 
-            <Menu.Item key="3" icon={<UsergroupAddOutlined className='sidebar-icon'/>}>
-              <Link to="/admin/seller" style={{color:'black'}}>Seller</Link>
+            <Menu.Item
+              key="3"
+              icon={<UsergroupAddOutlined className="sidebar-icon" />}
+            >
+              <Link to="/admin/seller" style={{ color: "black" }}>
+                Seller
+              </Link>
             </Menu.Item>
           </Menu>
         </Sider>
@@ -97,7 +109,7 @@ const AdminDashBoard = () => {
             </div>
           </Content>
           <Footer style={{ textAlign: "center" }}>
-            Home Food ©2021 Created by Pesto Theta
+            Home Food ©2021 Created by ninja-3 Pesto Theta
           </Footer>
         </Layout>
       </Layout>

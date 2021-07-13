@@ -9,8 +9,9 @@ import { useDispatch } from "react-redux";
 import { setSellerIdInCart } from "store/actions/index";
 import { useTranslation } from "react-i18next";
 import { updateCartItem } from "../utils/api";
+import InfiniteScroll from "react-infinite-scroll-component";
 
-const ProductItems = ({ products, savedCartItem, reloadCart, sellerId }) => {
+const ProductItems = ({ products, savedCartItem, reloadCart, sellerId ,fetchMoreProducts }) => {
   const Dispatch = useDispatch();
   const { t } = useTranslation();
 
@@ -21,8 +22,8 @@ const ProductItems = ({ products, savedCartItem, reloadCart, sellerId }) => {
     console.log(sessionId());
     if (!sessionId()) {
       notification.error({
-        message: "Notification",
-        description: "Please Login to add into cart",
+        message: t("Message.Notification"),
+        description: t("Message.PleaseLogin"),
         placement: "topRight",
       });
       return;
@@ -82,68 +83,78 @@ const ProductItems = ({ products, savedCartItem, reloadCart, sellerId }) => {
     }
   };
 
+  const fetchMoreData = () => {
+    fetchMoreProducts()
+  };
+
   return (
     <Row>
-      {products.map((dish, key) => {
-        return (
-          <Col sm={24} xs={24} md={24} key={key} className="product-row">
-            <Row>
-              <Col md={6} sm={8} xs={8}>
-                <Image url={dish.image} height="95" width="95"></Image>
-              </Col>
-              <Col md={18} sm={14} xs={14}>
-                <Title level={4} className="dish-head">
-                  {dish.name}{" "}
-                  <span>
-                    ({t("ProductItem.Only")} {dish.quantity}{" "}
-                    {t("ProductItem.Left")})
-                  </span>{" "}
-                </Title>
+      <InfiniteScroll
+        dataLength={products.length}
+        next={fetchMoreData}
+        hasMore={true}
+      >
+        {products.map((dish, key) => {
+          return (
+            <Col sm={24} xs={24} md={24} key={key} className="product-row">
+              <Row>
+                <Col md={6} sm={8} xs={8}>
+                  <Image url={dish.image} height="95" width="95"></Image>
+                </Col>
+                <Col md={18} sm={14} xs={14}>
+                  <Title level={4} className="dish-head">
+                    {dish.name}{" "}
+                    <span>
+                      ({t("ProductItem.Only")} {dish.quantity}{" "}
+                      {t("ProductItem.Left")})
+                    </span>{" "}
+                  </Title>
 
-                <Title level={5} className="dish-description">
-                  {dish.description}
-                </Title>
+                  <Title level={5} className="dish-description">
+                    {dish.description}
+                  </Title>
 
-                <Row className="category-tags">
-                  {dish.productCategory.map((category) => {
-                    return <Tag color="processing">{category.name}</Tag>;
-                  })}
-                </Row>
-                <Row justify="space-between" align="middle">
-                  <p level={5}>
-                    {rupeeSign} {dish.price}
-                  </p>
+                  <Row className="category-tags">
+                    {dish.productCategory.map((category) => {
+                      return <Tag color="processing">{category.name}</Tag>;
+                    })}
+                  </Row>
+                  <Row justify="space-between" align="middle">
+                    <p level={5}>
+                      {rupeeSign} {dish.price}
+                    </p>
 
-                  {getQuantity(dish) === 0 ? (
-                    <Button
-                      loading={isLoading}
-                      onClick={() => addItems(dish, "add")}
-                    >
-                      {t("ProductItem.Add")}
-                    </Button>
-                  ) : (
-                    <div>
-                      <Button
-                        loading={isLoading}
-                        onClick={() => addItems(dish, "sub")}
-                      >
-                        -
-                      </Button>
-                      <Button>{getQuantity(dish)}</Button>
+                    {getQuantity(dish) === 0 ? (
                       <Button
                         loading={isLoading}
                         onClick={() => addItems(dish, "add")}
                       >
-                        +
+                        {t("ProductItem.Add")}
                       </Button>
-                    </div>
-                  )}
-                </Row>
-              </Col>
-            </Row>
-          </Col>
-        );
-      })}
+                    ) : (
+                      <div>
+                        <Button
+                          loading={isLoading}
+                          onClick={() => addItems(dish, "sub")}
+                        >
+                          -
+                        </Button>
+                        <Button>{getQuantity(dish)}</Button>
+                        <Button
+                          loading={isLoading}
+                          onClick={() => addItems(dish, "add")}
+                        >
+                          +
+                        </Button>
+                      </div>
+                    )}
+                  </Row>
+                </Col>
+              </Row>
+            </Col>
+          );
+        })}
+      </InfiniteScroll>
     </Row>
   );
 };

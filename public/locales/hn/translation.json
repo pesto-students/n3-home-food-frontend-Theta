@@ -1,17 +1,40 @@
 {
+    "Message":{
+        "Notification": "अधिसूचना",
+        "PleaseLogin": "कार्ट में जोड़ने के लिए कृपया लॉगिन करें",
+        "Verified": "सत्यापित",
+        "OTPVerified": "ओटीपी सत्यापित",
+        "OTP not verified": "ओटीपी सत्यापित नहीं",
+        "Error": "त्रुटि",
+        "SMS not sent": "एसएमएस नहीं भेजा गया",
+        "OTPHasBeenSent": "ओटीपी भेजा गया है। कृपया ओटीपी दर्ज करें"
+    },
     "Header":{
         "Become Seller":"विक्रेता बनें",
         "Sign In":"दाखिल करना",
-        "Admin":"Admin",
+        "Admin":"व्यवस्थापक",
         "Enter Pincode":"पिनकोड दर्ज करें",
         "Save":"सेव",
+        "notFound": "आइटम नहीं मिला",
         "Pincode":"पिन कोड",
         "Logout":"लॉग आउट",
         "Orders":"ऑर्डर"
 
     },
     "Landing":{
-        "Sellers":"सेलर्स"
+        "Sellers":"सेलर्स",
+        "All": "सब",
+        "dinner": "रात्रिभोज",
+        "lunch": "दोपहर का भोजन",
+        "breakfast": "नाश्ता",
+        "snacks": "नाश्ता",
+        "Login": "लॉगिन",
+        "Phone": "फोन",
+        "EnterPhoneValidation": "कृपया अपना मोबाइल दर्ज करें",
+        "SendOtp": "ओटीपी भेजें",
+        "VerifyOTP": "ओटीपी सत्यापित करें"
+        
+
     },
     "ProductItem":{
         "Only": "केवल",

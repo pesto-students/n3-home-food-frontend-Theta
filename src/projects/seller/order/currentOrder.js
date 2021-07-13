@@ -7,8 +7,9 @@ import { orderDelived } from "../utils/api";
 import { rupeeSign } from "utils/constant";
 import DataNotFound from "components/dataNotFound/dataNotFound";
 import { orderTimeFormat } from "utils/helpers";
+import InfiniteScroll from "react-infinite-scroll-component";
 
-const CurrentOrders = ({ orders, callBack }) => {
+const CurrentOrders = ({ orders, callBack ,fetchMoreProducts }) => {
   const { t } = useTranslation();
 
   const delived = async (order) => {
@@ -41,8 +42,16 @@ const CurrentOrders = ({ orders, callBack }) => {
     );
   }
 
+  const fetchMoreData = () => {
+    fetchMoreProducts();
+ };
   return (
     <>
+        <InfiniteScroll
+        dataLength={orders.length}
+        next={fetchMoreData}
+        hasMore={true}
+      >
       {orders.map((item, key) => {
         return (
           <Card key={key}>
@@ -104,6 +113,7 @@ const CurrentOrders = ({ orders, callBack }) => {
           </Card>
         );
       })}
+      </InfiniteScroll>
     </>
   );
 };

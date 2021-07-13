@@ -50,9 +50,9 @@ export const getAdminCategoryChartDetails = async (dateString) => {
   return response;
 };
 
-export const getAllPendingProduct = async () => {
+export const getAllPendingProduct = async (page) => {
   let response = await axios
-    .get(`/products/get/pending`)
+    .get(`/products/get/pending?page=${page}`)
     .then((response) => {
       return response;
     })
@@ -61,9 +61,9 @@ export const getAllPendingProduct = async () => {
     });
   return response;
 };
-export const getAllApprovedProduct = async () => {
+export const getAllApprovedProduct = async (page) => {
   let response = await axios
-    .get(`/products/get/approved`)
+    .get(`/products/get/approved?page=${page}`)
     .then((response) => {
       return response;
     })
@@ -97,9 +97,9 @@ export const getAllRejectedSeller = async () => {
   return response;
 };
 
-export const getAllApproveSeller = async () => {
+export const getAllApproveSeller = async (page) => {
   let response = await axios
-    .get(`/sellers`)
+    .get(`/sellers?page=${page}`)
     .then((response) => {
       return response;
     })

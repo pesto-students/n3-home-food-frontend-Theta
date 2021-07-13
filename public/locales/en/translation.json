@@ -1,8 +1,20 @@
 {
+    "Message":{
+        "Notification":"Notification",
+        "PleaseLogin":"Please Login to add into cart",
+        "Verified":"Verified",
+        "OTPVerified":"OTP Verified",
+        "OTP not verified":"OTP not verified",
+        "Error":"Error",
+        "SMS not sent":"SMS not sent",
+        "OTPHasBeenSent":"OTP has been sent. Please Enter OTP "
+
+    },
     "Header":{
         "Become Seller":"Become Seller",
         "Sign In":"Sign In",
         "Admin":"Admin",
+        "notFound":"Items Not Found",
         "Enter Pincode":"Enter Pincode",
         "Save":"Save",
         "Pincode":"Pincode",
@@ -11,7 +23,19 @@
 
     },
     "Landing":{
-        "Sellers":"Sellers"
+        "Sellers":"Sellers",
+        "All":"All",
+        "dinner":"Dinner",
+        "lunch":"Lunch",
+        "breakfast":"Breakfast",
+        "snacks":"Snacks",
+        "Login":"Login",
+        "Phone":"Phone",
+        "EnterPhoneValidation":"Please Enter Your Mobile",
+        "SendOtp":"SEND OTP",
+        "VerifyOTP":"VERIFY OTP",
+        "Otp":"OTP",
+        "EnterOTP":"Enter OTP"
     },
     "ProductItem":{
         "Only": "Only",

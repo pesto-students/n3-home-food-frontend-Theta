@@ -19,7 +19,7 @@ import { useTranslation } from "react-i18next";
 import DataNotFound from "components/dataNotFound/dataNotFound";
 import { setAddProductIntoMyProduct } from "projects/seller/utils/api";
 
-const AllProducts = ({ products, isLoading, callback }) => {
+const AllProducts = ({ products, isLoading, callback ,fetchMoreProducts }) => {
   const { t } = useTranslation();
   const { Title } = Typography;
   const { Option } = Select;
@@ -29,13 +29,7 @@ const AllProducts = ({ products, isLoading, callback }) => {
   const [selectedCategory, setSelectedCategory] = useState([]);
 
   const fetchMoreData = () => {
-    // axios
-    // .get("`${baseUrl}/products/get/approved")
-    // .then((result) => {
-    //   setproducts(products.concat(result.data));
-    // })
-    // .catch((err) => console.error(err))
-    // .finally(() => setIsLoading(false));
+    fetchMoreProducts()
   };
 
   const addToMyProduct = async () => {
@@ -119,11 +113,6 @@ const AllProducts = ({ products, isLoading, callback }) => {
               dataLength={products.length}
               next={fetchMoreData}
               hasMore={true}
-              loader={
-                <Row className="m-2 mt-4" justify="center">
-                  <SpinnerLoader />
-                </Row>
-              }
             >
               {products.map((product, i) => (
                 <Card key={i} hoverable>

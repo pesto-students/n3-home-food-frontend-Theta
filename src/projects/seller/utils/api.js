@@ -24,9 +24,9 @@ export const editProfile = async (id, profileData) => {
   return response;
 };
 
-export const getAllCurrentOrderSeller = async (sessionId) => {
+export const getAllCurrentOrderSeller = async (sessionId,page) => {
   let response = await axios
-    .get(`/orders/get/${sessionId}`)
+    .get(`/orders/get/${sessionId}?page=${page}`)
     .then((response) => {
       return response;
     })
@@ -36,9 +36,10 @@ export const getAllCurrentOrderSeller = async (sessionId) => {
   return response;
 };
 
-export const getAllPastOrderSeller = async (sessionId) => {
+export const getAllPastOrderSeller = async (sessionId, page) => {
+  console.log('page',page)
   let response = await axios
-    .get(`/orders/get-approved/${sessionId}`)
+    .get(`/orders/get-approved/${sessionId}?page=${page}`)
     .then((response) => {
       return response;
     })
@@ -96,9 +97,9 @@ export const getSellerPieChartData = async (dateString,sessionId) => {
   return response;
 };
 
-export const getSellerApprovedProduct = async () => {
+export const getSellerApprovedProduct = async (page) => {
   let response = await axios
-    .get(`/products/get/pending`)
+    .get(`/products/get/pending?page=${page}`)
     .then((response) => {
       return response;
     })
@@ -108,9 +109,9 @@ export const getSellerApprovedProduct = async () => {
   return response;
 };
 
-export const getAllProduct = async () => {
+export const getAllProduct = async (page) => {
   let response = await axios
-    .get(`/products/get/approved`)
+    .get(`/products/get/approved?page=${page}`)
     .then((response) => {
       return response;
     })

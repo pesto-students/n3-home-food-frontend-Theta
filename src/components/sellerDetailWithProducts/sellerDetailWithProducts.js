@@ -1,9 +1,8 @@
 import { React, useEffect, useState, useCallback } from "react";
-import { Row, Col, Typography, Rate, Card } from "antd";
+import { Row, Col, Typography, Rate, Card, Tabs } from "antd";
 import "./sellerDetailWithProducts.css";
 import CustomerNavbar from "../customerNavbar/customerNavbar";
 import Image from "../image/image";
-import CustomTabs from "../Tabs/Tabs";
 import ProductItems from "./productItem";
 import SpinnerLoader from "../spinnerLoader/spinnerLoader";
 import Cart from "../cart/cart";
@@ -14,7 +13,10 @@ import { useTranslation } from "react-i18next";
 import DataNotFound from "components/dataNotFound/dataNotFound";
 import { fetchSellerProfile, fetchCart } from "../utils/api";
 
+const categoryList = ["All", "Breakfast", "Lunch", "Snack", "Dinner"];
+
 const SellerDetailWithProducts = ({ match }) => {
+  const { TabPane } = Tabs;
   const { t } = useTranslation();
   const sellerId = match.params.id;
   const { Title } = Typography;
@@ -22,33 +24,54 @@ const SellerDetailWithProducts = ({ match }) => {
   const [isCartLoad, setIsCartLoad] = useState(false);
   const [allProduct, setAllProduct] = useState(false);
   const [profile, setProfile] = useState({});
+  const [page, setPage] = useState(2);
+  const [tabSelected, setTabSelected] = useState(0);
+  const [pageSize, setPageSize] = useState(5);
   const [alreadyInCart, setAlreadyInCart] = useState({
     items: [],
   });
 
   const getCurrentTab = (tab) => {
-    if (tab === "All") {
-      setAllProduct([...profile.myProducts]);
+    setTabSelected(tab)
+    if (tab === "0") {
+      let products = [];
+      profile.myProducts.forEach((element, index) => {
+        if (index > pageSize) return;
+        products.push(element);
+      });
+      setAllProduct([...products]);
       return;
     }
     let items = profile.myProducts.filter(
-      (item) => item.productCategory.filter((n) => n.name === tab).length > 0
+      (item) =>
+        item.productCategory.filter((n) => n.name === categoryList[Number(tab)])
+          .length > 0
     );
-    setAllProduct([...items]);
+    let products = [];
+    items.forEach((element, index) => {
+      if (index > pageSize) return;
+      products.push(element);
+    });
+    setAllProduct([...products]);
   };
 
   const getSellerProfile = useCallback(async () => {
     const response = await fetchSellerProfile(sellerId);
     if (response.status === 200) {
       setProfile(response.data[0]);
-      setAllProduct(response.data[0].myProducts);
+      let products = [];
+      response.data[0].myProducts.forEach((element, index) => {
+        if (index > pageSize) return;
+        products.push(element);
+      });
+      setAllProduct([...products]);
       setIsLoading(false);
     }
   }, [sellerId]);
 
-  const getCart = () => {
+  const getCart = async () => {
     if (sessionId()) {
-      const response = fetchCart(sessionId()).catch((e) => {
+      const response = await fetchCart(sessionId()).catch((e) => {
         setIsCartLoad(true);
         let cart = {
           items: [],
@@ -62,6 +85,24 @@ const SellerDetailWithProducts = ({ match }) => {
       setIsCartLoad(true);
     }
   };
+
+  const fetchMoreProducts = useCallback(async () => {
+    let pageLimit =  pageSize + 5 
+    setPageSize(pageLimit)
+    console.log('scrolled')
+    if (tabSelected === "0") {
+      let products = [];
+      
+      profile.myProducts.forEach((element, index) => {
+        if (index > pageLimit) return;
+        products.push(element);
+      });
+      setAllProduct([...products]);
+      return;
+    }
+  },[pageSize,profile,tabSelected])
+
+
 
   useEffect(() => {
     getSellerProfile();
@@ -101,10 +142,13 @@ const SellerDetailWithProducts = ({ match }) => {
 
             <Row justify="center" className="margin-10">
               <div className="category-tabs">
-                <CustomTabs
-                  currentTab={getCurrentTab}
-                  list={["All", "Breakfast", "Lunch", "Snack", "Dinner"]}
-                />
+                <Tabs onChange={getCurrentTab}>
+                  <TabPane tab={t("Landing.All")} key="0" />
+                  <TabPane tab={t("Landing.breakfast")} key="1" />
+                  <TabPane tab={t("Landing.lunch")} key="2" />
+                  <TabPane tab={t("Landing.snacks")} key="3" />
+                  <TabPane tab={t("Landing.dinner")} key="4" />
+                </Tabs>
               </div>
             </Row>
 
@@ -116,7 +160,7 @@ const SellerDetailWithProducts = ({ match }) => {
                 </Title>
 
                 {allProduct.length === 0 && (
-                  <DataNotFound text="Items Not Found"></DataNotFound>
+                  <DataNotFound text={t("Header.notFound")}></DataNotFound>
                 )}
 
                 {isCartLoad && (
@@ -125,6 +169,7 @@ const SellerDetailWithProducts = ({ match }) => {
                     reloadCart={getCart}
                     savedCartItem={alreadyInCart.items}
                     sellerId={sellerId}
+                    fetchMoreProducts = {fetchMoreProducts}
                   />
                 )}
               </Col>

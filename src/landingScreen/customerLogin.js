@@ -3,9 +3,12 @@ import React, { useState, useEffect } from "react";
 import Login from "components/login/login";
 import { connect } from "react-redux";
 import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
+
 import { setIsCustomerLoginDrawerOpen } from "../store/actions";
 
 const CustomerLogin = (props) => {
+  const { t } = useTranslation();
   useEffect(() => {
     setVisible(props.title.isCustomerLoginDrawerOpen);
   }, [props.title.isCustomerLoginDrawerOpen]);
@@ -24,7 +27,7 @@ const CustomerLogin = (props) => {
 
   return (
     <Drawer
-      title={`Login`}
+      title={t("Landing.Login")}
       placement="right"
       width={400}
       closable={true}

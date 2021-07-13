@@ -13,15 +13,20 @@ function callback(key) {}
 const ProductCatalogue = () => {
   const [approveProducts, setApproveProducts] = useState([]);
   const [pendingproducts, setPendingproducts] = useState([]);
-
+  const [page, setPage] = useState(2);
+  const [Approvepage, setAppovalPage] = useState(2);
   const [isLoading, setIsLoading] = useState(true);
-
-  const allPending = async () => {
+  
+  const allPending = async (page) => {
     try {
-      const response = await getAllPendingProduct();
+      const response = await getAllPendingProduct(page);
       if (response.status === 200) {
+        let updatedProducts = []
+        response.data.forEach(element => {
+          updatedProducts.push(element)
+        } )
+        setPendingproducts(pendingproducts => [...pendingproducts , ...updatedProducts]);
         setIsLoading(false);
-        setPendingproducts(response.data);
       }
     } catch (error) {
       notification.error({
@@ -34,12 +39,16 @@ const ProductCatalogue = () => {
     }
   };
 
-  const allApproved = async () => {
+  const allApproved = async (page) => {
     try {
-      const response = await getAllApprovedProduct();
+      const response = await getAllApprovedProduct(page);
       if (response.status === 200) {
+        let updatedProducts = []
+        response.data.forEach(element => {
+          updatedProducts.push(element)
+        } )
+        setApproveProducts(approveProducts => [...approveProducts , ...updatedProducts]);
         setIsLoading(false);
-        setApproveProducts(response.data);
       }
     } catch (error) {
       notification.error({
@@ -50,11 +59,17 @@ const ProductCatalogue = () => {
         placement: "topLeft",
       });
     }
-  };
+  }; 
+
+  const fetchMoreAllProducts = () => {
+    setAppovalPage(Approvepage +1)
+    allApproved(Approvepage)
+  }
+
 
   useEffect(() => {
-    allPending();
-    allApproved();
+    allPending(1);
+    allApproved(1);
   }, []);
 
   return (
@@ -67,6 +82,7 @@ const ProductCatalogue = () => {
           isLoading={isLoading}
           products={approveProducts}
           loadAllProducts={allApproved}
+          fetchMoreAllProducts = {fetchMoreAllProducts}
         />
       </TabPane>
       <TabPane

@@ -1,6 +1,5 @@
 import { Menu, Dropdown, message } from "antd";
 import { Avatar } from "antd";
-import { UserOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import { setAsAdminLoggedOut } from "store/actions";
 export const AvatarMenu = ({image}) => {

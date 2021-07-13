@@ -150,6 +150,10 @@ function SellerGraphs() {
 
   return (
     <div>
+      <Row>
+        <h2>{t("seller.dashboard.dashboardText")}</h2>
+      </Row>
+
       <Row className="number-cards" justify="center">
         <Card hoverable={true} className="small-box">
           <Row className="stat-card">

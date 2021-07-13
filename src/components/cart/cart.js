@@ -13,15 +13,20 @@ import { useTranslation } from "react-i18next";
 const Cart = ({ alreadyInCart, reloadCart, showCheckout, ...props }) => {
   const { t } = useTranslation();
 
-  const [isLoading, setIsLoding] = useState(false);
+  const [allProduct, setAllProduct] = useState([...alreadyInCart.items]);
 
   let userId = sessionId();
 
-  useEffect(() => {}, [alreadyInCart]);
-  const addItems = (dish, method) => {
-    setIsLoding(true);
+  useEffect(() => {
+    setAllProduct([...alreadyInCart.items]);
+  }, [alreadyInCart.items]);
+
+  const addItems = (dish, key, method) => {
+    allProduct[key].isLoading = true;
+    setAllProduct([...allProduct]);
+
     let currentProduct = alreadyInCart.items.filter(
-      (item) => item.productId === dish.productId
+      (item) => item.productId.id === dish.productId.id
     );
 
     let cartItem = {};
@@ -47,13 +52,14 @@ const Cart = ({ alreadyInCart, reloadCart, showCheckout, ...props }) => {
       };
     }
 
-    updateCart(cartItem);
+    updateCart(cartItem, key);
   };
 
-  const updateCart = async (cartItem) => {
+  const updateCart = async (cartItem, key) => {
     const response = await updateCartItem(cartItem);
     if (response.status === 200) {
-      setIsLoding(false);
+      allProduct[key].isLoading = false;
+      setAllProduct([...allProduct]);
       reloadCart();
     }
   };
@@ -61,7 +67,7 @@ const Cart = ({ alreadyInCart, reloadCart, showCheckout, ...props }) => {
   const getQuantity = (currentItem) => {
     try {
       let current = alreadyInCart.items.filter(
-        (item) => item.productId === currentItem.productId
+        (item) => item.productId.id === currentItem.productId.id
       );
       if (current.length > 0) {
         return current[0].quantity;
@@ -87,7 +93,7 @@ const Cart = ({ alreadyInCart, reloadCart, showCheckout, ...props }) => {
   return (
     <>
       <Row>
-        {alreadyInCart.items.map((dish, key) => {
+        {allProduct.map((dish, key) => {
           return (
             <Col sm={24} xs={24} md={24} key={key} className="product-row">
               <Row>
@@ -105,23 +111,23 @@ const Cart = ({ alreadyInCart, reloadCart, showCheckout, ...props }) => {
                   <Row justify="space-between" align="middle">
                     {getQuantity(dish) === 0 ? (
                       <Button
-                        loading={isLoading}
-                        onClick={() => addItems(dish, "add")}
+                        loading={dish.isLoading}
+                        onClick={() => addItems(dish, key, "add")}
                       >
                         {t("Cart.Add")}
                       </Button>
                     ) : (
                       <div>
                         <Button
-                          loading={isLoading}
-                          onClick={() => addItems(dish, "sub")}
+                          loading={dish.isLoading}
+                          onClick={() => addItems(dish, key, "sub")}
                         >
                           -
                         </Button>
                         <Button>{getQuantity(dish)}</Button>
                         <Button
-                          loading={isLoading}
-                          onClick={() => addItems(dish, "add")}
+                          loading={dish.isLoading}
+                          onClick={() => addItems(dish, key, "add")}
                         >
                           +
                         </Button>

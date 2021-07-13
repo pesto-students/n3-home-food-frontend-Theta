@@ -11,6 +11,8 @@
     },
     "Header":{
         "Become Seller":"विक्रेता बनें",
+        "NotFound": "कोई डेटा नहीं मिला",
+        "MyIncome": "मेरी आय",
         "Sign In":"दाखिल करना",
         "Admin":"व्यवस्थापक",
         "Enter Pincode":"पिनकोड दर्ज करें",
@@ -18,7 +20,8 @@
         "notFound": "आइटम नहीं मिला",
         "Pincode":"पिन कोड",
         "Logout":"लॉग आउट",
-        "Orders":"ऑर्डर"
+        "Orders":"ऑर्डर",
+        "My Orders": "मेरे आदेश"
 
     },
     "Landing":{

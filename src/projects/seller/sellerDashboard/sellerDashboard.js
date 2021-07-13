@@ -16,6 +16,8 @@ import SellerProfile from "../sellerProfile/sellerProfile";
 import { useTranslation } from "react-i18next";
 import logo from "images/logo.png";
 import Image from "components/image/image";
+import Select from "components/selectBox/selectBox";
+
 import { AvatarMenu } from "projects/admin/header/header";
 import { Switch } from "react-router-dom";
 import Orders from "../order/order";
@@ -101,8 +103,11 @@ const SellerDashBoard = () => {
         </Sider>
         <Layout className="site-layout">
           <Header className="header-navbar">
-            <h1>Seller</h1>
-            <AvatarMenu image={seller}/>
+            <h1>{t("seller.dashboard.profileText")}</h1>
+            <div>
+              <Select />
+              <AvatarMenu />
+            </div>
           </Header>
           <Content style={{ margin: "20px 16px" }}>
             {user === "Seller" ? (

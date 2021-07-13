@@ -12,6 +12,9 @@
     },
     "Header":{
         "Become Seller":"Become Seller",
+        "NotFound":"No Data Found",
+        "MyIncome":"My Income",
+
         "Sign In":"Sign In",
         "Admin":"Admin",
         "notFound":"Items Not Found",
@@ -19,7 +22,8 @@
         "Save":"Save",
         "Pincode":"Pincode",
         "Logout":"Logout",
-        "Orders":"Orders"
+        "Orders":"Orders",
+        "My Orders":"My Orders"
 
     },
     "Landing":{

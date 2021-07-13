@@ -1,6 +1,6 @@
 import { Button, Col, Row, Typography, notification, Tag } from "antd";
 
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import { rupeeSign } from "utils/constant";
 import { sessionId } from "utils/helpers";
 import Image from "../image/image";
@@ -9,17 +9,21 @@ import { useDispatch } from "react-redux";
 import { setSellerIdInCart } from "store/actions/index";
 import { useTranslation } from "react-i18next";
 import { updateCartItem } from "../utils/api";
-import InfiniteScroll from "react-infinite-scroll-component";
 
-const ProductItems = ({ products, savedCartItem, reloadCart, sellerId ,fetchMoreProducts }) => {
+const ProductItems = ({ products, savedCartItem, reloadCart, sellerId }) => {
   const Dispatch = useDispatch();
   const { t } = useTranslation();
 
   const { Title } = Typography;
-  const [isLoading, setIsLoding] = useState(false);
+  const [allProducts, setAllProducts] = useState([...products]);
 
-  const addItems = (dish, method) => {
-    console.log(sessionId());
+  useEffect(() => {}, [savedCartItem]);
+
+  useEffect(() => {
+    setAllProducts([...products]);
+  }, [products]);
+
+  const addItems = (dish, key, method) => {
     if (!sessionId()) {
       notification.error({
         message: t("Message.Notification"),
@@ -29,9 +33,10 @@ const ProductItems = ({ products, savedCartItem, reloadCart, sellerId ,fetchMore
       return;
     }
 
-    setIsLoding(true);
+    allProducts[key].isLoading = true;
+    setAllProducts([...allProducts]);
     let currentProduct = savedCartItem.filter(
-      (item) => item.productId === dish.productId
+      (item) => item.productId.id === dish.productId
     );
     let cartItem = {};
     if (currentProduct.length > 0) {
@@ -57,13 +62,14 @@ const ProductItems = ({ products, savedCartItem, reloadCart, sellerId ,fetchMore
       };
     }
 
-    updateCart(cartItem);
+    updateCart(cartItem, key);
   };
 
-  const updateCart = async (cartItem) => {
+  const updateCart = async (cartItem, key) => {
     const response = await updateCartItem(cartItem);
     if (response.status === 200) {
-      setIsLoding(false);
+      allProducts[key].isLoading = false;
+      setAllProducts([...allProducts]);
       Dispatch(setSellerIdInCart(sellerId));
       reloadCart();
     }
@@ -72,7 +78,7 @@ const ProductItems = ({ products, savedCartItem, reloadCart, sellerId ,fetchMore
   const getQuantity = (currentItem) => {
     try {
       let current = savedCartItem.filter(
-        (item) => item.productId === currentItem.productId
+        (item) => item.productId.id === currentItem.productId
       );
       if (current.length > 0) {
         return current[0].quantity;
@@ -83,87 +89,70 @@ const ProductItems = ({ products, savedCartItem, reloadCart, sellerId ,fetchMore
     }
   };
 
-  const fetchMoreData = () => {
-    fetchMoreProducts()
-  };
-
   return (
     <Row>
-      <InfiniteScroll
-        dataLength={products.length}
-        next={fetchMoreData}
-        hasMore={true}
-      >
-        {products.map((dish, key) => {
-          return (
-            <Col sm={24} xs={24} md={24} key={key} className="product-row">
-              <Row>
-                <Col md={6} sm={8} xs={8}>
-                  <Image url={dish.image} height="95" width="95"></Image>
-                </Col>
-                <Col md={18} sm={14} xs={14}>
-                  <Title level={4} className="dish-head">
-                    {dish.name}{" "}
-                    <span>
-                      ({t("ProductItem.Only")} {dish.quantity}{" "}
-                      {t("ProductItem.Left")})
-                    </span>{" "}
-                  </Title>
+      {allProducts.map((dish, key) => {
+        return (
+          <Col sm={24} xs={24} md={24} key={key} className="product-row">
+            <Row>
+              <Col md={6} sm={8} xs={8}>
+                <Image url={dish.image} height="95" width="95"></Image>
+              </Col>
+              <Col md={18} sm={14} xs={14}>
+                <Title level={4} className="dish-head">
+                  {dish.name}{" "}
+                  <span>
+                    ({t("ProductItem.Only")} {dish.quantity}{" "}
+                    {t("ProductItem.Left")})
+                  </span>{" "}
+                </Title>
 
-                  <Title level={5} className="dish-description">
-                    {dish.description}
-                  </Title>
+                <Title level={5} className="dish-description">
+                  {dish.description}
+                </Title>
 
-                  <Row className="category-tags">
-                    {dish.productCategory.map((category) => {
-                      return <Tag color="processing">{category.name}</Tag>;
-                    })}
-                  </Row>
-                  <Row justify="space-between" align="middle">
-                    <p level={5}>
-                      {rupeeSign} {dish.price}
-                    </p>
+                <Row className="category-tags">
+                  {dish.productCategory.map((category) => {
+                    return <Tag color="processing">{category.name}</Tag>;
+                  })}
+                </Row>
+                <Row justify="space-between" align="middle">
+                  <p level={5}>
+                    {rupeeSign} {dish.price}
+                  </p>
 
-                    {getQuantity(dish) === 0 ? (
+                  {getQuantity(dish) === 0 ? (
+                    <Button
+                      loading={dish.isLoading}
+                      onClick={() => addItems(dish, key, "add")}
+                    >
+                      {t("ProductItem.Add")}
+                    </Button>
+                  ) : (
+                    <div>
                       <Button
-                        loading={isLoading}
-                        onClick={() => addItems(dish, "add")}
+                        loading={dish.isLoading}
+                        onClick={() => addItems(dish, key, "sub")}
                       >
-                        {t("ProductItem.Add")}
+                        -
                       </Button>
-                    ) : (
-                      <div>
-                        <Button
-                          loading={isLoading}
-                          onClick={() => addItems(dish, "sub")}
-                        >
-                          -
-                        </Button>
-                        <Button>{getQuantity(dish)}</Button>
-                        <Button
-                          loading={isLoading}
-                          onClick={() => addItems(dish, "add")}
-                        >
-                          +
-                        </Button>
-                      </div>
-                    )}
-                  </Row>
-                </Col>
-              </Row>
-            </Col>
-          );
-        })}
-      </InfiniteScroll>
+                      <Button>{getQuantity(dish)}</Button>
+                      <Button
+                        loading={dish.isLoading}
+                        onClick={() => addItems(dish, key, "add")}
+                      >
+                        +
+                      </Button>
+                    </div>
+                  )}
+                </Row>
+              </Col>
+            </Row>
+          </Col>
+        );
+      })}
     </Row>
   );
 };
 
-// const mapStateToProps = (state) => {
-//   return {
-//     cartItems: state.myCart,
-//   };
-// };
-
-// export default connect(mapStateToProps)(ProductItems);
 export default ProductItems;

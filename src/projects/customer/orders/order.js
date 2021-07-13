@@ -5,10 +5,12 @@ import React, { useEffect, useState } from "react";
 import CustomerNavbar from "components/customerNavbar/customerNavbar";
 import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
 import CustomerCurrentOrders from "./customerCurrentOrders";
+import { useTranslation } from "react-i18next";
 import { getAllCurrentOrder } from "../utils/api";
 import { getUser, setPincode } from "utils/helpers";
 
 const SellerProducts = () => {
+  const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(true);
 
   const [currentOrdersItem, setCurrentOrdersItem] = useState([]);
@@ -55,7 +57,7 @@ const SellerProducts = () => {
       <CustomerNavbar updatePincode={updatePincode} />
 
       <div className="my-order">
-        <h4>My Orders</h4>
+        <h4>{t("Header.My Orders")}</h4>
 
         {!isLoading ? (
           <CustomerCurrentOrders

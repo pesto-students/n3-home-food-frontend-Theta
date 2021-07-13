@@ -3,9 +3,21 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 50px;
     width: 100%;
 }
 
+/* .order-row-header{
+    row-gap: 0px;
+    background: #7777770d;
+    padding: 26px;
+} */
+
 .mt-20{
     margin-top: 20px;
+}
+.order-card{
+    padding: 20px !important;
+    width: 100%;
+    
 }

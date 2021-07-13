@@ -19,7 +19,8 @@
         "Save":"Save",
         "Pincode":"Pincode",
         "Logout":"Logout",
-        "Orders":"Orders"
+        "Orders":"Orders",
+        "My Orders":"My Orders"
 
     },
     "Landing":{

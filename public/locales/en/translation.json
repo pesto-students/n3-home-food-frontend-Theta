@@ -7,8 +7,8 @@
         "OTP not verified":"OTP not verified",
         "Error":"Error",
         "SMS not sent":"SMS not sent",
-        "OTPHasBeenSent":"OTP has been sent. Please Enter OTP "
-
+        "OTPHasBeenSent":"OTP has been sent. Please Enter OTP ",
+        "cartOfOtherSeller" : "Products of Other Sellers are already in the carts"
     },
     "Header":{
         "Become Seller":"Become Seller",

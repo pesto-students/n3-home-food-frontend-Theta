@@ -5,17 +5,21 @@ import { rupeeSign } from "utils/constant";
 import { sessionId } from "utils/helpers";
 import Image from "../image/image";
 import "./sellerDetailWithProducts.css";
-import { useDispatch } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { setSellerIdInCart } from "store/actions/index";
 import { useTranslation } from "react-i18next";
 import { updateCartItem } from "../utils/api";
 
-const ProductItems = ({ products, savedCartItem, reloadCart, sellerId }) => {
+const ProductItems = ({ products, savedCartItem, reloadCart, sellerId, ...props}) => {
   const Dispatch = useDispatch();
   const { t } = useTranslation();
 
   const { Title } = Typography;
   const [allProducts, setAllProducts] = useState([...products]);
+
+  useEffect(() => {
+    console.log('props',props.title.sellerIdInCart)
+  }, []);
 
   useEffect(() => {}, [savedCartItem]);
 
@@ -24,6 +28,14 @@ const ProductItems = ({ products, savedCartItem, reloadCart, sellerId }) => {
   }, [products]);
 
   const addItems = (dish, key, method) => {
+    if (sellerId && sellerId !== props.title.sellerIdInCart) {
+      notification.error({
+        message: t("Message.cartOfOtherSeller"),
+        placement: "topRight",
+      });
+      return;
+    }
+
     if (!sessionId()) {
       notification.error({
         message: t("Message.Notification"),
@@ -155,4 +167,10 @@ const ProductItems = ({ products, savedCartItem, reloadCart, sellerId }) => {
   );
 };
 
-export default ProductItems;
+const mapStateToProps = (state) => {
+  return {
+    title: state,
+  };
+};
+
+export default connect(mapStateToProps)(ProductItems);

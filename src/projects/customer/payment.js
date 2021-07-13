@@ -39,7 +39,7 @@ const Payment = (props) => {
 
     let data;
     axios
-      .post(`${baseUrl}/razorpay`)
+      .post(`${baseUrl}/razorpay`,{userId : userId})
       .then((result) => {
         data = result.data;
         var options = {
@@ -52,7 +52,7 @@ const Payment = (props) => {
           order_id: data.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
           handler: function (response) {
             axios
-              .post(`${baseUrl}/razorpay/verification`, { response })
+              .post(`${baseUrl}/razorpay/veri100fication`, { response })
               .then((result) => {
                 // call checkout api and place an order
 

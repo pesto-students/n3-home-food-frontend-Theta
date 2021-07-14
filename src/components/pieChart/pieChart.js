@@ -3,7 +3,10 @@ import { useEffect, useRef } from "react";
 import bb, { pie } from "billboard.js";
 import { Row } from "antd";
 import "./pieChart.css";
+import { useTranslation } from "react-i18next";
+
 const PieChart = ({ dataSource }) => {
+  const { t } = useTranslation();
   const PieChart = useRef(null);
 
   useEffect(() => {
@@ -27,7 +30,7 @@ const PieChart = ({ dataSource }) => {
   return (
     <>
       <Row justify="start" className="mt-1">
-        <h5>Categories Sold</h5>
+        <h5>{t("Header.Categories Sold")}</h5>
       </Row>
       <div ref={PieChart}>chart</div>
     </>

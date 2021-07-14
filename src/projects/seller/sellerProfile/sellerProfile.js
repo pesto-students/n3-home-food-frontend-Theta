@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Card, Col, Rate, Row, Typography, notification } from "antd";
+import { Card, Col, Rate, Row, Typography } from "antd";
 import Image from "components/image/image";
 import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
 import { rupeeSign } from "utils/constant";
 import { sessionId } from "utils/helpers";
 import { EditProfile } from "./editProfile";
-import { getSellerProfile } from "../utils/api";
+import { getSellerProfile, getSellerWallet } from "../utils/api";
 import { WalletOutlined } from "@ant-design/icons";
 
 const { Title } = Typography;
@@ -13,6 +13,7 @@ const { Title } = Typography;
 const SellerProfile = () => {
   const [isloading, setIsLoading] = useState(true);
   const [profile, setProfile] = useState({});
+  const [wallet, setWallet] = useState(0);
 
   const getProfile = async () => {
     try {
@@ -21,19 +22,23 @@ const SellerProfile = () => {
         setProfile(response.data);
         setIsLoading(false);
       }
+    } catch (error) {}
+  };
+
+  const getWallet = async () => {
+    try {
+      const response = await getSellerWallet(sessionId());
+      if (response.status === 200) {
+        setWallet(200);
+      }
     } catch (error) {
-      notification.error({
-        message: "Error",
-        description: error.response
-          ? error.response.data
-          : "Something went wrong",
-        placement: "topLeft",
-      });
+      setWallet(200);
     }
   };
 
   useEffect(() => {
     getProfile();
+    getWallet();
   }, []);
 
   return (
@@ -55,7 +60,7 @@ const SellerProfile = () => {
                 <h4>
                   <WalletOutlined />
                   {"  "}
-                  {rupeeSign} 500
+                  {rupeeSign} {wallet}
                 </h4>
               </Row>
               <Title level={4}>{profile.name}</Title>

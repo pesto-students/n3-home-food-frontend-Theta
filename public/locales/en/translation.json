@@ -1,5 +1,6 @@
 {
     "Message":{
+        "Wait":"Please Wait...",
         "Notification":"Notification",
         "PleaseLogin":"Please Login to add into cart",
         "Verified":"Verified",
@@ -14,7 +15,7 @@
         "Become Seller":"Become Seller",
         "NotFound":"No Data Found",
         "MyIncome":"My Income",
-
+        "Categories Sold":"Categories Sold",
         "Sign In":"Sign In",
         "Admin":"Admin",
         "notFound":"Items Not Found",
@@ -24,6 +25,11 @@
         "Logout":"Logout",
         "Orders":"Orders",
         "My Orders":"My Orders"
+
+    },
+    "Admin":{
+        "headLine":"Manage all the seller in your area",
+        "headDescription":"You can manage the seller of your area also you can control the product of seller and more"
 
     },
     "Landing":{

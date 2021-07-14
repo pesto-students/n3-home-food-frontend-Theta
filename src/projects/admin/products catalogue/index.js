@@ -15,56 +15,45 @@ const ProductCatalogue = () => {
   const [pendingproducts, setPendingproducts] = useState([]);
   const [Approvepage, setAppovalPage] = useState(2);
   const [isLoading, setIsLoading] = useState(true);
-  
+
   const allPending = async (page) => {
     try {
       const response = await getAllPendingProduct(page);
       if (response.status === 200) {
-        let updatedProducts = []
-        response.data.forEach(element => {
-          updatedProducts.push(element)
-        } )
-        setPendingproducts(pendingproducts => [...pendingproducts , ...updatedProducts]);
+        let updatedProducts = [];
+        response.data.forEach((element) => {
+          updatedProducts.push(element);
+        });
+        setPendingproducts((pendingproducts) => [
+          ...pendingproducts,
+          ...updatedProducts,
+        ]);
         setIsLoading(false);
       }
-    } catch (error) {
-      notification.error({
-        message: "Error",
-        description: error.response
-          ? error.response.data
-          : "Something went wrong",
-        placement: "topLeft",
-      });
-    }
+    } catch (error) {}
   };
 
   const allApproved = async (page) => {
     try {
       const response = await getAllApprovedProduct(page);
       if (response.status === 200) {
-        let updatedProducts = []
-        response.data.forEach(element => {
-          updatedProducts.push(element)
-        } )
-        setApproveProducts(approveProducts => [...approveProducts , ...updatedProducts]);
+        let updatedProducts = [];
+        response.data.forEach((element) => {
+          updatedProducts.push(element);
+        });
+        setApproveProducts((approveProducts) => [
+          ...approveProducts,
+          ...updatedProducts,
+        ]);
         setIsLoading(false);
       }
-    } catch (error) {
-      notification.error({
-        message: "Error",
-        description: error.response
-          ? error.response.data
-          : "Something went wrong",
-        placement: "topLeft",
-      });
-    }
-  }; 
+    } catch (error) {}
+  };
 
   const fetchMoreAllProducts = () => {
-    setAppovalPage(Approvepage +1)
-    allApproved(Approvepage)
-  }
-
+    setAppovalPage(Approvepage + 1);
+    allApproved(Approvepage);
+  };
 
   useEffect(() => {
     allPending(1);
@@ -81,7 +70,7 @@ const ProductCatalogue = () => {
           isLoading={isLoading}
           products={approveProducts}
           loadAllProducts={allApproved}
-          fetchMoreAllProducts = {fetchMoreAllProducts}
+          fetchMoreAllProducts={fetchMoreAllProducts}
         />
       </TabPane>
       <TabPane

@@ -68,15 +68,7 @@ const MyProducts = ({ products, isLoading, callback }) => {
         });
         callback();
       }
-    } catch (error) {
-      notification.error({
-        message: "Error",
-        description: error.response
-          ? error.response.data
-          : "Something went wrong",
-        placement: "topLeft",
-      });
-    }
+    } catch (error) {}
   };
 
   const editableProduct = (key) => {
@@ -107,15 +99,7 @@ const MyProducts = ({ products, isLoading, callback }) => {
         setMyProducts([...products]);
         callback();
       }
-    } catch (error) {
-      notification.error({
-        message: "Error",
-        description: error.response
-          ? error.response.data
-          : "Something went wrong",
-        placement: "topLeft",
-      });
-    }
+    } catch (error) {}
   };
 
   const changeCategory = (categoryies) => {

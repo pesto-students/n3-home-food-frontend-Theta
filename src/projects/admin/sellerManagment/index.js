@@ -31,15 +31,7 @@ const SellerManagment = () => {
         setRejectedSellersItems(response.data);
         setIsLoading(false);
       }
-    } catch (error) {
-      notification.error({
-        message: "Error",
-        description: error.response
-          ? error.response.data
-          : "Something went wrong",
-        placement: "topLeft",
-      });
-    }
+    } catch (error) {}
   };
 
   const approveSeller = async (page) => {
@@ -49,15 +41,7 @@ const SellerManagment = () => {
         setApproveSellersItems(response.data);
         setIsLoading(false);
       }
-    } catch (error) {
-      notification.error({
-        message: "Error",
-        description: error.response
-          ? error.response.data
-          : "Something went wrong",
-        placement: "topLeft",
-      });
-    }
+    } catch (error) {}
   };
 
   const pendingSeller = async () => {
@@ -67,21 +51,13 @@ const SellerManagment = () => {
         setPendingSellersItems(response.data);
         setIsLoading(false);
       }
-    } catch (error) {
-      notification.error({
-        message: "Error",
-        description: error.response
-          ? error.response.data
-          : "Something went wrong",
-        placement: "topLeft",
-      });
-    }
+    } catch (error) {}
   };
 
-  const fetchMoreSellers = () =>{
-    console.log('fetch more')
-    approveSeller(page)
-  }
+  const fetchMoreSellers = () => {
+    console.log("fetch more");
+    approveSeller(page);
+  };
 
   useEffect(() => {
     approveSeller(1);

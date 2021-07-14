@@ -2,15 +2,18 @@ import * as React from "react";
 import { useEffect, useRef } from "react";
 import bb, { line, zoom } from "billboard.js";
 import { Row } from "antd";
-import './lineChart.css'
+import "./lineChart.css";
+import { useTranslation } from "react-i18next";
+
 const LineChart = ({ dataSource }) => {
+  const { t } = useTranslation();
   const lineChart = useRef(null);
 
   useEffect(() => {
     bb.generate({
       data: {
         x: "x",
-       columns: dataSource,
+        columns: dataSource,
         type: line(), // for ESM specify as: line()
       },
       zoom: {
@@ -33,7 +36,7 @@ const LineChart = ({ dataSource }) => {
   return (
     <>
       <Row justify="start">
-        <h5>My Income</h5>
+        <h5>{t("Header.MyIncome")}</h5>
       </Row>
 
       <div style={{ height: "300px" }} ref={lineChart}>

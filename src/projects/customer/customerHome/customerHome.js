@@ -2,12 +2,10 @@ import {
   Carousel,
   Col,
   Layout,
-
-
-  notification, Row,
-
-
-  Tabs, Typography
+  notification,
+  Row,
+  Tabs,
+  Typography,
 } from "antd";
 import CustomerNavbar from "components/customerNavbar/customerNavbar";
 import Image from "components/image/image";
@@ -17,7 +15,6 @@ import { useTranslation } from "react-i18next";
 import { bannerImage } from "utils/constant";
 import { getCategoryId, getPincode, getUser } from "utils/helpers";
 import { getCategorySeller, getSellerByPage } from "../utils/api";
-
 
 const { Content } = Layout;
 const { Title } = Typography;
@@ -31,7 +28,7 @@ const CustomerHome = () => {
   const [seller, setSeller] = useState([]);
   const [loadSeller, setLoadSeller] = useState(false);
   const [pincode, setPincode] = useState(false);
-  const [tabSelected, setTabSelected] = useState('All');
+  const [tabSelected, setTabSelected] = useState("All");
   const [page, setPage] = useState(2);
 
   const user = getUser() ? getUser().userType : null;
@@ -41,28 +38,19 @@ const CustomerHome = () => {
     if (user === null) window.location.href = "/";
   }, [user]);
 
-  useEffect(()=> {
-    console.log(seller)
-  },[seller])
+  useEffect(() => {
+    console.log(seller);
+  }, [seller]);
 
   const getSellersByPincode = useCallback(async () => {
     setLoadSeller(false);
     try {
-     
-      let response = await getSellerByPage(pincode,1,'All')
+      let response = await getSellerByPage(pincode, 1, "All");
       if (response.status === 200) {
         setSeller(response.data);
         setLoadSeller(true);
       }
-    } catch (error) {
-      notification.error({
-        message: "Error",
-        description: error.response
-          ? error.response.data
-          : "Something went wrong",
-        placement: "topLeft",
-      });
-    }
+    } catch (error) {}
   }, [pincode]);
 
   const getAllSellerByCategory = async (categoryKey) => {
@@ -89,28 +77,19 @@ const CustomerHome = () => {
     }
   };
 
-  
   const fetchMoreSellers = useCallback(async () => {
-    setPage(page+1)
+    setPage(page + 1);
     try {
-      let response = await getSellerByPage(pincode,page,tabSelected);
+      let response = await getSellerByPage(pincode, page, tabSelected);
       if (response.status === 200) {
-        let updatedSeller = []
-        response.data.forEach(element => {
-          updatedSeller.push(element)
-        } )
-          setSeller(seller => [...seller , ...updatedSeller]);
+        let updatedSeller = [];
+        response.data.forEach((element) => {
+          updatedSeller.push(element);
+        });
+        setSeller((seller) => [...seller, ...updatedSeller]);
       }
-    } catch (error) {
-      notification.error({
-        message: "Error",
-        description: error.response
-          ? error.response.data
-          : "Something went wrong",
-        placement: "topLeft",
-      });
-    }
-  }, [pincode,tabSelected,page]);
+    } catch (error) {}
+  }, [pincode, tabSelected, page]);
 
   const updatePincode = (code) => {
     setPincode(code);
@@ -123,12 +102,11 @@ const CustomerHome = () => {
 
   const getCurrentTab = (tab) => {
     getAllSellerByCategory(tab);
-    setTabSelected(tab)
-    setPage(2)
+    setTabSelected(tab);
+    setPage(2);
   };
 
-  useEffect(() => {
-  }, [tabSelected]);
+  useEffect(() => {}, [tabSelected]);
 
   return (
     <Layout className="layout">
@@ -161,7 +139,11 @@ const CustomerHome = () => {
               </Tabs>
             </Col>
           </Row>
-          <SellerItems loading={loadSeller} seller={seller} fetchMoreSellers={fetchMoreSellers}/>
+          <SellerItems
+            loading={loadSeller}
+            seller={seller}
+            fetchMoreSellers={fetchMoreSellers}
+          />
         </div>
       </Content>
     </Layout>

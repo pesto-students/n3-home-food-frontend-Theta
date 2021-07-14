@@ -19,49 +19,39 @@ const SellerProducts = () => {
 
   const [currentOrdersItem, setCurrentOrdersItem] = useState([]);
   const [pastOrdersItem, setPastOrdersItem] = useState([]);
-  
+
   const getAllCurrentOrder = async (page) => {
     try {
-      const response = await getAllCurrentOrderSeller(sessionId(),page);
+      const response = await getAllCurrentOrderSeller(sessionId(), page);
       if (response.status === 200) {
-          let updatedOrders = []
-          response.data.forEach(element => {
-            updatedOrders.push(element)
-          } )
-          setCurrentOrdersItem(currentOrdersItem => [...currentOrdersItem , ...updatedOrders]);
-          setIsLoading(false);
+        let updatedOrders = [];
+        response.data.forEach((element) => {
+          updatedOrders.push(element);
+        });
+        setCurrentOrdersItem((currentOrdersItem) => [
+          ...currentOrdersItem,
+          ...updatedOrders,
+        ]);
+        setIsLoading(false);
       }
-    } catch (error) {
-      notification.error({
-        message: "Error",
-        description: error.response
-          ? error.response.data
-          : "Something went wrong",
-        placement: "topLeft",
-      });
-    }
+    } catch (error) {}
   };
 
   const getAllPastOrder = async (page) => {
     try {
-      const response = await getAllPastOrderSeller(sessionId(),page);
+      const response = await getAllPastOrderSeller(sessionId(), page);
       if (response.status === 200) {
-        let updatedOrders = []
-        response.data.forEach(element => {
-          updatedOrders.push(element)
-        } )
-        setPastOrdersItem(pastOrdersItem => [...pastOrdersItem , ...updatedOrders]);
+        let updatedOrders = [];
+        response.data.forEach((element) => {
+          updatedOrders.push(element);
+        });
+        setPastOrdersItem((pastOrdersItem) => [
+          ...pastOrdersItem,
+          ...updatedOrders,
+        ]);
         setIsLoading(false);
       }
-    } catch (error) {
-      notification.error({
-        message: "Error",
-        description: error.response
-          ? error.response.data
-          : "Something went wrong",
-        placement: "topLeft",
-      });
-    }
+    } catch (error) {}
   };
 
   const fetchMoreProducts = () => {
@@ -96,7 +86,11 @@ const SellerProducts = () => {
         key="1"
       >
         {!isLoading ? (
-          <CurrentOrders callBack={refreshOrder} orders={currentOrdersItem} fetchMoreProducts={fetchMoreActiveOrders} />
+          <CurrentOrders
+            callBack={refreshOrder}
+            orders={currentOrdersItem}
+            fetchMoreProducts={fetchMoreActiveOrders}
+          />
         ) : (
           <Row justify="center">
             <SpinnerLoader />

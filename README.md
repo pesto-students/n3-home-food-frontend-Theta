@@ -135,21 +135,7 @@ This is an example of how to list things you need to use the software and how to
 <img src="https://github.com/pesto-students/n3-home-food-frontend-Theta/blob/master/public/database%20architecture.png" >
   
 ### Road Map  
-<img src="https://github.com/pesto-students/n3-home-food-frontend-Theta/blob/master/public/database%20architecture.png" >
-
-<!-- CONTRIBUTING -->
-<!-- ## Contributing
-
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
- -->
-
-
+<img src="https://github.com/pesto-students/n3-home-food-frontend-Theta/blob/release/week4/public/roadmap.png" >
 
 
 <!-- CONTACT -->
@@ -159,6 +145,18 @@ Contributions are what make the open source community such an amazing place to b
 Kapil Sharma - kapilsh2014@gmail.com
 
 Sahil Thakare - sahilthakare521@gmail.com
+  
+  <!-- CONTRIBUTING -->
+## Contributing
+
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
   
 <!-- LICENSE -->
 ## License

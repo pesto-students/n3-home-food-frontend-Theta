@@ -1,14 +1,11 @@
 import {
   Carousel,
   Col,
-
   Layout,
-
-
-  notification, Row, Tabs,
-
-
-  Typography
+  notification,
+  Row,
+  Tabs,
+  Typography,
 } from "antd";
 import Image from "components/image/image";
 import Navbar from "components/navbar/navbar";
@@ -19,11 +16,10 @@ import { bannerImage } from "utils/constant";
 import {
   getCategoryId,
   getPincode,
-  redirectToOriginalPageFromLanding
+  redirectToOriginalPageFromLanding,
 } from "utils/helpers";
 import "./landing.css";
 import SellerItems from "./sellerItems";
-
 
 const { Content } = Layout;
 const { Title } = Typography;
@@ -38,12 +34,12 @@ const LandingPage = () => {
   const [loadSeller, setLoadSeller] = useState(true);
   const [pincode, setPincode] = useState("");
   const [page, setPage] = useState(2);
-  const [tabSelected, setTabSelected] = useState('All');
+  const [tabSelected, setTabSelected] = useState("All");
 
   const getSellers = async (code) => {
     try {
-      const response = await getSellerByPage(code,1,'All')
-     // const response = await getAllSellerByPincode(code);
+      const response = await getSellerByPage(code, 1, "All");
+      // const response = await getAllSellerByPincode(code);
       if (response.status === 200) {
         setSeller(response.data);
         setLoadSeller(true);
@@ -98,40 +94,30 @@ const LandingPage = () => {
   };
 
   const fetchMoreSellers = useCallback(async () => {
-    setPage(page+1)
+    setPage(page + 1);
     try {
-      let response = await getSellerByPage(pincode,page,tabSelected);
-      console.log('updated seller',response)
+      let response = await getSellerByPage(pincode, page, tabSelected);
+      console.log("updated seller", response);
 
       if (response.status === 200) {
-        let updatedSeller = []
-        response.data.forEach(element => {
-          updatedSeller.push(element)
-        } )
-          setSeller(seller => [...seller , ...updatedSeller]);
+        let updatedSeller = [];
+        response.data.forEach((element) => {
+          updatedSeller.push(element);
+        });
+        setSeller((seller) => [...seller, ...updatedSeller]);
       }
-    } catch (error) {
-      notification.error({
-        message: "Error",
-        description: error.response
-          ? error.response.data
-          : "Something went wrong",
-        placement: "topLeft",
-      });
-    }
-  }, [pincode,tabSelected,page]);
+    } catch (error) {}
+  }, [pincode, tabSelected, page]);
 
   const getCurrentTab = (tab) => {
     getCategorySeller(tab);
     //setCurrentTabValue(tab)
-    setTabSelected(tab)
-    setPage(2)
+    setTabSelected(tab);
+    setPage(2);
   };
 
+  useEffect(() => {}, [tabSelected]);
 
-  useEffect(() => {
-  }, [tabSelected]);
-  
   return (
     <Layout className="layout">
       <Navbar callBack={getSellerByPincode} />
@@ -163,7 +149,11 @@ const LandingPage = () => {
               </Tabs>
             </Col>
           </Row>
-          <SellerItems loading={loadSeller} seller={seller} fetchMoreSellers={fetchMoreSellers}/>
+          <SellerItems
+            loading={loadSeller}
+            seller={seller}
+            fetchMoreSellers={fetchMoreSellers}
+          />
         </div>
       </Content>
     </Layout>

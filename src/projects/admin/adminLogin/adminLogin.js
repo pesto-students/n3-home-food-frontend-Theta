@@ -4,23 +4,22 @@ import { React } from "react";
 import { connect } from "react-redux";
 import Login from "components/login/login";
 import "./adminLogin.css";
+import { useTranslation } from "react-i18next";
 
 function AdminLogin() {
+  const { t } = useTranslation();
   return (
     <>
       <Row style={{ height: "100vh" }}>
         <Col md={16} className="left-container">
           <div className="left-container-content">
-            <h1>Manage all the seller in your area</h1>
-            <p>
-              You can manage the seller of your area also you can control the
-              product of seller and more
-            </p>
+            <h1>{t("Admin.headLine")}</h1>
+            <p>{t("Admin.headDescription")}</p>
           </div>
         </Col>
         <Col md={8}>
           <div className="right-container">
-            <p>Login</p>
+            <p>{t("Landing.Login")}</p>
             <Login userType="Admin" />
           </div>
         </Col>

@@ -1,7 +1,5 @@
-import {
-  MoneyCollectOutlined, ShoppingCartOutlined
-} from "@ant-design/icons";
-import { Card, Col, DatePicker, notification, Row } from "antd";
+import { MoneyCollectOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+import { Card, Col, DatePicker, Row } from "antd";
 import Image from "components/image/image";
 import LineChart from "components/lineChart/lineChart";
 import PieChart from "components/pieChart/pieChart";
@@ -13,15 +11,16 @@ import { sessionId } from "utils/helpers";
 import {
   getGraphDetailSeller,
   getSellerDetailsWallet,
-  getSellerPieChartData
+  getSellerPieChartData,
 } from "../utils/api";
-import "./sellerGraphs.css";
+import { useTranslation } from "react-i18next";
 
+import "./sellerGraphs.css";
 
 const { RangePicker } = DatePicker;
 
 function SellerGraphs() {
-  // const { t } = useTranslation();
+  const { t } = useTranslation();
   const [lineGraphData, setLineGraphData] = useState();
   const [revenueData, setrevenueData] = useState();
   const [orderCountData, setorderCountData] = useState();
@@ -58,15 +57,7 @@ function SellerGraphs() {
         //   ? setLineGraphData(dataSource)
         //   : setLineGraphData()
       }
-    } catch (error) {
-      notification.error({
-        message: "Error",
-        description: error.response
-          ? error.response.data
-          : "Something went wrong",
-        placement: "topLeft",
-      });
-    }
+    } catch (error) {}
   };
 
   const getSellerDetails = async () => {
@@ -78,15 +69,7 @@ function SellerGraphs() {
           : setorderCountData(0);
         setrevenueData(response.data.totalPrice);
       }
-    } catch (error) {
-      notification.error({
-        message: "Error",
-        description: error.response
-          ? error.response.data
-          : "Something went wrong",
-        placement: "topLeft",
-      });
-    }
+    } catch (error) {}
   };
 
   const getPieChartDetails = async (dateString) => {
@@ -130,15 +113,7 @@ function SellerGraphs() {
             ])
           : setPieGraphData();
       }
-    } catch (error) {
-      notification.error({
-        message: "Error",
-        description: error.response
-          ? error.response.data
-          : "Something went wrong",
-        placement: "topLeft",
-      });
-    }
+    } catch (error) {}
   };
 
   const onChange = (value, dateString) => {
@@ -156,7 +131,10 @@ function SellerGraphs() {
             </Col>
             <Col span={16}>
               <div className="card-details">
-                <h6 className="stat-title"> Total Orders</h6>
+                <h6 className="stat-title">
+                  {" "}
+                  {t("seller.dashboard.totalOrder")}
+                </h6>
                 <h4 className="stat-count">
                   {orderCountData ? orderCountData : 0}
                 </h4>
@@ -172,7 +150,9 @@ function SellerGraphs() {
             </Col>
             <Col span={16}>
               <div className="card-details">
-                <h6 className="stat-title"> Total Income</h6>
+                <h6 className="stat-title">
+                  {t("seller.dashboard.totalIncome")}
+                </h6>
                 <h4 className="stat-count">
                   {" "}
                   {rupeeSign}
@@ -182,7 +162,7 @@ function SellerGraphs() {
             </Col>
           </Row>
         </Card>
-        <div className='date-picker-custom'>
+        <div className="date-picker-custom">
           <RangePicker
             defaultValue={[moment(), moment().subtract(7, "day")]}
             format={dateFormat}
@@ -191,7 +171,6 @@ function SellerGraphs() {
         </div>
       </Row>
 
-  
       <Row justify="center" className="m-4">
         <Col md={8} sm={24} xs={24}>
           <Card hoverable={true}>

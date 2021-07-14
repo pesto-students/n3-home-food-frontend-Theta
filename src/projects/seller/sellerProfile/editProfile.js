@@ -1,27 +1,11 @@
 import { UploadOutlined } from "@ant-design/icons";
-import {
-  Button,
-  Col,
-  Form,
-  Input,
-  message,
-  Modal,
-  Row,
-  Upload,
-  notification,
-} from "antd";
+import { Button, Col, Form, Input, message, Modal, Row, Upload } from "antd";
 
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { sessionId } from "utils/helpers";
 import { editProfile } from "../utils/api";
-// const openNotificationWithIcon = (type, message) => {
-//   notification[type]({
-//     message: message,
-//   });
-// };
 
-// image
 const props = {
   name: "file",
   action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
@@ -297,7 +281,9 @@ export const EditProfile = ({ profile, callBack }) => {
     data.append("idProof", values.idProof);
     data.append("description", values.description);
     data.append("pincode", Number(values.pincode));
-    data.append("image", values.image[0].originFileObj);
+    if (values.image) {
+      data.append("image", values.image[0].originFileObj);
+    }
 
     try {
       let response = await editProfile(sessionId(), data);
@@ -306,15 +292,7 @@ export const EditProfile = ({ profile, callBack }) => {
         setVisible(false);
         console.log(response, response.status);
       }
-    } catch (error) {
-      notification.error({
-        message: "Error",
-        description: error.response
-          ? error.response.data
-          : "Something went wrong",
-        placement: "topLeft",
-      });
-    }
+    } catch (error) {}
   };
 
   return (

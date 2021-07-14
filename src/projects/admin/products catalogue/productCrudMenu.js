@@ -19,15 +19,7 @@ export const ProductCrudMenu = ({ callback, product }) => {
       } else {
         openNotificationWithIcon("warning", "could not Product Deleted");
       }
-    } catch (error) {
-      notification.error({
-        message: "Error",
-        description: error.response
-          ? error.response.data
-          : "Something went wrong",
-        placement: "topLeft",
-      });
-    }
+    } catch (error) {}
   };
 
   const menu = (

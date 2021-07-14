@@ -24,7 +24,7 @@ export const editProfile = async (id, profileData) => {
   return response;
 };
 
-export const getAllCurrentOrderSeller = async (sessionId,page) => {
+export const getAllCurrentOrderSeller = async (sessionId, page) => {
   let response = await axios
     .get(`/orders/get/${sessionId}?page=${page}`)
     .then((response) => {
@@ -37,7 +37,7 @@ export const getAllCurrentOrderSeller = async (sessionId,page) => {
 };
 
 export const getAllPastOrderSeller = async (sessionId, page) => {
-  console.log('page',page)
+  console.log("page", page);
   let response = await axios
     .get(`/orders/get-approved/${sessionId}?page=${page}`)
     .then((response) => {
@@ -60,9 +60,23 @@ export const getSellerProfile = async (sessionId) => {
   return response;
 };
 
-export const getGraphDetailSeller = async (dateString,sessionId) => {
+export const getSellerWallet = async (sessionId) => {
   let response = await axios
-    .get(`/orders/get-revenue-seller/${sessionId}?startDate=${dateString[0]}&endDate=${dateString[1]}`)
+    .get(`/orders/seller-wallet${sessionId}`)
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+  return response;
+};
+
+export const getGraphDetailSeller = async (dateString, sessionId) => {
+  let response = await axios
+    .get(
+      `/orders/get-revenue-seller/${sessionId}?startDate=${dateString[0]}&endDate=${dateString[1]}`
+    )
     .then((response) => {
       return response;
     })
@@ -84,10 +98,12 @@ export const getSellerDetailsWallet = async (sessionId) => {
   return response;
 };
 
-export const getSellerPieChartData = async (dateString,sessionId) => {
+export const getSellerPieChartData = async (dateString, sessionId) => {
   //  sessionId = "60e1667429c1630022088549"
   let response = await axios
-    .get(`/orders/categories-seller/${sessionId}?startDate=${dateString[0]}&endDate=${dateString[1]}`)
+    .get(
+      `/orders/categories-seller/${sessionId}?startDate=${dateString[0]}&endDate=${dateString[1]}`
+    )
     .then((response) => {
       return response;
     })

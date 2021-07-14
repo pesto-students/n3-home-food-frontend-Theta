@@ -39,15 +39,7 @@ function SellerRegistration() {
           toggleDrawer();
         }, [2000]);
       }
-    } catch (error) {
-      notification.error({
-        message: "Error",
-        description: error.response
-          ? error.response.data
-          : "Something went wrong",
-        placement: "topLeft",
-      });
-    }
+    } catch (error) {}
   };
 
   return (

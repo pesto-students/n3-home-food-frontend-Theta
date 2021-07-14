@@ -1,5 +1,6 @@
 {
     "Message":{
+        "Wait": "कृपया प्रतीक्षा करें...",
         "Notification": "अधिसूचना",
         "PleaseLogin": "कार्ट में जोड़ने के लिए कृपया लॉगिन करें",
         "Verified": "सत्यापित",
@@ -11,6 +12,7 @@
     },
     "Header":{
         "Become Seller":"विक्रेता बनें",
+        "Categories Sold": "श्रेणियां बिकीं",
         "NotFound": "कोई डेटा नहीं मिला",
         "MyIncome": "मेरी आय",
         "Sign In":"दाखिल करना",
@@ -24,6 +26,10 @@
         "My Orders": "मेरे आदेश"
 
     },
+    "Admin": {
+        "headLine": "अपने क्षेत्र के सभी विक्रेता को प्रबंधित करें",
+        "headDescription": "आप अपने क्षेत्र के विक्रेता को भी प्रबंधित कर सकते हैं आप विक्रेता के उत्पाद को नियंत्रित कर सकते हैं और बहुत कुछ"
+      },
     "Landing":{
         "Sellers":"सेलर्स",
         "All": "सब",
@@ -78,7 +84,7 @@
         {
             
             "formDescription": "विवरण",
-            "fromDescriptionNameValidationAndPlaceholder": "कृपया विवरण दर्ज करें",
+            "formDescriptionNameValidationAndPlaceholder": "कृपया विवरण दर्ज करें",
             "partnerText":"हमारे साथ भागीदार",
             "description":"अपने घर पर खाना बनाएं और अपने आस-पास के लोगों को बेचें और कमाएं",
             "register": "रजिस्टर",

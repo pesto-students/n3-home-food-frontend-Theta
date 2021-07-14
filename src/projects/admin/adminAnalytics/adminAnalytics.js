@@ -1,19 +1,20 @@
 import {
-  MoneyCollectOutlined, ShoppingCartOutlined,
-
+  MoneyCollectOutlined,
+  ShoppingCartOutlined,
   UserAddOutlined,
-  UsergroupAddOutlined
+  UsergroupAddOutlined,
 } from "@ant-design/icons";
 import { Card, Col, DatePicker, notification, Row } from "antd";
 import Image from "components/image/image";
 import LineChart from "components/lineChart/lineChart";
 import PieChart from "components/pieChart/pieChart";
-import noGraph from 'images/no_graph.png';
+import noGraph from "images/no_graph.png";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import {
-  getAdminCategoryChartDetails, getAdminGraphDetails,
-  getAllOrderCount
+  getAdminCategoryChartDetails,
+  getAdminGraphDetails,
+  getAllOrderCount,
 } from "../utils/api";
 import "./adminDashboard.css";
 
@@ -24,7 +25,7 @@ function AdminDashboard() {
   const [adminData, setadminData] = useState({});
   const [pieGraphData, setPieGraphData] = useState();
   // const [categoryData, setCategoryData] = useState([]);
-  const dateFormat = 'YYYY/MM/DD';
+  const dateFormat = "YYYY/MM/DD";
 
   useEffect(() => {
     let startDate = moment().subtract(7, "day").format("YYYY-MM-DD");
@@ -48,15 +49,7 @@ function AdminDashboard() {
         console.log(dataSource);
         setLineGraphData(dataSource);
       }
-    } catch (error) {
-      notification.error({
-        message: "Error",
-        description: error.response
-          ? error.response.data
-          : "Something went wrong",
-        placement: "topLeft",
-      });
-    }
+    } catch (error) {}
   };
 
   const getAdminDetails = async () => {
@@ -65,15 +58,7 @@ function AdminDashboard() {
       if (response.status === 200) {
         response.data ? setadminData(response.data) : setadminData(0);
       }
-    } catch (error) {
-      notification.error({
-        message: "Error",
-        description: error.response
-          ? error.response.data
-          : "Something went wrong",
-        placement: "topLeft",
-      });
-    }
+    } catch (error) {}
   };
 
   const getOrderDetailsCateogryWise = async (dateString) => {
@@ -119,15 +104,7 @@ function AdminDashboard() {
           ["Dinner", dinner],
         ]);
       }
-    } catch (error) {
-      notification.error({
-        message: "Error",
-        description: error.response
-          ? error.response.data
-          : "Something went wrong",
-        placement: "topLeft",
-      });
-    }
+    } catch (error) {}
   };
 
   const onChange = (value, dateString) => {
@@ -141,13 +118,13 @@ function AdminDashboard() {
       <Row className="number-cards" justify="center">
         <Card hoverable={true} className="small-box">
           <Row className="stat-card">
-            <Col span={8} className='icon-container'>
+            <Col span={8} className="icon-container">
               <ShoppingCartOutlined className="icon" />{" "}
             </Col>
             <Col span={16}>
               <div className="card-details">
-                <h6 className='stat-title'>  Total Orders</h6>
-                <h4 className='stat-count'>{adminData.orderCount}</h4>
+                <h6 className="stat-title"> Total Orders</h6>
+                <h4 className="stat-count">{adminData.orderCount}</h4>
               </div>
             </Col>
           </Row>
@@ -155,28 +132,27 @@ function AdminDashboard() {
 
         <Card hoverable={true} className="small-box">
           <Row className="stat-card">
-            <Col span={8} className='icon-container'>
+            <Col span={8} className="icon-container">
               <MoneyCollectOutlined className="icon" />{" "}
             </Col>
             <Col span={16}>
               <div className="card-details">
-                <h6 className='stat-title'>  Total Income</h6>
-                <h4 className='stat-count'>{adminData.orderTotal}</h4>
+                <h6 className="stat-title"> Total Income</h6>
+                <h4 className="stat-count">{adminData.orderTotal}</h4>
               </div>
             </Col>
           </Row>
         </Card>
-       
 
         <Card hoverable={true} className="small-box">
           <Row className="stat-card">
-            <Col span={8} className='icon-container'>
+            <Col span={8} className="icon-container">
               <UsergroupAddOutlined className="icon" />{" "}
             </Col>
             <Col span={16}>
               <div className="card-details">
-                <h6 className='stat-title'>  Total Sellers</h6>
-                <h4 className='stat-count'>{adminData.sellerCount}</h4>
+                <h6 className="stat-title"> Total Sellers</h6>
+                <h4 className="stat-count">{adminData.sellerCount}</h4>
               </div>
             </Col>
           </Row>
@@ -184,41 +160,44 @@ function AdminDashboard() {
 
         <Card hoverable={true} className="small-box">
           <Row className="stat-card">
-            <Col span={8} className='icon-container'>
+            <Col span={8} className="icon-container">
               <UserAddOutlined className="icon" />{" "}
             </Col>
             <Col span={16}>
               <div className="card-details">
-                <h6 className='stat-title'>  Total Customers</h6>
-                <h4 className='stat-count'>{adminData.userCount}</h4>
+                <h6 className="stat-title"> Total Customers</h6>
+                <h4 className="stat-count">{adminData.userCount}</h4>
               </div>
             </Col>
           </Row>
         </Card>
-
       </Row>
 
       <Row justify="end" className="m-1">
-        <RangePicker  defaultValue={[moment(), moment().subtract(7, "day")]}
-      format={dateFormat} onChange={onChange} />
+        <RangePicker
+          defaultValue={[moment(), moment().subtract(7, "day")]}
+          format={dateFormat}
+          onChange={onChange}
+        />
       </Row>
       <Row justify="center">
         <Col md={8} sm={24} xs={24}>
-          <Card hoverable={true} >
+          <Card hoverable={true}>
             <div id="chart">
               {pieGraphData && <PieChart dataSource={pieGraphData} />}
-              {!pieGraphData && 
-               <Image  height="150" width="150" url={noGraph}></Image>
-              }
+              {!pieGraphData && (
+                <Image height="150" width="150" url={noGraph}></Image>
+              )}
             </div>
           </Card>
         </Col>
 
         <Col id="chart" md={16} sm={24} xs={24}>
           <Card hoverable={true} className="pt-2 pl-2 pr-2 ">
-            {lineGraphData && <LineChart  dataSource={lineGraphData} />}
-            {!lineGraphData &&      <Image  height="150" width="150" url={noGraph}></Image>
-}
+            {lineGraphData && <LineChart dataSource={lineGraphData} />}
+            {!lineGraphData && (
+              <Image height="150" width="150" url={noGraph}></Image>
+            )}
           </Card>
         </Col>
       </Row>

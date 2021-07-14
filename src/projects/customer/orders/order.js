@@ -22,15 +22,7 @@ const SellerProducts = () => {
         setCurrentOrdersItem(response.data);
         setIsLoading(false);
       }
-    } catch (error) {
-      notification.error({
-        message: "Error",
-        description: error.response
-          ? error.response.data
-          : "Something went wrong",
-        placement: "topLeft",
-      });
-    }
+    } catch (error) {}
   };
 
   const user = getUser() ? getUser().userType : null;

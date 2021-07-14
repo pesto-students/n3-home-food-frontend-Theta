@@ -26,44 +26,28 @@ const SellerProducts = () => {
     try {
       const response = await getSellerApprovedProduct(page);
       if (response.status === 200) {
-          let updatedProducts = []
-          response.data.forEach(element => {
-            updatedProducts.push(element)
-          } )
-          setAllApprove(allApprove => [...allApprove , ...updatedProducts]);
-          setIsLoading(false);
-     }
-    } catch (error) {
-      notification.error({
-        message: "Error",
-        description: error.response
-          ? error.response.data
-          : "Something went wrong",
-        placement: "topLeft",
-      });
-    }
+        let updatedProducts = [];
+        response.data.forEach((element) => {
+          updatedProducts.push(element);
+        });
+        setAllApprove((allApprove) => [...allApprove, ...updatedProducts]);
+        setIsLoading(false);
+      }
+    } catch (error) {}
   };
 
   const getAllProducts = async (page) => {
     try {
       const response = await getAllProduct(page);
       if (response.status === 200) {
-        let updatedProducts = []
-        response.data.forEach(element => {
-          updatedProducts.push(element)
-        } )
-        setAllProducts(allProducts => [...allProducts , ...updatedProducts]);
+        let updatedProducts = [];
+        response.data.forEach((element) => {
+          updatedProducts.push(element);
+        });
+        setAllProducts((allProducts) => [...allProducts, ...updatedProducts]);
         setIsLoading(false);
       }
-    } catch (error) {
-      notification.error({
-        message: "Error",
-        description: error.response
-          ? error.response.data
-          : "Something went wrong",
-        placement: "topLeft",
-      });
-    }
+    } catch (error) {}
   };
 
   const getMyProducts = async () => {
@@ -73,21 +57,13 @@ const SellerProducts = () => {
         setMyProducts(response.data[0].myProducts);
         setIsLoading(false);
       }
-    } catch (error) {
-      notification.error({
-        message: "Error",
-        description: error.response
-          ? error.response.data
-          : "Something went wrong",
-        placement: "topLeft",
-      });
-    }
+    } catch (error) {}
   };
 
   const fetchMoreProducts = () => {
-    setPage(page+1)
+    setPage(page + 1);
     getAllProducts(page);
-  }
+  };
 
   useEffect(() => {
     getApproved(1);
@@ -102,9 +78,7 @@ const SellerProducts = () => {
 
   useEffect(() => {}, [allProducts, myProducts, allApprove]);
 
-  const callback =()=> {
-
-  }
+  const callback = () => {};
   return (
     <Tabs defaultActiveKey="1" onChange={callback}>
       <TabPane
@@ -120,7 +94,7 @@ const SellerProducts = () => {
           products={allProducts}
           isLoading={isLoading}
           callback={allProductCallback}
-          fetchMoreProducts = {fetchMoreProducts}
+          fetchMoreProducts={fetchMoreProducts}
         />{" "}
       </TabPane>
       <TabPane

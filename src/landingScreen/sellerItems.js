@@ -22,7 +22,7 @@ const SellerItems = ({ loading, seller ,fetchMoreSellers}) => {
     }
     return (
       <InfiniteScroll
-        dataLength={seller.length/4}
+        dataLength={seller.length}
         next={fetchMoreData}
         hasMore={true}
       >

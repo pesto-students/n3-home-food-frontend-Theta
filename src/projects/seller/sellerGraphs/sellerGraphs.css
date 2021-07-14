@@ -114,3 +114,8 @@
     display: flex;
     justify-content: center;
 }
+
+.date-picker-custom{
+    height: 35px;
+    margin: 10px;
+}

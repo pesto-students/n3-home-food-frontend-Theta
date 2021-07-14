@@ -3,6 +3,7 @@ import {
   ShopFilled ,
   PieChartFilled,
   UsergroupAddOutlined,
+  MenuOutlined
 } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 
@@ -45,6 +46,10 @@ const AdminDashBoard = () => {
     handdleActiveTabs();
   }, []);
 
+  const CustomTrigger = () => (
+    <MenuOutlined />
+  );
+
   return (
     <>
       <Layout style={{ minHeight: "100vh" }}>
@@ -54,6 +59,7 @@ const AdminDashBoard = () => {
           collapsible
           collapsed={collapsed}
           onCollapse={onCollapse}
+          trigger={<CustomTrigger />}
         >
           <div className="home-food-logo">
             <Image

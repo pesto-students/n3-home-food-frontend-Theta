@@ -26,9 +26,10 @@ function AdminDashboard() {
   const [adminData, setadminData] = useState({});
   const [pieGraphData, setPieGraphData] = useState();
   // const [categoryData, setCategoryData] = useState([]);
+  const dateFormat = 'YYYY/MM/DD';
 
   useEffect(() => {
-    let startDate = moment().subtract(1, "day").format("YYYY-MM-DD");
+    let startDate = moment().subtract(7, "day").format("YYYY-MM-DD");
     let endDate = moment().format("YYYY-MM-DD");
     getAdminDetails();
     getGraphDetails([startDate, endDate]);
@@ -200,8 +201,8 @@ function AdminDashboard() {
       </Row>
 
       <Row justify="end" className="m-1">
-        <RangePicker onChange={onChange} />
-        <FilterOutlined className="funnel" />
+        <RangePicker  defaultValue={[moment(), moment().subtract(7, "day")]}
+      format={dateFormat} onChange={onChange} />
       </Row>
       <Row justify="center">
         <Col md={8} sm={24} xs={24}>

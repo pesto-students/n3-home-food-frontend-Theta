@@ -19,7 +19,7 @@ import {
 } from "@ant-design/icons";
 import moment from "moment";
 import Image from "components/image/image";
-import noGraph from 'images/no_graph.png'
+import noGraph from "images/no_graph.png";
 
 const { RangePicker } = DatePicker;
 
@@ -29,9 +29,10 @@ function SellerGraphs() {
   const [revenueData, setrevenueData] = useState();
   const [orderCountData, setorderCountData] = useState();
   const [pieGraphData, setPieGraphData] = useState();
+  const dateFormat = "YYYY/MM/DD";
 
   useEffect(() => {
-    let startDate = moment().subtract(1, "day").format("YYYY-MM-DD");
+    let startDate = moment().subtract(7, "day").format("YYYY-MM-DD");
     let endDate = moment().format("YYYY-MM-DD");
     getSellerDetails();
     getGraphDetails([startDate, endDate]);
@@ -150,11 +151,7 @@ function SellerGraphs() {
 
   return (
     <div>
-      <Row>
-        <h2>{t("seller.dashboard.dashboardText")}</h2>
-      </Row>
-
-      <Row className="number-cards" justify="center">
+      <Row className="number-cards" justify="end">
         <Card hoverable={true} className="small-box">
           <Row className="stat-card">
             <Col span={8} className="icon-container">
@@ -188,12 +185,16 @@ function SellerGraphs() {
             </Col>
           </Row>
         </Card>
+        <div className='date-picker-custom'>
+          <RangePicker
+            defaultValue={[moment(), moment().subtract(7, "day")]}
+            format={dateFormat}
+            onChange={onChange}
+          />
+        </div>
       </Row>
 
-      <Row justify="end" className="m-1">
-        <RangePicker onChange={onChange} />
-        <FilterOutlined className="funnel" />
-      </Row>
+  
       <Row justify="center" className="m-4">
         <Col md={8} sm={24} xs={24}>
           <Card hoverable={true}>

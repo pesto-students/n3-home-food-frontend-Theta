@@ -2,7 +2,8 @@ import {
   ShopFilled,
   DropboxOutlined,
   PieChartOutlined,
-  UserOutlined
+  UserOutlined,
+  MenuOutlined
 } from "@ant-design/icons";
 import "./sellerDashboard.css";
 import { Layout, Menu } from "antd";
@@ -51,6 +52,10 @@ const SellerDashBoard = () => {
     handdleActiveTabs();
   }, []);
 
+  const CustomTrigger = () => (
+    <MenuOutlined />
+  );
+
   const logoSize = collapsed ? 50 : 100;
 
   return (
@@ -62,6 +67,7 @@ const SellerDashBoard = () => {
           collapsible
           collapsed={collapsed}
           onCollapse={onCollapse}
+          trigger={<CustomTrigger />}
         >
           <div className="home-food-logo">
             <Image
@@ -104,10 +110,11 @@ const SellerDashBoard = () => {
         <Layout className="site-layout">
           <Header className="header-navbar">
             <h1>{t("seller.dashboard.profileText")}</h1>
-            <div>
-              <Select />
-              <AvatarMenu />
+            <div className='custom-dropDown'>  
+            <Select  />  
             </div>
+              <AvatarMenu  image={seller}/>
+         
           </Header>
           <Content style={{ margin: "20px 16px" }}>
             {user === "Seller" ? (

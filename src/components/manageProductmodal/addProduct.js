@@ -69,7 +69,9 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, fromFor }) => {
             form.resetFields();
             onCreate(values);
           })
-          .catch((info) => {});
+          .catch((info) => {
+            
+          });
       }}
     >
       <Form

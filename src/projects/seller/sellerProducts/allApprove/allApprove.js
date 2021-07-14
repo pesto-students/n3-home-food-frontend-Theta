@@ -5,8 +5,11 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Image from "components/image/image";
 import DataNotFound from "components/dataNotFound/dataNotFound";
 import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
+import { useTranslation } from "react-i18next";
 
 const AllApprove = ({ products, isLoading }) => {
+  const { t } = useTranslation();
+
   const { Title } = Typography;
   const [ishasMore, setIshasMore] = useState(false);
 
@@ -43,7 +46,10 @@ const AllApprove = ({ products, isLoading }) => {
                       <div className="product-details ">
                         <Title level={4}>{product.name}</Title>
                         <p>{product.description}</p>
-                        <span>Max Amount: ₹ {product.max_price}</span>
+                        <span>
+                          {" "}
+                          {t("seller.profile.MaxAmount")}: ₹ {product.max_price}
+                        </span>
                         <Row>
                           {" "}
                           <Tag color="warning">{product.status}</Tag>

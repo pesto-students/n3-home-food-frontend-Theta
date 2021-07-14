@@ -14,7 +14,7 @@ const SelectBox = () => {
   return (
     <>
       <Select
-        defaultValue="English"
+        defaultValue={localStorage.getItem("i18nextLng") === "en" ? "en" : "hn"}
         style={{ width: 120 }}
         onChange={handleChange}
       >

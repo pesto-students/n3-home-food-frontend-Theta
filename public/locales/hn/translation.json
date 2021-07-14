@@ -101,7 +101,9 @@
             "address": "पता",
             "addressValidationAndPlaceholder": "कृपया पता दर्ज करें",
             "submit": "सबमिट करें",
-            "loginText": "पहले से ही एक विक्रेता, लॉगिन करें?"
+            "loginText": "पहले से ही एक विक्रेता, लॉगिन करें?",
+            "ProductImage": "उत्पाद छवि",
+            "ClickToUpload": "अपलोड करने के लिए क्लिक करें"
         },
         "dashboard":{
             "dashboardText": "डैशबोर्ड",
@@ -132,7 +134,11 @@
            
           },
           "profile":{
+            "deleteText": "हटाएं",
+            "MaxAmount": "अधिकतम राशि",
             "editText": "संपादित करें",
+            "Plates": "प्लेटें",
+            "Price": "कीमत",
             "editProfileModalTitle": "प्रोफ़ाइल संपादित करें",
             "profileImageText": "प्रोफ़ाइल छवि"
           },

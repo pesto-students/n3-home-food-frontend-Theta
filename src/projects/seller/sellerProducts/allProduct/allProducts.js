@@ -1,14 +1,12 @@
 import {
   Button,
   Card,
-
-  Modal, notification,
-
-
-  Row, Select,
-
+  Modal,
+  notification,
+  Row,
+  Select,
   Skeleton,
-  Typography
+  Typography,
 } from "antd";
 import DataNotFound from "components/dataNotFound/dataNotFound";
 import Image from "components/image/image";
@@ -19,8 +17,7 @@ import { useTranslation } from "react-i18next";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { getCategoryId, sessionId } from "utils/helpers";
 
-
-const AllProducts = ({ products, isLoading, callback ,fetchMoreProducts }) => {
+const AllProducts = ({ products, isLoading, callback, fetchMoreProducts }) => {
   const { t } = useTranslation();
   const { Title } = Typography;
   const { Option } = Select;
@@ -30,7 +27,7 @@ const AllProducts = ({ products, isLoading, callback ,fetchMoreProducts }) => {
   const [selectedCategory, setSelectedCategory] = useState([]);
 
   const fetchMoreData = () => {
-    fetchMoreProducts()
+    fetchMoreProducts();
   };
 
   const addToMyProduct = async () => {
@@ -129,7 +126,9 @@ const AllProducts = ({ products, isLoading, callback ,fetchMoreProducts }) => {
                       <div className="product-details ">
                         <Title level={4}>{product.name}</Title>
                         <p>{product.description}</p>
-                        <span>Max Amount ₹{product.max_price}</span>
+                        <span>
+                          {t("seller.profile.MaxAmount")} ₹{product.max_price}
+                        </span>
                       </div>
                     </div>
                   </div>

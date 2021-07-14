@@ -102,7 +102,10 @@
              "address":"Address",
              "addressValidationAndPlaceholder":"Please Enter Address",
              "submit":" Submit",
-             "loginText":"Already a seller, Login?"
+             "loginText":"Already a seller, Login?",
+             "ProductImage":"Product Image",
+             "ClickToUpload":"Click to upload"
+
 
             },
         "dashboard":{
@@ -134,7 +137,11 @@
             }
         },
         "profile":{
+          "Plates":"Plates",
+          "MaxAmount":"Max Amount",
+          "Price":"Price",
           "editText":"Edit",
+          "deleteText":"Delete",
           "profileImageText":"Profile Image",
           "editProfileModalTitle":"Edit Profile"
         },

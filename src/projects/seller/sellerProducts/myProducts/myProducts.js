@@ -20,11 +20,13 @@ import Image from "components/image/image";
 import { sessionId, getCategoryId } from "utils/helpers";
 import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
 import { catchError } from "utils/helpers";
+import { useTranslation } from "react-i18next";
 
 import DataNotFound from "components/dataNotFound/dataNotFound";
 import { updateProduct, deleteMyProduct } from "projects/seller/utils/api";
 
 const MyProducts = ({ products, isLoading, callback }) => {
+  const { t } = useTranslation();
   const { Option } = Select;
   const { Title } = Typography;
   const [myProducts, setMyProducts] = useState([...products]);
@@ -136,7 +138,7 @@ const MyProducts = ({ products, isLoading, callback }) => {
                           onClick={() => editableProduct(i)}
                           icon={<EditOutlined />}
                         >
-                          Edit
+                          {t("seller.profile.editText")}
                         </Menu.Item>
                         <Menu.Item
                           key="delete"
@@ -144,7 +146,7 @@ const MyProducts = ({ products, isLoading, callback }) => {
                           s
                           icon={<DeleteOutlined />}
                         >
-                          Delete
+                          {t("seller.profile.deleteText")}
                         </Menu.Item>
                       </Menu>
                     }
@@ -230,7 +232,10 @@ const MyProducts = ({ products, isLoading, callback }) => {
                                 />
                               </Form.Item>
                             ) : (
-                              <span>Plates: {product.quantity} </span>
+                              <span>
+                                {" "}
+                                {t("seller.profile.Plates")}: {product.quantity}{" "}
+                              </span>
                             )}
                           </Col>
                           <Col md={24}>
@@ -251,7 +256,10 @@ const MyProducts = ({ products, isLoading, callback }) => {
                                 />
                               </Form.Item>
                             ) : (
-                              <span>Price: ₹ {product.price} </span>
+                              <span>
+                                {" "}
+                                {t("seller.profile.Price")}: ₹ {product.price}{" "}
+                              </span>
                             )}
                           </Col>
                         </Row>

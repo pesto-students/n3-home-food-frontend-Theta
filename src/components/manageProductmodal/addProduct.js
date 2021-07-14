@@ -69,9 +69,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, fromFor }) => {
             form.resetFields();
             onCreate(values);
           })
-          .catch((info) => {
-            
-          });
+          .catch((info) => {});
       }}
     >
       <Form
@@ -149,13 +147,15 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, fromFor }) => {
 
         <Form.Item
           name="productImage"
-          label="Product Image"
+          label={t("seller.registerForm.ProductImage")}
           valuePropName="fileList"
           getValueFromEvent={normFile}
           extra=""
         >
           <Upload {...props} name="logo" maxCount={1}>
-            <Button icon={<UploadOutlined />}>Click to Upload</Button>
+            <Button icon={<UploadOutlined />}>
+              {t("seller.registerForm.ClickToUpload")}
+            </Button>
           </Upload>
         </Form.Item>
 

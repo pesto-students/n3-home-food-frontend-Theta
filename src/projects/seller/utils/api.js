@@ -37,7 +37,6 @@ export const getAllCurrentOrderSeller = async (sessionId, page) => {
 };
 
 export const getAllPastOrderSeller = async (sessionId, page) => {
-  console.log("page", page);
   let response = await axios
     .get(`/orders/get-approved/${sessionId}?page=${page}`)
     .then((response) => {

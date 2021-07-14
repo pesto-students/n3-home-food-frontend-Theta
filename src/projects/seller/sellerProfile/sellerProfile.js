@@ -3,7 +3,7 @@ import { Card, Col, Rate, Row, Typography } from "antd";
 import Image from "components/image/image";
 import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
 import { rupeeSign } from "utils/constant";
-import { sessionId } from "utils/helpers";
+import { sessionId, catchError } from "utils/helpers";
 import { EditProfile } from "./editProfile";
 import { getSellerProfile, getSellerWallet } from "../utils/api";
 import { WalletOutlined } from "@ant-design/icons";
@@ -22,7 +22,9 @@ const SellerProfile = () => {
         setProfile(response.data);
         setIsLoading(false);
       }
-    } catch (error) {}
+    } catch (error) {
+      catchError(error);
+    }
   };
 
   const getWallet = async () => {

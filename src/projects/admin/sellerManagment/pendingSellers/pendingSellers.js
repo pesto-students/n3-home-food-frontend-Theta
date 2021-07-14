@@ -1,11 +1,12 @@
 import { Button, Card, notification, Row, Skeleton } from "antd";
 import DataNotFound from "components/dataNotFound/dataNotFound";
-import Image from 'components/image/image';
+import Image from "components/image/image";
 import { RejectSellerModal } from "components/manageSellerModal/rejectSeller";
 import { approveSellerById } from "projects/admin/utils/api";
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import "./pendingSeller.css";
+import { catchError } from "utils/helpers";
 
 const openNotificationWithIcon = (type, message) => {
   notification[type]({
@@ -25,7 +26,9 @@ const PendingSellers = ({ callback, sellers, isLoading }) => {
       } else {
         openNotificationWithIcon("error", "Could Not Approve Seller");
       }
-    } catch (error) {}
+    } catch (error) {
+      catchError(error);
+    }
   };
 
   const updateSellerList = () => {
@@ -52,7 +55,12 @@ const PendingSellers = ({ callback, sellers, isLoading }) => {
                   <div className="container">
                     <div className="row">
                       <div className="product-cointaner">
-                        <Image url={seller.image} height={150} width={100} type='seller'/>
+                        <Image
+                          url={seller.image}
+                          height={150}
+                          width={100}
+                          type="seller"
+                        />
                       </div>
                       <div className="product-details ">
                         <span className="seller-name">{seller.name}</span>

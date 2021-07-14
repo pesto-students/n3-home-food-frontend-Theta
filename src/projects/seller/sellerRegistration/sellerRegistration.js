@@ -8,6 +8,7 @@ import "./sellerRegistration.css";
 import CustomerLogin from "landingScreen/customerLogin";
 import { setIsCustomerLoginDrawerOpen } from "store/actions";
 import { registerSeller } from "../utils/api";
+import { catchError } from "utils/helpers";
 
 function SellerRegistration() {
   const { t } = useTranslation();
@@ -39,7 +40,9 @@ function SellerRegistration() {
           toggleDrawer();
         }, [2000]);
       }
-    } catch (error) {}
+    } catch (error) {
+      catchError(error);
+    }
   };
 
   return (

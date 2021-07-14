@@ -4,14 +4,14 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { sessionId } from "utils/helpers";
 import {
-  getAllProduct, getSellerApprovedProduct,
-
-  getSellerListedProduct
+  getAllProduct,
+  getSellerApprovedProduct,
+  getSellerListedProduct,
 } from "../utils/api";
 import AllApprove from "./allApprove/allApprove";
 import AllProducts from "./allProduct/allProducts";
 import MyProducts from "./myProducts/myProducts";
-
+import { catchError } from "utils/helpers";
 
 const SellerProducts = () => {
   const { t } = useTranslation();
@@ -33,7 +33,9 @@ const SellerProducts = () => {
         setAllApprove((allApprove) => [...allApprove, ...updatedProducts]);
         setIsLoading(false);
       }
-    } catch (error) {}
+    } catch (error) {
+      catchError(error);
+    }
   };
 
   const getAllProducts = async (page) => {
@@ -47,7 +49,9 @@ const SellerProducts = () => {
         setAllProducts((allProducts) => [...allProducts, ...updatedProducts]);
         setIsLoading(false);
       }
-    } catch (error) {}
+    } catch (error) {
+      catchError(error);
+    }
   };
 
   const getMyProducts = async () => {
@@ -57,7 +61,9 @@ const SellerProducts = () => {
         setMyProducts(response.data[0].myProducts);
         setIsLoading(false);
       }
-    } catch (error) {}
+    } catch (error) {
+      catchError(error);
+    }
   };
 
   const fetchMoreProducts = () => {

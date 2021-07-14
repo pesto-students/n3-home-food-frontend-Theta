@@ -3,14 +3,13 @@ import TabTag from "components/tag/tag";
 import React, { useEffect, useState } from "react";
 import {
   getAllApproveSeller,
-  getAllPendingSeller, getAllRejectedSeller
+  getAllPendingSeller,
+  getAllRejectedSeller,
 } from "../utils/api";
 import PendingSellers from "./pendingSellers/pendingSellers";
 import RejectedSellers from "./rejectedSeller /rejectedSellers";
 import SellerApproval from "./Seller Approval/sellerApproval";
-
-// import AllProducts from './allProducts/allProducts';
-// import ProductApproval from './product Approval/productApproval';
+import { catchError } from "utils/helpers";
 
 const SellerManagment = () => {
   const { TabPane } = Tabs;
@@ -30,7 +29,9 @@ const SellerManagment = () => {
         setRejectedSellersItems(response.data);
         setIsLoading(false);
       }
-    } catch (error) {}
+    } catch (error) {
+      catchError(error);
+    }
   };
 
   const approveSeller = async (page) => {
@@ -40,7 +41,9 @@ const SellerManagment = () => {
         setApproveSellersItems(response.data);
         setIsLoading(false);
       }
-    } catch (error) {}
+    } catch (error) {
+      catchError(error);
+    }
   };
 
   const pendingSeller = async () => {
@@ -50,11 +53,12 @@ const SellerManagment = () => {
         setPendingSellersItems(response.data);
         setIsLoading(false);
       }
-    } catch (error) {}
+    } catch (error) {
+      catchError(error);
+    }
   };
 
   const fetchMoreSellers = () => {
-    console.log("fetch more");
     approveSeller(page);
   };
 

@@ -3,11 +3,10 @@ import CustomerNavbar from "components/customerNavbar/customerNavbar";
 import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { getUser, setPincode } from "utils/helpers";
+import { getUser, setPincode, catchError } from "utils/helpers";
 import { getAllCurrentOrder } from "../utils/api";
 import CustomerCurrentOrders from "./customerCurrentOrders";
 import "./order.css";
-
 
 const SellerProducts = () => {
   const { t } = useTranslation();
@@ -22,7 +21,9 @@ const SellerProducts = () => {
         setCurrentOrdersItem(response.data);
         setIsLoading(false);
       }
-    } catch (error) {}
+    } catch (error) {
+      catchError(error);
+    }
   };
 
   const user = getUser() ? getUser().userType : null;

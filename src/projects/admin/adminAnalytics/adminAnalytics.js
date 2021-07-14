@@ -2,7 +2,7 @@ import {
   MoneyCollectOutlined,
   ShoppingCartOutlined,
   UserAddOutlined,
-  UsergroupAddOutlined
+  UsergroupAddOutlined,
 } from "@ant-design/icons";
 import { Card, Col, DatePicker, Row } from "antd";
 import Image from "components/image/image";
@@ -14,8 +14,9 @@ import React, { useEffect, useState } from "react";
 import {
   getAdminCategoryChartDetails,
   getAdminGraphDetails,
-  getAllOrderCount
+  getAllOrderCount,
 } from "../utils/api";
+import { catchError } from "utils/helpers";
 import "./adminDashboard.css";
 
 const { RangePicker } = DatePicker;
@@ -46,10 +47,11 @@ function AdminDashboard() {
           dateGraphData.push(element._id);
         });
         let dataSource = [dateGraphData, lineGraphDataMock];
-        console.log(dataSource);
         setLineGraphData(dataSource);
       }
-    } catch (error) {}
+    } catch (error) {
+      catchError(error);
+    }
   };
 
   const getAdminDetails = async () => {
@@ -58,7 +60,9 @@ function AdminDashboard() {
       if (response.status === 200) {
         response.data ? setadminData(response.data) : setadminData(0);
       }
-    } catch (error) {}
+    } catch (error) {
+      catchError(error);
+    }
   };
 
   const getOrderDetailsCateogryWise = async (dateString) => {
@@ -66,15 +70,10 @@ function AdminDashboard() {
       const response = await getAdminCategoryChartDetails(dateString);
       if (response.status === 200) {
         let categoryArray = [];
-        // response.data
-        //   ? setCategoryData(response.data.orderItems)
-        //   : setCategoryData(0);
-        // console.log(response.data[1])
         response.data.forEach((order) => {
           order.categories.forEach((ordercat) => {
             ordercat.orderItems.items.forEach((element) => {
               element.productId.category.forEach((item) => {
-                //  categoryArray.push({date:order.date ,category: item.name})
                 categoryArray.push(item.name);
               });
             });
@@ -104,11 +103,12 @@ function AdminDashboard() {
           ["Dinner", dinner],
         ]);
       }
-    } catch (error) {}
+    } catch (error) {
+      catchError(error);
+    }
   };
 
   const onChange = (value, dateString) => {
-    console.log("value", dateString);
     getGraphDetails(dateString);
     getOrderDetailsCateogryWise(dateString);
   };

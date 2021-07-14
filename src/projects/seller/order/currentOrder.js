@@ -1,10 +1,10 @@
-import { Button, Card, Col, notification, Row, Tag,Typography } from "antd";
+import { Button, Card, Col, notification, Row, Tag, Typography } from "antd";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { orderDelived } from "../utils/api";
 import { rupeeSign } from "utils/constant";
 import DataNotFound from "components/dataNotFound/dataNotFound";
-import { orderTimeFormat } from "utils/helpers";
+import { orderTimeFormat, catchError } from "utils/helpers";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 const CurrentOrders = ({ orders, callBack, fetchMoreProducts }) => {
@@ -22,7 +22,9 @@ const CurrentOrders = ({ orders, callBack, fetchMoreProducts }) => {
         });
         callBack();
       }
-    } catch (error) {}
+    } catch (error) {
+      catchError(error);
+    }
   };
 
   if (orders.length === 0) {
@@ -52,7 +54,6 @@ const CurrentOrders = ({ orders, callBack, fetchMoreProducts }) => {
                     {t("seller.order.deliveryType")} :{" "}
                     <Tag color="processing">{item.DeliveryType}</Tag>
                   </Text>
-               
                 </Col>
                 <Col md={12}>
                   <Row justify="end">

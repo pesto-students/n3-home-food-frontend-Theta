@@ -1,19 +1,11 @@
-import {
-  Carousel,
-  Col,
-  Layout,
-  notification,
-  Row,
-  Tabs,
-  Typography,
-} from "antd";
+import { Carousel, Col, Layout, Row, Tabs, Typography } from "antd";
 import CustomerNavbar from "components/customerNavbar/customerNavbar";
 import Image from "components/image/image";
 import SellerItems from "landingScreen/sellerItems";
 import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { bannerImage } from "utils/constant";
-import { getCategoryId, getPincode, getUser } from "utils/helpers";
+import { getCategoryId, getPincode, getUser, catchError } from "utils/helpers";
 import { getCategorySeller, getSellerByPage } from "../utils/api";
 
 const { Content } = Layout;
@@ -38,9 +30,7 @@ const CustomerHome = () => {
     if (user === null) window.location.href = "/";
   }, [user]);
 
-  useEffect(() => {
-    console.log(seller);
-  }, [seller]);
+  useEffect(() => {}, [seller]);
 
   const getSellersByPincode = useCallback(async () => {
     setLoadSeller(false);
@@ -50,7 +40,9 @@ const CustomerHome = () => {
         setSeller(response.data);
         setLoadSeller(true);
       }
-    } catch (error) {}
+    } catch (error) {
+      catchError(error);
+    }
   }, [pincode]);
 
   const getAllSellerByCategory = async (categoryKey) => {
@@ -66,11 +58,7 @@ const CustomerHome = () => {
           setLoadSeller(true);
         }
       } catch (error) {
-        notification.error({
-          message: "Error",
-          description: error.response,
-          placement: "topLeft",
-        });
+        catchError(error);
       }
     } else {
       getSellersByPincode(pincode);
@@ -88,7 +76,9 @@ const CustomerHome = () => {
         });
         setSeller((seller) => [...seller, ...updatedSeller]);
       }
-    } catch (error) {}
+    } catch (error) {
+      catchError(error);
+    }
   }, [pincode, tabSelected, page]);
 
   const updatePincode = (code) => {

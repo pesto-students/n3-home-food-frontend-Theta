@@ -7,7 +7,7 @@ import noGraph from "images/no_graph.png";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { rupeeSign } from "utils/constant";
-import { sessionId } from "utils/helpers";
+import { sessionId, catchError } from "utils/helpers";
 import {
   getGraphDetailSeller,
   getSellerDetailsWallet,
@@ -35,9 +35,7 @@ function SellerGraphs() {
     getPieChartDetails([startDate, endDate]);
   }, []);
 
-  useEffect(() => {
-    console.log(lineGraphData, pieGraphData);
-  }, [pieGraphData, lineGraphData]);
+  useEffect(() => {}, [pieGraphData, lineGraphData]);
 
   const getGraphDetails = async (dateString) => {
     let lineGraphDataMock = ["revenue"];
@@ -50,14 +48,15 @@ function SellerGraphs() {
           dateGraphData.push(element._id);
         });
         let dataSource = [dateGraphData, lineGraphDataMock];
-        console.log(lineGraphDataMock.length);
 
         setLineGraphData(dataSource);
         // (lineGraphDataMock.length > 1 )
         //   ? setLineGraphData(dataSource)
         //   : setLineGraphData()
       }
-    } catch (error) {}
+    } catch (error) {
+      catchError(error);
+    }
   };
 
   const getSellerDetails = async () => {
@@ -69,7 +68,9 @@ function SellerGraphs() {
           : setorderCountData(0);
         setrevenueData(response.data.totalPrice);
       }
-    } catch (error) {}
+    } catch (error) {
+      catchError(error);
+    }
   };
 
   const getPieChartDetails = async (dateString) => {
@@ -113,7 +114,9 @@ function SellerGraphs() {
             ])
           : setPieGraphData();
       }
-    } catch (error) {}
+    } catch (error) {
+      catchError(error);
+    }
   };
 
   const onChange = (value, dateString) => {
@@ -177,7 +180,10 @@ function SellerGraphs() {
             <div id="chart">
               {pieGraphData && <PieChart dataSource={pieGraphData} />}
               {!pieGraphData && (
-                <Image height="150" width="150" url={noGraph}></Image>
+                <>
+                  <h5>{t("Header.Categories Sold")}</h5>
+                  <Image height="150" width="150" url={noGraph}></Image>
+                </>
               )}
             </div>
           </Card>
@@ -187,7 +193,10 @@ function SellerGraphs() {
           <Card hoverable={true}>
             {lineGraphData && <LineChart dataSource={lineGraphData} />}
             {!lineGraphData && (
-              <Image height="150" width="150" url={noGraph}></Image>
+              <>
+                <h5>{t("Header.MyIncome")}</h5>
+                <Image height="150" width="150" url={noGraph}></Image>
+              </>
             )}
           </Card>
         </Col>

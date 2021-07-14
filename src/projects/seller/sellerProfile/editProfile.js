@@ -3,7 +3,7 @@ import { Button, Col, Form, Input, message, Modal, Row, Upload } from "antd";
 
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { sessionId } from "utils/helpers";
+import { sessionId, catchError } from "utils/helpers";
 import { editProfile } from "../utils/api";
 
 const props = {
@@ -271,7 +271,6 @@ export const EditProfile = ({ profile, callBack }) => {
   const { t } = useTranslation();
 
   const onCreate = async (values) => {
-    console.log(values);
     const data = new FormData();
 
     data.append("name", values.name);
@@ -290,9 +289,10 @@ export const EditProfile = ({ profile, callBack }) => {
       if (response.status === 200) {
         callBack();
         setVisible(false);
-        console.log(response, response.status);
       }
-    } catch (error) {}
+    } catch (error) {
+      catchError(error);
+    }
   };
 
   return (

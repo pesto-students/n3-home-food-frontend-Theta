@@ -37,7 +37,6 @@ export const getCategoryId = (category) => {
 
 export const sessionId = () => {
   let user = getUser();
-  // console.log('user.id ',user.id )
   return user ? user.id : "";
 };
 
@@ -51,4 +50,11 @@ export const getPincode = () => {
 
 export const orderTimeFormat = (date) => {
   return moment(date).format("dddd, MMMM Do YYYY, h:mm a");
+};
+
+export const catchError = (error) => {
+  console.log(process.env.NODE_ENV);
+  if (process.env.NODE_ENV === "development") {
+    console.log(error);
+  }
 };

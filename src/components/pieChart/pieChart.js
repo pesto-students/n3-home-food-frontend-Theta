@@ -14,12 +14,8 @@ const PieChart = ({ dataSource }) => {
       data: {
         columns: dataSource,
         type: pie(), // for ESM specify as: pie()
-        onover: function (d, i) {
-          console.log("onover", d, i);
-        },
-        onout: function (d, i) {
-          console.log("onout", d, i);
-        },
+        onover: function (d, i) {},
+        onout: function (d, i) {},
       },
       pie: {
         innerRadius: 20,

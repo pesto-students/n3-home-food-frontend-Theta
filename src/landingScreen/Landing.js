@@ -1,12 +1,4 @@
-import {
-  Carousel,
-  Col,
-  Layout,
-  notification,
-  Row,
-  Tabs,
-  Typography,
-} from "antd";
+import { Carousel, Col, Layout, Row, Tabs, Typography } from "antd";
 import Image from "components/image/image";
 import Navbar from "components/navbar/navbar";
 import { React, useCallback, useEffect, useState } from "react";
@@ -16,6 +8,7 @@ import { bannerImage } from "utils/constant";
 import {
   getCategoryId,
   getPincode,
+  catchError,
   redirectToOriginalPageFromLanding,
 } from "utils/helpers";
 import "./landing.css";
@@ -39,21 +32,13 @@ const LandingPage = () => {
   const getSellers = async (code) => {
     try {
       const response = await getSellerByPage(code, 1, "All");
-      // const response = await getAllSellerByPincode(code);
       if (response.status === 200) {
         setSeller(response.data);
         setLoadSeller(true);
       }
     } catch (error) {
-      setLoadSeller(false);
-
-      notification.error({
-        message: "Error",
-        description: error.response
-          ? error.response.data
-          : "Something went wrong",
-        placement: "topLeft",
-      });
+      setLoadSeller(true);
+      catchError(error);
     }
   };
 
@@ -70,12 +55,7 @@ const LandingPage = () => {
           setLoadSeller(true);
         }
       } catch (error) {
-        console.log(error);
-        notification.error({
-          message: "Error",
-          description: error.response,
-          placement: "topLeft",
-        });
+        catchError(error);
       }
     } else {
       getSellers(pincode);
@@ -97,7 +77,6 @@ const LandingPage = () => {
     setPage(page + 1);
     try {
       let response = await getSellerByPage(pincode, page, tabSelected);
-      console.log("updated seller", response);
 
       if (response.status === 200) {
         let updatedSeller = [];
@@ -106,7 +85,9 @@ const LandingPage = () => {
         });
         setSeller((seller) => [...seller, ...updatedSeller]);
       }
-    } catch (error) {}
+    } catch (error) {
+      catchError(error);
+    }
   }, [pincode, tabSelected, page]);
 
   const getCurrentTab = (tab) => {

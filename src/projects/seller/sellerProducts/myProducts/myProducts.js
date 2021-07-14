@@ -19,6 +19,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Image from "components/image/image";
 import { sessionId, getCategoryId } from "utils/helpers";
 import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
+import { catchError } from "utils/helpers";
 
 import DataNotFound from "components/dataNotFound/dataNotFound";
 import { updateProduct, deleteMyProduct } from "projects/seller/utils/api";
@@ -68,7 +69,9 @@ const MyProducts = ({ products, isLoading, callback }) => {
         });
         callback();
       }
-    } catch (error) {}
+    } catch (error) {
+      catchError(error);
+    }
   };
 
   const editableProduct = (key) => {
@@ -99,7 +102,9 @@ const MyProducts = ({ products, isLoading, callback }) => {
         setMyProducts([...products]);
         callback();
       }
-    } catch (error) {}
+    } catch (error) {
+      catchError(error);
+    }
   };
 
   const changeCategory = (categoryies) => {

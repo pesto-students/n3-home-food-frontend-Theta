@@ -4,7 +4,7 @@ import React from "react";
 import { rupeeSign } from "utils/constant";
 import { useTranslation } from "react-i18next";
 import { putRateToOrder } from "../utils/api";
-import { orderTimeFormat } from "utils/helpers";
+import { orderTimeFormat, catchError } from "utils/helpers";
 
 const CustomerCurrentOrders = ({ orders, callBack }) => {
   const { t } = useTranslation();
@@ -21,7 +21,9 @@ const CustomerCurrentOrders = ({ orders, callBack }) => {
         });
         callBack();
       }
-    } catch (error) {}
+    } catch (error) {
+      catchError(error);
+    }
   };
 
   return (

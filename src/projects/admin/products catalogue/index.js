@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { getAllApprovedProduct, getAllPendingProduct } from "../utils/api";
 import AllProducts from "./allProducts/allProducts";
 import ProductApproval from "./product Approval/productApproval";
-
+import { catchError } from "utils/helpers";
 
 const { TabPane } = Tabs;
 
@@ -30,7 +30,9 @@ const ProductCatalogue = () => {
         ]);
         setIsLoading(false);
       }
-    } catch (error) {}
+    } catch (error) {
+      catchError(error);
+    }
   };
 
   const allApproved = async (page) => {
@@ -47,7 +49,9 @@ const ProductCatalogue = () => {
         ]);
         setIsLoading(false);
       }
-    } catch (error) {}
+    } catch (error) {
+      catchError(error);
+    }
   };
 
   const fetchMoreAllProducts = () => {

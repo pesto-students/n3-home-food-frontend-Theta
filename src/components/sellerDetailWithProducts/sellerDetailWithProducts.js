@@ -31,7 +31,7 @@ const SellerDetailWithProducts = ({ match }) => {
   });
 
   const getCurrentTab = (tab) => {
-    setTabSelected(tab)
+    setTabSelected(tab);
     if (tab === "0") {
       let products = [];
       profile.myProducts.forEach((element, index) => {
@@ -66,7 +66,7 @@ const SellerDetailWithProducts = ({ match }) => {
       setAllProduct([...products]);
       setIsLoading(false);
     }
-  }, [sellerId,pageSize]);
+  }, [sellerId, pageSize]);
 
   const getCart = async () => {
     if (sessionId()) {
@@ -86,12 +86,11 @@ const SellerDetailWithProducts = ({ match }) => {
   };
 
   const fetchMoreProducts = useCallback(async () => {
-    let pageLimit =  pageSize + 5 
-    setPageSize(pageLimit)
-    console.log('scrolled')
+    let pageLimit = pageSize + 5;
+    setPageSize(pageLimit);
     if (tabSelected === "0") {
       let products = [];
-      
+
       profile.myProducts.forEach((element, index) => {
         if (index > pageLimit) return;
         products.push(element);
@@ -99,9 +98,7 @@ const SellerDetailWithProducts = ({ match }) => {
       setAllProduct([...products]);
       return;
     }
-  },[pageSize,profile,tabSelected])
-
-
+  }, [pageSize, profile, tabSelected]);
 
   useEffect(() => {
     getSellerProfile();
@@ -168,7 +165,7 @@ const SellerDetailWithProducts = ({ match }) => {
                     reloadCart={getCart}
                     savedCartItem={alreadyInCart.items}
                     sellerId={sellerId}
-                    fetchMoreProducts = {fetchMoreProducts}
+                    fetchMoreProducts={fetchMoreProducts}
                   />
                 )}
               </Col>

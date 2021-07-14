@@ -62,7 +62,7 @@ export const getSellerProfile = async (sessionId) => {
 
 export const getSellerWallet = async (sessionId) => {
   let response = await axios
-    .get(`/orders/seller-wallet${sessionId}`)
+    .get(`/orders/seller-wallet/${sessionId}`)
     .then((response) => {
       return response;
     })

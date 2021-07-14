@@ -5,6 +5,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import item from "images/seller.png";
 import "../Seller Approval/sellerApproval.css";
 import DataNotFound from "components/dataNotFound/dataNotFound";
+import Image from 'components/image/image'
 const RejectedSellers = ({ isLoading, sellers }) => {
   const fetchMoreData = () => {
     // axios
@@ -43,7 +44,9 @@ const RejectedSellers = ({ isLoading, sellers }) => {
                   <div>
                     <div className="row seller-row">
                       <div className="product-cointaner">
-                        <img src={item} className="product-image" alt="" />
+                        {/* <img src={seller.image} className="product-image" alt="" /> */}
+                        <Image url={seller.image} height={150} width={100} type='seller'/>
+
                         <div className="seller-details">
                           <span className="seller-name">{seller.name}</span>
                           <span className="rejection-reason">

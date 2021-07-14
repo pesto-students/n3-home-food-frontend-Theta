@@ -41,7 +41,7 @@ const SellerApproval = ({ isLoading, sellers, callback }) => {
                   <div>
                     <div className="row seller-row">
                       <div className="product-cointaner">
-                        <img src={item} className="product-image" alt="" />
+                        <img src={seller.image} className="product-image" alt="" />
 
                         <span className="seller-name">{seller.name}</span>
                       </div>

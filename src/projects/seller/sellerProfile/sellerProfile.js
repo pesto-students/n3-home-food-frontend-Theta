@@ -29,10 +29,10 @@ const SellerProfile = () => {
     try {
       const response = await getSellerWallet(sessionId());
       if (response.status === 200) {
-        setWallet(200);
+        setWallet(response.data.totalPrice);
       }
     } catch (error) {
-      setWallet(200);
+      setWallet(0);
     }
   };
 

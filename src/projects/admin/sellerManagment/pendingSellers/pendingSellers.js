@@ -7,7 +7,7 @@ import item from "images/south-indian.jpg";
 import "./pendingSeller.css";
 import { approveSellerById } from "projects/admin/utils/api";
 import DataNotFound from "components/dataNotFound/dataNotFound";
-
+import Image from 'components/image/image'
 const openNotificationWithIcon = (type, message) => {
   notification[type]({
     message: message,
@@ -53,7 +53,7 @@ const PendingSellers = ({ callback, sellers, isLoading }) => {
                   <div className="container">
                     <div className="row">
                       <div className="product-cointaner">
-                        <img src={item} className="product-image" alt="" />
+                        <Image url={seller.image} height={150} width={100} type='seller'/>
                       </div>
                       <div className="product-details ">
                         <span className="seller-name">{seller.name}</span>

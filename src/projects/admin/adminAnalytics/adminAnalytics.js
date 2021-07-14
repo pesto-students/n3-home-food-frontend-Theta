@@ -1,23 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { Card, Col, DatePicker, Row, notification } from "antd";
+import {
+  MoneyCollectOutlined, ShoppingCartOutlined,
+
+  UserAddOutlined,
+  UsergroupAddOutlined
+} from "@ant-design/icons";
+import { Card, Col, DatePicker, notification, Row } from "antd";
+import Image from "components/image/image";
 import LineChart from "components/lineChart/lineChart";
 import PieChart from "components/pieChart/pieChart";
-import "./adminDashboard.css";
-import {
-  getAdminGraphDetails,
-  getAllOrderCount,
-  getAdminCategoryChartDetails,
-} from "../utils/api";
+import noGraph from 'images/no_graph.png';
 import moment from "moment";
+import React, { useEffect, useState } from "react";
 import {
-  ShoppingCartOutlined,
-  MoneyCollectOutlined,
-  UserAddOutlined,
-  UsergroupAddOutlined,
-  FilterOutlined,
-} from "@ant-design/icons";
-import noGraph from 'images/no_graph.png'
-import Image from "components/image/image";
+  getAdminCategoryChartDetails, getAdminGraphDetails,
+  getAllOrderCount
+} from "../utils/api";
+import "./adminDashboard.css";
 
 const { RangePicker } = DatePicker;
 

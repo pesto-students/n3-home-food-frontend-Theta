@@ -1,23 +1,24 @@
 import {
   Button,
   Card,
-  notification,
-  Modal,
-  Select,
-  Row,
-  Skeleton,
-  Typography,
-} from "antd";
 
-import React, { useState } from "react";
-import InfiniteScroll from "react-infinite-scroll-component";
+  Modal, notification,
+
+
+  Row, Select,
+
+  Skeleton,
+  Typography
+} from "antd";
+import DataNotFound from "components/dataNotFound/dataNotFound";
 import Image from "components/image/image";
 import { AddProductSellerModal } from "components/manageProductmodal/addProduct";
-import { getCategoryId, sessionId } from "utils/helpers";
-import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
-import { useTranslation } from "react-i18next";
-import DataNotFound from "components/dataNotFound/dataNotFound";
 import { setAddProductIntoMyProduct } from "projects/seller/utils/api";
+import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { getCategoryId, sessionId } from "utils/helpers";
+
 
 const AllProducts = ({ products, isLoading, callback ,fetchMoreProducts }) => {
   const { t } = useTranslation();

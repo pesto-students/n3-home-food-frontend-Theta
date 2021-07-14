@@ -13,7 +13,6 @@ function callback(key) {}
 const ProductCatalogue = () => {
   const [approveProducts, setApproveProducts] = useState([]);
   const [pendingproducts, setPendingproducts] = useState([]);
-  const [page, setPage] = useState(2);
   const [Approvepage, setAppovalPage] = useState(2);
   const [isLoading, setIsLoading] = useState(true);
   

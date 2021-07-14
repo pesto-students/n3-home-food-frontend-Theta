@@ -1,21 +1,23 @@
-import React, { useEffect, useState, useCallback } from "react";
 import {
   Carousel,
   Col,
   Layout,
-  Row,
-  Typography,
-  notification,
-  Tabs,
-} from "antd";
-import { useTranslation } from "react-i18next";
 
-import Image from "components/image/image";
+
+  notification, Row,
+
+
+  Tabs, Typography
+} from "antd";
 import CustomerNavbar from "components/customerNavbar/customerNavbar";
-import { getCategoryId, getPincode, getUser } from "utils/helpers";
+import Image from "components/image/image";
 import SellerItems from "landingScreen/sellerItems";
-import { getSeller, getCategorySeller,getSellerByPage } from "../utils/api";
+import React, { useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { bannerImage } from "utils/constant";
+import { getCategoryId, getPincode, getUser } from "utils/helpers";
+import { getCategorySeller, getSellerByPage } from "../utils/api";
+
 
 const { Content } = Layout;
 const { Title } = Typography;

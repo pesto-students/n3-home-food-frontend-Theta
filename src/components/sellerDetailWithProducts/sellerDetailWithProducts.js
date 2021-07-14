@@ -24,7 +24,6 @@ const SellerDetailWithProducts = ({ match }) => {
   const [isCartLoad, setIsCartLoad] = useState(false);
   const [allProduct, setAllProduct] = useState(false);
   const [profile, setProfile] = useState({});
-  const [page, setPage] = useState(2);
   const [tabSelected, setTabSelected] = useState(0);
   const [pageSize, setPageSize] = useState(5);
   const [alreadyInCart, setAlreadyInCart] = useState({
@@ -67,7 +66,7 @@ const SellerDetailWithProducts = ({ match }) => {
       setAllProduct([...products]);
       setIsLoading(false);
     }
-  }, [sellerId]);
+  }, [sellerId,pageSize]);
 
   const getCart = async () => {
     if (sessionId()) {

@@ -1,30 +1,27 @@
-import React, { useEffect, useState } from "react";
-import { Card, Col, DatePicker, Row, notification } from "antd";
-
+import {
+  MoneyCollectOutlined, ShoppingCartOutlined
+} from "@ant-design/icons";
+import { Card, Col, DatePicker, notification, Row } from "antd";
+import Image from "components/image/image";
 import LineChart from "components/lineChart/lineChart";
 import PieChart from "components/pieChart/pieChart";
-import "./sellerGraphs.css";
-import { useTranslation } from "react-i18next";
+import noGraph from "images/no_graph.png";
+import moment from "moment";
+import React, { useEffect, useState } from "react";
+import { rupeeSign } from "utils/constant";
 import { sessionId } from "utils/helpers";
 import {
   getGraphDetailSeller,
   getSellerDetailsWallet,
-  getSellerPieChartData,
+  getSellerPieChartData
 } from "../utils/api";
-import { rupeeSign } from "utils/constant";
-import {
-  ShoppingCartOutlined,
-  MoneyCollectOutlined,
-  FilterOutlined,
-} from "@ant-design/icons";
-import moment from "moment";
-import Image from "components/image/image";
-import noGraph from "images/no_graph.png";
+import "./sellerGraphs.css";
+
 
 const { RangePicker } = DatePicker;
 
 function SellerGraphs() {
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
   const [lineGraphData, setLineGraphData] = useState();
   const [revenueData, setrevenueData] = useState();
   const [orderCountData, setorderCountData] = useState();

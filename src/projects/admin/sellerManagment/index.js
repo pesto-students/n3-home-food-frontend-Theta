@@ -20,7 +20,7 @@ const SellerManagment = () => {
   const [approveSellerItems, setApproveSellersItems] = useState([]);
   const [rejectedSellersItems, setRejectedSellersItems] = useState([]);
   const [pendingSellersItems, setPendingSellersItems] = useState([]);
-  const [page, setPage] = useState(2);
+  const [page] = useState(2);
 
   const callback = (key) => {};
 

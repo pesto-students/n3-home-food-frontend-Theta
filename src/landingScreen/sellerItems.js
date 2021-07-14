@@ -1,11 +1,10 @@
-import { Row, Col } from "antd";
+import { Col, Row } from "antd";
 import SellerCard from "components/sellerCard/sellerCard";
 import ServiceNotFound from "components/serviceNotFound/serviceNotFound";
 import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
-import { Link } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
-import './sellerItems.css'
-import { useState } from "react";
+import { Link } from "react-router-dom";
+import './sellerItems.css';
 const SellerItems = ({ loading, seller ,fetchMoreSellers}) => {
 
   const fetchMoreData = () => {

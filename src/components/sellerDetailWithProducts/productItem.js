@@ -17,9 +17,6 @@ const ProductItems = ({ products, savedCartItem, reloadCart, sellerId, ...props}
   const { Title } = Typography;
   const [allProducts, setAllProducts] = useState([...products]);
 
-  useEffect(() => {
-    console.log('props',props.title.sellerIdInCart)
-  }, []);
 
   useEffect(() => {}, [savedCartItem]);
 

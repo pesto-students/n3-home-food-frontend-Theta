@@ -1,26 +1,29 @@
 import {
   Carousel,
   Col,
-  Tabs,
-  Layout,
-  Row,
-  Typography,
-  notification,
-} from "antd";
 
-import { React, useEffect, useState, useCallback } from "react";
-import { useTranslation } from "react-i18next";
+  Layout,
+
+
+  notification, Row, Tabs,
+
+
+  Typography
+} from "antd";
 import Image from "components/image/image";
 import Navbar from "components/navbar/navbar";
+import { React, useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { getAllSellerByCategory, getSellerByPage } from "utils/api";
+import { bannerImage } from "utils/constant";
 import {
   getCategoryId,
   getPincode,
-  redirectToOriginalPageFromLanding,
+  redirectToOriginalPageFromLanding
 } from "utils/helpers";
 import "./landing.css";
 import SellerItems from "./sellerItems";
-import { getAllSellerByPincode, getAllSellerByCategory, getSellerByPage } from "utils/api";
-import { bannerImage } from "utils/constant";
+
 
 const { Content } = Layout;
 const { Title } = Typography;

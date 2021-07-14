@@ -1,13 +1,12 @@
 import { Card, Row, Skeleton, Typography } from "antd";
-
-import React, { useState } from "react";
-import InfiniteScroll from "react-infinite-scroll-component";
 import DataNotFound from "components/dataNotFound/dataNotFound";
 import Image from "components/image/image";
 import { AddProductModal } from "components/manageProductmodal/addProduct";
-import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
+import React from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 import { ProductCrudMenu } from "../productCrudMenu";
 import "./allProducts.css";
+
 const AllProducts = ({
   isLoading,
   products,

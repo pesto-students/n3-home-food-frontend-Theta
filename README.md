@@ -104,7 +104,10 @@ Project Link: [HOME FOOD]()
 - [Design Files](https://drive.google.com/file/d/1ZsHUcppCgRSodUsBPYNnufJIXQVBMpSX/view?usp=sharing)
 - [One pager](https://drive.google.com/file/d/1eKHTMmlTKy6Q_cXUgh01wLXiTrIquEv0/view?usp=sharing)
 - [PRD](https://drive.google.com/file/d/1Vx6rk5sD8S4teRjC3GvpJQ161Ww8kAkv/view?usp=sharing)
+  
+## Schema Design
 
+<img src="https://github.com/pesto-students/n3-home-food-frontend-Theta/blob/master/public/database%20architecture.png" >
 <!-- CONTRIBUTING -->
 <!-- ## Contributing
 

@@ -126,7 +126,7 @@ const SellerDetailWithProducts = ({ match }) => {
             <div className="seller-banner">
               <Row className="image-and-detail">
                 <Col md={6} sm={24} xs={24}>
-                  <Image url={profile.image} height="100%" width="100%"></Image>
+                  <Image url={profile.image} height="200" width="100%"></Image>
                 </Col>
                 <Col md={16} sm={24} xs={24} className="seller-details">
                   <Title level={1}>{profile.name}</Title>

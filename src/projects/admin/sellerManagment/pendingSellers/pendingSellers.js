@@ -20,6 +20,7 @@ const PendingSellers = ({ callback, sellers, isLoading }) => {
   const approveSeller = async (id) => {
     try {
       const response = await approveSellerById(id);
+      console.log(response);
       if (response.status === 200) {
         openNotificationWithIcon("success", "Seller Approved");
         callback();

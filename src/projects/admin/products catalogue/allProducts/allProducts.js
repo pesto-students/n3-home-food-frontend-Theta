@@ -16,7 +16,7 @@ const AllProducts = ({
   const { Title } = Typography;
 
   const fetchMoreProducts = () => {
-    fetchMoreAllProducts()
+    fetchMoreAllProducts();
   };
   return (
     <>

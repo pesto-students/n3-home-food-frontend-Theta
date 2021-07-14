@@ -62,6 +62,12 @@ const SellerManagment = () => {
     approveSeller(page);
   };
 
+  const fetchAllSeller = () => {
+    approveSeller(1);
+    rejectedSeller();
+    pendingSeller();
+  };
+
   useEffect(() => {
     approveSeller(1);
     rejectedSeller();
@@ -77,7 +83,7 @@ const SellerManagment = () => {
         <SellerApproval
           sellers={approveSellerItems}
           isLoading={isLoading}
-          callback={approveSeller}
+          callback={fetchAllSeller}
           fetchMoreSellers={fetchMoreSellers}
         />
       </TabPane>
@@ -93,7 +99,7 @@ const SellerManagment = () => {
       >
         <PendingSellers
           sellers={pendingSellersItems}
-          callback={pendingSeller}
+          callback={fetchAllSeller}
           isLoading={isLoading}
         />
       </TabPane>

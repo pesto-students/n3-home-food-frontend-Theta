@@ -6,6 +6,7 @@ import { RejectSellerModal } from "components/manageSellerModal/rejectSeller";
 import "./sellerApproval.css";
 import DataNotFound from "components/dataNotFound/dataNotFound";
 import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
+import Image from "components/image/image";
 
 const SellerApproval = ({ isLoading, sellers, callback }) => {
   const [hasMore, setHasMore] = useState(false);
@@ -40,8 +41,12 @@ const SellerApproval = ({ isLoading, sellers, callback }) => {
                   <div>
                     <div className="row seller-row">
                       <div className="product-cointaner">
-                        <img src={seller.image} className="product-image" alt="" />
-
+                        <Image
+                          url={seller.image}
+                          height={150}
+                          width={100}
+                          type="seller"
+                        />
                         <span className="seller-name">{seller.name}</span>
                       </div>
 

@@ -59,6 +59,11 @@ const ProductCatalogue = () => {
     allApproved(Approvepage);
   };
 
+  const allTypeofProducts = () => {
+    allPending(1);
+    allApproved(1);
+  };
+
   useEffect(() => {
     allPending(1);
     allApproved(1);
@@ -73,7 +78,7 @@ const ProductCatalogue = () => {
         <AllProducts
           isLoading={isLoading}
           products={approveProducts}
-          loadAllProducts={allApproved}
+          loadAllProducts={allTypeofProducts}
           fetchMoreAllProducts={fetchMoreAllProducts}
         />
       </TabPane>
@@ -88,6 +93,7 @@ const ProductCatalogue = () => {
       >
         <ProductApproval
           isLoading={isLoading}
+          callBack={allTypeofProducts}
           products={pendingproducts}
           loadPenindgProducts={allPending}
         />

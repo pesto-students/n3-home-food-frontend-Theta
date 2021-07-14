@@ -1,17 +1,37 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 <!-- PROJECT LOGO -->
 <br />
 
   <h1 align="center">Home Food</h1>
 
+### Demo Link
+
+[HOME FOOD](https://friendly-albattani-a3dffd.netlify.app)
+<li>To access the Application with demo data please login using the following Credentials</li>
+
+#### Admin 
+<li>Phone : 7741084950</li>
+<li>OTP : 123456</li>
+
+#### Seller 
+<li>Phone : 7210786647 </li>
+<li>OTP : 123455</li>
+
+#### Customer 
+<li>Phone : 7741084950</li>
+<li>OTP : 123456</li>
+<li>pincode : 500000</li>
+
 <!-- TABLE OF CONTENTS -->
+
+  <summary><h3 style="display: inline-block">Table of Contents</h3></summary>
 <details open="open">
-  <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
-  <ol>
+<ol>
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
+        <li><a href="#features">Features</a></li>
+         <li><a href="#resources">Resources</a></li>
         <li><a href="#built-with">Built With</a></li>
         <li><a href="#tools-and-libraries-used">Tools and Libraries Used<a></li>
       </ul>
@@ -21,9 +41,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
+        <li><a href="#schema-design">Schema Design</a></li>
+        <li><a href="#road-map">Road Map</a></li>
       </ul>
     </li>
-    <li><a href="#resources">Resources</a></li>
+   
   </ol>
 </details>
 
@@ -31,25 +53,34 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## About The Project
 
-- Serving home food anywhere to customers at low cost and High quality
+- Serving home food anywhere to customers at low cost and High quality.
 - Reaching places where restaurants are not available.
 - Providing employment for the individual who can make food at home.
 
+### Features
+  
+### Resources
+
+- [Design Files](https://drive.google.com/file/d/1ZsHUcppCgRSodUsBPYNnufJIXQVBMpSX/view?usp=sharing)
+- [One pager](https://drive.google.com/file/d/1eKHTMmlTKy6Q_cXUgh01wLXiTrIquEv0/view?usp=sharing)
+- [PRD](https://drive.google.com/file/d/1Vx6rk5sD8S4teRjC3GvpJQ161Ww8kAkv/view?usp=sharing)
+  
 ### Built With
 
-- [React.js]()
-- [Redux]()
-- [Node.js]()
-- [MongoDB]()
-- [Netlify]()
-- [Heroku]()
-- [AWS-S3 bucket]()
+- [AWS-S3 bucket](https://aws.amazon.com/s3/)
+- [Heroku](https://www.heroku.com)
+- [MongoDB](https://www.mongodb.com/cloud/atlas)
+- [Netlify](https://www.netlify.com)
+- [Node.js](https://nodejs.org/en/)
+- [React.js](https://reactjs.org/)
+- [Redux](https://redux.js.org/)
+
 
 ### Tools and Libraries Used
 
-- [FIGMA]()
-- [Billboard.js]()
-- [Razorpay]()
+- [Billboard.js](https://naver.github.io/billboard.js/)
+- [FIGMA](https://www.figma.com)
+- [Razorpay](https://razorpay.com/)
 - [For Security]()
   
   1. <b>Firebase</b> - Firebase - helps us Develop simple, free multi-platform sign-in for our Users.
@@ -85,6 +116,8 @@ This is an example of how to list things you need to use the software and how to
 3. Add the `.env` file in the root
    ```
    SKIP_PREFLIGHT_CHECK=true
+   RAZORPAY_KEY= *****
+   NODE_ENV = Prod
    ```
 4. Run the project
    ```sh
@@ -93,19 +126,17 @@ This is an example of how to list things you need to use the software and how to
 
 <!-- USAGE EXAMPLES -->
 
-#### Demo Link
 
-Project Link: [HOME FOOD]()
 
-## Resources
 
-- [Design Files](https://drive.google.com/file/d/1ZsHUcppCgRSodUsBPYNnufJIXQVBMpSX/view?usp=sharing)
-- [One pager](https://drive.google.com/file/d/1eKHTMmlTKy6Q_cXUgh01wLXiTrIquEv0/view?usp=sharing)
-- [PRD](https://drive.google.com/file/d/1Vx6rk5sD8S4teRjC3GvpJQ161Ww8kAkv/view?usp=sharing)
   
-## Schema Design
+### Schema Design
 
 <img src="https://github.com/pesto-students/n3-home-food-frontend-Theta/blob/master/public/database%20architecture.png" >
+  
+### Road Map  
+<img src="https://github.com/pesto-students/n3-home-food-frontend-Theta/blob/master/public/database%20architecture.png" >
+
 <!-- CONTRIBUTING -->
 <!-- ## Contributing
 
@@ -118,12 +149,8 @@ Contributions are what make the open source community such an amazing place to b
 5. Open a Pull Request
  -->
 
-<!-- LICENSE -->
-<!-- ## License
 
-Distributed under the MIT License. See `LICENSE` for more information.
 
- -->
 
 <!-- CONTACT -->
 
@@ -132,3 +159,9 @@ Distributed under the MIT License. See `LICENSE` for more information.
 Kapil Sharma - kapilsh2014@gmail.com
 
 Sahil Thakare - sahilthakare521@gmail.com
+  
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+  

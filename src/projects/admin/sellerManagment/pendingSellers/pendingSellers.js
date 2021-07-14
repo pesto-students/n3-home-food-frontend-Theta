@@ -1,13 +1,12 @@
 import { Button, Card, notification, Row, Skeleton } from "antd";
-
+import DataNotFound from "components/dataNotFound/dataNotFound";
+import Image from 'components/image/image';
+import { RejectSellerModal } from "components/manageSellerModal/rejectSeller";
+import { approveSellerById } from "projects/admin/utils/api";
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { RejectSellerModal } from "components/manageSellerModal/rejectSeller";
-import item from "images/south-indian.jpg";
 import "./pendingSeller.css";
-import { approveSellerById } from "projects/admin/utils/api";
-import DataNotFound from "components/dataNotFound/dataNotFound";
-import Image from 'components/image/image'
+
 const openNotificationWithIcon = (type, message) => {
   notification[type]({
     message: message,

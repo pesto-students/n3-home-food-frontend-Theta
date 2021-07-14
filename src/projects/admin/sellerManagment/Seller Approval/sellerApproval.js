@@ -3,7 +3,6 @@ import { Card, Row, Skeleton } from "antd";
 import React, { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { RejectSellerModal } from "components/manageSellerModal/rejectSeller";
-import item from "images/seller.png";
 import "./sellerApproval.css";
 import DataNotFound from "components/dataNotFound/dataNotFound";
 import SpinnerLoader from "components/spinnerLoader/spinnerLoader";

@@ -1,6 +1,4 @@
-import { Button, Card, Col, notification, Row, Tag } from "antd";
-
-import Title from "antd/lib/typography/Title";
+import { Button, Card, Col, notification, Row, Tag,Typography } from "antd";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { orderDelived } from "../utils/api";
@@ -11,6 +9,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 const CurrentOrders = ({ orders, callBack, fetchMoreProducts }) => {
   const { t } = useTranslation();
+  const { Text, Title } = Typography;
 
   const delived = async (order) => {
     try {
@@ -49,31 +48,32 @@ const CurrentOrders = ({ orders, callBack, fetchMoreProducts }) => {
             <Card key={key}>
               <Row justify="space-betwee">
                 <Col md={12}>
-                  <Title level={5}>
+                  <Text level={5}>
                     {t("seller.order.deliveryType")} :{" "}
                     <Tag color="processing">{item.DeliveryType}</Tag>
-                  </Title>
+                  </Text>
+               
                 </Col>
                 <Col md={12}>
                   <Row justify="end">
-                    <Title level={5}>
+                    <Text level={5}>
                       {t("seller.order.receivedOn")}
                       {"  "}
                       {orderTimeFormat(item.dateOrdered)}
-                    </Title>
+                    </Text>
                   </Row>
                 </Col>
               </Row>
               <Row>
                 <Col md={24}>
-                  <Title level={5}>
+                  <Text level={5}>
                     {t("seller.order.orderNo")} - {item._id}
-                  </Title>
+                  </Text>
                 </Col>
                 <Col md={24}>
-                  <Title level={5}>
+                  <Text level={5}>
                     {t("seller.order.contactNumber")}- {item.user.phone}
-                  </Title>
+                  </Text>
                 </Col>
               </Row>
               <Row justify="end">
@@ -88,11 +88,11 @@ const CurrentOrders = ({ orders, callBack, fetchMoreProducts }) => {
               <hr></hr>
               <Row justify="space-betwee">
                 <Col md={12}>
-                  <Title level={5}>
+                  <Text level={5}>
                     {item.orderItems.items.map((dish) => {
                       return `${dish.productId.name} - (${dish.quantity})`;
                     })}
-                  </Title>
+                  </Text>
                 </Col>
                 <Col md={12}>
                   <Row justify="end">

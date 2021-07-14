@@ -25,13 +25,7 @@ const ProductItems = ({ products, savedCartItem, reloadCart, sellerId, ...props}
   }, [products]);
 
   const addItems = (dish, key, method) => {
-    if (sellerId && sellerId !== props.title.sellerIdInCart) {
-      notification.error({
-        message: t("Message.cartOfOtherSeller"),
-        placement: "topRight",
-      });
-      return;
-    }
+   
 
     if (!sessionId()) {
       notification.error({
@@ -41,6 +35,7 @@ const ProductItems = ({ products, savedCartItem, reloadCart, sellerId, ...props}
       });
       return;
     }
+
 
     allProducts[key].isLoading = true;
     setAllProducts([...allProducts]);

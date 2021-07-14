@@ -2,9 +2,9 @@ import {
   MoneyCollectOutlined,
   ShoppingCartOutlined,
   UserAddOutlined,
-  UsergroupAddOutlined,
+  UsergroupAddOutlined
 } from "@ant-design/icons";
-import { Card, Col, DatePicker, notification, Row } from "antd";
+import { Card, Col, DatePicker, Row } from "antd";
 import Image from "components/image/image";
 import LineChart from "components/lineChart/lineChart";
 import PieChart from "components/pieChart/pieChart";
@@ -14,7 +14,7 @@ import React, { useEffect, useState } from "react";
 import {
   getAdminCategoryChartDetails,
   getAdminGraphDetails,
-  getAllOrderCount,
+  getAllOrderCount
 } from "../utils/api";
 import "./adminDashboard.css";
 

@@ -1,13 +1,13 @@
-import { Tabs, Row, notification } from "antd";
-
+import { Row, Tabs } from "antd";
+import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
+import TabTag from "components/tag/tag";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { sessionId } from "utils/helpers";
+import { getAllCurrentOrderSeller, getAllPastOrderSeller } from "../utils/api";
 import CurrentOrders from "./currentOrder";
 import PastOrders from "./pastOrder";
-import TabTag from "components/tag/tag";
-import { sessionId } from "utils/helpers";
-import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
-import { useTranslation } from "react-i18next";
-import { getAllCurrentOrderSeller, getAllPastOrderSeller } from "../utils/api";
+
 
 const SellerProducts = () => {
   const { t } = useTranslation();

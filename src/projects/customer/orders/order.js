@@ -1,13 +1,13 @@
-import { Row, notification } from "antd";
-import "./order.css";
-
-import React, { useEffect, useState } from "react";
+import { Row } from "antd";
 import CustomerNavbar from "components/customerNavbar/customerNavbar";
 import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
-import CustomerCurrentOrders from "./customerCurrentOrders";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { getAllCurrentOrder } from "../utils/api";
 import { getUser, setPincode } from "utils/helpers";
+import { getAllCurrentOrder } from "../utils/api";
+import CustomerCurrentOrders from "./customerCurrentOrders";
+import "./order.css";
+
 
 const SellerProducts = () => {
   const { t } = useTranslation();

@@ -1,17 +1,17 @@
-import { Tabs, notification } from "antd";
-
+import { Tabs } from "antd";
+import TabTag from "components/tag/tag";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { sessionId } from "utils/helpers";
+import {
+  getAllProduct, getSellerApprovedProduct,
+
+  getSellerListedProduct
+} from "../utils/api";
 import AllApprove from "./allApprove/allApprove";
 import AllProducts from "./allProduct/allProducts";
 import MyProducts from "./myProducts/myProducts";
-import { sessionId } from "utils/helpers";
-import { useTranslation } from "react-i18next";
-import TabTag from "components/tag/tag";
-import {
-  getSellerApprovedProduct,
-  getAllProduct,
-  getSellerListedProduct,
-} from "../utils/api";
+
 
 const SellerProducts = () => {
   const { t } = useTranslation();

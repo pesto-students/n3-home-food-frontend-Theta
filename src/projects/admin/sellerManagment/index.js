@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from "react";
-
-import { Tabs, notification } from "antd";
-import SellerApproval from "./Seller Approval/sellerApproval";
-import RejectedSellers from "./rejectedSeller /rejectedSellers";
-import PendingSellers from "./pendingSellers/pendingSellers";
+import { Tabs } from "antd";
 import TabTag from "components/tag/tag";
+import React, { useEffect, useState } from "react";
 import {
-  getAllRejectedSeller,
   getAllApproveSeller,
-  getAllPendingSeller,
+  getAllPendingSeller, getAllRejectedSeller
 } from "../utils/api";
+import PendingSellers from "./pendingSellers/pendingSellers";
+import RejectedSellers from "./rejectedSeller /rejectedSellers";
+import SellerApproval from "./Seller Approval/sellerApproval";
+
 // import AllProducts from './allProducts/allProducts';
 // import ProductApproval from './product Approval/productApproval';
 

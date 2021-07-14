@@ -1,10 +1,10 @@
+import { Tabs } from "antd";
+import TabTag from "components/tag/tag";
 import React, { useEffect, useState } from "react";
-
-import { Tabs, notification } from "antd";
+import { getAllApprovedProduct, getAllPendingProduct } from "../utils/api";
 import AllProducts from "./allProducts/allProducts";
 import ProductApproval from "./product Approval/productApproval";
-import TabTag from "components/tag/tag";
-import { getAllPendingProduct, getAllApprovedProduct } from "../utils/api";
+
 
 const { TabPane } = Tabs;
 

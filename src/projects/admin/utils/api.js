@@ -2,7 +2,9 @@ import axios from "utils/axios";
 
 export const getAdminGraphDetails = async (dateString) => {
   let response = await axios
-    .get(`/orders/get-total-revenue?startDate=${dateString[0]}&endDate=${dateString[1]}`)
+    .get(
+      `/orders/get-total-revenue?startDate=${dateString[0]}&endDate=${dateString[1]}`
+    )
     .then((response) => {
       return response;
     })
@@ -40,7 +42,9 @@ export const getAdminCategoryChart = async () => {
 
 export const getAdminCategoryChartDetails = async (dateString) => {
   let response = await axios
-    .get(`/orders/categories?startDate=${dateString[0]}&endDate=${dateString[1]}`)
+    .get(
+      `/orders/categories?startDate=${dateString[0]}&endDate=${dateString[1]}`
+    )
     .then((response) => {
       return response;
     })
@@ -52,7 +56,7 @@ export const getAdminCategoryChartDetails = async (dateString) => {
 
 export const getAllPendingProduct = async (page) => {
   let response = await axios
-    .get(`/products/get/pending?page=${page}`)
+    .get(`/products/get/pending`)
     .then((response) => {
       return response;
     })
@@ -63,7 +67,7 @@ export const getAllPendingProduct = async (page) => {
 };
 export const getAllApprovedProduct = async (page) => {
   let response = await axios
-    .get(`/products/get/approved?page=${page}`)
+    .get(`/products/get/approved`)
     .then((response) => {
       return response;
     })
@@ -99,7 +103,7 @@ export const getAllRejectedSeller = async () => {
 
 export const getAllApproveSeller = async (page) => {
   let response = await axios
-    .get(`/sellers?page=${page}`)
+    .get(`/sellers`)
     .then((response) => {
       return response;
     })

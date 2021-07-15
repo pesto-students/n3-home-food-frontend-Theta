@@ -20,14 +20,7 @@ const ProductCatalogue = () => {
     try {
       const response = await getAllPendingProduct(page);
       if (response.status === 200) {
-        let updatedProducts = [];
-        response.data.forEach((element) => {
-          updatedProducts.push(element);
-        });
-        setPendingproducts((pendingproducts) => [
-          ...pendingproducts,
-          ...updatedProducts,
-        ]);
+        setPendingproducts(response.data);
         setIsLoading(false);
       }
     } catch (error) {
@@ -39,14 +32,7 @@ const ProductCatalogue = () => {
     try {
       const response = await getAllApprovedProduct(page);
       if (response.status === 200) {
-        let updatedProducts = [];
-        response.data.forEach((element) => {
-          updatedProducts.push(element);
-        });
-        setApproveProducts((approveProducts) => [
-          ...approveProducts,
-          ...updatedProducts,
-        ]);
+        setApproveProducts(response.data);
         setIsLoading(false);
       }
     } catch (error) {

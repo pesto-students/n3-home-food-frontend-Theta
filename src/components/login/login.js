@@ -25,8 +25,6 @@ const Login = ({ userType }) => {
   };
 
   const onSignInSubmit = ({ phone }) => {
-    // loginUser({ phone: phone, customerType: userType });
-    // return;
     setButtonLoding(true);
     configureCaptcha();
     const phoneNumber = "+91" + phone;

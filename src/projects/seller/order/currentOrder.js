@@ -5,7 +5,6 @@ import { orderDelived } from "../utils/api";
 import { rupeeSign } from "utils/constant";
 import DataNotFound from "components/dataNotFound/dataNotFound";
 import { orderTimeFormat, catchError } from "utils/helpers";
-import InfiniteScroll from "react-infinite-scroll-component";
 
 const CurrentOrders = ({ orders, callBack, fetchMoreProducts }) => {
   const { t } = useTranslation();
@@ -35,79 +34,69 @@ const CurrentOrders = ({ orders, callBack, fetchMoreProducts }) => {
     );
   }
 
-  const fetchMoreData = () => {
-    fetchMoreProducts();
-  };
   return (
     <>
-      <InfiniteScroll
-        dataLength={orders.length}
-        next={fetchMoreData}
-        hasMore={true}
-      >
-        {orders.map((item, key) => {
-          return (
-            <Card key={key}>
-              <Row justify="space-betwee">
-                <Col md={12}>
+      {orders.map((item, key) => {
+        return (
+          <Card key={key}>
+            <Row justify="space-betwee">
+              <Col md={12}>
+                <Text level={5}>
+                  {t("seller.order.deliveryType")} :{" "}
+                  <Tag color="processing">{item.DeliveryType}</Tag>
+                </Text>
+              </Col>
+              <Col md={12}>
+                <Row justify="end">
                   <Text level={5}>
-                    {t("seller.order.deliveryType")} :{" "}
-                    <Tag color="processing">{item.DeliveryType}</Tag>
+                    {t("seller.order.receivedOn")}
+                    {"  "}
+                    {orderTimeFormat(item.dateOrdered)}
                   </Text>
-                </Col>
-                <Col md={12}>
-                  <Row justify="end">
-                    <Text level={5}>
-                      {t("seller.order.receivedOn")}
-                      {"  "}
-                      {orderTimeFormat(item.dateOrdered)}
-                    </Text>
-                  </Row>
-                </Col>
-              </Row>
-              <Row>
-                <Col md={24}>
-                  <Text level={5}>
-                    {t("seller.order.orderNo")} - {item._id}
-                  </Text>
-                </Col>
-                <Col md={24}>
-                  <Text level={5}>
-                    {t("seller.order.contactNumber")}- {item.user.phone}
-                  </Text>
-                </Col>
-              </Row>
-              <Row justify="end">
-                <Button
-                  type="primary"
-                  // loading={isLoading}
-                  onClick={() => delived(item)}
-                >
-                  {t("seller.order.deliverButton")}
-                </Button>
-              </Row>
-              <hr></hr>
-              <Row justify="space-betwee">
-                <Col md={12}>
-                  <Text level={5}>
-                    {item.orderItems.items.map((dish) => {
-                      return `${dish.productId.name} - (${dish.quantity})`;
-                    })}
-                  </Text>
-                </Col>
-                <Col md={12}>
-                  <Row justify="end">
-                    <Title level={5}>
-                      {t("seller.order.totalText")}: {rupeeSign}{" "}
-                      {item.totalPrice}
-                    </Title>
-                  </Row>
-                </Col>
-              </Row>
-            </Card>
-          );
-        })}
-      </InfiniteScroll>
+                </Row>
+              </Col>
+            </Row>
+            <Row>
+              <Col md={24}>
+                <Text level={5}>
+                  {t("seller.order.orderNo")} - {item._id}
+                </Text>
+              </Col>
+              <Col md={24}>
+                <Text level={5}>
+                  {t("seller.order.contactNumber")}- {item.user.phone}
+                </Text>
+              </Col>
+            </Row>
+            <Row justify="end">
+              <Button
+                type="primary"
+                // loading={isLoading}
+                onClick={() => delived(item)}
+              >
+                {t("seller.order.deliverButton")}
+              </Button>
+            </Row>
+            <hr></hr>
+            <Row justify="space-betwee">
+              <Col md={12}>
+                <Text level={5}>
+                  {item.orderItems.items.map((dish) => {
+                    return `${dish.productId.name} - (${dish.quantity})`;
+                  })}
+                </Text>
+              </Col>
+              <Col md={12}>
+                <Row justify="end">
+                  <Title level={5}>
+                    {t("seller.order.totalText")}: {rupeeSign} {item.totalPrice}
+                  </Title>
+                </Row>
+              </Col>
+            </Row>
+          </Card>
+        );
+      })}
     </>
   );
 };

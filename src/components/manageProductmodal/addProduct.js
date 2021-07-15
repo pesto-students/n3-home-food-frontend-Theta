@@ -130,12 +130,12 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, fromFor }) => {
               message: t("seller.product.requestForm.descriptionValidation"),
             },
             {
-              min: 5,
-              message: "Product Description must be minimum 5 characters.",
+              min: 1,
+              message: "Product Description must be minimum 1 characters.",
             },
             {
-              max: 20,
-              message: "Product Description must be Maximun 20 characters.",
+              max: 600,
+              message: "Product Description must be Maximun 600 characters.",
             },
           ]}
         >

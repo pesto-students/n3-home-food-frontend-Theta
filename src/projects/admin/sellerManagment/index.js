@@ -36,7 +36,7 @@ const SellerManagment = () => {
 
   const approveSeller = async (page) => {
     try {
-      const response = await getAllApproveSeller(page);
+      const response = await getAllApproveSeller();
       if (response.status === 200) {
         setApproveSellersItems(response.data);
         setIsLoading(false);

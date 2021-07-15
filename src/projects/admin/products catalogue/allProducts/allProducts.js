@@ -3,7 +3,6 @@ import DataNotFound from "components/dataNotFound/dataNotFound";
 import Image from "components/image/image";
 import { AddProductModal } from "components/manageProductmodal/addProduct";
 import React from "react";
-import InfiniteScroll from "react-infinite-scroll-component";
 import { ProductCrudMenu } from "../productCrudMenu";
 import "./allProducts.css";
 
@@ -15,9 +14,6 @@ const AllProducts = ({
 }) => {
   const { Title } = Typography;
 
-  const fetchMoreProducts = () => {
-    fetchMoreAllProducts();
-  };
   return (
     <>
       <div>
@@ -26,39 +22,33 @@ const AllProducts = ({
 
         <Skeleton loading={isLoading} active>
           {products.length > 0 ? (
-            <InfiniteScroll
-              dataLength={products.length}
-              next={fetchMoreProducts}
-              hasMore={true}
-            >
-              {products.map((product, i) => (
-                <Card key={i} hoverable>
-                  <div className="container">
-                    <div className="row">
-                      <div className="product-cointaner">
-                        <Image
-                          url={product.image}
-                          height="100"
-                          width="150"
-                        ></Image>
-                      </div>
-                      <div className="product-details ">
-                        <Title level={4}>{product.name}</Title>
-                        <span>Max Amount : ₹ {product.max_price}</span>
-                      </div>
-                      <div className="product-delete">
-                        <span className="seller-name">
-                          <ProductCrudMenu
-                            product={product}
-                            callback={loadAllProducts}
-                          />
-                        </span>
-                      </div>
+            products.map((product, i) => (
+              <Card key={i} hoverable>
+                <div className="container">
+                  <div className="row">
+                    <div className="product-cointaner">
+                      <Image
+                        url={product.image}
+                        height="100"
+                        width="150"
+                      ></Image>
+                    </div>
+                    <div className="product-details ">
+                      <Title level={4}>{product.name}</Title>
+                      <span>Max Amount : ₹ {product.max_price}</span>
+                    </div>
+                    <div className="product-delete">
+                      <span className="seller-name">
+                        <ProductCrudMenu
+                          product={product}
+                          callback={loadAllProducts}
+                        />
+                      </span>
                     </div>
                   </div>
-                </Card>
-              ))}
-            </InfiniteScroll>
+                </div>
+              </Card>
+            ))
           ) : (
             <Row className="m-2 mt-4" justify="center">
               <DataNotFound text="No Data Found!" />

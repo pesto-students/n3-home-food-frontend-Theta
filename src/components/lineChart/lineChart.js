@@ -2,18 +2,18 @@ import * as React from "react";
 import { useEffect, useRef } from "react";
 import bb, { line, zoom } from "billboard.js";
 import { Row } from "antd";
+import "./lineChart.css";
+import { useTranslation } from "react-i18next";
+
 const LineChart = ({ dataSource }) => {
+  const { t } = useTranslation();
   const lineChart = useRef(null);
 
   useEffect(() => {
     bb.generate({
       data: {
         x: "x",
-       columns: dataSource,
-      //   columns: [
-      // ["x", "2013-01-01", "2013-01-02", "2013-01-03", "2013-01-04", "2013-01-05", "2013-01-06", "2013-01-07", "2013-01-08", "2013-01-09", "2013-01-10", "2013-01-11", "2013-01-12"],
-      // ["sample", 30, 200, 100, 400, 150, 250, 30, 200, 100, 400, 150, 250]
-      //   ],
+        columns: dataSource,
         type: line(), // for ESM specify as: line()
       },
       zoom: {
@@ -25,9 +25,9 @@ const LineChart = ({ dataSource }) => {
           type: "timeseries",
           tick: {
             count: 4,
-            format: "%Y-%m-%d"
-          }
-        }
+            format: "%Y-%m-%d",
+          },
+        },
       },
       bindto: lineChart.current,
     });
@@ -35,13 +35,13 @@ const LineChart = ({ dataSource }) => {
 
   return (
     <>
-      <Row justify="center" className='mt-2'>
-        <h4>My Income</h4>
+      <Row justify="start">
+        <h5>{t("Header.MyIncome")}</h5>
       </Row>
-      <div  ref={lineChart}>
+
+      <div style={{ height: "300px" }} ref={lineChart}>
         chart
       </div>
-    
     </>
   );
 };

@@ -1,14 +1,15 @@
 import { Row } from "antd";
-import "./order.css";
-
-import React, { useEffect, useState } from "react";
 import CustomerNavbar from "components/customerNavbar/customerNavbar";
 import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
-import CustomerCurrentOrders from "./customerCurrentOrders";
+import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { getUser, setPincode, catchError } from "utils/helpers";
 import { getAllCurrentOrder } from "../utils/api";
-import { getUser, setPincode } from "utils/helpers";
+import CustomerCurrentOrders from "./customerCurrentOrders";
+import "./order.css";
 
 const SellerProducts = () => {
+  const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(true);
 
   const [currentOrdersItem, setCurrentOrdersItem] = useState([]);
@@ -20,7 +21,9 @@ const SellerProducts = () => {
         setCurrentOrdersItem(response.data);
         setIsLoading(false);
       }
-    } catch (error) {}
+    } catch (error) {
+      catchError(error);
+    }
   };
 
   const user = getUser() ? getUser().userType : null;
@@ -47,7 +50,7 @@ const SellerProducts = () => {
       <CustomerNavbar updatePincode={updatePincode} />
 
       <div className="my-order">
-        <h4>My Orders</h4>
+        <h4>{t("Header.My Orders")}</h4>
 
         {!isLoading ? (
           <CustomerCurrentOrders

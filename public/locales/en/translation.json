@@ -1,17 +1,51 @@
 {
+    "Message":{
+        "Wait":"Please Wait...",
+        "Notification":"Notification",
+        "PleaseLogin":"Please Login to add into cart",
+        "Verified":"Verified",
+        "OTPVerified":"OTP Verified",
+        "OTP not verified":"OTP not verified",
+        "Error":"Error",
+        "SMS not sent":"SMS not sent",
+        "OTPHasBeenSent":"OTP has been sent. Please Enter OTP ",
+        "cartOfOtherSeller" : "Products of Other Sellers are already in the carts"
+    },
     "Header":{
         "Become Seller":"Become Seller",
+        "NotFound":"No Data Found",
+        "MyIncome":"My Income",
+        "Categories Sold":"Categories Sold",
         "Sign In":"Sign In",
         "Admin":"Admin",
+        "notFound":"Items Not Found",
         "Enter Pincode":"Enter Pincode",
         "Save":"Save",
         "Pincode":"Pincode",
         "Logout":"Logout",
-        "Orders":"Orders"
+        "Orders":"Orders",
+        "My Orders":"My Orders"
+
+    },
+    "Admin":{
+        "headLine":"Manage all the seller in your area",
+        "headDescription":"You can manage the seller of your area also you can control the product of seller and more"
 
     },
     "Landing":{
-        "Sellers":"Sellers"
+        "Sellers":"Sellers",
+        "All":"All",
+        "dinner":"Dinner",
+        "lunch":"Lunch",
+        "breakfast":"Breakfast",
+        "snacks":"Snacks",
+        "Login":"Login",
+        "Phone":"Phone",
+        "EnterPhoneValidation":"Please Enter Your Mobile",
+        "SendOtp":"SEND OTP",
+        "VerifyOTP":"VERIFY OTP",
+        "Otp":"OTP",
+        "EnterOTP":"Enter OTP"
     },
     "ProductItem":{
         "Only": "Only",
@@ -68,13 +102,16 @@
              "address":"Address",
              "addressValidationAndPlaceholder":"Please Enter Address",
              "submit":" Submit",
-             "loginText":"Already a seller, Login?"
+             "loginText":"Already a seller, Login?",
+             "ProductImage":"Product Image",
+             "ClickToUpload":"Click to upload"
+
 
             },
         "dashboard":{
             "dashboardText":"Dashboard",
             "productText":"Product",
-            "profileText":"Seller",
+            "profileText":"Profile",
             "orderText":"Order",
             "totalOrder":"Total Orders",
             "totalIncome":"Total Income"
@@ -100,7 +137,11 @@
             }
         },
         "profile":{
+          "Plates":"Plates",
+          "MaxAmount":"Max Amount",
+          "Price":"Price",
           "editText":"Edit",
+          "deleteText":"Delete",
           "profileImageText":"Profile Image",
           "editProfileModalTitle":"Edit Profile"
         },

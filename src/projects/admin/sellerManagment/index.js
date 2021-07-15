@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from "react";
-
 import { Tabs } from "antd";
-import SellerApproval from "./Seller Approval/sellerApproval";
-import RejectedSellers from "./rejectedSeller /rejectedSellers";
-import PendingSellers from "./pendingSellers/pendingSellers";
 import TabTag from "components/tag/tag";
+import React, { useEffect, useState } from "react";
 import {
-  getAllRejectedSeller,
   getAllApproveSeller,
   getAllPendingSeller,
+  getAllRejectedSeller,
 } from "../utils/api";
-// import AllProducts from './allProducts/allProducts';
-// import ProductApproval from './product Approval/productApproval';
+import PendingSellers from "./pendingSellers/pendingSellers";
+import RejectedSellers from "./rejectedSeller /rejectedSellers";
+import SellerApproval from "./Seller Approval/sellerApproval";
+import { catchError } from "utils/helpers";
 
 const SellerManagment = () => {
   const { TabPane } = Tabs;
@@ -20,6 +18,7 @@ const SellerManagment = () => {
   const [approveSellerItems, setApproveSellersItems] = useState([]);
   const [rejectedSellersItems, setRejectedSellersItems] = useState([]);
   const [pendingSellersItems, setPendingSellersItems] = useState([]);
+  const [page] = useState(2);
 
   const callback = (key) => {};
 
@@ -30,17 +29,21 @@ const SellerManagment = () => {
         setRejectedSellersItems(response.data);
         setIsLoading(false);
       }
-    } catch (error) {}
+    } catch (error) {
+      catchError(error);
+    }
   };
 
-  const approveSeller = async () => {
+  const approveSeller = async (page) => {
     try {
       const response = await getAllApproveSeller();
       if (response.status === 200) {
         setApproveSellersItems(response.data);
         setIsLoading(false);
       }
-    } catch (error) {}
+    } catch (error) {
+      catchError(error);
+    }
   };
 
   const pendingSeller = async () => {
@@ -50,11 +53,23 @@ const SellerManagment = () => {
         setPendingSellersItems(response.data);
         setIsLoading(false);
       }
-    } catch (error) {}
+    } catch (error) {
+      catchError(error);
+    }
+  };
+
+  const fetchMoreSellers = () => {
+    approveSeller(page);
+  };
+
+  const fetchAllSeller = () => {
+    approveSeller(1);
+    rejectedSeller();
+    pendingSeller();
   };
 
   useEffect(() => {
-    approveSeller();
+    approveSeller(1);
     rejectedSeller();
     pendingSeller();
   }, []);
@@ -68,7 +83,8 @@ const SellerManagment = () => {
         <SellerApproval
           sellers={approveSellerItems}
           isLoading={isLoading}
-          callback={approveSeller}
+          callback={fetchAllSeller}
+          fetchMoreSellers={fetchMoreSellers}
         />
       </TabPane>
       <TabPane
@@ -83,7 +99,7 @@ const SellerManagment = () => {
       >
         <PendingSellers
           sellers={pendingSellersItems}
-          callback={pendingSeller}
+          callback={fetchAllSeller}
           isLoading={isLoading}
         />
       </TabPane>

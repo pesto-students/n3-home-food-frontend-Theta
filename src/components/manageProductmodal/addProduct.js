@@ -4,7 +4,6 @@ import {
   Form,
   Input,
   InputNumber,
-  message,
   Modal,
   notification,
   Select,
@@ -13,7 +12,7 @@ import {
 
 import axios from "axios";
 import React, { useState } from "react";
-
+import "./reassignProduct.css";
 import { useTranslation } from "react-i18next";
 import { baseUrl } from "utils/constant";
 import { getCategoryId } from "utils/helpers";
@@ -26,21 +25,22 @@ const openNotificationWithIcon = (type, message) => {
 };
 
 // image
-const props = {
-  name: "file",
-  action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
-  headers: {
-    authorization: "authorization-text",
-  },
-  onChange(info) {
-    if (info.file.status !== "uploading") {
-    }
-    if (info.file.status === "done") {
-      message.success(`${info.file.name} file uploaded successfully`);
-    } else if (info.file.status === "error") {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  },
+// const props = {
+//   name: "file",
+
+//   onChange(info) {
+//     if (info.file.status !== "uploading") {
+//     }
+//     if (info.file.status === "done") {
+//       message.success(`${info.file.name} file uploaded successfully`);
+//     } else if (info.file.status === "error") {
+//       message.error(`${info.file.name} file upload failed.`);
+//     }
+//   },
+// };
+
+const getFile = (e) => {
+  console.log(e);
 };
 
 const normFile = (e) => {
@@ -130,12 +130,12 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, fromFor }) => {
               message: t("seller.product.requestForm.descriptionValidation"),
             },
             {
-              min: 5,
-              message: "Product Description must be minimum 5 characters.",
+              min: 1,
+              message: "Product Description must be minimum 1 characters.",
             },
             {
-              max: 20,
-              message: "Product Description must be Maximun 20 characters.",
+              max: 600,
+              message: "Product Description must be Maximun 600 characters.",
             },
           ]}
         >
@@ -147,13 +147,15 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, fromFor }) => {
 
         <Form.Item
           name="productImage"
-          label="Product Image"
+          label={t("seller.registerForm.ProductImage")}
           valuePropName="fileList"
           getValueFromEvent={normFile}
           extra=""
         >
-          <Upload {...props} name="logo" maxCount={1}>
-            <Button icon={<UploadOutlined />}>Click to Upload</Button>
+          <Upload name="logo" customRequest={getFile} maxCount={1}>
+            <Button icon={<UploadOutlined />}>
+              {t("seller.registerForm.ClickToUpload")}
+            </Button>
           </Upload>
         </Form.Item>
 

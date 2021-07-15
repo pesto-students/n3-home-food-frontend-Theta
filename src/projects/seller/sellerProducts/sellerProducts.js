@@ -1,17 +1,17 @@
 import { Tabs } from "antd";
-
+import TabTag from "components/tag/tag";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { sessionId } from "utils/helpers";
+import {
+  getAllProduct,
+  getSellerApprovedProduct,
+  getSellerListedProduct,
+} from "../utils/api";
 import AllApprove from "./allApprove/allApprove";
 import AllProducts from "./allProduct/allProducts";
 import MyProducts from "./myProducts/myProducts";
-import { sessionId } from "utils/helpers";
-import { useTranslation } from "react-i18next";
-import TabTag from "components/tag/tag";
-import {
-  getSellerApprovedProduct,
-  getAllProduct,
-  getSellerListedProduct,
-} from "../utils/api";
+import { catchError } from "utils/helpers";
 
 const SellerProducts = () => {
   const { t } = useTranslation();
@@ -20,25 +20,38 @@ const SellerProducts = () => {
   const [myProducts, setMyProducts] = useState([]);
   const [allApprove, setAllApprove] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [page, setPage] = useState(2);
 
-  const getApproved = async () => {
+  const getApproved = async (page) => {
     try {
-      const response = await getSellerApprovedProduct();
+      const response = await getSellerApprovedProduct(page);
       if (response.status === 200) {
-        setAllApprove(response.data);
+        let updatedProducts = [];
+        response.data.forEach((element) => {
+          updatedProducts.push(element);
+        });
+        setAllApprove((allApprove) => [...allApprove, ...updatedProducts]);
         setIsLoading(false);
       }
-    } catch (error) {}
+    } catch (error) {
+      catchError(error);
+    }
   };
 
-  const getAllProducts = async () => {
+  const getAllProducts = async (page) => {
     try {
-      const response = await getAllProduct();
+      const response = await getAllProduct(page);
       if (response.status === 200) {
-        setAllProducts(response.data);
+        let updatedProducts = [];
+        response.data.forEach((element) => {
+          updatedProducts.push(element);
+        });
+        setAllProducts((allProducts) => [...allProducts, ...updatedProducts]);
         setIsLoading(false);
       }
-    } catch (error) {}
+    } catch (error) {
+      catchError(error);
+    }
   };
 
   const getMyProducts = async () => {
@@ -48,12 +61,19 @@ const SellerProducts = () => {
         setMyProducts(response.data[0].myProducts);
         setIsLoading(false);
       }
-    } catch (error) {}
+    } catch (error) {
+      catchError(error);
+    }
+  };
+
+  const fetchMoreProducts = () => {
+    setPage(page + 1);
+    getAllProducts(page);
   };
 
   useEffect(() => {
-    getApproved();
-    getAllProducts();
+    getApproved(1);
+    getAllProducts(1);
     getMyProducts();
   }, []);
 
@@ -64,8 +84,9 @@ const SellerProducts = () => {
 
   useEffect(() => {}, [allProducts, myProducts, allApprove]);
 
+  const callback = () => {};
   return (
-    <Tabs defaultActiveKey="1">
+    <Tabs defaultActiveKey="1" onChange={callback}>
       <TabPane
         tab={
           <TabTag
@@ -79,6 +100,7 @@ const SellerProducts = () => {
           products={allProducts}
           isLoading={isLoading}
           callback={allProductCallback}
+          fetchMoreProducts={fetchMoreProducts}
         />{" "}
       </TabPane>
       <TabPane

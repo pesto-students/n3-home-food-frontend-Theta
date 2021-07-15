@@ -63,7 +63,7 @@
       "src"
     ],
     "moduleNameMapper": {
-      "\\.(css|scss|jpg|png|jpeg)$": "identity-obj-proxy"
+      "\\.(css|scss|jpg|png|jpeg|webp)$": "identity-obj-proxy"
     },
     "globals": {
       "window": {},

@@ -57,6 +57,7 @@ const Navbar = ({ callBack }) => {
         title={t("Header.Enter Pincode")}
         visible={openPincdeModal}
         okText={t("Header.Save")}
+        cancelText={t("seller.product.cancelButton")}
         onCancel={() => setOpenPincodeModal(false)}
         okButtonProps={{
           form: "category-editor-form",
@@ -80,15 +81,15 @@ const Navbar = ({ callBack }) => {
             rules={[
               {
                 required: true,
-                message: "Please Enter Pincode",
+                message: t("Header.Enter Pincode"),
               },
-              {
-                max: 10,
-                message: "Pincode Maximun 10 characters.",
-              },
+              // {
+              //   max: 10,
+              //   message: "Pincode Maximun 10 characters.",
+              // },
             ]}
           >
-            <Input size="large" placeholder="Pincode" />
+            <Input size="large" placeholder={t("Header.Pincode")} />
           </Form.Item>
         </Form>
       </Modal>

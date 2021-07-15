@@ -3,10 +3,10 @@ import { Card, Row, Skeleton } from "antd";
 import React, { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { RejectSellerModal } from "components/manageSellerModal/rejectSeller";
-import item from "images/seller.png";
 import "./sellerApproval.css";
 import DataNotFound from "components/dataNotFound/dataNotFound";
 import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
+import Image from "components/image/image";
 
 const SellerApproval = ({ isLoading, sellers, callback }) => {
   const [hasMore, setHasMore] = useState(false);
@@ -41,8 +41,12 @@ const SellerApproval = ({ isLoading, sellers, callback }) => {
                   <div>
                     <div className="row seller-row">
                       <div className="product-cointaner">
-                        <img src={item} className="product-image" alt="" />
-
+                        <Image
+                          url={seller.image}
+                          height={150}
+                          width={100}
+                          type="seller"
+                        />
                         <span className="seller-name">{seller.name}</span>
                       </div>
 

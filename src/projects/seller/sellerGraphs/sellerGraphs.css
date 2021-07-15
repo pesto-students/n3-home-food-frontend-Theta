@@ -1,3 +1,5 @@
+
+
 .dashboard-card-background{
     background-color: #002140;
     height: 100px;
@@ -5,14 +7,115 @@
 }
 
 .number-cards{
-    margin-top: -6%;
+    margin-top: 0
 }
 
 .card-detailed{
     width: 200px;
     height: 100px;
     text-align: center;
-    background-color: azure;
     display: flex;
     flex-flow: column;
+}
+
+.small-box {
+    border-radius: .25rem;
+    display: block;
+    margin-bottom: 20px;
+    width: 184px;
+    height: 100px;
+}
+
+.bg-info {
+    background-color: #17a2b8!important;
+}
+
+.count{
+    color: #fff;
+    font-size: 2.2rem;
+    font-weight:600;
+    margin:7px
+}
+
+.status-name{
+    color: #fff;
+}
+
+
+.ant-card-body {
+    padding: 5px 18px;
+    text-align: left;
+}
+
+.card-icon{
+    font-size: 48px;
+    margin: 5px 28%;
+    color: #fff;
+}
+
+.main-items{
+    display: flex;
+    flex-flow: row;
+}
+
+.funnel{
+        font-size: 24px;
+        margin: 5px 17px;  
+        color: #F7BB41;  
+}
+
+.card-details{
+    margin: 15px 5px;
+    display: flex;
+    flex-flow: column;
+}
+
+.class-container{
+    display: flex;
+    flex-flow: row;
+}
+
+.stat-card{
+    height: 111%;
+    margin: -5px -18px;
+}
+
+.icon-container{
+    background-color: #ffce6bf7;
+}
+
+.ant-card-body {
+    /* padding: 0px; */
+    height: 100%;
+}
+
+.icon{
+        display: flex;
+        justify-content: center;
+        font-size: xx-large;
+        height: 100%;
+        margin-top: 45%;
+        color: #fff;
+}
+
+.stat-count{
+    font-weight: 600;
+    margin-bottom: -6px;
+    margin-left: 10px;
+    color: grey;
+}
+
+.stat-title{
+    color: #F7BB41;
+    font-weight: 600;
+}
+
+.no-graph-found{
+    display: flex;
+    justify-content: center;
+}
+
+.date-picker-custom{
+    height: 35px;
+    margin: 10px;
 }

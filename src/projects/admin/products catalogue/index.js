@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-
 import { Tabs } from "antd";
+import TabTag from "components/tag/tag";
+import React, { useEffect, useState } from "react";
+import { getAllApprovedProduct, getAllPendingProduct } from "../utils/api";
 import AllProducts from "./allProducts/allProducts";
 import ProductApproval from "./product Approval/productApproval";
-import TabTag from "components/tag/tag";
-import { getAllPendingProduct, getAllApprovedProduct } from "../utils/api";
+import { catchError } from "utils/helpers";
 
 const { TabPane } = Tabs;
 
@@ -13,32 +13,46 @@ function callback(key) {}
 const ProductCatalogue = () => {
   const [approveProducts, setApproveProducts] = useState([]);
   const [pendingproducts, setPendingproducts] = useState([]);
-
+  const [Approvepage, setAppovalPage] = useState(2);
   const [isLoading, setIsLoading] = useState(true);
 
-  const allPending = async () => {
+  const allPending = async (page) => {
     try {
-      const response = await getAllPendingProduct();
+      const response = await getAllPendingProduct(page);
       if (response.status === 200) {
-        setIsLoading(false);
         setPendingproducts(response.data);
+        setIsLoading(false);
       }
-    } catch (error) {}
+    } catch (error) {
+      catchError(error);
+    }
   };
 
-  const allApproved = async () => {
+  const allApproved = async (page) => {
     try {
-      const response = await getAllApprovedProduct();
+      const response = await getAllApprovedProduct(page);
       if (response.status === 200) {
-        setIsLoading(false);
         setApproveProducts(response.data);
+        setIsLoading(false);
       }
-    } catch (error) {}
+    } catch (error) {
+      catchError(error);
+    }
+  };
+
+  const fetchMoreAllProducts = () => {
+    setAppovalPage(Approvepage + 1);
+    allApproved(Approvepage);
+  };
+
+  const allTypeofProducts = () => {
+    allPending(1);
+    allApproved(1);
   };
 
   useEffect(() => {
-    allPending();
-    allApproved();
+    allPending(1);
+    allApproved(1);
   }, []);
 
   return (
@@ -50,7 +64,8 @@ const ProductCatalogue = () => {
         <AllProducts
           isLoading={isLoading}
           products={approveProducts}
-          loadAllProducts={allApproved}
+          loadAllProducts={allTypeofProducts}
+          fetchMoreAllProducts={fetchMoreAllProducts}
         />
       </TabPane>
       <TabPane
@@ -64,6 +79,7 @@ const ProductCatalogue = () => {
       >
         <ProductApproval
           isLoading={isLoading}
+          callBack={allTypeofProducts}
           products={pendingproducts}
           loadPenindgProducts={allPending}
         />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { Select } from "antd";
 import { useTranslation } from "react-i18next";
 
@@ -14,12 +14,12 @@ const SelectBox = () => {
   return (
     <>
       <Select
-        defaultValue="English"
+        defaultValue={localStorage.getItem("i18nextLng") === "en" ? "en" : "hn"}
         style={{ width: 120 }}
         onChange={handleChange}
       >
         <Option value="en">English</Option>
-        <Option value="hn">Hindi</Option>
+        <Option value="hn">हिंदी</Option>
       </Select>
     </>
   );

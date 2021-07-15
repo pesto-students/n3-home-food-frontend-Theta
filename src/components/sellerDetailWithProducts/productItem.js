@@ -1,36 +1,46 @@
 import { Button, Col, Row, Typography, notification, Tag } from "antd";
 
-import { React, useState } from "react";
-import axios from "utils/axios";
-import { baseUrl, rupeeSign } from "utils/constant";
+import { React, useState, useEffect } from "react";
+import { rupeeSign } from "utils/constant";
 import { sessionId } from "utils/helpers";
 import Image from "../image/image";
 import "./sellerDetailWithProducts.css";
-import { useDispatch } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { setSellerIdInCart } from "store/actions/index";
 import { useTranslation } from "react-i18next";
+import { updateCartItem } from "../utils/api";
 
-const ProductItems = ({ products, savedCartItem, reloadCart, sellerId }) => {
+const ProductItems = ({ products, savedCartItem, reloadCart, sellerId, ...props}) => {
   const Dispatch = useDispatch();
   const { t } = useTranslation();
 
   const { Title } = Typography;
-  const [isLoading, setIsLoding] = useState(false);
+  const [allProducts, setAllProducts] = useState([...products]);
 
-  const addItems = (dish, method) => {
-    console.log(sessionId());
+
+  useEffect(() => {}, [savedCartItem]);
+
+  useEffect(() => {
+    setAllProducts([...products]);
+  }, [products]);
+
+  const addItems = (dish, key, method) => {
+   
+
     if (!sessionId()) {
       notification.error({
-        message: "Notification",
-        description: "Please Login to add into cart",
+        message: t("Message.Notification"),
+        description: t("Message.PleaseLogin"),
         placement: "topRight",
       });
       return;
     }
 
-    setIsLoding(true);
+
+    allProducts[key].isLoading = true;
+    setAllProducts([...allProducts]);
     let currentProduct = savedCartItem.filter(
-      (item) => item.productId === dish.productId
+      (item) => item.productId.id === dish.productId
     );
     let cartItem = {};
     if (currentProduct.length > 0) {
@@ -56,25 +66,23 @@ const ProductItems = ({ products, savedCartItem, reloadCart, sellerId }) => {
       };
     }
 
-    updateCart(cartItem);
+    updateCart(cartItem, key);
   };
 
-  const updateCart = (cartItem) => {
-    axios
-      .post(`${baseUrl}/cart`, cartItem)
-      .then((result) => {
-        setIsLoding(false);
-        Dispatch(setSellerIdInCart(sellerId));
-
-        reloadCart();
-      })
-      .catch((err) => console.error(err));
+  const updateCart = async (cartItem, key) => {
+    const response = await updateCartItem(cartItem);
+    if (response.status === 200) {
+      allProducts[key].isLoading = false;
+      setAllProducts([...allProducts]);
+      Dispatch(setSellerIdInCart(sellerId));
+      reloadCart();
+    }
   };
 
   const getQuantity = (currentItem) => {
     try {
       let current = savedCartItem.filter(
-        (item) => item.productId === currentItem.productId
+        (item) => item.productId.id === currentItem.productId
       );
       if (current.length > 0) {
         return current[0].quantity;
@@ -87,7 +95,7 @@ const ProductItems = ({ products, savedCartItem, reloadCart, sellerId }) => {
 
   return (
     <Row>
-      {products.map((dish, key) => {
+      {allProducts.map((dish, key) => {
         return (
           <Col sm={24} xs={24} md={24} key={key} className="product-row">
             <Row>
@@ -119,23 +127,23 @@ const ProductItems = ({ products, savedCartItem, reloadCart, sellerId }) => {
 
                   {getQuantity(dish) === 0 ? (
                     <Button
-                      loading={isLoading}
-                      onClick={() => addItems(dish, "add")}
+                      loading={dish.isLoading}
+                      onClick={() => addItems(dish, key, "add")}
                     >
                       {t("ProductItem.Add")}
                     </Button>
                   ) : (
                     <div>
                       <Button
-                        loading={isLoading}
-                        onClick={() => addItems(dish, "sub")}
+                        loading={dish.isLoading}
+                        onClick={() => addItems(dish, key, "sub")}
                       >
                         -
                       </Button>
                       <Button>{getQuantity(dish)}</Button>
                       <Button
-                        loading={isLoading}
-                        onClick={() => addItems(dish, "add")}
+                        loading={dish.isLoading}
+                        onClick={() => addItems(dish, key, "add")}
                       >
                         +
                       </Button>
@@ -151,11 +159,10 @@ const ProductItems = ({ products, savedCartItem, reloadCart, sellerId }) => {
   );
 };
 
-// const mapStateToProps = (state) => {
-//   return {
-//     cartItems: state.myCart,
-//   };
-// };
+const mapStateToProps = (state) => {
+  return {
+    title: state,
+  };
+};
 
-// export default connect(mapStateToProps)(ProductItems);
-export default ProductItems;
+export default connect(mapStateToProps)(ProductItems);

@@ -1,9 +1,8 @@
 import axios from "utils/axios";
-import { getCategoryId } from "utils/helpers";
 
-export const getSeller = async (pincode) => {
+export const fetchSellerProfile = async (id) => {
   let response = await axios
-    .get(`/sellers/pincode/${pincode}`)
+    .get(`/sellers/get/getproducts?sellerid=${id}`)
     .then((response) => {
       return response;
     })
@@ -13,57 +12,7 @@ export const getSeller = async (pincode) => {
   return response;
 };
 
-export const getSellerByPage = async (pincode, page, tabSelected) => {
-  let response
-  if (tabSelected !== "All") {
-    response = await axios
-    .get(`sellers/get/SellersByCategoryFilter?categoryId=${getCategoryId(tabSelected)}&pincode=${pincode}&page=${page}`)
-    .then((response) => {
-      return response;
-    })
-    .catch((error) => {
-      return error.response;
-    });
-  } else {
-     response = await axios
-    .get(`/sellers/pincode/${pincode}?page=${page}`)
-    .then((response) => {
-      return response;
-    })
-    .catch((error) => {
-      return error.response;
-    });
-  }
-
-
-  return response;
-};
-
-export const getCategorySeller = async (category, code) => {
-  let response = await axios
-    .get(`sellers/get/SellersByCategory?categoryId=${category}&pincode=${code}`)
-    .then((response) => {
-      return response;
-    })
-    .catch((error) => {
-      return error.response;
-    });
-  return response;
-};
-
-export const getAllCurrentOrder = async () => {
-  let response = await axios
-    .get(`/orders/`)
-    .then((response) => {
-      return response;
-    })
-    .catch((error) => {
-      return error.response;
-    });
-  return response;
-};
-
-export const getUserCart = async (id) => {
+export const fetchCart = async (id) => {
   let response = await axios
     .get(`/cart/${id}`)
     .then((response) => {
@@ -75,9 +24,57 @@ export const getUserCart = async (id) => {
   return response;
 };
 
-export const putRateToOrder = async (id, rate) => {
+export const updateCartItem = async (data) => {
   let response = await axios
-    .put(`/orders/rate/${id}`, rate)
+    .post(`/cart`, data)
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+  return response;
+};
+
+export const reassignProduct = async (productId, data) => {
+  let response = await axios
+    .put(`/products/product-reassign/${productId}`, data)
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+  return response;
+};
+
+export const getApproveProduct = async () => {
+  let response = await axios
+    .get(`/products/get/approved`)
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+  return response;
+};
+
+export const rejectSeller = async (id) => {
+  let response = await axios
+    .put(`/sellers/reject/${id}`)
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+  return response;
+};
+
+export const approveSeller = async (id) => {
+  let response = await axios
+    .put(`/sellers/approve/${id}`)
     .then((response) => {
       return response;
     })

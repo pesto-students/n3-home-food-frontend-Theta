@@ -1,51 +1,80 @@
-import { Tabs, Row } from "antd";
-
+import { Row, Tabs } from "antd";
+import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
+import TabTag from "components/tag/tag";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { sessionId, catchError } from "utils/helpers";
+import { getAllCurrentOrderSeller, getAllPastOrderSeller } from "../utils/api";
 import CurrentOrders from "./currentOrder";
 import PastOrders from "./pastOrder";
-import TabTag from "components/tag/tag";
-import { sessionId } from "utils/helpers";
-import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
-import { useTranslation } from "react-i18next";
-import { getAllCurrentOrderSeller, getAllPastOrderSeller } from "../utils/api";
 
 const SellerProducts = () => {
   const { t } = useTranslation();
   const { TabPane } = Tabs;
 
   const [isLoading, setIsLoading] = useState(true);
+  const [page, setPage] = useState(2);
+  const [CurrentOrderPage, setCurrentOrderPage] = useState(2);
 
   const [currentOrdersItem, setCurrentOrdersItem] = useState([]);
   const [pastOrdersItem, setPastOrdersItem] = useState([]);
 
-  const getAllCurrentOrder = async () => {
+  const getAllCurrentOrder = async (page) => {
     try {
-      const response = await getAllCurrentOrderSeller(sessionId());
+      const response = await getAllCurrentOrderSeller(sessionId(), page);
       if (response.status === 200) {
-        setCurrentOrdersItem(response.data);
+        let updatedOrders = [];
+        response.data.forEach((element) => {
+          updatedOrders.push(element);
+        });
+        setCurrentOrdersItem((currentOrdersItem) => [
+          ...currentOrdersItem,
+          ...updatedOrders,
+        ]);
         setIsLoading(false);
       }
-    } catch (error) {}
+    } catch (error) {
+      catchError(error);
+    }
   };
 
-  const getAllPastOrder = async () => {
+  const getAllPastOrder = async (page) => {
     try {
-      const response = await getAllPastOrderSeller(sessionId());
+      const response = await getAllPastOrderSeller(sessionId(), page);
       if (response.status === 200) {
+        let updatedOrders = [];
+        response.data.forEach((element) => {
+          updatedOrders.push(element);
+        });
+        setPastOrdersItem((pastOrdersItem) => [
+          ...pastOrdersItem,
+          ...updatedOrders,
+        ]);
         setIsLoading(false);
-        setPastOrdersItem(response.data);
       }
-    } catch (error) {}
+    } catch (error) {
+      catchError(error);
+    }
+  };
+
+  const fetchMoreProducts = () => {
+    setPage(page + 1);
+    getAllPastOrder(page);
+  };
+
+  const fetchMoreActiveOrders = () => {
+    setCurrentOrderPage(CurrentOrderPage + 1);
+    getAllCurrentOrder(CurrentOrderPage);
   };
 
   useEffect(() => {
-    getAllCurrentOrder();
-    getAllPastOrder();
+    getAllCurrentOrder(1);
+    getAllPastOrder(1);
   }, []);
 
   const refreshOrder = () => {
-    getAllCurrentOrder();
-    getAllPastOrder();
+    getAllCurrentOrder(1);
+    getAllPastOrder(1);
   };
 
   return (
@@ -60,7 +89,11 @@ const SellerProducts = () => {
         key="1"
       >
         {!isLoading ? (
-          <CurrentOrders callBack={refreshOrder} orders={currentOrdersItem} />
+          <CurrentOrders
+            callBack={refreshOrder}
+            orders={currentOrdersItem}
+            fetchMoreProducts={fetchMoreActiveOrders}
+          />
         ) : (
           <Row justify="center">
             <SpinnerLoader />
@@ -77,7 +110,10 @@ const SellerProducts = () => {
         key="2"
       >
         {!isLoading ? (
-          <PastOrders orders={pastOrdersItem} />
+          <PastOrders
+            orders={pastOrdersItem}
+            fetchMoreProducts={fetchMoreProducts}
+          />
         ) : (
           <Row justify="center">
             <SpinnerLoader />

@@ -1,1 +1,4 @@
 
+.ant-upload-text-icon  .anticon-loading{
+display: none !important
+}

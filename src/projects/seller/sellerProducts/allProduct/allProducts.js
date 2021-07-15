@@ -1,25 +1,22 @@
 import {
   Button,
   Card,
-  notification,
   Modal,
-  Select,
+  notification,
   Row,
+  Select,
   Skeleton,
   Typography,
 } from "antd";
-
-import React, { useState } from "react";
-import InfiniteScroll from "react-infinite-scroll-component";
+import DataNotFound from "components/dataNotFound/dataNotFound";
 import Image from "components/image/image";
 import { AddProductSellerModal } from "components/manageProductmodal/addProduct";
-import { getCategoryId, sessionId } from "utils/helpers";
-import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
-import { useTranslation } from "react-i18next";
-import DataNotFound from "components/dataNotFound/dataNotFound";
 import { setAddProductIntoMyProduct } from "projects/seller/utils/api";
+import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { getCategoryId, sessionId } from "utils/helpers";
 
-const AllProducts = ({ products, isLoading, callback }) => {
+const AllProducts = ({ products, isLoading, callback, fetchMoreProducts }) => {
   const { t } = useTranslation();
   const { Title } = Typography;
   const { Option } = Select;
@@ -27,16 +24,6 @@ const AllProducts = ({ products, isLoading, callback }) => {
   const [isCategoryModal, setIsCategoryModal] = useState(false);
   const [currentProduct, setCurrentProduct] = useState({});
   const [selectedCategory, setSelectedCategory] = useState([]);
-
-  const fetchMoreData = () => {
-    // axios
-    // .get("`${baseUrl}/products/get/approved")
-    // .then((result) => {
-    //   setproducts(products.concat(result.data));
-    // })
-    // .catch((err) => console.error(err))
-    // .finally(() => setIsLoading(false));
-  };
 
   const addToMyProduct = async () => {
     if (selectedCategory.length === 0) {
@@ -115,45 +102,36 @@ const AllProducts = ({ products, isLoading, callback }) => {
 
         <Skeleton loading={isLoading} active>
           {products.length > 0 ? (
-            <InfiniteScroll
-              dataLength={products.length}
-              next={fetchMoreData}
-              hasMore={true}
-              loader={
-                <Row className="m-2 mt-4" justify="center">
-                  <SpinnerLoader />
-                </Row>
-              }
-            >
-              {products.map((product, i) => (
-                <Card key={i} hoverable>
-                  <div className="container">
-                    <div className="row">
-                      <div className="product-cointaner">
-                        <Image
-                          url={product.image}
-                          height="100"
-                          width="150"
-                        ></Image>
-                      </div>
-                      <div className="product-details ">
-                        <Title level={4}>{product.name}</Title>
-                        <p>{product.description}</p>
-                        <span>Max Amount ₹{product.max_price}</span>
-                      </div>
+            products.map((product, i) => (
+              <Card key={i} hoverable>
+                <div className="container">
+                  <div className="row">
+                    <div className="product-cointaner">
+                      <Image
+                        url={product.image}
+                        height="100"
+                        width="150"
+                      ></Image>
+                    </div>
+                    <div className="product-details ">
+                      <Title level={4}>{product.name}</Title>
+                      <p>{product.description}</p>
+                      <span>
+                        {t("seller.profile.MaxAmount")} ₹{product.max_price}
+                      </span>
                     </div>
                   </div>
-                  <Row justify="end">
-                    <Button
-                      type="primary"
-                      onClick={() => handdleOpenCategoryModal(product)}
-                    >
-                      {t("seller.product.addButton")}
-                    </Button>
-                  </Row>
-                </Card>
-              ))}
-            </InfiniteScroll>
+                </div>
+                <Row justify="end">
+                  <Button
+                    type="primary"
+                    onClick={() => handdleOpenCategoryModal(product)}
+                  >
+                    {t("seller.product.addButton")}
+                  </Button>
+                </Row>
+              </Card>
+            ))
           ) : (
             <Row className="m-2 mt-4" justify="center">
               <DataNotFound text="No Data Found!" />

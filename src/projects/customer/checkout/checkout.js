@@ -1,8 +1,4 @@
-import {
-  CreditCardOutlined,
-  SolutionOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
+import { CreditCardOutlined, SolutionOutlined } from "@ant-design/icons";
 import { Card, Radio, Space, Steps } from "antd";
 import Title from "antd/lib/typography/Title";
 import React from "react";
@@ -65,19 +61,6 @@ export class Checkout extends React.Component {
     const { value } = this.state;
     // const { alreadyInCart } = this.state;
 
-    const Content1 = (
-      <Translation>
-        {(t, { i18n }) => (
-          <Card hoverable>
-            <div className="about-row">
-              <span> {t("Checkout.Contact No")} - 7741084950</span>
-              <span> {t("Checkout.Pincode")} - 560066</span>
-            </div>
-          </Card>
-        )}
-      </Translation>
-    );
-
     const deliverMethod = (
       <Translation>
         {(t, { i18n }) => (
@@ -115,11 +98,6 @@ export class Checkout extends React.Component {
                   onChange={this.onChange}
                   current={current}
                 >
-                  <Step
-                    title={t("Checkout.personal details")}
-                    icon={<UserOutlined />}
-                    description={Content1}
-                  />
                   <Step
                     title={t("Checkout.Delivery")}
                     icon={<SolutionOutlined />}

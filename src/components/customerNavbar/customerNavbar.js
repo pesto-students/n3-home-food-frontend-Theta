@@ -7,6 +7,7 @@ import logo from "images/logo.png";
 import { getPincode, setPincode } from "utils/helpers";
 import Image from "components/image/image";
 import { useTranslation } from "react-i18next";
+import SelectBox from "../selectBox/selectBox";
 
 const { Header } = Layout;
 
@@ -88,6 +89,7 @@ const CustomerNavbar = ({ updatePincode }) => {
           </Link>
         </Col>
         <Col md={14} sm={24} xs={24} className="keep-items-left">
+          <SelectBox />
           <Link to="/my/orders">
             <Button type="link">{t("Header.Orders")}</Button>
           </Link>

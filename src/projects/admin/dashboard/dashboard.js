@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import {
-  DesktopOutlined,
-  FileOutlined,
-  PieChartOutlined,
+  ShopFilled ,
+  PieChartFilled,
+  UsergroupAddOutlined,
+  MenuOutlined
 } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 
@@ -13,6 +14,7 @@ import { getUser } from "utils/helpers";
 import DashboardRoutes from "../dashboard-routes/dashboardRoutes";
 import { AvatarMenu } from "../header/header";
 import "./dashboard.css";
+import admin from '../../../images/admin.png'
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -44,10 +46,21 @@ const AdminDashBoard = () => {
     handdleActiveTabs();
   }, []);
 
+  const CustomTrigger = () => (
+    <MenuOutlined />
+  );
+
   return (
     <>
       <Layout style={{ minHeight: "100vh" }}>
-        <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
+        <Sider
+          breakpoint="md"
+          collapsedWidth="0"
+          collapsible
+          collapsed={collapsed}
+          onCollapse={onCollapse}
+          trigger={<CustomTrigger />}
+        >
           <div className="home-food-logo">
             <Image
               url={logo}
@@ -63,34 +76,46 @@ const AdminDashBoard = () => {
             selectedKeys={[activeTab]}
             mode="inline"
           >
-            <Menu.Item key="1" icon={<PieChartOutlined />}>
-              <Link to="/admin/dashboard">Dashboard</Link>
+            <Menu.Item
+              key="1"
+              icon={<PieChartFilled className="sidebar-icon" />}
+            >
+              <Link to="/admin/dashboard" style={{ color: "black" }}>
+                Dashboard
+              </Link>
             </Menu.Item>
 
-            <Menu.Item key="2" icon={<DesktopOutlined />}>
-              <Link to="/admin/product">Product</Link>
+            <Menu.Item key="2" icon={<ShopFilled className="sidebar-icon" />}>
+              <Link to="/admin/product" style={{ color: "black" }}>
+                Product
+              </Link>
             </Menu.Item>
 
-            <Menu.Item key="3" icon={<FileOutlined />}>
-              <Link to="/admin/seller">Seller</Link>
+            <Menu.Item
+              key="3"
+              icon={<UsergroupAddOutlined className="sidebar-icon" />}
+            >
+              <Link to="/admin/seller" style={{ color: "black" }}>
+                Seller
+              </Link>
             </Menu.Item>
           </Menu>
         </Sider>
         <Layout className="site-layout">
           <Header className="header-navbar">
-            <h1>Admin</h1>
-            <AvatarMenu />
+            <h1 >Admin</h1>
+            <AvatarMenu image={admin}/>
           </Header>
           <Content style={{ margin: "20px 16px" }}>
             <div
               className="site-layout-background"
-              style={{ padding: 24, minHeight: 360 }}
+              style={{ padding: 12, minHeight: 360 }}
             >
               {user === "Admin" && <DashboardRoutes />}
             </div>
           </Content>
           <Footer style={{ textAlign: "center" }}>
-            Home Food ©2021 Created by Pesto Theta
+            Home Food ©2021 Created by ninja-3 Pesto Theta
           </Footer>
         </Layout>
       </Layout>

@@ -15,31 +15,29 @@ import {
   Typography,
 } from "antd";
 import React, { useEffect, useState } from "react";
-import InfiniteScroll from "react-infinite-scroll-component";
 import Image from "components/image/image";
-import { sessionId } from "utils/helpers";
-import SpinnerLoader from "components/spinnerLoader/spinnerLoader";
+import { sessionId, getCategoryId } from "utils/helpers";
+import { catchError } from "utils/helpers";
+import { useTranslation } from "react-i18next";
+
 import DataNotFound from "components/dataNotFound/dataNotFound";
 import { updateProduct, deleteMyProduct } from "projects/seller/utils/api";
 
 const MyProducts = ({ products, isLoading, callback }) => {
+  const { t } = useTranslation();
   const { Option } = Select;
   const { Title } = Typography;
   const [myProducts, setMyProducts] = useState([...products]);
   const [price, setPrice] = useState(0);
   const [quantity, setQuantity] = useState(0);
   const [currentProductId, setCurrentProductId] = useState("");
-  const [ishasMore, setIshasMore] = useState(false);
+  // const [ishasMore, setIshasMore] = useState(false);
 
   const [SelectedCategory, setSelectedCategory] = useState([]);
 
   useEffect(() => {
     setMyProducts([...products]);
   }, [products]);
-
-  const fetchMoreData = () => {
-    setIshasMore(true);
-  };
 
   const editProduct = async () => {
     if (SelectedCategory.length === 0) {
@@ -67,7 +65,9 @@ const MyProducts = ({ products, isLoading, callback }) => {
         });
         callback();
       }
-    } catch (error) {}
+    } catch (error) {
+      catchError(error);
+    }
   };
 
   const editableProduct = (key) => {
@@ -98,7 +98,9 @@ const MyProducts = ({ products, isLoading, callback }) => {
         setMyProducts([...products]);
         callback();
       }
-    } catch (error) {}
+    } catch (error) {
+      catchError(error);
+    }
   };
 
   const changeCategory = (categoryies) => {
@@ -109,161 +111,156 @@ const MyProducts = ({ products, isLoading, callback }) => {
     <>
       <Skeleton loading={isLoading} active>
         {myProducts.length > 0 ? (
-          <InfiniteScroll
-            dataLength={myProducts.length}
-            next={fetchMoreData}
-            hasMore={ishasMore}
-            loader={
-              <Row className="m-2 mt-4" justify="center">
-                <SpinnerLoader />
+          myProducts.map((product, i) => (
+            <Card key={i} hoverable>
+              <Row justify="end">
+                <Dropdown
+                  overlay={
+                    <Menu>
+                      <Menu.Item
+                        key="edit"
+                        onClick={() => editableProduct(i)}
+                        icon={<EditOutlined />}
+                      >
+                        {t("seller.profile.editText")}
+                      </Menu.Item>
+                      <Menu.Item
+                        key="delete"
+                        onClick={() => deleteProduct(i)}
+                        s
+                        icon={<DeleteOutlined />}
+                      >
+                        {t("seller.profile.deleteText")}
+                      </Menu.Item>
+                    </Menu>
+                  }
+                >
+                  <MoreOutlined />
+                </Dropdown>
               </Row>
-            }
-          >
-            {myProducts.map((product, i) => (
-              <Card key={i} hoverable>
-                <Row justify="end">
-                  <Dropdown
-                    overlay={
-                      <Menu>
-                        <Menu.Item
-                          key="edit"
-                          onClick={() => editableProduct(i)}
-                          icon={<EditOutlined />}
-                        >
-                          Edit
-                        </Menu.Item>
-                        <Menu.Item
-                          key="delete"
-                          onClick={() => deleteProduct(i)}
-                          s
-                          icon={<DeleteOutlined />}
-                        >
-                          Delete
-                        </Menu.Item>
-                      </Menu>
-                    }
-                  >
-                    <MoreOutlined />
-                  </Dropdown>
-                </Row>
 
-                <Form layout="vertical" onFinish={editProduct}>
-                  <div className="container">
-                    <div className="row">
-                      <div className="product-cointaner">
-                        <Image
-                          url={product.image}
-                          height="100"
-                          width="150"
-                        ></Image>
-                      </div>
-                      <div className="product-details ">
-                        <Title level={4}>
-                          {product.name ? product.name : "Static for now"}
-                        </Title>
-                        <p>{product.description}</p>
+              <Form layout="vertical" onFinish={editProduct}>
+                <div className="container">
+                  <div className="row">
+                    <div className="product-cointaner">
+                      <Image
+                        url={product.image}
+                        height="100"
+                        width="150"
+                      ></Image>
+                    </div>
+                    <div className="product-details ">
+                      <Title level={4}>
+                        {product.name ? product.name : "Static for now"}
+                      </Title>
+                      <p>{product.description}</p>
 
-                        <Row style={{ marginBottom: 20 }}>
+                      <Row style={{ marginBottom: 20 }}>
+                        {product.edit ? (
+                          <Form.Item
+                            name="productCategory"
+                            label="Product Category"
+                            rules={[
+                              {
+                                required: false,
+                                message: "Please Select Product Category!",
+                              },
+                            ]}
+                          >
+                            <Select
+                              mode="multiple"
+                              style={{ width: 200 }}
+                              defaultValue={SelectedCategory}
+                              onChange={changeCategory}
+                              placeholder="Please select a Category"
+                            >
+                              <Option value={getCategoryId("Breakfast")}>
+                                Breakfast
+                              </Option>
+                              <Option value={getCategoryId("Lunch")}>
+                                Lunch
+                              </Option>
+                              <Option value={getCategoryId("Snack")}>
+                                Snack
+                              </Option>
+                              <Option value={getCategoryId("Dinner")}>
+                                Dinner
+                              </Option>
+                            </Select>
+                          </Form.Item>
+                        ) : (
+                          product.productCategory.map((category) => {
+                            return (
+                              <Tag color="processing">{category.name}</Tag>
+                            );
+                          })
+                        )}
+                      </Row>
+
+                      <Row>
+                        <Col md={24}>
                           {product.edit ? (
                             <Form.Item
-                              name="productCategory"
-                              label="Product Category"
+                              label="Quantity"
                               rules={[
                                 {
-                                  required: false,
-                                  message: "Please Select Product Category!",
+                                  required: true,
+                                  message: "Enter quantity",
                                 },
                               ]}
                             >
-                              <Select
-                                mode="multiple"
-                                style={{ width: 200 }}
-                                defaultValue={SelectedCategory}
-                                onChange={changeCategory}
-                                placeholder="Please select a Category"
-                              >
-                                <Option value="60c906ce35453e14cd3f4ee3">
-                                  Breakfast
-                                </Option>
-                                <Option value="60ccfb4516659e249450ed49">
-                                  Lunch
-                                </Option>
-                                <Option value="60ccfea78d901732e097e2ee">
-                                  Snacks
-                                </Option>
-                                <Option value="60cf33b093112a14d5da3897">
-                                  Dinner
-                                </Option>
-                              </Select>
+                              <Input
+                                placeholder="Quantity"
+                                value={quantity}
+                                onChange={(e) => setQuantity(e.target.value)}
+                              />
                             </Form.Item>
                           ) : (
-                            product.productCategory.map((category) => {
-                              return (
-                                <Tag color="processing">{category.name}</Tag>
-                              );
-                            })
+                            <span>
+                              {" "}
+                              {t("seller.profile.Plates")}: {product.quantity}{" "}
+                            </span>
                           )}
-                        </Row>
-
-                        <Row>
-                          <Col md={24}>
-                            {product.edit ? (
-                              <Form.Item
-                                label="Quantity"
-                                rules={[
-                                  {
-                                    required: true,
-                                    message: "Enter quantity",
-                                  },
-                                ]}
-                              >
-                                <Input
-                                  placeholder="Quantity"
-                                  value={quantity}
-                                  onChange={(e) => setQuantity(e.target.value)}
-                                />
-                              </Form.Item>
-                            ) : (
-                              <span>Plates: {product.quantity} </span>
-                            )}
-                          </Col>
-                          <Col md={24}>
-                            {product.edit ? (
-                              <Form.Item
-                                label="Price"
-                                rules={[
-                                  {
-                                    required: true,
-                                    message: "Enter Price ₹",
-                                  },
-                                ]}
-                              >
-                                <Input
-                                  placeholder="Price ₹"
-                                  value={price}
-                                  onChange={(e) => setPrice(e.target.value)}
-                                />
-                              </Form.Item>
-                            ) : (
-                              <span>Price: ₹ {product.price} </span>
-                            )}
-                          </Col>
-                        </Row>
-                      </div>
+                        </Col>
+                        <Col md={24}>
+                          {product.edit ? (
+                            <Form.Item
+                              label="Price"
+                              rules={[
+                                {
+                                  required: true,
+                                  message: "Enter Price ₹",
+                                },
+                              ]}
+                            >
+                              <Input
+                                placeholder="Price ₹"
+                                value={price}
+                                onChange={(e) => setPrice(e.target.value)}
+                              />
+                            </Form.Item>
+                          ) : (
+                            <span>
+                              {" "}
+                              {t("seller.profile.Price")}: ₹ {product.price}{" "}
+                            </span>
+                          )}
+                        </Col>
+                      </Row>
                     </div>
                   </div>
+                </div>
 
-                  <Row justify="end">
-                    {product.edit && (
-                      <Button type="primary" htmlType="submit">
-                        Save
-                      </Button>
-                    )}
-                  </Row>
-                </Form>
-              </Card>
-            ))}
-          </InfiniteScroll>
+                <Row justify="end">
+                  {product.edit && (
+                    <Button type="primary" htmlType="submit">
+                      Save
+                    </Button>
+                  )}
+                </Row>
+              </Form>
+            </Card>
+          ))
         ) : (
           <Row className="m-2 mt-4" justify="center">
             <DataNotFound text="No Data Found!" />

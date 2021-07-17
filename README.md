@@ -58,11 +58,11 @@
 - Providing employment for the individual who can make food at home.
 
 ### Features
-  #### Customer
+  Customer
   <img src="https://github.com/pesto-students/n3-home-food-frontend-Theta/blob/feature/week4-pixel-perfection/public/customer.gif" />
-  #### Seller 
+  Seller 
   <img src="https://github.com/pesto-students/n3-home-food-frontend-Theta/blob/feature/week4-pixel-perfection/public/seller.gif" />
-  #### Admin
+  Admin
   <img src="https://github.com/pesto-students/n3-home-food-frontend-Theta/blob/feature/week4-pixel-perfection/public/admin1.gif" />
 
  

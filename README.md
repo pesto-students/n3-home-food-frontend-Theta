@@ -58,7 +58,14 @@
 - Providing employment for the individual who can make food at home.
 
 ### Features
-  
+  Customer
+  <img src="https://github.com/pesto-students/n3-home-food-frontend-Theta/blob/feature/week4-pixel-perfection/public/customer.gif" />
+  Seller 
+  <img src="https://github.com/pesto-students/n3-home-food-frontend-Theta/blob/feature/week4-pixel-perfection/public/seller.gif" />
+  Admin
+  <img src="https://github.com/pesto-students/n3-home-food-frontend-Theta/blob/feature/week4-pixel-perfection/public/admin1.gif" />
+
+ 
 ### Resources
 - [Backend git repository](https://github.com/pesto-students/n3-home-food-backend-Theta)
 - [Design Files](https://drive.google.com/file/d/1ZsHUcppCgRSodUsBPYNnufJIXQVBMpSX/view?usp=sharing)

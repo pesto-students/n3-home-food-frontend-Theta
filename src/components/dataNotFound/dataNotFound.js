@@ -1,10 +1,12 @@
 import * as React from "react";
-import { useTranslation } from "react-i18next";
-
+import { Row } from "antd";
+import ServiceNotFound from "components/serviceNotFound/serviceNotFound";
 const DataNotFound = () => {
-  const { t } = useTranslation();
-
-  return <p>{t("Header.NotFound")}</p>;
+  return (
+    <Row justify="center">
+      <ServiceNotFound />
+    </Row>
+  );
 };
 
 export default DataNotFound;

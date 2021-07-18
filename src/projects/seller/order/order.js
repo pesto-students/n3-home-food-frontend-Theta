@@ -23,14 +23,7 @@ const SellerProducts = () => {
     try {
       const response = await getAllCurrentOrderSeller(sessionId(), page);
       if (response.status === 200) {
-        let updatedOrders = [];
-        response.data.forEach((element) => {
-          updatedOrders.push(element);
-        });
-        setCurrentOrdersItem((currentOrdersItem) => [
-          ...currentOrdersItem,
-          ...updatedOrders,
-        ]);
+        setCurrentOrdersItem(response.data);
         setIsLoading(false);
       }
     } catch (error) {
@@ -42,14 +35,7 @@ const SellerProducts = () => {
     try {
       const response = await getAllPastOrderSeller(sessionId(), page);
       if (response.status === 200) {
-        let updatedOrders = [];
-        response.data.forEach((element) => {
-          updatedOrders.push(element);
-        });
-        setPastOrdersItem((pastOrdersItem) => [
-          ...pastOrdersItem,
-          ...updatedOrders,
-        ]);
+        setPastOrdersItem(response.data);
         setIsLoading(false);
       }
     } catch (error) {

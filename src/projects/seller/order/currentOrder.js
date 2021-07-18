@@ -13,6 +13,7 @@ const CurrentOrders = ({ orders, callBack, fetchMoreProducts }) => {
   const delived = async (order) => {
     try {
       const response = await orderDelived(order.id);
+
       if (response.status === 200) {
         notification.success({
           message: `Notification`,

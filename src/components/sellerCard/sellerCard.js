@@ -13,7 +13,11 @@ const SellerCard = ({ detail }) => {
       style={{ width: "100%", margin: "0px" }}
       cover={<Image height="150px" width="100%" url={detail.image} />}
     >
-      <Meta title={detail.display_name} description={detail.phone} />
+      <Meta
+        style={{ marginTop: 10 }}
+        title={detail.display_name}
+        description={detail.phone}
+      />
       {detail.rating > 0 ? (
         <Rate
           className="move-from-top"

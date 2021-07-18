@@ -142,10 +142,6 @@ const Navbar = ({ callBack }) => {
           <Button type="link" onClick={() => setOpenPincodeModal(true)}>
             {t("Header.Pincode")} {currentPincode && `(${currentPincode})`}
           </Button>
-
-          <Link to="/admin/login">
-            <Button type="link">{t("Header.Admin")}</Button>
-          </Link>
         </Col>
         <CustomerLogin type="Customer" />
       </Row>

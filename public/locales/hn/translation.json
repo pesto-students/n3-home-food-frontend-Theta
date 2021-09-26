@@ -1,0 +1,157 @@
+{
+    "Message":{
+        "Wait": "कृपया प्रतीक्षा करें...",
+        "Notification": "अधिसूचना",
+        "PleaseLogin": "कार्ट में जोड़ने के लिए कृपया लॉगिन करें",
+        "Verified": "सत्यापित",
+        "OTPVerified": "ओटीपी सत्यापित",
+        "OTP not verified": "ओटीपी सत्यापित नहीं",
+        "Error": "त्रुटि",
+        "SMS not sent": "एसएमएस नहीं भेजा गया",
+        "OTPHasBeenSent": "ओटीपी भेजा गया है। कृपया ओटीपी दर्ज करें"
+    },
+    "Header":{
+        "Become Seller":"विक्रेता बनें",
+        "Categories Sold": "श्रेणियां बिकीं",
+        "NotFound": "कोई डेटा नहीं मिला",
+        "MyIncome": "मेरी आय",
+        "Sign In":"दाखिल करना",
+        "Admin":"व्यवस्थापक",
+        "Enter Pincode":"पिनकोड दर्ज करें",
+        "Save":"सेव",
+        "notFound": "आइटम नहीं मिला",
+        "Pincode":"पिन कोड",
+        "Logout":"लॉग आउट",
+        "Orders":"ऑर्डर",
+        "My Orders": "मेरे आदेश"
+
+    },
+    "Admin": {
+        "headLine": "अपने क्षेत्र के सभी विक्रेता को प्रबंधित करें",
+        "headDescription": "आप अपने क्षेत्र के विक्रेता को भी प्रबंधित कर सकते हैं आप विक्रेता के उत्पाद को नियंत्रित कर सकते हैं और बहुत कुछ"
+      },
+    "Landing":{
+        "Sellers":"सेलर्स",
+        "All": "सब",
+        "dinner": "रात्रिभोज",
+        "lunch": "दोपहर का भोजन",
+        "breakfast": "नाश्ता",
+        "snacks": "नाश्ता",
+        "Login": "लॉगिन",
+        "Phone": "फोन",
+        "EnterPhoneValidation": "कृपया अपना मोबाइल दर्ज करें",
+        "SendOtp": "ओटीपी भेजें",
+        "VerifyOTP": "ओटीपी सत्यापित करें"
+        
+
+    },
+    "ProductItem":{
+        "Only": "केवल",
+        "Left":"बचा हुआ",
+        "Add":"जोड़े"
+    },
+    "Cart":{
+        "Max Amount": "अधिकतम राशि",
+        "Products":"आइटम",
+        "Cart":"कार्ट",
+        "Add":"जोड़े",
+        "Checkout":"चेक आउट",
+        "Sub Total":"संपूर्ण"
+    },
+    "Checkout":{
+        "Cart":"कार्ट",
+        "Contact No":"संपर्क नंबर",
+        "Pincode":"पिन कोड",
+        "Take Away":"टेक अवे",
+        "Dine In":"डाईन ईन",
+        "Pay":"पे",
+        "personal details":"व्यक्तिगत विवरण",
+        "Delivery":"डीलेवरी"
+    },
+    "Payment":{
+        "Pay now":"अब भुगतान करें"
+    },
+    "MyOrders":{
+        "Delivery Type":"डीलेवरी प्रकार",
+        "Received on":"प्राप्त हुआ",
+        "Order No":"आदेश संख्या",
+        "Contact Number":"संपर्क नंबर",
+        "Total":"संपूर्ण"
+
+    },
+    "seller":{
+        "registerForm":
+        {
+            
+            "formDescription": "विवरण",
+            "formDescriptionNameValidationAndPlaceholder": "कृपया विवरण दर्ज करें",
+            "partnerText":"हमारे साथ भागीदार",
+            "description":"अपने घर पर खाना बनाएं और अपने आस-पास के लोगों को बेचें और कमाएं",
+            "register": "रजिस्टर",
+            "name": "नाम",
+            "nameValidationAndPlaceholder": "कृपया उपयोगकर्ता नाम दर्ज करें",
+            "displayName": "प्रदर्शन नाम",
+            "displayNameValidationAndPlaceholder": "कृपया प्रदर्शन नाम दर्ज करें",
+            "mobileNumber": "मोबाइल नंबर",
+            "mobileNumberValidationAndPlaceholder": "कृपया मोबाइल नंबर दर्ज करें",
+            "idProof": "आधार कार्ड",
+            "idProofValidationAndPlaceholder": "कृपया आधार कार्ड दर्ज करें",
+            "email": "ईमेल (वैकल्पिक)",
+            "emailValidationAndPlaceholder": "कृपया ईमेल दर्ज करें",
+            "address": "पता",
+            "addressValidationAndPlaceholder": "कृपया पता दर्ज करें",
+            "submit": "सबमिट करें",
+            "loginText": "पहले से ही एक विक्रेता, लॉगिन करें?",
+            "ProductImage": "उत्पाद छवि",
+            "ClickToUpload": "अपलोड करने के लिए क्लिक करें"
+        },
+        "dashboard":{
+            "dashboardText": "डैशबोर्ड",
+            "productText": "उत्पाद",
+            "profileText": "विक्रेता",
+            "orderText": "आदेश",
+            "totalOrder": "कुल आदेश",
+            "totalIncome": "कुल आय"
+          },
+        "product":  {
+            "allProducts": "सभी उत्पाद",
+            "myProducts": "मेरे उत्पाद",
+            "allApprove": "सभी स्वीकृत",
+            "requestProductButton": "उत्पाद का अनुरोध करें",
+            "addButton": "जोड़ें",
+            "cancelButton": "रद्द करना",
+            "requestForm":{
+                "addProductText": "उत्पाद जोड़ें",
+                "productName": "उत्पाद का नाम",
+                "productNameValidation": "कृपया उत्पाद का नाम दर्ज करें",
+                "productCategory": "उत्पाद श्रेणी",
+                "productCategoryValidation": "कृपया श्रेणी चुनें",
+                "description": "विवरण",
+                "descriptionValidation": "कृपया उत्पाद विवरण दर्ज करें",
+                "price": "मूल्य",
+                "priceValidation": "कृपया मूल्य दर्ज करें"
+            }
+           
+          },
+          "profile":{
+            "deleteText": "हटाएं",
+            "MaxAmount": "अधिकतम राशि",
+            "editText": "संपादित करें",
+            "Plates": "प्लेटें",
+            "Price": "कीमत",
+            "editProfileModalTitle": "प्रोफ़ाइल संपादित करें",
+            "profileImageText": "प्रोफ़ाइल छवि"
+          },
+        "order":{
+            "currentOrder": "वर्तमान आदेश",
+            "pastOrder": "पिछले आदेश",
+            "deliveryType": "वितरण प्रकार",
+            "orderNo": "आदेश संख्या",
+            "contactNumber":"संपर्क नंबर",
+            "receivedOn": "प्राप्त",
+            "deliverButton": "वितरित करें",
+            "totalText": "संपूर्ण"
+        }
+   } 
+
+}

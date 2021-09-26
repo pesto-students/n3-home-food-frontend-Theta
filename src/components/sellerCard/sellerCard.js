@@ -15,7 +15,7 @@ const SellerCard = ({ detail }) => {
     >
       <Meta
         style={{ marginTop: 10 }}
-        title={detail.display_name}
+        title={detail.name}
         description={detail.phone}
       />
       {detail.rating > 0 ? (

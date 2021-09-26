@@ -61,7 +61,7 @@
   
 ### Resources
 - [Backend git repository](https://github.com/pesto-students/n3-home-food-backend-Theta)
-- [Design Files](https://drive.google.com/file/d/1ZsHUcppCgRSodUsBPYNnufJIXQVBMpSX/view?usp=sharing)
+- [Design Files](https://www.figma.com/file/qggSziizUDufaCCipSKdJ2/Food-delivery-app?node-id=3%3A434)
 - [One pager](https://drive.google.com/file/d/1eKHTMmlTKy6Q_cXUgh01wLXiTrIquEv0/view?usp=sharing)
 - [Postman Api Documentation](https://documenter.getpostman.com/view/16227165/Tzm5GbvK)
 - [PRD](https://drive.google.com/file/d/1Vx6rk5sD8S4teRjC3GvpJQ161Ww8kAkv/view?usp=sharing)

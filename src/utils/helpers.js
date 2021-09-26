@@ -45,7 +45,7 @@ export const setPincode = (code) => {
 };
 
 export const getPincode = () => {
-  return localStorage.getItem("pincode");
+  return 500000;
 };
 
 export const orderTimeFormat = (date) => {

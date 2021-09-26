@@ -14,12 +14,12 @@
 <li>OTP : 123456</li>
 
 #### Seller 
-<li>Phone : 7210786647 </li>
-<li>OTP : 123455</li>
+<li>Phone :7741084950  </li>
+<li>OTP : 123456</li>
 
 #### Customer 
-<li>Phone : 7741084950</li>
-<li>OTP : 123456</li>
+<li>Phone : 7210786647</li>
+<li>OTP : 123455</li>
 <li>pincode : 500000</li>
 
 <!-- TABLE OF CONTENTS -->
